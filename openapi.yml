@@ -1,0 +1,299 @@
+openapi: 3.0.0
+info:
+  title: RapidGuestRegistration - OpenAPI 3.0
+  description: |-
+    This is the RapidGuestRegistration API, used for everything from creating tables to managing users, as well as registering for guests.
+  contact:
+    email: group-b@rapidguestregistration.com
+  license:
+    name: MIT
+    url: 'https://github.com/' # TODO: Add link to license.
+  version: 3.0.2
+externalDocs:
+  description: Read the Documentation
+  url: 'http://github.com/' # TODO: Add link to documentation.
+servers:
+  - url: /api/v0
+
+paths:
+  /location:
+    put:
+      summary: Update an existing location
+      description: Update a location 
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: Update successful.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: Invalid location ID
+        '404':
+          description: Location not found
+        '403':
+          description: You are not allowed to change this location.
+    get:
+      summary: Get your locations
+      description: Get locations associated with your user
+      responses:
+        '200':
+          description: Locations retrieved successfully.
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+    post:
+      summary: Add a new location
+      description: Add a location 
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: Insert successful.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: Invalid location ID
+  '/location/{locationId}':
+    parameters:
+      - name: locationId
+        in: path
+        description: ID of the location to return.
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: Get a specific location.
+      description: Gets the location with the location ID.
+      responses:
+        '200':
+          description: Update successful.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: Invalid location ID
+        '404':
+          description: Location not found
+        '403':
+          description: You are not allowed to access this location.
+    post:
+      summary: Update an existing location
+      description: Update a location 
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: Update successful.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '400':
+          description: Invalid location ID
+  '/location/{locationId}/table':
+    parameters:
+      - name: locationId
+        in: path
+        description: ID of the location to return.
+        required: true
+        schema:
+          type: integer
+          format: int64
+    get:
+      summary: Get your locations
+      description: Get locations associated with your user
+      
+      responses:
+        '200':
+          description: Update successful.
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Table'
+    post:
+      summary: Add a new table on this location
+      description: Add a table 
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Table'
+      responses:
+        '200':
+          description: Insert successful.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        '400':
+          description: Invalid location ID.
+        '403':
+          description: You are not allowed to modify this location
+  '/location/{locationId}/table/{tableId}':
+    get:
+      summary: Get your locations
+      description: Get locations associated with your user
+      parameters:
+          - name: locationId
+            in: path
+            description: ID of the location to return.
+            required: true
+            schema:
+              type: integer
+              format: int64
+          - name: tableId
+            in: path
+            description: ID of the location to return.
+            required: true
+            schema:
+              type: integer
+              format: int64
+      responses:
+        '200':
+          description: Table retrieval successful.
+          content: 
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Table'
+        '403':
+          description: Table or location does not exist.
+        '404':
+          description: Table or location does not exist.
+    post:
+      summary: Update an existing table
+      description: Update a table 
+      parameters:
+        - name: locationId
+          in: path
+          description: ID of the location to return.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tableId
+          in: path
+          description: ID of the location to return.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Table'
+      responses:
+        '200':
+          description: Update successful.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+        '400':
+          description: Invalid location or table ID
+        '403':
+          description: You are not allowed to edit this table.
+  '/location/{locationId}/table/{tableId}/register':
+    post:
+      summary: Register on this table on this location.
+      description: Register on this table on this location.
+      parameters:
+        - name: locationId
+          in: path
+          description: ID of the location to register on.
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: tableId
+          in: path
+          description: ID of the table to register on.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content: 
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Guest'
+      responses:
+        '200':
+          description: Registration successful.
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guest'
+        '400':
+          description: Invalid location or table ID
+components:
+  schemas:
+    Guest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Sepp Forcher"
+        email:
+          type: string
+          format: email
+          example: "sepp.forcher@orf.at"
+        phoneNumber:
+          type: string
+          example: "+43 420 69696969"
+    Location:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 69
+        name:
+          type: string
+          example: "Coolstreet 123"
+    Table:
+      type: object
+      properties:
+        id:
+            type: integer
+            format: int64
+            example: 420
+        name:
+          type: string
+          example: "Table #12"
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'https://petstore3.swagger.io/oauth/authorize'
+          scopes:
+            'write:pets': modify pets in your account
+            'read:pets': read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
