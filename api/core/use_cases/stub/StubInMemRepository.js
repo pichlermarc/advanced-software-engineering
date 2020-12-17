@@ -1,5 +1,7 @@
 "use strict";
 
+const IGateway = require('../../gateways/IGateway');
+
 class StubInMemRepository extends IGateway {
     constructor() {
         super();
@@ -14,3 +16,5 @@ class StubInMemRepository extends IGateway {
     }
     size() { return this.repo.length; }
 }
+
+module.exports = StubInMemRepository;

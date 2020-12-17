@@ -7,3 +7,5 @@ class StubResponseModel {
         this.error_msg = error_msg;
     }
 }
+
+module.exports = StubResponseModel;

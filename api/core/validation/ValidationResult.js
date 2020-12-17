@@ -18,3 +18,5 @@ class ValidationResult {
         return this.errorMessage;
     }
 }
+
+module.exports = ValidationResult;

@@ -6,3 +6,5 @@ class IGateway {
     remove(id) {}
     size() {}
 }
+
+module.exports = IGateway;

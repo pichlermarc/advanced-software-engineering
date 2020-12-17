@@ -1,5 +1,8 @@
 "use strict";
 
+const IValidator = require('../../validation/IValidator');
+const ValidationResult = require('../../validation/ValidationResult');
+
 class StubValidator extends IValidator {
     constructor() {
         super();
@@ -13,3 +16,5 @@ class StubValidator extends IValidator {
         return new ValidationResult();
     }
 }
+
+module.exports = StubValidator;

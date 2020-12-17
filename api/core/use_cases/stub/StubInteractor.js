@@ -1,5 +1,7 @@
 "use strict";
 
+const StubResponseModel = require('./StubResponseModel');
+
 class StubInteractor {
     constructor(repository, validator) {
         this.repository = repository;
@@ -25,3 +27,5 @@ class StubInteractor {
         return response;
     }
 }
+
+module.exports = StubInteractor;

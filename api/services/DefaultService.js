@@ -1,6 +1,10 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
 const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
+const StubValidator = require('../core/use_cases/stub/StubValidator');
+const StubInMemRepository = require('../core/use_cases/stub/StubInMemRepository');
+const StubInteractor = require('../core/use_cases/stub/StubInteractor');
+
 
 /**
 * Get your locations
@@ -54,9 +58,17 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
       console.log("---locationLocationIdGET---");
     try {
         console.log("try to create RequestModel...")
+
         let requestmodel = new StubRequestModel(locationId);
+        let repository = new StubInMemRepository();
+        let validator = new StubValidator();
+        let interactor = new StubInteractor(repository, validator);
+        let response = interactor.execute(requestmodel);
+
       resolve(Service.successResponse({
         locationId,
+          "location": response.location,
+          "error-msg": response.error_msg
       }));
     } catch (e) {
       reject(Service.rejectResponse(
