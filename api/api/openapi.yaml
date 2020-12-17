@@ -13,9 +13,7 @@ externalDocs:
   description: Read the Documentation
   url: http://github.com/
 servers:
-- url: /api/v0
-security:
-- api_key: []
+- url: /
 paths:
   /location:
     get:
@@ -415,8 +413,3 @@ components:
           example: 'Table #12'
           type: string
       type: object
-  securitySchemes:
-    api_key:
-      in: header
-      name: api_key
-      type: apiKey

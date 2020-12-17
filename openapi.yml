@@ -12,10 +12,7 @@ info:
 externalDocs:
   description: Read the Documentation
   url: 'http://github.com/' # TODO: Add link to documentation.
-servers:
-  - url: /api/v0
-security: 
-  - api_key: []
+
 paths:
   /location:
     put:
@@ -303,8 +300,3 @@ components:
         name:
           type: string
           example: "Table #12"
-  securitySchemes:
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
