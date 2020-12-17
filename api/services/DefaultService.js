@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
-
-console.log("---File DefaultService.js---")
+const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
 
 /**
 * Get your locations
@@ -52,8 +51,10 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
 * */
 const locationLocationIdGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
-      console.log("locationLocationIdGET");
+      console.log("---locationLocationIdGET---");
     try {
+        console.log("try to create RequestModel...")
+        let requestmodel = new StubRequestModel(locationId);
       resolve(Service.successResponse({
         locationId,
       }));

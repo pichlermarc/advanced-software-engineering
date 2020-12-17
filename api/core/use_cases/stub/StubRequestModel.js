@@ -5,3 +5,5 @@ class StubRequestModel {
         this.id = id;
     }
 }
+
+module.exports = StubRequestModel;
