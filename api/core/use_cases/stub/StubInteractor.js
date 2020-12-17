@@ -15,7 +15,7 @@ class StubInteractor {
         if(!validation_result.isValid) {
             const response = new StubResponseModel(request.id,
                 null,
-                validation_result.getErrorMessage());
+                validation_result.error_msg);
             return response;
         }
 

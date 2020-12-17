@@ -2,10 +2,11 @@
 
 class ValidationResult {
     constructor(errorMessage) {
-        if(errorMessage == null) {
+        if(errorMessage === null) {
             this.isValid = true;
+            this.error_msg = null;
         } else {
-            this.errorMessage = errorMessage;
+            this.error_msg = errorMessage;
             this.isValid = false;
         }
     }
