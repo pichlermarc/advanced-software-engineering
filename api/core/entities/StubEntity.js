@@ -3,7 +3,10 @@
 // the business-objects or business-models
 
 class StubEntity {
-    constructor(id) {
+    constructor(id, location = null) {
         this.id = id;
+        this.location = location;
     }
 }
+
+module.exports = StubEntity;

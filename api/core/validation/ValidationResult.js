@@ -9,14 +9,6 @@ class ValidationResult {
             this.isValid = false;
         }
     }
-
-    isValid() {
-        return this.isValid;
-    }
-
-    getErrorMessage() {
-        return this.errorMessage;
-    }
 }
 
 module.exports = ValidationResult;

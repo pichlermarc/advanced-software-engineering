@@ -2,6 +2,7 @@
 
 class StubRequestModel {
     constructor(id) {
+        console.log("StubRequestModel: %d", id);
         this.id = id;
     }
 }

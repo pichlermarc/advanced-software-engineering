@@ -9,6 +9,7 @@ class StubValidator extends IValidator {
     }
 
     validate(request) {
+        //console.log("---request.id=" . request.id);
         if(request.id < 0) {
             return new ValidationResult("Id must not be smaller than zero!");
         }

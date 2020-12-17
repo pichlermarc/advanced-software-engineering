@@ -56,10 +56,12 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
 const locationLocationIdGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
       console.log("---locationLocationIdGET---");
+      console.log("locationId: ")
     try {
         console.log("try to create RequestModel...")
 
         let requestmodel = new StubRequestModel(locationId);
+        console.log("requestmodel: %d", requestmodel.id);
         let repository = new StubInMemRepository();
         let validator = new StubValidator();
         let interactor = new StubInteractor(repository, validator);
