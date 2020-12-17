@@ -1,5 +1,7 @@
 const assert = require('chai').assert;
-const ValidationResult = require('../core/validation/ValidationResult');
+const ValidationResult = require('../../../core/validation/ValidationResult');
+
+// the test-framework 'jest' can even handle 'mocha' tests!
 
 describe('ValidationResult', function (){
     it('should return a valid validation-result when passing no parameter', function (){
