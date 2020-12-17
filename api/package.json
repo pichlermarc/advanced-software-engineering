@@ -1,5 +1,5 @@
 {
-  "name":  "rapidguestregistration-openapi-3-0",
+  "name": "rapidguestregistration-openapi-3-0",
   "version": "3.0.2",
   "description": "This is the RapidGuestRegistration API, used for everything from creating tables to managing users, as well as registering for guests.",
   "main": "index.js",

@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
 
+console.log("---File DefaultService.js---")
+
 /**
 * Get your locations
 * Get locations associated with your user
@@ -50,6 +52,7 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
 * */
 const locationLocationIdGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
+      console.log("locationLocationIdGET");
     try {
       resolve(Service.successResponse({
         locationId,
