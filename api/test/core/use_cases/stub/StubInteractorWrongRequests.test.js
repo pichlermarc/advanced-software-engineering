@@ -16,8 +16,6 @@ afterEach(() => {
     // fixture teardown
 });
 
-// test request:
-
 test('should create error message in response if id is less than zero', () => {
     let stub_req = new StubRequestModel(-1)
     const stub_response = stub_interactor.execute(stub_req)
@@ -38,5 +36,3 @@ test('should not create error message in response if id is one', () => {
     expect(stub_response.id).toBe(1)
     expect(stub_response.error_msg).toBeNull()
 })
-
-// test
