@@ -747,11 +747,6 @@ namespace RapidGuestRegistration.Client.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Get<List<Location>>("/location", localVarRequestOptions, this.Configuration);
@@ -804,11 +799,6 @@ namespace RapidGuestRegistration.Client.Api
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -861,11 +851,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Delete<Location>("/location/{locationId}", localVarRequestOptions, this.Configuration);
@@ -921,11 +906,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -978,11 +958,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Get<Location>("/location/{locationId}", localVarRequestOptions, this.Configuration);
@@ -1038,11 +1013,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -1099,11 +1069,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
             localVarRequestOptions.Data = location;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Post<Location>("/location/{locationId}", localVarRequestOptions, this.Configuration);
@@ -1163,11 +1128,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
             localVarRequestOptions.Data = location;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -1220,11 +1180,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Get<List<Table>>("/location/{locationId}/table", localVarRequestOptions, this.Configuration);
@@ -1280,11 +1235,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -1341,11 +1291,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
             localVarRequestOptions.Data = table;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Post<Table>("/location/{locationId}/table", localVarRequestOptions, this.Configuration);
@@ -1405,11 +1350,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
             localVarRequestOptions.Data = table;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -1465,11 +1405,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
             localVarRequestOptions.PathParameters.Add("tableId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(tableId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Delete<List<Table>>("/location/{locationId}/table/{tableId}", localVarRequestOptions, this.Configuration);
@@ -1528,11 +1463,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
             localVarRequestOptions.PathParameters.Add("tableId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(tableId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -1588,11 +1518,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
             localVarRequestOptions.PathParameters.Add("tableId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(tableId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Get<List<Table>>("/location/{locationId}/table/{tableId}", localVarRequestOptions, this.Configuration);
@@ -1651,11 +1576,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("locationId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(locationId)); // path parameter
             localVarRequestOptions.PathParameters.Add("tableId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(tableId)); // path parameter
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -1715,11 +1635,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("tableId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(tableId)); // path parameter
             localVarRequestOptions.Data = table;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Post<Table>("/location/{locationId}/table/{tableId}", localVarRequestOptions, this.Configuration);
@@ -1782,11 +1697,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("tableId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(tableId)); // path parameter
             localVarRequestOptions.Data = table;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -1846,11 +1756,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("tableId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(tableId)); // path parameter
             localVarRequestOptions.Data = guest;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Post<Guest>("/location/{locationId}/table/{tableId}/register", localVarRequestOptions, this.Configuration);
@@ -1913,11 +1818,6 @@ namespace RapidGuestRegistration.Client.Api
             localVarRequestOptions.PathParameters.Add("tableId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(tableId)); // path parameter
             localVarRequestOptions.Data = guest;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -1971,11 +1871,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.Data = location;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Post<Location>("/location", localVarRequestOptions, this.Configuration);
@@ -2032,11 +1927,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.Data = location;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 
@@ -2090,11 +1980,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.Data = location;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
             var localVarResponse = this.Client.Put<Location>("/location", localVarRequestOptions, this.Configuration);
@@ -2151,11 +2036,6 @@ namespace RapidGuestRegistration.Client.Api
 
             localVarRequestOptions.Data = location;
 
-            // authentication (api_key) required
-            if (!String.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("api_key")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("api_key", this.Configuration.GetApiKeyWithPrefix("api_key"));
-            }
 
             // make the HTTP request
 

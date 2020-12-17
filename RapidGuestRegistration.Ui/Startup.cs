@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RapidGuestRegistration.Client.Api;
 using RapidGuestRegistration.Ui.Data;
 
 namespace RapidGuestRegistration.Ui
@@ -29,6 +30,16 @@ namespace RapidGuestRegistration.Ui
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<IDefaultApi>(provider =>
+            {
+                var apiConfiguration = Configuration.GetSection("api");
+                if(apiConfiguration.GetValue<string>("mode") == "production")
+                    return new DefaultApi(apiConfiguration.GetValue<string>("basePath"));
+                if (apiConfiguration.GetValue<string>("mode") == "mock")
+                    return new MockApi();
+                throw new InvalidOperationException(
+                    "Cannot determine operation mode, use either \"production\" or \"mock\"");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

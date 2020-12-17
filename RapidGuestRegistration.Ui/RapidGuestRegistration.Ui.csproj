@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RapidGuestRegistration.Client\src\RapidGuestRegistration.Client\RapidGuestRegistration.Client.csproj" />
+  </ItemGroup>
+
 </Project>

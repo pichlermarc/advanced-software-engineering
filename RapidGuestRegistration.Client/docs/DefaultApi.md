@@ -1,6 +1,6 @@
 # RapidGuestRegistration.Client.Api.DefaultApi
 
-All URIs are relative to *http://localhost/api/v0*
+All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -41,12 +41,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
 
             try
@@ -75,7 +70,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -112,12 +107,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
 
@@ -150,7 +140,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -190,12 +180,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
 
@@ -228,7 +213,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -268,12 +253,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
             var location = new Location(); // Location |  (optional) 
@@ -308,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -346,12 +326,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
 
@@ -384,7 +359,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -421,12 +396,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
             var table = new Table(); // Table |  (optional) 
@@ -461,7 +431,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -500,12 +470,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
             var tableId = 789;  // long | ID of the location to return.
@@ -540,7 +505,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -579,12 +544,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
             var tableId = 789;  // long | ID of the location to return.
@@ -619,7 +579,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -658,12 +618,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
             var tableId = 789;  // long | ID of the location to return.
@@ -700,7 +655,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -739,12 +694,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to register on.
             var tableId = 789;  // long | ID of the table to register on.
@@ -781,7 +731,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -819,12 +769,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var location = new Location(); // Location |  (optional) 
 
@@ -857,7 +802,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 
@@ -895,12 +840,7 @@ namespace Example
         public static void Main()
         {
             Configuration config = new Configuration();
-            config.BasePath = "http://localhost/api/v0";
-            // Configure API key authorization: api_key
-            config.AddApiKey("api_key", "YOUR_API_KEY");
-            // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-            // config.AddApiKeyPrefix("api_key", "Bearer");
-
+            config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var location = new Location(); // Location |  (optional) 
 
@@ -933,7 +873,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key)
+No authorization required
 
 ### HTTP request headers
 

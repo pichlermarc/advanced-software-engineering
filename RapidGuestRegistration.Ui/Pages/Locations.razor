@@ -1,0 +1,33 @@
+@page "/locations"
+@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@inject IDefaultApi Api
+<h3>Locations</h3>
+
+
+@foreach (var location in _locations)
+{
+    <div class="row">
+        <LocationDisplay Location="@location" OnLocationsChanged="@UpdateLocations"></LocationDisplay>
+    </div>
+}
+
+<h3>Add Location</h3>
+<div class="row">
+    <LocationCreate OnLocationsChanged="@UpdateLocations"></LocationCreate>
+</div>
+
+@code {
+    private List<Location> _locations;
+
+    protected override void OnInitialized()
+    {
+        _locations = Api.LocationGet();
+    }
+
+    private void UpdateLocations()
+    {
+        _locations = Api.LocationGet();
+    }
+
+}

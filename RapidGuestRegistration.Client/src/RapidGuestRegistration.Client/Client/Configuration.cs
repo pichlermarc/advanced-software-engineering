@@ -103,7 +103,7 @@ namespace RapidGuestRegistration.Client.Client
         {
             Proxy = null;
             UserAgent = "OpenAPI-Generator/1.0.0/csharp";
-            BasePath = "http://localhost/api/v0";
+            BasePath = "http://localhost";
             DefaultHeaders = new ConcurrentDictionary<string, string>();
             ApiKey = new ConcurrentDictionary<string, string>();
             ApiKeyPrefix = new ConcurrentDictionary<string, string>();
@@ -111,7 +111,7 @@ namespace RapidGuestRegistration.Client.Client
             {
                 {
                     new Dictionary<string, object> {
-                        {"url", "/api/v0"},
+                        {"url", "/"},
                         {"description", "No description provided"},
                     }
                 }
@@ -129,7 +129,7 @@ namespace RapidGuestRegistration.Client.Client
             IDictionary<string, string> defaultHeaders,
             IDictionary<string, string> apiKey,
             IDictionary<string, string> apiKeyPrefix,
-            string basePath = "http://localhost/api/v0") : this()
+            string basePath = "http://localhost") : this()
         {
             if (string.IsNullOrWhiteSpace(basePath))
                 throw new ArgumentException("The provided basePath is invalid.", "basePath");
