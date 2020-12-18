@@ -61,12 +61,23 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
         let repository = new StubInMemRepository();
         let validator = new StubValidator();
         let interactor = new StubInteractor(repository, validator);
-        let response = interactor.execute(requestmodel);
+
+        let responsemodel = interactor.execute(requestmodel);
+
+        if(responsemodel.error_msg !== null) {
+            throw {
+                name: "StubException",
+                message: responsemodel.error_msg,
+                status: 405,
+                toString: function() {
+                    return this.name + ": " + this.message;
+                }
+            };
+        }
 
       resolve(Service.successResponse({
         locationId,
-          "location": response.location,
-          "error-msg": response.error_msg
+          "location": responsemodel.location
       }));
     } catch (e) {
       reject(Service.rejectResponse(
