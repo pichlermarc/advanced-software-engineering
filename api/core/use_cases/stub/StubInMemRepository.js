@@ -3,6 +3,15 @@
 const IGateway = require('../../gateways/IGateway');
 
 class StubInMemRepository extends IGateway {
+    /**
+     * The Repository for entity StubEntity.
+     * It exists only at execution time and is NOT persistent!
+     * The entities are stored and maintained in an array.
+     *
+     * Please note:
+     *   This class represents the entity-gateway-implementation from
+     *    the logical architecture view.
+     */
     constructor() {
         super();
         this.repo = [];

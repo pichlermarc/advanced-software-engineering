@@ -4,6 +4,10 @@ const IValidator = require('../../validation/IValidator');
 const ValidationResult = require('../../validation/ValidationResult');
 
 class StubValidator extends IValidator {
+    /**
+     * Validator validates the input - the request-model - of the interactor and
+     * returns an object of type ValidationResult.
+     */
     constructor() {
         super();
     }

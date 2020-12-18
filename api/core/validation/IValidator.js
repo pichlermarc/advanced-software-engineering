@@ -1,7 +1,11 @@
 "use strict";
 
 class IValidator {
-    validate(request) {}
+    /**
+     * Interface for input validator:
+     * Validates input - the request model - for the interactor.
+     */
+    validate(request_model) {}
 }
 
 module.exports = IValidator;

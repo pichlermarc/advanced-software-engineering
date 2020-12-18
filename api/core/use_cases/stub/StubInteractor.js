@@ -5,12 +5,12 @@ const StubEntity = require('../../entities/StubEntity');
 
 class StubInteractor {
     /**
-     * The interactor represents the one use-case respectively it processes on use-case.
-     * The used design-pattern for the interactor is the 'command pattern'.
-     * The request-model contains all input data for the use-case; its output is stored
-     *  in the response-model.
-     * @param repository used repository.
-     * @param validator used validator that validates input data.
+     * The interactor represents one use-case respectively it processes on use-case.
+     * The used design-pattern is the 'command pattern'.
+     *
+     * The communication with the interactor is done with:
+     *   - the request-model: contains all input data for the use-case;
+     *   - the response-model: contains the output of the use-case.
      *
      * The stub use-case:
      *   Data: id
@@ -25,23 +25,23 @@ class StubInteractor {
     }
 
     // 1. call process use-case
-    execute(request) {
+    execute(request_model) {
         // 2. validation
-        let validation_result = this.validator.validate(request);
+        let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
-            const response = new StubResponseModel(request.id,
+            const response_model = new StubResponseModel(request_model.id,
                 null,
                 validation_result.error_msg);
-            return response;
+            return response_model;
         }
 
         // 3. DB interaction
-        const stub_entity = new StubEntity(request.id, "stub");
+        const stub_entity = new StubEntity(request_model.id, "stub");
         this.repository.save(stub_entity);
 
         // 4. return response
-        const response = new StubResponseModel(request.id, stub_entity.location);
-        return response;
+        const response_model = new StubResponseModel(request_model.id, stub_entity.location);
+        return response_model;
     }
 }
 
