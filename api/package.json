@@ -1,11 +1,12 @@
 {
-  "name":  "rapidguestregistration-openapi-3-0",
+  "name": "rapidguestregistration-openapi-3-0",
   "version": "3.0.2",
   "description": "This is the RapidGuestRegistration API, used for everything from creating tables to managing users, as well as registering for guests.",
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "keywords": [
     "openapi-generator",
@@ -33,6 +34,7 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.17.2",
+    "jest": "^26.6.3",
     "mocha": "^7.1.1"
   },
   "eslintConfig": {
