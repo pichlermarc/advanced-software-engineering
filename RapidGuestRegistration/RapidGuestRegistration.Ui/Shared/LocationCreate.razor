@@ -1,0 +1,33 @@
+@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@inject IDefaultApi Api
+<div class="col-12">
+    <div class="card mb-1">
+        <div class="card-header">
+            <div class="input-group h-100">
+                <input id="name" class="mr-1" placeholder="Location Name" @bind="@_location.Name"/>
+                <button class="btn btn-primary mr-1 float-right" @onclick="AddLocation">Add</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+@code {
+    private Location _location;
+    
+    [Parameter]
+    public EventCallback OnLocationsChanged { get; set; }
+    
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _location = new Location();
+    }
+
+    private async void AddLocation()
+    {
+        Api.LocationPost(_location);
+        await OnLocationsChanged.InvokeAsync(_location);
+    }
+
+}
