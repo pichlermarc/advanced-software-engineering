@@ -76,8 +76,8 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
         }
 
       resolve(Service.successResponse({
-        locationId,
-          "location": responsemodel.location
+        "id": responsemodel.id,
+          "name": responsemodel.location
       }));
     } catch (e) {
       reject(Service.rejectResponse(
