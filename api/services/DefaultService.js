@@ -1,5 +1,10 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
+const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
+const StubValidator = require('../core/use_cases/stub/StubValidator');
+const StubInMemRepository = require('../core/use_cases/stub/StubInMemRepository');
+const StubInteractor = require('../core/use_cases/stub/StubInteractor');
+
 
 /**
 * Get your locations
@@ -50,9 +55,29 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
 * */
 const locationLocationIdGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
+      console.log("---locationLocationIdGET---process-the-stub-usecase---");
     try {
+        let requestmodel = new StubRequestModel(locationId);
+        let repository = new StubInMemRepository();
+        let validator = new StubValidator();
+        let interactor = new StubInteractor(repository, validator);
+
+        let responsemodel = interactor.execute(requestmodel);
+
+        if(responsemodel.error_msg !== null) {
+            throw {
+                name: "StubException",
+                message: responsemodel.error_msg,
+                status: 405,
+                toString: function() {
+                    return this.name + ": " + this.message;
+                }
+            };
+        }
+
       resolve(Service.successResponse({
         locationId,
+          "location": responsemodel.location
       }));
     } catch (e) {
       reject(Service.rejectResponse(
