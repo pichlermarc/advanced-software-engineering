@@ -28,10 +28,7 @@ class LocationInteractor {
         // 2. validation not needed since no input/request data
 
         // 3. DB interaction
-        let stub_entities = [];
-        for (let i=0; i<this.repository.size(); i++) {
-            stub_entities.push(this.repository.load(i));
-        }
+        const stub_entities = this.repository.load();
 
         // 4. return response
         const response_model = new LocationResponseModel(stub_entities, null);

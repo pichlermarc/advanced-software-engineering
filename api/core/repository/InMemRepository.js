@@ -24,8 +24,13 @@ class InMemRepository extends IGateway {
         this.repo.push(stub_entity);
     }
     load(id) {
-        const entity_found = this.repo[id];
-        return entity_found;
+        let res;
+        if (id === undefined) // for GET /locations route
+            res = this.repo;
+        else {
+            res = this.repo.find(e => e.id == id);
+        }
+        return res;
     }
     remove(id) {
         const entitiy_remove = this.load(id);
