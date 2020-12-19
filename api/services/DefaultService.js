@@ -5,6 +5,10 @@ const StubValidator = require('../core/use_cases/stub/StubValidator');
 const StubInMemRepository = require('../core/use_cases/stub/StubInMemRepository');
 const StubInteractor = require('../core/use_cases/stub/StubInteractor');
 
+const AddLocationRequestModel = require('../core/use_cases/addLocation/AddLocationRequestModel');
+const AddLocationInMemRepository = require('../core/use_cases/addLocation/AddLocationInMemRepository');
+const AddLocationValidator = require('../core/use_cases/addLocation/AddLocationValidator');
+const AddLocationInteractor = require('../core/use_cases/addLocation/AddLocationInteractor');
 
 /**
 * Get your locations
@@ -259,14 +263,34 @@ const locationLocationIdTableTableIdRegisterPOST = ({ locationId, tableId, guest
 * */
 const locationPOST = ({ location }) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        location,
-      }));
+      console.log("---locationPOST---process-the-addLocation-usecase---");
+      try {
+          let requestmodel = new AddLocationRequestModel(location.name);
+          let repository = new AddLocationInMemRepository();
+          let validator = new AddLocationValidator();
+          let interactor = new AddLocationInteractor(repository, validator);
+
+          let responsemodel = interactor.execute(requestmodel);
+
+          if(responsemodel.error_msg !== null) {
+              throw {
+                  name: "AddLocationException",
+                  message: responsemodel.error_msg,
+                  status: 400,
+                  toString: function() {
+                      return this.name + ": " + this.message;
+                  }
+              };
+          }
+
+          resolve(Service.successResponse({
+              "id": responsemodel.id,
+              "name": responsemodel.location
+          }));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
-        e.status || 405,
+        e.status || 400,
       ));
     }
   },
