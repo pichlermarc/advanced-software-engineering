@@ -4,7 +4,6 @@ const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
 const StubValidator = require('../core/use_cases/stub/StubValidator');
 const InMemRepository = require('../core/repository/InMemRepository');
 const StubInteractor = require('../core/use_cases/stub/StubInteractor');
-const LocationResponseModel = require('../core/use_cases/location/LocationResponseModel');
 const LocationInteractor = require('../core/use_cases/location/LocationInteractor');
 
 /**
@@ -74,7 +73,7 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
       console.log("---locationLocationIdGET---process-the-stub-usecase---");
     try {
         let requestmodel = new StubRequestModel(locationId);
-        let repository = new StubInMemRepository();
+        let repository = new InMemRepository();
         let validator = new StubValidator();
         let interactor = new StubInteractor(repository, validator);
 
