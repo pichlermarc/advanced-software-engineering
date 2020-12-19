@@ -2,9 +2,10 @@
 const Service = require('./Service');
 const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
 const StubValidator = require('../core/use_cases/stub/StubValidator');
-const StubInMemRepository = require('../core/use_cases/stub/StubInMemRepository');
+const InMemRepository = require('../core/repository/InMemRepository');
 const StubInteractor = require('../core/use_cases/stub/StubInteractor');
-
+const LocationResponseModel = require('../core/use_cases/location/LocationResponseModel');
+const LocationInteractor = require('../core/use_cases/location/LocationInteractor');
 
 /**
 * Get your locations
@@ -14,12 +15,27 @@ const StubInteractor = require('../core/use_cases/stub/StubInteractor');
 * */
 const locationGET = () => new Promise(
   async (resolve, reject) => {
+    console.log("---locationGET---");
     try {
-      resolve(Service.successResponse({
-      }));
+      let repository = new InMemRepository();
+      let interactor = new LocationInteractor(repository);
+
+      let responsemodel = interactor.execute();
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "LocationException",
+          message: responsemodel.error_msg,
+          status: 405,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+      resolve(Service.successResponse(responsemodel.entities));
     } catch (e) {
       reject(Service.rejectResponse(
-        e.message || 'Invalid input',
+        e.message || responsemodel.error_msg,
         e.status || 405,
       ));
     }
