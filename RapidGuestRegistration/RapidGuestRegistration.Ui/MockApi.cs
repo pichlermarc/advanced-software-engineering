@@ -15,7 +15,8 @@ namespace RapidGuestRegistration.Ui
         {
             _locations = new List<Location>
             {
-                new Location {Id = 1, Name = "Location #1"}, new Location {Id = 2, Name = "Location #2"},
+                new Location {Id = 1, Name = "Location #1"}, 
+                new Location {Id = 2, Name = "Location #2"},
                 new Location {Id = 3, Name = "Location #3"}
             };
         }
@@ -42,7 +43,7 @@ namespace RapidGuestRegistration.Ui
 
         public Location LocationLocationIdDelete(long locationId)
         {
-            var itemToDelete = _locations.Find((location => location.Id == locationId));
+            var itemToDelete = _locations.Find(location => location.Id == locationId);
             _locations.Remove(itemToDelete);
             return itemToDelete;
         }
@@ -54,7 +55,7 @@ namespace RapidGuestRegistration.Ui
 
         public Location LocationLocationIdGet(long locationId)
         {
-            throw new System.NotImplementedException();
+            return _locations.Find(location => location.Id == locationId);
         }
 
         public ApiResponse<Location> LocationLocationIdGetWithHttpInfo(long locationId)
@@ -141,7 +142,8 @@ namespace RapidGuestRegistration.Ui
             if (location == null)
                 throw new ArgumentNullException(nameof(location));
 
-            location.Id = _locations.Select(location1 => location.Id).DefaultIfEmpty(0).Max() + 1;
+            location.Id  = _locations.Select(existingLocation => existingLocation.Id).DefaultIfEmpty(0).Max() + 1;
+            
             
             // Copy location object since we want to simulate inserts without references.
             _locations.Add(new Location {Id = location.Id, Name = location.Name});
@@ -155,7 +157,16 @@ namespace RapidGuestRegistration.Ui
 
         public Location LocationPut(Location location = default(Location))
         {
-            throw new System.NotImplementedException();
+            if (location == null)
+                throw new ArgumentNullException(nameof(location));
+            
+            var locationToUpdate = _locations.Find(listLocation => listLocation.Id == location.Id);
+            if (locationToUpdate == null)
+                throw new InvalidOperationException($"Could not find location with ID {location.Id} to update");
+            locationToUpdate.Id = location.Id;
+            locationToUpdate.Name = location.Name;
+
+            return locationToUpdate;
         }
 
         public ApiResponse<Location> LocationPutWithHttpInfo(Location location = default(Location))

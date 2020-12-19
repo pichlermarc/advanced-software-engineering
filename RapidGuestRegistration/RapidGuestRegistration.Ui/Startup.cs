@@ -34,7 +34,7 @@ namespace RapidGuestRegistration.Ui
             {
                 var apiConfiguration = Configuration.GetSection("api");
                 if(apiConfiguration.GetValue<string>("mode") == "production")
-                    return new DefaultApi(apiConfiguration.GetValue<string>("basePath"));
+                    return new DefaultApi(apiConfiguration.GetValue<string>("baseUrl"));
                 if (apiConfiguration.GetValue<string>("mode") == "mock")
                     return new MockApi();
                 throw new InvalidOperationException(

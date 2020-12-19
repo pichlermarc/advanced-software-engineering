@@ -1,13 +1,14 @@
 @using RapidGuestRegistration.Client.Model
 @using RapidGuestRegistration.Client.Api
 @inject IDefaultApi Api
+@inject NavigationManager NavigationManager
 <div class="col-12">
     <div class="card mb-1">
         <div class="card-header">
             <div class="input-group h-100">
                 <!-- <input id="name" class="mr-1" value="@Location.Name"/> -->
                 <h4 class="align-middle mr-1">@Location.Name</h4>
-                <button class="btn btn-primary mr-1 float-right">Edit</button>
+                <button class="btn btn-primary mr-1 float-right" @onclick="NavigateToEdit">Edit</button>
                 <button class="btn btn-outline-danger mr-1 float-right" @onclick="DeleteLocation">Delete</button>
             </div>
 
@@ -26,5 +27,10 @@
     {
         var location = Api.LocationLocationIdDelete(Location.Id);
         await OnLocationsChanged.InvokeAsync(location);
+    }
+
+    private async void NavigateToEdit()
+    {
+        NavigationManager.NavigateTo($"/location/{Location.Id}/edit");
     }
 }
