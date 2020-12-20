@@ -36,11 +36,13 @@ class StubInteractor {
         }
 
         // 3. DB interaction
-        const stub_entity = new StubEntity(request_model.id, "stub");
-        this.repository.save(stub_entity);
+        //const stub_entity = new StubEntity(request_model.id, request_model.name);
+        //this.repository.save(stub_entity);
+
+        let entity = this.repository.load(request_model.id);
 
         // 4. return response
-        const response_model = new StubResponseModel(request_model.id, stub_entity.location);
+        const response_model = new StubResponseModel(entity.id, entity.name);
         return response_model;
     }
 }

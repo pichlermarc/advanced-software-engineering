@@ -1,9 +1,9 @@
 "use strict";
 
-const IGateway = require('../../gateways/IGateway');
-const StubEntity = require('../../entities/StubEntity')
+const IGateway = require('../gateways/IGateway');
+const StubEntity = require('../entities/StubEntity')
 
-class AddLocationInMemRepository extends IGateway {
+class LocationsInMemRepository extends IGateway {
     constructor() {
         super();
         this.repo = [];
@@ -24,4 +24,4 @@ class AddLocationInMemRepository extends IGateway {
     clear() { this.repo = []; }
 }
 
-module.exports = AddLocationInMemRepository;
+module.exports = LocationsInMemRepository;

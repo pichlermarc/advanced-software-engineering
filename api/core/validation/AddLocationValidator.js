@@ -1,7 +1,7 @@
 "use strict";
 
-const IValidator = require('../../validation/IValidator');
-const ValidationResult = require('../../validation/ValidationResult');
+const IValidator = require('./IValidator');
+const ValidationResult = require('./ValidationResult');
 
 class AddLocationValidator extends IValidator {
     /**

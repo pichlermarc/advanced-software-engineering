@@ -1,9 +1,9 @@
 "use strict";
 
 class AddLocationResponseModel {
-    constructor(id, location = null, error_msg = null) {
+    constructor(id, name = null, error_msg = null) {
         this.id = id;
-        this.location = location;
+        this.name = name;
         this.error_msg = error_msg;
     }
 }
