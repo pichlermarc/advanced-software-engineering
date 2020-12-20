@@ -3,9 +3,9 @@
 // the business-objects or business-models
 
 class StubEntity {
-    constructor(id, location = null) {
+    constructor(id, name = null) {
         this.id = id;
-        this.location = location;
+        this.name = name;
     }
 }
 

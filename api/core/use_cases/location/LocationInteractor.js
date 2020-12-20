@@ -1,9 +1,9 @@
 "use strict";
 
-const StubResponseModel = require('./StubResponseModel');
+const LocationResponseModel = require('./LocationResponseModel');
 const StubEntity = require('../../entities/StubEntity');
 
-class StubInteractor {
+class LocationInteractor {
     /**
      * The interactor represents one use-case respectively it processes on use-case.
      * The used design-pattern is the 'command pattern'.
@@ -19,32 +19,21 @@ class StubInteractor {
      *   3. System creates new entity and determines locatation-name.
      *   4. System delivers location-name to user.
      */
-    constructor(repository, validator) {
+    constructor(repository) {
         this.repository = repository;
-        this.validator = validator;
     }
 
     // 1. call process use-case
-    execute(request_model) {
-        // 2. validation
-        let validation_result = this.validator.validate(request_model);
-        if(!validation_result.isValid) {
-            const response_model = new StubResponseModel(request_model.id,
-                null,
-                validation_result.error_msg);
-            return response_model;
-        }
+    execute() {
+        // 2. validation not needed since no input/request data
 
         // 3. DB interaction
-        //const stub_entity = new StubEntity(request_model.id, request_model.name);
-        //this.repository.save(stub_entity);
-
-        let entity = this.repository.load(request_model.id);
+        const stub_entities = this.repository.load();
 
         // 4. return response
-        const response_model = new StubResponseModel(entity.id, entity.name);
+        const response_model = new LocationResponseModel(stub_entities, null);
         return response_model;
     }
 }
 
-module.exports = StubInteractor;
+module.exports = LocationInteractor;

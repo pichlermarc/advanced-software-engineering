@@ -1,8 +1,8 @@
 "use strict";
 
-const IGateway = require('../../gateways/IGateway');
-
-class StubInMemRepository extends IGateway {
+const IGateway = require('../gateways/IGateway');
+const StubEntity = require('../../core/entities/StubEntity');
+class InMemRepository extends IGateway {
     /**
      * The Repository for entity StubEntity.
      * It exists only at execution time and is NOT persistent!
@@ -14,14 +14,23 @@ class StubInMemRepository extends IGateway {
      */
     constructor() {
         super();
-        this.repo = [];
+        this.repo = [
+          new StubEntity(101, "Auenland"),
+          new StubEntity(102, "Mordor"),
+          new StubEntity(103, "Bruchtal")
+          ];
     }
     save(stub_entity) {
         this.repo.push(stub_entity);
     }
     load(id) {
-        const entity_found = this.repo.find(e => e.id == id);
-        return entity_found;
+        let res;
+        if (id === undefined) // for GET /locations route
+            res = this.repo;
+        else {
+            res = this.repo.find(e => e.id == id);
+        }
+        return res;
     }
     remove(id) {
         const entitiy_remove = this.load(id);
@@ -32,4 +41,4 @@ class StubInMemRepository extends IGateway {
     clear() { this.repo = []; }
 }
 
-module.exports = StubInMemRepository;
+module.exports = InMemRepository;

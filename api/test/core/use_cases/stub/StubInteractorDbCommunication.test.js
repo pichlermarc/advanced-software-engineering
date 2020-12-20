@@ -17,6 +17,7 @@ let stub_response;
 beforeEach(() => {
     // fixture setup
     stub_repo.clear();
+    stub_repo.save(stub_entity);
     stub_response = stub_interactor.execute(stub_entity)
 })
 
