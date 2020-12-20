@@ -2,7 +2,6 @@
 const Service = require('./Service');
 const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
 const StubValidator = require('../core/use_cases/stub/StubValidator');
-const InMemRepository = require('../core/repository/InMemRepository');
 const StubInteractor = require('../core/use_cases/stub/StubInteractor');
 
 const AddLocationRequestModel = require('../core/requestModels/AddLocationRequestModel');
@@ -25,7 +24,7 @@ const locationGET = () => new Promise(
   async (resolve, reject) => {
     console.log("---locationGET---");
     try {
-      let repository = new InMemRepository();
+
       let interactor = new LocationInteractor(repository);
 
       let responsemodel = interactor.execute();
@@ -61,7 +60,7 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
     console.log("---locationLocationIdDELETE---");
     try {
       let requestmodel = new StubRequestModel(locationId);
-      let repository = new InMemRepository();
+
       let validator = new StubValidator();
       let interactor = new DeleteLocationInteractor(repository, validator);
 

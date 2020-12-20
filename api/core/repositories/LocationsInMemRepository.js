@@ -12,8 +12,13 @@ class LocationsInMemRepository extends IGateway {
         this.repo.push(locationEntity);
     }
     load(id) {
-        const entity = this.repo.find(e => e.id == id);
-        return entity;
+        let res;
+        if (id === undefined) // for GET /locations route
+            res = this.repo;
+        else {
+            res = this.repo.find(e => e.id == id);
+        }
+        return res;
     }
     remove(id) {
         const entitiy = this.load(id);
