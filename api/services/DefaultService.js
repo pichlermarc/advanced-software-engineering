@@ -2,7 +2,7 @@
 const Service = require('./Service');
 const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
 const StubValidator = require('../core/use_cases/stub/StubValidator');
-const StubInMemRepository = require('../core/use_cases/stub/StubInMemRepository');
+const InMemRepository = require('../core/repository/InMemRepository');
 const StubInteractor = require('../core/use_cases/stub/StubInteractor');
 
 const AddLocationRequestModel = require('../core/requestModels/AddLocationRequestModel');
@@ -12,6 +12,9 @@ const AddLocationInteractor = require('../core/use_cases/addLocation/AddLocation
 
 let repository = new LocationsInMemRepository();
 
+const LocationInteractor = require('../core/use_cases/location/LocationInteractor');
+const DeleteLocationInteractor = require('../core/use_cases/location/DeleteLocationInteractor');
+
 /**
 * Get your locations
 * Get locations associated with your user
@@ -20,12 +23,27 @@ let repository = new LocationsInMemRepository();
 * */
 const locationGET = () => new Promise(
   async (resolve, reject) => {
+    console.log("---locationGET---");
     try {
-      resolve(Service.successResponse({
-      }));
+      let repository = new InMemRepository();
+      let interactor = new LocationInteractor(repository);
+
+      let responsemodel = interactor.execute();
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "LocationException",
+          message: responsemodel.error_msg,
+          status: 405,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+      resolve(Service.successResponse(responsemodel.entities));
     } catch (e) {
       reject(Service.rejectResponse(
-        e.message || 'Invalid input',
+        e.message || responsemodel.error_msg,
         e.status || 405,
       ));
     }
@@ -40,10 +58,26 @@ const locationGET = () => new Promise(
 * */
 const locationLocationIdDELETE = ({ locationId }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationLocationIdDELETE---");
     try {
-      resolve(Service.successResponse({
-        locationId,
-      }));
+      let requestmodel = new StubRequestModel(locationId);
+      let repository = new InMemRepository();
+      let validator = new StubValidator();
+      let interactor = new DeleteLocationInteractor(repository, validator);
+
+      let responsemodel = interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "StubException",
+          message: responsemodel.error_msg,
+          status: 405,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+      resolve(Service.successResponse({"id": responsemodel.id, "name": responsemodel.location}));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -64,7 +98,6 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
       console.log("---locationLocationIdGET---process-the-stub-usecase---");
     try {
         let requestmodel = new StubRequestModel(locationId);
-
         let validator = new StubValidator();
         let interactor = new StubInteractor(repository, validator);
 
