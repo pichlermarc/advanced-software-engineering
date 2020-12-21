@@ -59,8 +59,11 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         // NOTE: location has to be in repo to create table for it!
         let location = this.load_location(table.location_id);
         if(location === undefined) {
-            // todo: implement and throw error?
-            return undefined;
+            throw new Error("Repo: Location with id #" + table.location_id + " does not exist! Create location first!")
+        }
+        let table_load = this.load_table(table.id);
+        if(table_load !== undefined) {
+            throw new Error("Repo: Table with id #" + table.id + " already exists!");
         }
         this.table_repo.push(table);
     }

@@ -64,8 +64,23 @@ test('should return undefined if table is not found', () => {
     expect(table_loaded).toBeUndefined();
 })
 
-test('should return undefind if save table and location_id in table is not in repo', () => {
-    let location_id_not_in_repo = 123456789;
-    let result_of_save = repo.save_table(new Table(5811, "table-dummy-1"), location_id_not_in_repo);
-    expect(result_of_save).toBeUndefined();
+test('should throw an error if save table and location_id of new table is not in repo', () => {
+    let table_location_not_exists = new Table(5811, "table-dummy-1", 123456789);
+    expect(() => {
+        repo.save_table(table_location_not_exists);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_table(table_location_not_exists);
+    }).toThrowError(/^Repo: Location.*does not exist!/);
 })
+
+test('should throw an error if try to save an existing table', () => {
+    repo.save_table(table);
+    expect(() => {
+        repo.save_table(table);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_table(table);
+    }).toThrowError(/^Repo: Table.*already exists!$/);
+})
+
