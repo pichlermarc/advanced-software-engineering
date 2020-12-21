@@ -1,10 +1,21 @@
 "use strict";
 
-class IGatewayAssignGuestToTable {
-    /**
-     * The database gateway for entity 'AssignGuestToTable'.
-     * This interfaces defines the needed methods for DB operation.
-     */
+class IGatewayLocation {
+
+    save_location(location) {}
+    load_location(id) {}
+    remove_location(id) {}
+    size_location() {}
+
+    save_table(guest) {}
+    load_table(id) {}
+    remove_table(id) {}
+    size_table() {}
+
+    save_guest(guest) {}
+    load_guest(id) {}
+    remove_guest(id) {}
+    size_guest() {}
 
     /**
      * Stores the assignment: Guest sits on table in location at date.
@@ -21,4 +32,4 @@ class IGatewayAssignGuestToTable {
     size_assign_guest_to_table() {}
 }
 
-module.exports = IGatewayAssignGuestToTable;
+module.exports = IGatewayLocation;
