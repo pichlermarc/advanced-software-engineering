@@ -2,6 +2,13 @@
 
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
 
+/**
+ * 'all_undefined()' return true if all values in the array are undefined.
+ * @param arr
+ * @returns {*}
+ */
+const all_undefined = arr => arr.every(v => v === undefined);
+
 class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     constructor() {
         super();
@@ -66,13 +73,13 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         if (id === undefined) {
             guest = this.guest_repo;
         } else {
-            guest = this.guest_repo.find(t => t.id == id);
+            guest = this.guest_repo.find(g => g.id == id);
         }
         return guest;
     }
     remove_guest(id) {
         const guest = this.load_guest(id);
-        this.guest_repo = this.guest_repo.filter(t => t.id != id);
+        this.guest_repo = this.guest_repo.filter(g => g.id != id);
         return guest;
     }
     size_guest() { return this.guest_repo.length; }
@@ -85,26 +92,26 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         let table = this.load_table(assign.table_id);
         let guest = this.load_guest(assign.guest_id);
 
-        const all_undefined = arr => arr.every(v => v === undefined);
         if(all_undefined([location, table, guest])) {
             // todo: implement and throw error?
             return undefined;
         }
 
+        // TODO: check if assignment already exists!
         this.assign_g2t_repo.push(assign);
     }
-    load_assign_g2t(id) {
+    load_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {
         let assign;
-        if (id === undefined) {
+        if (arguments.length == 0) {
             assign = this.assign_g2t_repo;
         } else {
-            assign = this.assign_g2t_repo.find(t => t.id == id);
+            assign = this.assign_g2t_repo.find(a => arguments);
         }
         return assign;
     }
     remove_assign_g2t(id) {
         const assign = this.load_assign_g2t(id);
-        this.assign_g2t_repo = this.assign_g2t_repo.filter(t => t.id != id);
+        this.assign_g2t_repo = this.assign_g2t_repo.filter(t => arguments);
         return assign;
     }
     size_assign_g2t() { return this.assign_g2t_repo.length; }
