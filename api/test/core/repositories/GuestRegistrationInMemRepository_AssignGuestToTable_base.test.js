@@ -1,3 +1,7 @@
+const each = require('jest-each');
+// jest-each: for parametrize tests
+// https://github.com/mattphillips/jest-each
+
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository');
 const Location = require('../../../core/entities/Location');
 const Table = require('../../../core/entities/Table');
@@ -37,6 +41,7 @@ test('fixture table should be defined', () => {
 test('fixture table should be defined', () => {
     expect(guest).toBeDefined()
 })
+
 
 test('should create new assigment and check for all repository constraints', () => {
     let assign = new AssignGuestToTable(999, 888, 777, 666, 555);
