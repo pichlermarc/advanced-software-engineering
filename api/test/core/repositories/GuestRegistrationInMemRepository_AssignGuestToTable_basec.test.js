@@ -22,11 +22,6 @@ beforeEach(() => {
     repo.save_guest(guest);
 })
 
-afterEach(() => {
-    // fixture teardown
-});
-
-
 test('fixture repo should be defined', () => {
     expect(repo).toBeDefined()
 })
@@ -66,20 +61,4 @@ test('should return correct assignment after saving', () => {
     let load_assign = repo.load_assign_g2t(assign.location_id, assign.table_id,
         assign.guest_id, assign.date_from, assign.date_to);
     expect(load_assign).toBeDefined();
-})
-
-test('should return list of assignments if passing only location and table to load_assign_g2t', () => {
-    let guest2 = new Guest(6912, "guest-dummy", "guest.dummy-1@x.y", "01-234-567891");
-    let guest3 = new Guest(6913, "guest-dummy", "guest.dummy-1@x.y", "01-234-567891");
-    repo.save_guest(guest2);
-    repo.save_guest(guest3);
-
-    let assign2 = new AssignGuestToTable(location.id, table.id, guest2.id, date_from, date_to);
-    let assign3 = new AssignGuestToTable(location.id, table.id, guest3.id, date_from, date_to);
-    repo.save_assign_g2t(assign2);
-    repo.save_assign_g2t(assign3);
-
-    let load_all_guest_on_table = repo.load_assign_g2t(assign.location_id, assign.table_id);
-    expect(load_all_guest_on_table).toBeDefined();
-    expect(load_all_guest_on_table.length).toBe(3);
 })

@@ -13,11 +13,6 @@ beforeEach(() => {
     repo.save_location(location);
 })
 
-afterEach(() => {
-    // fixture teardown
-});
-
-
 test('fixture repo should be defined', () => {
     expect(repo).toBeDefined()
 })

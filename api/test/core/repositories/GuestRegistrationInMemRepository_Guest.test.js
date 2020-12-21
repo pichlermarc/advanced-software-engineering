@@ -9,11 +9,6 @@ beforeEach(() => {
     repo.clear_guest();
 })
 
-afterEach(() => {
-    // fixture teardown
-});
-
-
 test('fixture repo should be defined', () => {
     expect(repo).toBeDefined()
 })

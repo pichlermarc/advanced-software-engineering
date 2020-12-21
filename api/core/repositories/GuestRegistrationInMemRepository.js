@@ -103,8 +103,10 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     load_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {
         let assign;
         if (arguments.length == 0) {
+            // return all assignments
             assign = this.assign_g2t_repo;
         } else {
+            // filter assignments
             assign = this.assign_g2t_repo.find(a => arguments);
         }
         return assign;
