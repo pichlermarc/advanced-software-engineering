@@ -49,11 +49,36 @@ test('should clear repository: remove all locations', () => {
     expect(repo.size_location()).toBe(3);
     repo.clear_location()
     expect(repo.size_location()).toBe(0);
-    repo.save_location(new Location(4711, "location-dummy-1"));
+    repo.save_location(location);
     expect(repo.size_location()).toBe(1);
 })
 
 test('should return undefined if location is not found', () => {
     let location_loaded = repo.load_location(4711);
     expect(location_loaded).toBeUndefined();
+})
+
+/**
+ * NOTE: To catch an error that will be thrown in a function
+ *          => you have to wrap the test-code in a function!
+ * INFO: https://medium.com/@afolabiwaheed/how-to-test-a-function-thats-expected-to-throw-error-in-jest-2419cc7c6462
+ */
+/*
+test('should throw an error if try to save an existing location', () => {
+    repo.save_location(location);
+    // That does NOT WORK!
+    // This test will fail with next line!
+    //expect(repo.save_location(location)).toThrowError(Error);
+    // instead, wrap the function call in a separate function; see next test:
+})
+*/
+
+test('should throw an error if try to save an existing location', () => {
+    repo.save_location(location);
+    expect(() => {
+        repo.save_location(location);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_location(location);
+    }).toThrowError(/^Repo: Location.*already exists!$/);
 })

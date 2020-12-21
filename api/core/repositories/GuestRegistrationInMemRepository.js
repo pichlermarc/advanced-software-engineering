@@ -29,7 +29,13 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     }
 
     /* ----- location START ----- */
-    save_location(location) { this.location_repo.push(location); }
+    save_location(location) {
+        let location_load = this.load_location(location.id);
+        if(location_load !== undefined) {
+            throw new Error("Repo: Location with id #" + location.id + " already exists!");
+        }
+        this.location_repo.push(location);
+    }
     load_location(id) {
         let location;
         if (id === undefined) { // for GET /locations route
