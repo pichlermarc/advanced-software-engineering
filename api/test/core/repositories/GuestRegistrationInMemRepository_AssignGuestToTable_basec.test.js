@@ -14,12 +14,12 @@ let date_from = 1;
 let date_to = 2;
 let assign = new AssignGuestToTable(location.id, table.id, guest.id, date_from, date_to);
 
+repo.save_location(location);
+repo.save_table(table);
+repo.save_guest(guest);
+
 beforeEach(() => {
-    // fixture setup
-    repo.clear_table();
-    repo.save_location(location);
-    repo.save_table(table);
-    repo.save_guest(guest);
+    repo.clear_assign_g2t();
 })
 
 test('fixture repo should be defined', () => {
@@ -48,14 +48,20 @@ test('should save new assignment if all repository constraints are ok', () => {
     expect(repo.size_assign_g2t()).toBe(1);
 })
 
-/*
+
 // TODO: test runs in intellij but NOT in command line - wtf!
+//          list size is 2 but size 1 is expected!
 test('should return all assignments if no parameters passed to load_g2t', () => {
+    console.log("#1:" + repo.size_assign_g2t())
     repo.save_assign_g2t(assign);
+    console.log("#2:" + repo.size_assign_g2t())
     let assignment_list = repo.load_assign_g2t();
+    console.log("#3:" + repo.size_assign_g2t())
+    console.log(assignment_list);
     expect(assignment_list.length).toBe(1);
+    expect(assignment_list[0]).toBe(assign);
 })
- */
+
 test('should return correct assignment after saving', () => {
     repo.save_assign_g2t(assign);
     let load_assign = repo.load_assign_g2t(assign.location_id, assign.table_id,

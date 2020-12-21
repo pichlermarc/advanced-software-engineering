@@ -7,10 +7,11 @@ let location = new Location(location_id, "location-dummy");
 let table = new Table(5811, "table-dummy", location_id);
 let repo = new GuestRegistrationInMemRepository();
 
+repo.save_location(location);
+
 beforeEach(() => {
     // fixture setup
     repo.clear_table();
-    repo.save_location(location);
 })
 
 test('fixture repo should be defined', () => {

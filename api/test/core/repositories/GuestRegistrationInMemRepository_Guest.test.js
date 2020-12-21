@@ -5,7 +5,6 @@ let guest = new Guest(6911, "guest-dummy", "guest.dummy-1@x.y", "01-234-567891")
 let repo = new GuestRegistrationInMemRepository();
 
 beforeEach(() => {
-    // fixture setup
     repo.clear_guest();
 })
 

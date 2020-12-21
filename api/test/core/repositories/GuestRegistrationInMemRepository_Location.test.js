@@ -5,7 +5,6 @@ let location = new Location(4711, "location-dummy");
 let repo = new GuestRegistrationInMemRepository();
 
 beforeEach(() => {
-    // fixture setup
     repo.clear_location();
 })
 

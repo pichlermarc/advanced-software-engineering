@@ -18,6 +18,16 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         this.assign_g2t_repo = [];
     }
 
+    load() {
+        return [this.location_repo, this.table_repo, this.guest_repo, this.assign_g2t_repo];
+    }
+    clear() {
+        this.location_repo = [];
+        this.table_repo = [];
+        this.guest_repo = [];
+        this.assign_g2t_repo = [];
+    }
+
     /* ----- location START ----- */
     save_location(location) { this.location_repo.push(location); }
     load_location(id) {
@@ -99,6 +109,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
 
         // TODO: check if assignment already exists!
         this.assign_g2t_repo.push(assign);
+        console.log("save_assign_g2t:" + this.assign_g2t_repo.length)
     }
     load_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {
         let assign;
@@ -107,7 +118,11 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             assign = this.assign_g2t_repo;
         } else {
             // filter assignments
-            assign = this.assign_g2t_repo.find(a => arguments);
+            assign = this.assign_g2t_repo.filter(a => arguments);
+            if(arguments.length == 5) {
+                // all args are set -> search for special assignment
+                assign = assign[0]
+            }
         }
         return assign;
     }
