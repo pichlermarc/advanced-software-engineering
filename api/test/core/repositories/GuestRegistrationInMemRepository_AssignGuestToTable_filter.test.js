@@ -8,13 +8,13 @@ let repo = new GuestRegistrationInMemRepository();
 
 let location = new Location(4711, "location-dummy");
 let table = new Table(5811, "table-dummy", location.id);
-let guest = new Guest(6911, "guest-dummy", "guest.dummy-1@x.y", "01-234-567891");
-let guest2 = new Guest(6912, "guest-dummy", "guest.dummy-1@x.y", "01-234-567891");
-let guest3 = new Guest(6913, "guest-dummy", "guest.dummy-1@x.y", "01-234-567891");
+let guest1 = new Guest(6911, "guest-dummy", "guest.dummy-1@x.y", "01-234-567891");
+let guest2 = new Guest(6912, "guest-dummy", "guest.dummy-2@x.y", "01-234-567892");
+let guest3 = new Guest(6913, "guest-dummy", "guest.dummy-3@x.y", "01-234-567893");
 
 let date_from = 1;
 let date_to = 2;
-let assign = new AssignGuestToTable(location.id, table.id, guest.id, date_from, date_to);
+let assign1 = new AssignGuestToTable(location.id, table.id, guest1.id, date_from, date_to);
 let assign2 = new AssignGuestToTable(location.id, table.id, guest2.id, date_from, date_to);
 let assign3 = new AssignGuestToTable(location.id, table.id, guest3.id, date_from, date_to);
 
@@ -23,10 +23,10 @@ beforeEach(() => {
     repo.clear_table();
     repo.save_location(location);
     repo.save_table(table);
-    repo.save_guest(guest);
+    repo.save_guest(guest1);
     repo.save_guest(guest2);
     repo.save_guest(guest3);
-    repo.save_assign_g2t(assign);
+    repo.save_assign_g2t(assign1);
     repo.save_assign_g2t(assign2);
     repo.save_assign_g2t(assign3);
 })

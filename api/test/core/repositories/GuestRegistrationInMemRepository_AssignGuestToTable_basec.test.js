@@ -61,4 +61,5 @@ test('should return correct assignment after saving', () => {
     let load_assign = repo.load_assign_g2t(assign.location_id, assign.table_id,
         assign.guest_id, assign.date_from, assign.date_to);
     expect(load_assign).toBeDefined();
+    expect(load_assign).toBe(assign);
 })
