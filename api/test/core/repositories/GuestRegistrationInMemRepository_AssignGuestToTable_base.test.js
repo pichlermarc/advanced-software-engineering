@@ -39,8 +39,13 @@ test('fixture table should be defined', () => {
 })
 
 test('should create new assigment and check for all repository constraints', () => {
-    let result_of_save = repo.save_assign_g2t(new AssignGuestToTable(999, 888, 777, 666, 555));
-    expect(result_of_save).toBeUndefined();
+    let assign = new AssignGuestToTable(999, 888, 777, 666, 555);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(/^Repo: Constraint.*not existing!/);
 })
 
 test('should save new assignment if all repository constraints are ok', () => {
@@ -48,9 +53,6 @@ test('should save new assignment if all repository constraints are ok', () => {
     expect(repo.size_assign_g2t()).toBe(1);
 })
 
-
-// TODO: test runs in intellij but NOT in command line - wtf!
-//          list size is 2 but size 1 is expected!
 test('should return all assignments if no parameters passed to load_g2t', () => {
     repo.save_assign_g2t(assign);
     let assignment_list = repo.load_assign_g2t();
