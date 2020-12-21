@@ -7,7 +7,7 @@ class IGatewayLocation {
     remove_location(id) {}
     size_location() {}
 
-    save_table(guest) {}
+    save_table(table) {}
     load_table(id) {}
     remove_table(id) {}
     size_table() {}

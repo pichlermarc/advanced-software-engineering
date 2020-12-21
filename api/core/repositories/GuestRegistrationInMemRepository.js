@@ -8,6 +8,7 @@ const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration
  * @returns {*}
  */
 const all_undefined = arr => arr.every(v => v === undefined);
+const some_undefined = arr => arr.some(v => v === undefined);
 
 class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     constructor() {
@@ -117,9 +118,8 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         let table = this.load_table(assign.table_id);
         let guest = this.load_guest(assign.guest_id);
 
-        if(all_undefined([location, table, guest])) {
-            // todo: implement and throw error?
-            return undefined;
+        if(some_undefined([location, table, guest])) {
+            throw new Error("Repo: Constraint violated: Location, table or guest is not existing!");
         }
 
         // TODO: check if assignment already exists!
