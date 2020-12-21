@@ -25,7 +25,7 @@ repo.save_guest(guest2);
 repo.save_guest(guest3);
 
 beforeEach(() => {
-    repo.repo.clear_assign_g2t();
+    repo.clear_assign_g2t();
     repo.save_assign_g2t(assign1);
     repo.save_assign_g2t(assign2);
     repo.save_assign_g2t(assign3);
@@ -35,4 +35,7 @@ test('should return list of assignments if passing only location and table to lo
     let load_all_guest_on_table = repo.load_assign_g2t(location.id, table.id);
     expect(load_all_guest_on_table).toBeDefined();
     expect(load_all_guest_on_table.length).toBe(3);
+    expect(load_all_guest_on_table[0]).toBe(assign1);
+    expect(load_all_guest_on_table[1]).toBe(assign2);
+    expect(load_all_guest_on_table[2]).toBe(assign3);
 })

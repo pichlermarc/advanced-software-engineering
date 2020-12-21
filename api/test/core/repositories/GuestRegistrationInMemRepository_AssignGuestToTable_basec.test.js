@@ -52,12 +52,8 @@ test('should save new assignment if all repository constraints are ok', () => {
 // TODO: test runs in intellij but NOT in command line - wtf!
 //          list size is 2 but size 1 is expected!
 test('should return all assignments if no parameters passed to load_g2t', () => {
-    console.log("#1:" + repo.size_assign_g2t())
     repo.save_assign_g2t(assign);
-    console.log("#2:" + repo.size_assign_g2t())
     let assignment_list = repo.load_assign_g2t();
-    console.log("#3:" + repo.size_assign_g2t())
-    console.log(assignment_list);
     expect(assignment_list.length).toBe(1);
     expect(assignment_list[0]).toBe(assign);
 })

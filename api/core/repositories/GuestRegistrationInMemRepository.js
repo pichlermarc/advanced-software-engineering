@@ -109,7 +109,6 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
 
         // TODO: check if assignment already exists!
         this.assign_g2t_repo.push(assign);
-        console.log("save_assign_g2t:" + this.assign_g2t_repo.length)
     }
     load_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {
         let assign;
@@ -119,7 +118,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         } else {
             // filter assignments
             assign = this.assign_g2t_repo.filter(a => arguments);
-            if(arguments.length == 5) {
+            if(arguments.length == 5 && assign !== undefined && assign.length == 1) {
                 // all args are set -> search for special assignment
                 assign = assign[0]
             }
