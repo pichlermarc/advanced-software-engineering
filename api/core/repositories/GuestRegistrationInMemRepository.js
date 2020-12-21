@@ -8,7 +8,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         this.location_repo = [];
         this.table_repo = [];
         this.guest_repo = [];
-        //this.assign_guest_to_table_repo = [];
+        this.assign_g2t_repo = [];
     }
 
     /* ----- location START ----- */
@@ -78,6 +78,38 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     size_guest() { return this.guest_repo.length; }
     clear_guest() { this.guest_repo = []; }
     /* ----- guest END ----- */
+
+    /* ----- assign-guest-to-table START ----- */
+    save_assign_g2t(assign) {
+        let location = this.load_location(assign.location_id);
+        let table = this.load_table(assign.table_id);
+        let guest = this.load_guest(assign.guest_id);
+
+        const all_undefined = arr => arr.every(v => v === undefined);
+        if(all_undefined([location, table, guest])) {
+            // todo: implement and throw error?
+            return undefined;
+        }
+
+        this.assign_g2t_repo.push(assign);
+    }
+    load_assign_g2t(id) {
+        let assign;
+        if (id === undefined) {
+            assign = this.assign_g2t_repo;
+        } else {
+            assign = this.assign_g2t_repo.find(t => t.id == id);
+        }
+        return assign;
+    }
+    remove_assign_g2t(id) {
+        const assign = this.load_assign_g2t(id);
+        this.assign_g2t_repo = this.assign_g2t_repo.filter(t => t.id != id);
+        return assign;
+    }
+    size_assign_g2t() { return this.assign_g2t_repo.length; }
+    clear_assign_g2t() { this.assign_g2t_repo = []; }
+    /* ----- assign-guest-to-table END ----- */
 }
 
 module.exports = GuestRegistrationInMemRepository;
