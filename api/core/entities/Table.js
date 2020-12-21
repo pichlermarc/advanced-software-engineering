@@ -1,10 +1,10 @@
 "use strict";
 
 class Table {
-    constructor(id, name, location) {
+    constructor(id, name, location_id) {
         this.id = id;
         this.name = name;
-        this.location = location;
+        this.location_id = location_id;
     }
 }
 

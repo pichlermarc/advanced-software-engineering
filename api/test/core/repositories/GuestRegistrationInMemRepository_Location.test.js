@@ -40,7 +40,7 @@ test('should load same location from repo that has recently been stored', () => 
 
 test('should remove right location from repo', () => {
     repo.save_location(location);
-    let location2 = new Location(4712, "stub-loc-2");
+    let location2 = new Location(4712, "location-dummy-2");
     repo.save_location(location2);
     expect(repo.size_location()).toBe(2);
     let location_removed = repo.remove_location(location2.id);
@@ -49,13 +49,17 @@ test('should remove right location from repo', () => {
 })
 
 test('should clear repository: remove all locations', () => {
-    repo.save_location(new Location(4711, "stub-loc-1"));
-    repo.save_location(new Location(4712, "stub-loc-2"));
-    repo.save_location(new Location(4713, "stub-loc-3"));
+    repo.save_location(new Location(4711, "location-dummy-1"));
+    repo.save_location(new Location(4712, "location-dummy-2"));
+    repo.save_location(new Location(4713, "location-dummy-3"));
     expect(repo.size_location()).toBe(3);
     repo.clear_location()
     expect(repo.size_location()).toBe(0);
-    repo.save_location(new Location(4711, "stub-loc-1"));
+    repo.save_location(new Location(4711, "location-dummy-1"));
     expect(repo.size_location()).toBe(1);
+})
 
+test('should return undefined if location is not found', () => {
+    let location_loaded = repo.load_location(4711);
+    expect(location_loaded).toBeUndefined();
 })
