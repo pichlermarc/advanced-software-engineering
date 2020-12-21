@@ -86,7 +86,13 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     /* ----- table END ----- */
 
     /* ----- guest START ----- */
-    save_guest(guest) { this.guest_repo.push(guest); }
+    save_guest(guest) {
+        let guest_load = this.load_guest(guest.id);
+        if(guest_load !== undefined) {
+            throw new Error("Repo: Guest with id #" + guest.id + " already exists!");
+        }
+        this.guest_repo.push(guest);
+    }
     load_guest(id) {
         let guest;
         if (id === undefined) {

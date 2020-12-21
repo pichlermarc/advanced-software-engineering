@@ -57,3 +57,13 @@ test('should return undefined if guest is not found', () => {
     let guest_loaded = repo.load_guest(6911);
     expect(guest_loaded).toBeUndefined();
 })
+
+test('should throw an error if try to save an existing guest', () => {
+    repo.save_guest(guest);
+    expect(() => {
+        repo.save_guest(guest);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_guest(guest);
+    }).toThrowError(/^Repo: Guest.*already exists!$/);
+})
