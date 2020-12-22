@@ -68,7 +68,7 @@ class FakeGuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             }
             return [this.location_received];
         }
-        if(this.location_received.id != id) {
+        if(this.location_received == null || this.location_received.id != id) {
             return null;
         }
         return this.location_received;
@@ -111,7 +111,7 @@ class FakeGuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             }
             return [this.table_received];
         }
-        if(this.table_received.id != id) {
+        if(this.table_received == null || this.table_received.id != id) {
             return null;
         }
         return this.table_received;
@@ -148,7 +148,7 @@ class FakeGuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             }
             return [this.guest_received];
         }
-        if(this.guest_received.id != id) {
+        if(this.guest_received == null || this.guest_received.id != id) {
             return null;
         }
         return this.guest_received;
