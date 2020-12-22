@@ -1,7 +1,7 @@
 "use strict";
 
-const IGateway = require('../gateways/IGateway');
-const StubEntity = require('../../core/entities/StubEntity');
+const IGateway = require('./IGateway');
+const StubEntity = require('./StubEntity');
 class InMemRepository extends IGateway {
     /**
      * The Repository for entity StubEntity.

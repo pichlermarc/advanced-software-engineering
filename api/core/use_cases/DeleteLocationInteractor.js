@@ -1,9 +1,9 @@
 "use strict";
 
-const StubResponseModel = require('./StubResponseModel');
-const StubEntity = require('../../entities/StubEntity');
-
-class StubInteractor {
+// TODO: * exchange against real response-model!
+//       * use GuestRegistrationInMemRepository
+const StubResponseModel = require('../stub/StubResponseModel');
+class DeleteLocationInteractor {
     /**
      * The interactor represents one use-case respectively it processes on use-case.
      * The used design-pattern is the 'command pattern'.
@@ -26,25 +26,27 @@ class StubInteractor {
 
     // 1. call process use-case
     execute(request_model) {
-        // 2. validation
+        // 2. validation not needed since no input/request data
         let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
             const response_model = new StubResponseModel(request_model.id,
-                null,
-                validation_result.error_msg);
+              null,
+              validation_result.error_msg);
             return response_model;
         }
 
         // 3. DB interaction
-        //const stub_entity = new StubEntity(request_model.id, request_model.name);
-        //this.repository.save(stub_entity);
-
-        let entity = this.repository.load(request_model.id);
+        let response_model;
+        const location_removed_id = this.repository.remove_location(request_model.id);
+        if(location_removed_id != null) {
+            response_model = new StubResponseModel(request_model.id, request_model.name);
+        } else {
+            response_model = new StubResponseModel(null, null, "No Entity With That ID in DB")
+        }
 
         // 4. return response
-        const response_model = new StubResponseModel(entity.id, entity.name);
         return response_model;
     }
 }
 
-module.exports = StubInteractor;
+module.exports = DeleteLocationInteractor;

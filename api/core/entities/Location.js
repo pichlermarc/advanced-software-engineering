@@ -1,10 +1,10 @@
 "use strict";
 
-class AddLocationRequestModel {
+class Location {
     constructor(id, name) {
         this.id = id;
         this.name = name;
     }
 }
 
-module.exports = AddLocationRequestModel;
+module.exports = Location;

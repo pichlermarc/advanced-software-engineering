@@ -1,7 +1,7 @@
 "use strict";
 
-const AddLocationResponseModel = require('../../responseModels/AddLocationResponseModel');
-const StubEntity = require('../../entities/StubEntity');
+const AddLocationResponseModel = require('../responseModels/AddLocationResponseModel');
+const Location = require('../entities/Location');
 
 class AddLocationInteractor {
     constructor(repository, validator) {
@@ -21,12 +21,13 @@ class AddLocationInteractor {
         }
 
         // 3. DB interaction
-        const stub_entity = new StubEntity(Math.floor(Math.random() * (100 - 1 + 1)) + 1, request_model.name);
-        if(this.repository.load(stub_entity.id) === undefined)
-            this.repository.save(stub_entity);
+        const location = new Location(Math.floor(Math.random() * (100 - 1 + 1)) + 1, request_model.name);
+        if(this.repository.load_location(location.id) == null) {
+            this.repository.save_location(location);
+        }
 
         // 4. return response
-        const response_model = new AddLocationResponseModel(stub_entity.id, stub_entity.name);
+        const response_model = new AddLocationResponseModel(location.id, location.name);
         return response_model;
     }
 }
