@@ -1,6 +1,6 @@
-const FakeLocationsInMemRepository = require('../../repositories/fake/FakeLocationsInMemRepository')
-const LocationInteractor = require('../../../../core/use_cases/LocationInteractor')
-const StubEntity = require('../../../../core/stub/StubEntity');
+const FakeLocationsInMemRepository = require('../repositories/fake/FakeLocationsInMemRepository')
+const LocationInteractor = require('../../../core/use_cases/LocationInteractor')
+const StubEntity = require('../../../core/stub/StubEntity');
 
 let repo = new FakeLocationsInMemRepository();
 let interactor = new LocationInteractor(repo)
