@@ -1,6 +1,6 @@
 const AddLocationValidator = require('../../../../core/validation/AddLocationValidator')
 const FakeLocationsInMemRepository = require('../../repositories/fake/FakeLocationsInMemRepository')
-const AddLocationInteractor = require('../../../../core/use_cases/addLocation/AddLocationInteractor')
+const AddLocationInteractor = require('../../../../core/use_cases/AddLocationInteractor')
 const AddLocationRequestModel = require('../../../../core/requestModels/AddLocationRequestModel')
 const StubEntity = require('../../../../core/entities/StubEntity');
 

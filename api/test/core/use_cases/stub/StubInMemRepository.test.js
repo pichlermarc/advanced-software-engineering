@@ -1,4 +1,4 @@
-const StubInMemRepository = require('../../../../core/repository/InMemRepository');
+const StubInMemRepository = require('../../../../core/repositories/InMemRepository');
 const StubEntity = require('../../../../core/entities/StubEntity');
 
 let stub_entity = new StubEntity(4711, "stub-loc");

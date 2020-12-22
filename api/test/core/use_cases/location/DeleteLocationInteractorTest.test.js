@@ -1,7 +1,7 @@
-const StubValidator = require('../../../../core/use_cases/stub/StubValidator')
+const StubValidator = require('../../../../core/stub/StubValidator')
 const FakeLocationsInMemRepository = require('../../repositories/fake/FakeLocationsInMemRepository')
-const DeleteLocationInteractor = require('../../../../core/use_cases/location/DeleteLocationInteractor')
-const StubRequestModel = require('../../../../core/use_cases/stub/StubRequestModel')
+const DeleteLocationInteractor = require('../../../../core/use_cases/DeleteLocationInteractor')
+const StubRequestModel = require('../../../../core/stub/StubRequestModel')
 const StubEntity = require('../../../../core/entities/StubEntity');
 
 const STUB_ID = 4711

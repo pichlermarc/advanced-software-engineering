@@ -1,18 +1,18 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
-const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
-const StubValidator = require('../core/use_cases/stub/StubValidator');
-const StubInteractor = require('../core/use_cases/stub/StubInteractor');
+const StubRequestModel = require('../core/stub/StubRequestModel');
+const StubValidator = require('../core/stub/StubValidator');
+const StubInteractor = require('../core/stub/StubInteractor');
 
 const AddLocationRequestModel = require('../core/requestModels/AddLocationRequestModel');
 const LocationsInMemRepository = require('../core/repositories/LocationsInMemRepository');
 const AddLocationValidator = require('../core/validation/AddLocationValidator');
-const AddLocationInteractor = require('../core/use_cases/addLocation/AddLocationInteractor');
+const AddLocationInteractor = require('../core/use_cases/AddLocationInteractor');
 
 let repository = new LocationsInMemRepository();
 
-const LocationInteractor = require('../core/use_cases/location/LocationInteractor');
-const DeleteLocationInteractor = require('../core/use_cases/location/DeleteLocationInteractor');
+const LocationInteractor = require('../core/use_cases/LocationInteractor');
+const DeleteLocationInteractor = require('../core/use_cases/DeleteLocationInteractor');
 
 /**
 * Get your locations

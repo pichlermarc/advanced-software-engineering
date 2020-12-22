@@ -1,7 +1,7 @@
-const StubValidator = require('../../../../core/use_cases/stub/StubValidator')
+const StubValidator = require('../../../../core/stub/StubValidator')
 const FakeStubInMemRepository = require('./fake/FakeStubInMemRepository')
-const StubInteractor = require('../../../../core/use_cases/stub/StubInteractor')
-const StubRequestModel = require('../../../../core/use_cases/stub/StubRequestModel')
+const StubInteractor = require('../../../../core/stub/StubInteractor')
+const StubRequestModel = require('../../../../core/stub/StubRequestModel')
 const StubEntity = require('../../../../core/entities/StubEntity');
 
 const STUB_ID = 4711
