@@ -167,14 +167,6 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
                 date_from: [date_from],
                 date_to: [date_to]
             };*/
-            //let assign = multifilter(this.assign_g2t_repo, filters);
-            /*assign = this.assign_g2t_repo.filter((a) => {
-                    return
-                (location_id !== undefined && a.location_id == location_id && table_id !== undefined && a.table_id == table_id && guest_id !== undefined && a.guest_id == guest_id) ||
-                (location_id !== undefined && a.location_id == location_id && table_id !== undefined && a.table_id == table_id) ||
-                (location_id !== undefined && a.location_id == location_id);
-                }
-            );*/
             if(location_id !== undefined) {
                 filters["location_id"] = [location_id];
             }
