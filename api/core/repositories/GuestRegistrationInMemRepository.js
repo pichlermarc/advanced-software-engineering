@@ -1,5 +1,6 @@
 "use strict";
 
+const multifilter = require('../util/multifilter');
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
 
 /**
@@ -122,7 +123,11 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             throw new Error("Repo: FK Constraint violated: Location, table or guest is not existing!");
         }
 
-        // TODO: check if assignment already exists!
+        let assign_load = this.load_assign_g2t(assign.location_id, assign.table_id, assign.guest_id,
+            assign.date_from, assign.date_to)
+        if(assign_load !== undefined) {
+             throw new Error("Repo: Assignment already exists!");
+        }
         this.assign_g2t_repo.push(assign);
     }
     load_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {
@@ -131,12 +136,44 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             // return all assignments
             assign = this.assign_g2t_repo;
         } else {
-            // filter assignments
-            assign = this.assign_g2t_repo.filter(a => arguments);
-            if(arguments.length == 5 && assign !== undefined && assign.length == 1) {
+            assign = this.assign_g2t_repo.find(a =>
+                a.location_id == location_id &&
+                a.table_id == table_id &&
+                a.guest_id == guest_id &&
+                    a.date_from == date_from &&
+                    a.date_to == date_to
+            );
+            if(assign !== undefined && assign.length == 1) {
                 // all args are set -> search for special assignment
                 assign = assign[0]
+            } else if(assign === undefined || assign.length == 0) {
+                assign = undefined;
             }
+        }
+        return assign;
+    }
+    filter_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {
+        let assign;
+        if (arguments.length == 0) {
+            // return all assignments
+            assign = this.assign_g2t_repo;
+        } else {
+            // filter assignments
+            const filters = {
+                location_id: [location_id],
+                table_id: [table_id],
+                guest_id: [guest_id],
+                date_from: [date_from],
+                date_to: [date_to]
+            };
+            //let assign = multifilter(this.assign_g2t_repo, filters);
+            assign = this.assign_g2t_repo.filter((a) => {
+                    return
+                (location_id !== undefined && a.location_id == location_id && table_id !== undefined && a.table_id == table_id && a.guest_id == guest_id) ||
+                (location_id !== undefined && a.location_id == location_id && table_id !== undefined && a.table_id == table_id) ||
+                (location_id !== undefined && a.location_id == location_id);
+                }
+            );
         }
         return assign;
     }

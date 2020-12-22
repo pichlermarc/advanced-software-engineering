@@ -31,11 +31,17 @@ beforeEach(() => {
     repo.save_assign_g2t(assign3);
 })
 
+test('should setup the repo of assignments as well', () => {
+    expect(repo).toBeDefined();
+    expect(repo.size_assign_g2t()).toBe(3);
+})
+
+
 test('should return list of assignments if passing only location and table to load_assign_g2t', () => {
-    let load_all_guest_on_table = repo.load_assign_g2t(location.id, table.id);
-    expect(load_all_guest_on_table).toBeDefined();
-    expect(load_all_guest_on_table.length).toBe(3);
-    expect(load_all_guest_on_table[0]).toBe(assign1);
-    expect(load_all_guest_on_table[1]).toBe(assign2);
-    expect(load_all_guest_on_table[2]).toBe(assign3);
+    let all_guest_on_table = repo.filter_assign_g2t(location.id, table.id);
+    expect(all_guest_on_table).toBeDefined();
+    expect(all_guest_on_table.length).toBe(3);
+    expect(all_guest_on_table[0]).toBe(assign1);
+    expect(all_guest_on_table[1]).toBe(assign2);
+    expect(all_guest_on_table[2]).toBe(assign3);
 })

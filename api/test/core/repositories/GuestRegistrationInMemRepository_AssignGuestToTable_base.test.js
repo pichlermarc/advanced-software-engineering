@@ -44,6 +44,10 @@ test('fixture table should be defined', () => {
     expect(guest).toBeDefined()
 })
 
+test('fixture table should be defined', () => {
+    expect(assign).toBeDefined()
+})
+
 const test_cases_nok = [
     [999, 888, 777, 666, 555],
     [999, table.id, guest.id, date_from, date_to],
@@ -128,3 +132,13 @@ test('should return correct assignment after saving', () => {
     expect(load_assign).toBeDefined();
     expect(load_assign).toBe(assign);
 });
+
+test('should throw an error if try to save an existing assignment', () => {
+    repo.save_assign_g2t(assign);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(/^Repo: Assignment already exists!$/);
+})
