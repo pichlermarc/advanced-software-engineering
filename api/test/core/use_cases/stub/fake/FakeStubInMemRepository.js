@@ -1,4 +1,4 @@
-const IGateway = require('../../../../../core/gateways/IGateway')
+const IGateway = require('../../../../../core/stub/IGateway')
 
 class FakeStubInMemRepository extends IGateway {
     constructor() {

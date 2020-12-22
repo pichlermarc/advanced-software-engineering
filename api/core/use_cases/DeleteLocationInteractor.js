@@ -1,7 +1,7 @@
 "use strict";
 
 const StubResponseModel = require('../stub/StubResponseModel');
-const StubEntity = require('../entities/StubEntity');
+const StubEntity = require('../stub/StubEntity');
 class DeleteLocationInteractor {
     /**
      * The interactor represents one use-case respectively it processes on use-case.

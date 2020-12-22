@@ -1,7 +1,7 @@
 "use strict";
 
 const StubResponseModel = require('./StubResponseModel');
-const StubEntity = require('../entities/StubEntity');
+const StubEntity = require('./StubEntity');
 
 class StubInteractor {
     /**

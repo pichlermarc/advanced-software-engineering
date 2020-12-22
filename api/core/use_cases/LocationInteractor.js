@@ -1,7 +1,7 @@
 "use strict";
 
 const LocationResponseModel = require('../responseModels/LocationResponseModel');
-const StubEntity = require('../entities/StubEntity');
+const StubEntity = require('../stub/StubEntity');
 
 class LocationInteractor {
     /**

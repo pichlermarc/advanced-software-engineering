@@ -1,7 +1,7 @@
 "use strict";
 
-const IGateway = require('../../../../core/gateways/IGateway');
-const StubEntity = require('../../../../core/entities/StubEntity')
+const IGateway = require('../../../../core/stub/IGateway');
+const StubEntity = require('../../../../core/stub/StubEntity')
 
 class FakeLocationsInMemRepository extends IGateway {
     constructor() {

@@ -2,7 +2,7 @@ const StubValidator = require('../../../../core/stub/StubValidator')
 const FakeStubInMemRepository = require('./fake/FakeStubInMemRepository')
 const StubInteractor = require('../../../../core/stub/StubInteractor')
 const StubRequestModel = require('../../../../core/stub/StubRequestModel')
-const StubEntity = require('../../../../core/entities/StubEntity')
+const StubEntity = require('../../../../core/stub/StubEntity')
 
 let stub_validator = new StubValidator()
 let stub_repo = new FakeStubInMemRepository();

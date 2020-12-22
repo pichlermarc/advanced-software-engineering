@@ -2,7 +2,7 @@ const AddLocationValidator = require('../../../../core/validation/AddLocationVal
 const FakeLocationsInMemRepository = require('../../repositories/fake/FakeLocationsInMemRepository')
 const AddLocationInteractor = require('../../../../core/use_cases/AddLocationInteractor')
 const AddLocationRequestModel = require('../../../../core/requestModels/AddLocationRequestModel')
-const StubEntity = require('../../../../core/entities/StubEntity');
+const StubEntity = require('../../../../core/stub/StubEntity');
 
 const STUB_ID = 4711
 const STUB_NAME = "stub"
