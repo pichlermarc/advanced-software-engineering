@@ -78,10 +78,12 @@ class FakeGuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         if(id === undefined) {
             return [this.location_received];
         }
-        if(this.location_received.id != id) {
+        if(this.location_received == null || this.location_received.id != id) {
             return null;
         }
+        const location_deleted = new Location(this.location_received.id, this.location_received.name);
         this.location_received = null;
+        return location_deleted;
     }
     size_location() {
         if (this.location_received == null) {
@@ -118,7 +120,7 @@ class FakeGuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     }
     remove_table(id) {
         this.table_remove_was_called = true;
-        if(this.table_received.id != id) {
+        if(this.table_received == null || this.table_received.id != id) {
             return null;
         }
         this.table_received = null;
@@ -155,7 +157,7 @@ class FakeGuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     }
     remove_guest(id) {
         this.guest_remove_was_called = true;
-        if(this.guest_received.id != id) {
+        if(this.guest_received == null || this.guest_received.id != id) {
             return null;
         }
         this.guest_received = null;
