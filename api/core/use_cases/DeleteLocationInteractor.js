@@ -36,16 +36,15 @@ class DeleteLocationInteractor {
         }
 
         // 3. DB interaction
-        const deleted_entity = this.repository.remove_location(request_model.id);
-
-        // 4. return response
         let response_model;
-        if (typeof deleted_entity !== 'undefined') {
-            response_model = new StubResponseModel(deleted_entity.id, deleted_entity.name, null);
-        }
-        else {
+        const location_removed_id = this.repository.remove_location(request_model.id);
+        if(location_removed_id != null) {
+            response_model = new StubResponseModel(request_model.id, request_model.name);
+        } else {
             response_model = new StubResponseModel(null, null, "No Entity With That ID in DB")
         }
+
+        // 4. return response
         return response_model;
     }
 }

@@ -10,14 +10,12 @@ const LOCATION_NAME = "location-dummy"
 let validator = new StubValidator()
 let repo = new FakeGuestRegistrationInMemRepository();
 let interactor = new DeleteLocationInteractor(repo, validator)
-let req;
-let res;
+let req = new StubRequestModel(LOCATION_ID);
 
 beforeAll(() => {
   // fixture setup
   repo.clear();
   repo.save_location(new Location(LOCATION_ID, LOCATION_NAME));
-  req = new StubRequestModel(LOCATION_ID);
 })
 
 afterAll(() => {
@@ -25,16 +23,15 @@ afterAll(() => {
   repo.clear();
 });
 
-test(`Should return the deleted entity from the repo with the specified id ${LOCATION_ID}`, () => {
-  res = interactor.execute(req);
+test(`Should return the id from the deleted location: ${LOCATION_ID}`, () => {
+  let res = interactor.execute(req);
   expect(res).toBeDefined();
   expect(res.id).toBe(LOCATION_ID);
-  expect(res.location).toBe(LOCATION_NAME);
   expect(res.error_msg).toBeNull();
 })
 
 test('should return error since you try to delete an entity from repo which is not there', () => {
-  res = interactor.execute(new StubRequestModel(LOCATION_ID+1));
+  let res = interactor.execute(new StubRequestModel(LOCATION_ID+1));
   expect(res.id).toBeNull();
   expect(res.location).toBeNull();
   expect(res.error_msg).toBeDefined();

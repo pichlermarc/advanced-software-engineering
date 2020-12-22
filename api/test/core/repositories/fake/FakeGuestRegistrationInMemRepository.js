@@ -81,7 +81,7 @@ class FakeGuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         if(this.location_received == null || this.location_received.id != id) {
             return null;
         }
-        const location_deleted = new Location(this.location_received.id, this.location_received.name);
+        const location_deleted = this.location_received.id;
         this.location_received = null;
         return location_deleted;
     }
