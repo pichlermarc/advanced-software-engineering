@@ -1,4 +1,6 @@
-const each = require('jest-each');
+"use strict";
+
+//const each = require('jest-each');
 // jest-each: for parametrize tests
 // https://github.com/mattphillips/jest-each
 
@@ -42,8 +44,19 @@ test('fixture table should be defined', () => {
     expect(guest).toBeDefined()
 })
 
+const test_cases_nok = [
+    [999, 888, 777, 666, 555],
+    [999, table.id, guest.id, date_from, date_to],
+    [location.id, 888, guest.id, date_from, date_to],
+    [location.id, table.id, 777, date_from, date_to],
+    [location.id, table.id, guest.id, 666, date_to],
+    [location.id, table.id, guest.id, date_from, 555],
+];
 
-test('should create new assigment and check for all repository constraints', () => {
+/*
+// TODO: jest-each not working!
+each(test_cases_nok
+).test('should create new assigment and check for all repository constraints', () => {
     let assign = new AssignGuestToTable(999, 888, 777, 666, 555);
     expect(() => {
         repo.save_assign_g2t(assign);
@@ -51,6 +64,49 @@ test('should create new assigment and check for all repository constraints', () 
     expect(() => {
         repo.save_assign_g2t(assign);
     }).toThrowError(/^Repo: Constraint.*not existing!/);
+});
+*/
+
+// TODO: remove that dangerous hack and get paramerized test working!
+test('should not create new assigment with wrong foreign keys', () => {
+    const p = test_cases_nok[0];
+    let assign = new AssignGuestToTable(p[0], p[1], p[2], p[3], p[4]);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(/^Repo: FK Constraint.*not existing!/);
+})
+test('should not create new assigment with wrong foreign key - location', () => {
+    const p = test_cases_nok[1];
+    let assign = new AssignGuestToTable(p[0], p[1], p[2], p[3], p[4]);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(/^Repo: FK Constraint.*not existing!/);
+})
+test('should not create new assigment with wrong foreign key - table', () => {
+    const p = test_cases_nok[2];
+    let assign = new AssignGuestToTable(p[0], p[1], p[2], p[3], p[4]);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(/^Repo: FK Constraint.*not existing!/);
+})
+test('should not create new assigment with wrong foreign key - guest', () => {
+    const p = test_cases_nok[3];
+    let assign = new AssignGuestToTable(p[0], p[1], p[2], p[3], p[4]);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(Error);
+    expect(() => {
+        repo.save_assign_g2t(assign);
+    }).toThrowError(/^Repo: FK Constraint.*not existing!/);
 })
 
 test('should save new assignment if all repository constraints are ok', () => {
@@ -71,4 +127,4 @@ test('should return correct assignment after saving', () => {
         assign.guest_id, assign.date_from, assign.date_to);
     expect(load_assign).toBeDefined();
     expect(load_assign).toBe(assign);
-})
+});

@@ -119,7 +119,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         let guest = this.load_guest(assign.guest_id);
 
         if(some_undefined([location, table, guest])) {
-            throw new Error("Repo: Constraint violated: Location, table or guest is not existing!");
+            throw new Error("Repo: FK Constraint violated: Location, table or guest is not existing!");
         }
 
         // TODO: check if assignment already exists!
