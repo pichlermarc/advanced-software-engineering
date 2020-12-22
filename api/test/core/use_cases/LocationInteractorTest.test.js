@@ -1,34 +1,29 @@
-const FakeLocationsInMemRepository = require('../repositories/fake/FakeLocationsInMemRepository')
+const FakeGuestRegistrationInMemRepository = require('../repositories/fake/FakeGuestRegistrationInMemRepository')
 const LocationInteractor = require('../../../core/use_cases/LocationInteractor')
-const StubEntity = require('../../../core/stub/StubEntity');
+const Location = require('../../../core/entities/Location');
 
-let repo = new FakeLocationsInMemRepository();
+let repo = new FakeGuestRegistrationInMemRepository();
 let interactor = new LocationInteractor(repo)
 let res;
 
 beforeAll(() => {
-  // fixture setup
-  repo.save(new StubEntity(1,"test1"));
-  repo.save(new StubEntity(2,"test2"));
-  repo.save(new StubEntity(3,"test3"));
-  repo.save(new StubEntity(4,"test4"));
-})
-
-afterAll(() => {
   repo.clear();
+  repo.save_location(new Location(1,"test1"));
+  repo.save_location(new Location(2,"test2"));
+  repo.save_location(new Location(3,"test3"));
+  repo.save_location(new Location(4,"test4"));
 })
 
-test('should return all 4 stored entities in the repository', () => {
+test('should return stored location from repository', () => {
   res = interactor.execute();
   expect(res).toBeDefined()
-  expect(res.entities.length).toBe(4)
+  expect(res.location_list.length).toBe(1)
   expect(res.error_msg).toBeNull()
 })
 
-test('should return 0, since repo is empty', () => {
+test('should creae response with 0 locations, since repo is empty', () => {
   repo.clear();
   res = interactor.execute();
   expect(res).toBeDefined();
-  expect(res.entities.length).toBe(0);
+  expect(res.location_list.length).toBe(0);
 })
-

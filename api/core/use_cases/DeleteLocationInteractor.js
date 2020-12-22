@@ -1,7 +1,8 @@
 "use strict";
 
+// TODO: * exchange against real response-model!
+//       * use GuestRegistrationInMemRepository
 const StubResponseModel = require('../stub/StubResponseModel');
-const StubEntity = require('../stub/StubEntity');
 class DeleteLocationInteractor {
     /**
      * The interactor represents one use-case respectively it processes on use-case.

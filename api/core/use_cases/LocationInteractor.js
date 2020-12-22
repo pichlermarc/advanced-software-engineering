@@ -1,7 +1,6 @@
 "use strict";
 
 const LocationResponseModel = require('../responseModels/LocationResponseModel');
-const StubEntity = require('../stub/StubEntity');
 
 class LocationInteractor {
     /**
@@ -28,10 +27,10 @@ class LocationInteractor {
         // 2. validation not needed since no input/request data
 
         // 3. DB interaction
-        const stub_entities = this.repository.load();
+        const locations = this.repository.load_location();
 
         // 4. return response
-        const response_model = new LocationResponseModel(stub_entities, null);
+        const response_model = new LocationResponseModel(locations);
         return response_model;
     }
 }
