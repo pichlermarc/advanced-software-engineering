@@ -36,7 +36,6 @@ test('should setup the repo of assignments as well', () => {
     expect(repo.size_assign_g2t()).toBe(3);
 })
 
-
 test('should return list of assignments if passing only location and table to load_assign_g2t', () => {
     let all_guest_on_table = repo.filter_assign_g2t(location.id, table.id);
     expect(all_guest_on_table).toBeDefined();

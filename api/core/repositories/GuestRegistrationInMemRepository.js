@@ -159,21 +159,38 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             assign = this.assign_g2t_repo;
         } else {
             // filter assignments
-            const filters = {
+            let filters = {};
+            /*const filters = {
                 location_id: [location_id],
                 table_id: [table_id],
                 guest_id: [guest_id],
                 date_from: [date_from],
                 date_to: [date_to]
-            };
+            };*/
             //let assign = multifilter(this.assign_g2t_repo, filters);
-            assign = this.assign_g2t_repo.filter((a) => {
+            /*assign = this.assign_g2t_repo.filter((a) => {
                     return
-                (location_id !== undefined && a.location_id == location_id && table_id !== undefined && a.table_id == table_id && a.guest_id == guest_id) ||
+                (location_id !== undefined && a.location_id == location_id && table_id !== undefined && a.table_id == table_id && guest_id !== undefined && a.guest_id == guest_id) ||
                 (location_id !== undefined && a.location_id == location_id && table_id !== undefined && a.table_id == table_id) ||
                 (location_id !== undefined && a.location_id == location_id);
                 }
-            );
+            );*/
+            if(location_id !== undefined) {
+                filters["location_id"] = [location_id];
+            }
+            if(table_id !== undefined) {
+                filters["table_id"] = [table_id];
+            }
+            if(guest_id !== undefined) {
+                filters["guest_id"] = [guest_id];
+            }
+            if(date_from !== undefined) {
+                filters["date_from"] = [date_from];
+            }
+            if(date_to !== undefined) {
+                filters["date_to"] = [date_to];
+            }
+            assign = multifilter(this.assign_g2t_repo, filters);
         }
         return assign;
     }
