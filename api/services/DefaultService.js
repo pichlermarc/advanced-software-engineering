@@ -1,11 +1,20 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
-const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
-const StubValidator = require('../core/use_cases/stub/StubValidator');
-const InMemRepository = require('../core/repository/InMemRepository');
-const StubInteractor = require('../core/use_cases/stub/StubInteractor');
-const LocationInteractor = require('../core/use_cases/location/LocationInteractor');
-const DeleteLocationInteractor = require('../core/use_cases/location/DeleteLocationInteractor');
+
+const StubRequestModel = require('../core/stub/StubRequestModel');
+const StubValidator = require('../core/stub/StubValidator');
+const StubInteractor = require('../core/stub/StubInteractor');
+
+const AddLocationRequestModel = require('../core/requestModels/AddLocationRequestModel');
+const GuestRegistrationInMemRepository = require('../core/repositories/GuestRegistrationInMemRepository');
+const AddLocationValidator = require('../core/validation/AddLocationValidator');
+const AddLocationInteractor = require('../core/use_cases/AddLocationInteractor');
+
+let repository = new GuestRegistrationInMemRepository();
+
+const LocationInteractor = require('../core/use_cases/LocationInteractor');
+const DeleteLocationInteractor = require('../core/use_cases/DeleteLocationInteractor');
+
 /**
 * Get your locations
 * Get locations associated with your user
@@ -16,7 +25,7 @@ const locationGET = () => new Promise(
   async (resolve, reject) => {
     console.log("---locationGET---");
     try {
-      let repository = new InMemRepository();
+
       let interactor = new LocationInteractor(repository);
 
       let responsemodel = interactor.execute();
@@ -52,7 +61,7 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
     console.log("---locationLocationIdDELETE---");
     try {
       let requestmodel = new StubRequestModel(locationId);
-      let repository = new InMemRepository();
+
       let validator = new StubValidator();
       let interactor = new DeleteLocationInteractor(repository, validator);
 
@@ -89,7 +98,6 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
       console.log("---locationLocationIdGET---process-the-stub-usecase---");
     try {
         let requestmodel = new StubRequestModel(locationId);
-        let repository = new InMemRepository();
         let validator = new StubValidator();
         let interactor = new StubInteractor(repository, validator);
 
@@ -290,14 +298,34 @@ const locationLocationIdTableTableIdRegisterPOST = ({ locationId, tableId, guest
 * */
 const locationPOST = ({ location }) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        location,
-      }));
+      console.log("---locationPOST---process-the-addLocation-usecase---");
+      try {
+          let requestmodel = new AddLocationRequestModel(location.name);
+
+          let validator = new AddLocationValidator();
+          let interactor = new AddLocationInteractor(repository, validator);
+
+          let responsemodel = interactor.execute(requestmodel);
+
+          if(responsemodel.error_msg !== null) {
+              throw {
+                  name: "AddLocationException",
+                  message: responsemodel.error_msg,
+                  status: 400,
+                  toString: function() {
+                      return this.name + ": " + this.message;
+                  }
+              };
+          }
+
+          resolve(Service.successResponse({
+              "id": responsemodel.id,
+              "name": responsemodel.name
+          }, 201));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
-        e.status || 405,
+        e.status || 400,
       ));
     }
   },
