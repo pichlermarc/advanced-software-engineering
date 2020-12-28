@@ -15,7 +15,9 @@ So far we start
 The DB uses filesystem volumes to store its data, so the DB data should be persistent. 
 These volumes should be in `$project-root/db/postgres` and `$project-root/db/pgadmin`. 
 If something does not work out while starting the containers, you can try to delete these 
-directories, remove the stopped containers with `docker-compose rm` and run `docker-compose up` again. 
+directories, remove the stopped containers with `docker-compose rm`. 
+Also remove the docker volumes `docker volume rm <*_pgadmin> <*_postgres>. 
+Then restart containers with `docker-compose up`, which should also run the .sql script.
 
 ### Regarding DB + pgAdmin
 + pgAdmin (localhost:5050): user/password: `admin@pgadmin.org/admin`
