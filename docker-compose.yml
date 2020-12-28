@@ -17,6 +17,7 @@ services:
       POSTGRES_PASSWORD: postgres
       PGDATA: /db/postgres
     volumes:
+      - ./api/generateDBTables.sql:/docker-entrypoint-initdb.d/1-schema.sql
       - ./db/postgres:/db/postgres
     ports:
       - "5051:5432"
