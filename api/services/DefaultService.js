@@ -12,9 +12,11 @@ const AddLocationInteractor = require('../core/use_cases/AddLocationInteractor')
 
 let repository = new GuestRegistrationInMemRepository();
 
-const LocationInteractor = require('../core/use_cases/LocationInteractor');
+const GetLocationInteractor = require('../core/use_cases/GetLocationInteractor');
+const GetLocationsInteractor = require('../core/use_cases/GetLocationsInteractor');
 const DeleteLocationInteractor = require('../core/use_cases/DeleteLocationInteractor');
-
+const LocationRequestModel = require('../core/requestModels/LocationRequestModel');
+const LocationValidator = require('../core/validation/LocationValidator');
 /**
 * Get your locations
 * Get locations associated with your user
@@ -26,7 +28,7 @@ const locationGET = () => new Promise(
     console.log("---locationGET---");
     try {
 
-      let interactor = new LocationInteractor(repository);
+      let interactor = new GetLocationsInteractor(repository);
 
       let responsemodel = interactor.execute();
 
@@ -60,16 +62,16 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
   async (resolve, reject) => {
     console.log("---locationLocationIdDELETE---");
     try {
-      let requestmodel = new StubRequestModel(locationId);
+      let requestmodel = new LocationRequestModel(locationId);
 
-      let validator = new StubValidator();
+      let validator = new LocationValidator();
       let interactor = new DeleteLocationInteractor(repository, validator);
 
       let responsemodel = interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
         throw {
-          name: "StubException",
+          name: "LocationNotFoundException",
           message: responsemodel.error_msg,
           status: 405,
           toString: function() {
@@ -97,15 +99,15 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
       console.log("---locationLocationIdGET---process-the-stub-usecase---");
     try {
-        let requestmodel = new StubRequestModel(locationId);
-        let validator = new StubValidator();
-        let interactor = new StubInteractor(repository, validator);
+        let requestmodel = new LocationRequestModel(locationId);
+        let validator = new LocationValidator();
+        let interactor = new GetLocationInteractor(repository, validator);
 
         let responsemodel = interactor.execute(requestmodel);
 
         if(responsemodel.error_msg !== null) {
             throw {
-                name: "StubException",
+                name: "LocationNotFoundException",
                 message: responsemodel.error_msg,
                 status: 405,
                 toString: function() {

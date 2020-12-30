@@ -1,16 +1,16 @@
-const StubValidator = require('../../../core/stub/StubValidator')
+const Validator = require('../../../core/validation/LocationValidator')
 const FakeGuestRegistrationInMemRepository = require('../repositories/fake/FakeGuestRegistrationInMemRepository')
 const DeleteLocationInteractor = require('../../../core/use_cases/DeleteLocationInteractor')
-const StubRequestModel = require('../../../core/stub/StubRequestModel')
+const RequestModel = require('../../../core/requestModels/LocationRequestModel')
 const Location = require('../../../core/entities/Location');
 
 const LOCATION_ID = 4711
 const LOCATION_NAME = "location-dummy"
 
-let validator = new StubValidator()
+let validator = new Validator()
 let repo = new FakeGuestRegistrationInMemRepository();
 let interactor = new DeleteLocationInteractor(repo, validator)
-let req = new StubRequestModel(LOCATION_ID);
+let req = new RequestModel(LOCATION_ID);
 
 beforeAll(() => {
   // fixture setup
@@ -31,7 +31,7 @@ test(`Should return the id from the deleted location: ${LOCATION_ID}`, () => {
 })
 
 test('should return error since you try to delete an entity from repo which is not there', () => {
-  let res = interactor.execute(new StubRequestModel(LOCATION_ID+1));
+  let res = interactor.execute(new RequestModel(LOCATION_ID+1));
   expect(res.id).toBeNull();
   expect(res.location).toBeNull();
   expect(res.error_msg).toBeDefined();

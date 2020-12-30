@@ -1,5 +1,5 @@
 const FakeGuestRegistrationInMemRepository = require('../repositories/fake/FakeGuestRegistrationInMemRepository')
-const LocationInteractor = require('../../../core/use_cases/LocationInteractor')
+const LocationInteractor = require('../../../core/use_cases/GetLocationsInteractor')
 const Location = require('../../../core/entities/Location');
 
 let repo = new FakeGuestRegistrationInMemRepository();
