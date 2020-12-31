@@ -1,5 +1,5 @@
 const Validator = require('../../../core/validation/LocationValidator')
-const FakeGuestRegistrationInMemRepository = require('../repositories/fake/FakeGuestRegistrationInMemRepository')
+const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository')
 const DeleteLocationInteractor = require('../../../core/use_cases/DeleteLocationInteractor')
 const RequestModel = require('../../../core/requestModels/LocationRequestModel')
 const Location = require('../../../core/entities/Location');
@@ -8,7 +8,7 @@ const LOCATION_ID = 4711
 const LOCATION_NAME = "location-dummy"
 
 let validator = new Validator()
-let repo = new FakeGuestRegistrationInMemRepository();
+let repo = new GuestRegistrationInMemRepository();
 let interactor = new DeleteLocationInteractor(repo, validator)
 let req = new RequestModel(LOCATION_ID);
 

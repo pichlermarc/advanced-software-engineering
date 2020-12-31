@@ -1,8 +1,8 @@
-const FakeGuestRegistrationInMemRepository = require('../repositories/fake/FakeGuestRegistrationInMemRepository')
+const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository')
 const LocationInteractor = require('../../../core/use_cases/GetLocationsInteractor')
 const Location = require('../../../core/entities/Location');
 
-let repo = new FakeGuestRegistrationInMemRepository();
+let repo = new GuestRegistrationInMemRepository();
 let interactor = new LocationInteractor(repo)
 let res;
 
@@ -17,7 +17,7 @@ beforeAll(() => {
 test('should return stored location from repository', () => {
   res = interactor.execute();
   expect(res).toBeDefined()
-  expect(res.location_list.length).toBe(1)
+  expect(res.location_list.length).toBe(4)
   expect(res.error_msg).toBeNull()
 })
 
