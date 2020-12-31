@@ -39,7 +39,7 @@ class GetLocationInteractor {
         //const stub_entity = new LocationEntity(request_model.id, request_model.name);
         //this.repository.save(stub_entity);
 
-        let entity = this.repository.load(request_model.id);
+        let entity = this.repository.load_location(request_model.id);
 
         // 4. return response
         const response_model = new ResponseModel(entity.id, entity.name);

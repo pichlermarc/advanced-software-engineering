@@ -42,7 +42,7 @@ const locationGET = () => new Promise(
           }
         };
       }
-      resolve(Service.successResponse(responsemodel.entities));
+      resolve(Service.successResponse(responsemodel.location_list));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || responsemodel.error_msg,
