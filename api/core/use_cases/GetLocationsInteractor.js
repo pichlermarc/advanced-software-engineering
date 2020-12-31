@@ -1,8 +1,8 @@
 "use strict";
 
-const LocationResponseModel = require('../responseModels/LocationResponseModel');
+const ResponseModel = require('../responseModels/LocationsResponseModel');
 
-class LocationInteractor {
+class GetLocationsInteractor {
     /**
      * The interactor represents one use-case respectively it processes on use-case.
      * The used design-pattern is the 'command pattern'.
@@ -30,9 +30,9 @@ class LocationInteractor {
         const locations = this.repository.load_location();
 
         // 4. return response
-        const response_model = new LocationResponseModel(locations);
+        const response_model = new ResponseModel(locations);
         return response_model;
     }
 }
 
-module.exports = LocationInteractor;
+module.exports = GetLocationsInteractor;

@@ -1,7 +1,9 @@
 "use strict";
 
 const ResponseModel = require('../responseModels/LocationResponseModel');
-class DeleteLocationInteractor {
+const LocationEntity = require('../entities/Location');
+
+class GetLocationInteractor {
     /**
      * The interactor represents one use-case respectively it processes on use-case.
      * The used design-pattern is the 'command pattern'.
@@ -24,27 +26,25 @@ class DeleteLocationInteractor {
 
     // 1. call process use-case
     execute(request_model) {
-        // 2. validation not needed since no input/request data
+        // 2. validation
         let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
             const response_model = new ResponseModel(request_model.id,
-              null,
-              validation_result.error_msg);
+                null,
+                validation_result.error_msg);
             return response_model;
         }
 
         // 3. DB interaction
-        let response_model;
-        const location_removed_id = this.repository.remove_location(request_model.id);
-        if(location_removed_id != null) {
-            response_model = new ResponseModel(request_model.id, request_model.name);
-        } else {
-            response_model = new ResponseModel(null, null, "No Entity With That ID in DB")
-        }
+        //const stub_entity = new LocationEntity(request_model.id, request_model.name);
+        //this.repository.save(stub_entity);
+
+        let entity = this.repository.load(request_model.id);
 
         // 4. return response
+        const response_model = new ResponseModel(entity.id, entity.name);
         return response_model;
     }
 }
 
-module.exports = DeleteLocationInteractor;
+module.exports = GetLocationInteractor;
