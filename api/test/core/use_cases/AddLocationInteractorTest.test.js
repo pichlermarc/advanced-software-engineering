@@ -11,7 +11,7 @@ let validator = new AddLocationValidator()
 let repo = new FakeGuestRegistrationInMemRepository();
 let interactor = new AddLocationInteractor(repo, validator)
 let location = new Location(LOCATION_ID, LOCATION_NAME);
-let request_model = new AddLocationRequestModel(location.id, location.name)
+let request_model = new AddLocationRequestModel(location.name)
 let res;
 
 beforeEach(() => {
@@ -33,7 +33,7 @@ test('should save new entity to DB', () => {
 
 test('validator must throw error because location name is empty', () => {
     location = new Location(LOCATION_ID, "");
-    request_model = new AddLocationRequestModel(location.id, location.name);
+    request_model = new AddLocationRequestModel(location.name);
     res = interactor.execute(request_model);
     expect(res.error_msg).toBe("Name must not be empty!");
     expect(repo.load_location(LOCATION_ID)).toBeNull();
