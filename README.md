@@ -22,3 +22,6 @@ Then restart containers with `docker-compose up`, which should also run the .sql
 ### Regarding DB + pgAdmin
 + pgAdmin (localhost:5050): user/password: `admin@pgadmin.org/admin`
 + postgres DB server: hostname/port/user/password: `postgres/5432/postgres/postgres`
+
+## Start only the API (without container)
+Execute `npm --prefix ./api start` in project root directory.
