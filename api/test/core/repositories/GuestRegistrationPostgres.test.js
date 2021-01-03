@@ -41,6 +41,23 @@ test('should query simple maths', async () => {
     }
 })
 
+test('should query simple maths - wrong execpt', async () => {
+    const client = await pgPool.connect();
+    try {
+        await client.query(TRANSACTION_BEGIN);
+
+        const { rows } = await client.query(query_maths);
+        console.log("result of query \"", query_maths, "\":", rows[0]["result"])
+        expect(rows[0]["result"]).not.toBe(3);
+
+        await client.query(TRANSACTION_ROLLBACK);
+    } catch(err) {
+        throw err;
+    } finally {
+        await client.release();
+    }
+})
+
 test('should throw error if query not existing table', async () => {
     const client = await pgPool.connect();
     try {
@@ -72,18 +89,18 @@ const query_executor = async (query_to_exec, succ_callback, err_callback) => {
 }
 
 test('should query simple maths with executor', async () => {
-    query_executor(query_all_locations,
+    query_executor(query_maths,
         succ = async () => {
             expect(rows[0]["result"]).toBe(4);
     })
 })
 
 test('should query simple wrong maths with executor', async () => {
-    query_executor(query_all_locations,
+    query_executor(query_maths,
         succ = async () => {
+            console.log("success-callback")
             expect(rows[0]["result"]).toBe(3);
         })
-    expect(4).not.toBe(3);
 })
 
 test('should throw error if query not existing table with executor', async () => {
