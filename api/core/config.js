@@ -14,7 +14,9 @@ const config =
         config_id: "development",
         app_name: "guest registration",
         app_desc: "ase project",
+        host_name: "localhost",
         db_name: "development",
+        db_user: "postgres",
         db_passwd: "postgres",
         db_schema: "public",
         db_port: 5051
@@ -35,7 +37,7 @@ const config =
 
 const default_config = config.development;
 
-// Factory 'create_config' returns the merged result of default-config and wanted-config
+// Factory function 'create_config' returns the merged result of default-config and wanted-config
 const create_config = (config_type=null) => {
     const wanted_config = config[config_type] || {};
     // merge objects: https://stackoverflow.com/a/171256/7421890

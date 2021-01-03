@@ -1,7 +1,8 @@
 "use strict";
 
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
-const { Pool } = require('pg');
+const create_connection_pool = require("./ConnectionPool")
+
 // docu of node-postgres:
 // https://node-postgres.com/
 
@@ -9,13 +10,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     constructor(config) {
         super();
-        this.pool = new Pool({
-            user: 'postgres',
-            host: 'localhost',
-            database: config.db_name,
-            password: config.db_passwd,
-            port: config.db_port
-        });
+        this.pool = create_connection_pool(config);
     }
 
     /* ----- location START ----- */
