@@ -1,31 +1,34 @@
 "use strict";
 
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
-const { Pool } = require('pg');
+const create_connection_pool = require("./ConnectionPool")
+
+// docu of node-postgres:
+// https://node-postgres.com/
 
 class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
-    constructor() {
+    constructor(config) {
         super();
-        this.pool = new Pool({ // host, port, ... etc.
-            user: 'postgres',
-            host: 'postgres',
-            database: 'postgres',
-            password: 'postgres',
-            port: 5432
-        });
+        this.pool = create_connection_pool(config);
     }
 
     /* ----- location START ----- */
     save_location(location) {
-        this.pool.query('insert into location(id, name) values($1, $2)', [location.id, location.name])
+        /*this.pool.query('insert into location(id, name) values($1, $2)', [location.id, location.name])
           .then(res => {return res})
-          .catch(throw new Error("Not implemented yet!"));
+          .catch(throw new Error("Not implemented yet!"));*/
     }
     load_location(id) {
+        /*
         this.pool.query('select * from location where location.id=$1', id)
           .then(res => {return res})
-          .catch(throw new Error("Not implemented yet!"));
+          .catch(throw new Error("Not implemented yet!"));*/
+    }
+    load_all_locations() {
+        /*this.pool.query('select * from location;')
+            .then(res => {return res})
+            .catch(throw new Error("Not implemented yet!"));*/
     }
     remove_location(id) {
         throw new Error("Not implemented yet!")
