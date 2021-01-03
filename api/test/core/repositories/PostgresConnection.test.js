@@ -20,7 +20,6 @@ afterAll(async () => {
     await pgPool.end();
 });
 
-
 test('should connect directly to postgres and execute a simple maths query', async () => {
     const client = await pgPool.connect();
     try {
@@ -37,7 +36,6 @@ test('should connect directly to postgres and execute a simple maths query', asy
         await client.release();
     }
 })
-
 
 test('should connect directly to postgres and throw error at attempting to query a not existing table', async () => {
     const client = await pgPool.connect();

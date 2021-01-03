@@ -51,20 +51,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     clear_table() { throw new Error("Not implemented yet!") }
     /* ----- table END ----- */
 
-    /* ----- guest START ----- */
-    save_guest(guest) {
-        throw new Error("Not implemented yet!")
-    }
-    load_guest(id) {
-        throw new Error("Not implemented yet!")
-    }
-    remove_guest(id) {
-        throw new Error("Not implemented yet!")
-    }
-    size_guest() { throw new Error("Not implemented yet!") }
-    clear_guest() { throw new Error("Not implemented yet!") }
-    /* ----- guest END ----- */
-
     /* ----- assign-guest-to-table START ----- */
     save_assign_g2t(assign) {
         throw new Error("Not implemented yet!")

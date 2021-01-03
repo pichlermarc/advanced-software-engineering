@@ -12,11 +12,6 @@ class IGatewayLocation {
     remove_table(id) {}
     size_table() {}
 
-    save_guest(guest) {}
-    load_guest(id) {}
-    remove_guest(id) {}
-    size_guest() {}
-
     save_assign_g2t(assign) {}
     load_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {}
     remove_assign_g2t(id) {}

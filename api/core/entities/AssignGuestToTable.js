@@ -1,12 +1,16 @@
 "use strict";
 
 class AssignGuestToTable {
-    constructor(location_id, table_id, guest_id, date_from, date_to) {
+    constructor(location_id, table_id, date_from, first_name, last_name, phone, email) {
         this.location_id = location_id;
         this.table_id = table_id;
-        this.guest_id = guest_id;
         this.date_from = date_from;
-        this.date_to = date_to;
+        // guest data from gov-requironment:
+        // https://images.derstandard.at/2020/09/25/StadtWien20CTGastroA4L3_1.pdf
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.phone = phone;
+        this.email = email;
     }
 }
 
