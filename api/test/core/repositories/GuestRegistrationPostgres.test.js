@@ -78,11 +78,12 @@ test('should query simple maths with executor', async () => {
     })
 })
 
-test('should fail query simple wrong maths with executor', async () => {
+test('should query simple wrong maths with executor', async () => {
     query_executor(query_all_locations,
         succ = async () => {
             expect(rows[0]["result"]).toBe(3);
         })
+    expect(4).not.toBe(3);
 })
 
 test('should throw error if query not existing table with executor', async () => {
