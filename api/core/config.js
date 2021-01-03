@@ -16,8 +16,8 @@ const config =
         app_desc: "ase project",
         host_name: "localhost",
         db_name: "development",
-        db_user: "postgres",
-        db_passwd: "postgres",
+        db_user: "ase",
+        db_passwd: "ase",
         db_schema: "public",
         db_port: 5051
     },
