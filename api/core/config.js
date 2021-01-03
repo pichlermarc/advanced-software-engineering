@@ -38,6 +38,7 @@ const default_config = config.development;
 // Factory 'create_config' returns the merged result of default-config and wanted-config
 const create_config = (config_type=null) => {
     const wanted_config = config[config_type] || {};
+    // merge objects: https://stackoverflow.com/a/171256/7421890
     return Object.assign({}, default_config, wanted_config)
 }
 
