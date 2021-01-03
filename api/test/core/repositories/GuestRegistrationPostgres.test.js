@@ -72,6 +72,7 @@ test('should throw error if query not existing table', async () => {
     }
 })
 
+/*
 const query_executor = async (query_to_exec, succ_callback, err_callback) => {
     const client = await pgPool.connect();
     try {
@@ -108,3 +109,4 @@ test('should throw error if query not existing table with executor', async () =>
         expect(err.toString()).toBe("error: relation \"this_table_does_not_exist\" does not exist");
     })
 })
+*/
