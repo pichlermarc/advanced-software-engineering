@@ -32,7 +32,7 @@ test('fixture repo should be defined', () => {
     expect(repo).toBeDefined()
 })
 
-test('fixture table should be defined', () => {
+test('fixture location should be defined', () => {
     expect(location).toBeDefined()
 })
 
@@ -40,11 +40,11 @@ test('fixture table should be defined', () => {
     expect(table).toBeDefined()
 })
 
-test('fixture table should be defined', () => {
+test('fixture guest should be defined', () => {
     expect(guest).toBeDefined()
 })
 
-test('fixture table should be defined', () => {
+test('fixture assign should be defined', () => {
     expect(assign).toBeDefined()
 })
 
