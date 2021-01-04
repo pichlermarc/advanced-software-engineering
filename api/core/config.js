@@ -28,7 +28,13 @@ const config =
     },
     test: {
         config_id: "test",
-        db_name: "GuestRegistrationInMemRepository",
+        host_name: "localhost",
+        db_name: "development",
+        db_user: "ase",
+        db_passwd: "ase",
+        db_schema: "public",
+        db_port: 5051,
+        db_dialect: "sqlite",
     },
     staging: {
         config_id: "staging",
@@ -46,8 +52,13 @@ const default_config = config.development;
 
 // Factory function 'create_config' returns the merged result of default-config and wanted-config
 const create_config = (config_type=null) => {
-    // const env = process.env.NODE_ENV || config_type || "development";
-    const wanted_config = config[config_type] || {};
+
+    // take 'config_type' or env-var or default-config
+    const env = config_type || process.env.NODE_ENV || "development";
+
+    // valid config or empty object
+    const wanted_config = config[env] || {};
+
     // merge objects: https://stackoverflow.com/a/171256/7421890
     return Object.assign({}, default_config, wanted_config)
 }

@@ -1,7 +1,9 @@
 "use strict";
 
+const create_config = require("../config");
+const create_db_connection = require("./index")
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
-const create_connection_pool = require("./ConnectionPool")
+const {Location, Table, Assign} = require("./models")
 
 // docu of node-postgres:
 // https://node-postgres.com/
@@ -10,7 +12,12 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     constructor(config) {
         super();
-        this.pool = create_connection_pool(config);
+        this.db = create_db_connection(config);
+        //this.db.authenticate();
+    }
+
+    connection_close() {
+        this.db.close()
     }
 
     /* ----- location START ----- */
@@ -18,7 +25,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         /*this.pool.query('insert into location(id, name) values($1, $2)', [location.id, location.name])
           .then(res => {return res})
           .catch(throw new Error("Not implemented yet!"));*/
+
+        // syntax: DatabaseModel.create({key:value, ...});
+        const m_loc = Location.create(location);
     }
+
     load_location(id) {
         /*
         this.pool.query('select * from location where location.id=$1', id)

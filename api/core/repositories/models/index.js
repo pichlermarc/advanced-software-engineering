@@ -47,4 +47,13 @@ const create_models = (config) => {
     return db;
 };
 
-module.exports = create_models;
+const Location = require("./Location")
+const Table = require("./Table")
+const Assign = require("./Assign")
+
+module.exports = {
+    create_models,
+    /*Location,
+    Table,
+    Assign*/
+};
