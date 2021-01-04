@@ -1,7 +1,7 @@
 const create_config = require('../../../core/config')
 const create_connection_pool = require('../../../core/repositories/ConnectionPool')
 
-const config = create_config()
+const config = create_config("development")
 const query_maths = "SELECT 2*2 AS \"result\";"
 const query_table_does_not_exist = "SELECT * from this_table_does_not_exist;"
 

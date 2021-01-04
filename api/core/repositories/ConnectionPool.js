@@ -1,6 +1,5 @@
 const { Pool } = require('pg');
 
-
 /*
  *  Factory method 'create_connection_pool' creates a new pool for given config.
  *  If no config is given, it will return 'null'.

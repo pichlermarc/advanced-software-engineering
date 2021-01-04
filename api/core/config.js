@@ -5,6 +5,8 @@
  *
  *      default-config = development.
  *      All other configs override the development values.
+ *
+ *      The keys development, test and production are used in the env-var NODE_ENV
  */
 
 const config =
@@ -24,8 +26,8 @@ const config =
         db_dialect: "postgres",
 
     },
-    testing: {
-        config_id: "testing",
+    test: {
+        config_id: "test",
         db_name: "GuestRegistrationInMemRepository",
     },
     staging: {
@@ -44,6 +46,7 @@ const default_config = config.development;
 
 // Factory function 'create_config' returns the merged result of default-config and wanted-config
 const create_config = (config_type=null) => {
+    // const env = process.env.NODE_ENV || config_type || "development";
     const wanted_config = config[config_type] || {};
     // merge objects: https://stackoverflow.com/a/171256/7421890
     return Object.assign({}, default_config, wanted_config)

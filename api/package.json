@@ -6,7 +6,7 @@
   "scripts": {
     "prestart": "npm install",
     "start": "node index.js",
-    "test": "jest",
+    "test": "NODE_ENV=test jest --runInBand",
     "sync": "node ./core/sync_models.js"
   },
   "keywords": [
