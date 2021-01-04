@@ -15,8 +15,11 @@ let repository = new GuestRegistrationInMemRepository();
 const GetLocationInteractor = require('../core/use_cases/GetLocationInteractor');
 const GetLocationsInteractor = require('../core/use_cases/GetLocationsInteractor');
 const DeleteLocationInteractor = require('../core/use_cases/DeleteLocationInteractor');
+const LocationIdRequestModel = require('../core/requestModels/LocationIdRequestModel');
+const LocationIdValidator = require('../core/validation/LocationIdValidator');
 const LocationRequestModel = require('../core/requestModels/LocationRequestModel');
 const LocationValidator = require('../core/validation/LocationValidator');
+const UpdateLocationInteractor = require('../core/use_cases/UpdateLocationInteractor');
 /**
 * Get your locations
 * Get locations associated with your user
@@ -62,9 +65,9 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
   async (resolve, reject) => {
     console.log("---locationLocationIdDELETE---");
     try {
-      let requestmodel = new LocationRequestModel(locationId);
+      let requestmodel = new LocationIdRequestModel(locationId);
 
-      let validator = new LocationValidator();
+      let validator = new LocationIdValidator();
       let interactor = new DeleteLocationInteractor(repository, validator);
 
       let responsemodel = interactor.execute(requestmodel);
@@ -99,8 +102,8 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
       console.log("---locationLocationIdGET---process-the-stub-usecase---");
     try {
-        let requestmodel = new LocationRequestModel(locationId);
-        let validator = new LocationValidator();
+        let requestmodel = new LocationIdRequestModel(locationId);
+        let validator = new LocationIdValidator();
         let interactor = new GetLocationInteractor(repository, validator);
 
         let responsemodel = interactor.execute(requestmodel);
@@ -341,14 +344,34 @@ const locationPOST = ({ location }) => new Promise(
 * */
 const locationPUT = ({ location }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationPUT---update existing Location---");
     try {
+      let requestmodel = new LocationRequestModel(location.id, location.name);
+
+      let validator = new LocationValidator();
+      let interactor = new UpdateLocationInteractor(repository, validator);
+
+      let responsemodel = interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "UpdateLocationException",
+          message: responsemodel.error_msg,
+          status: 400,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+
       resolve(Service.successResponse({
-        location,
-      }));
+        "id": responsemodel.id,
+        "name": responsemodel.name
+      }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
-        e.status || 405,
+        e.status || 400,
       ));
     }
   },

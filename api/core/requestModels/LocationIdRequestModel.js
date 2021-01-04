@@ -8,9 +8,8 @@ class LocationIdRequestModel {
      *   The naming "Request" has nothing to do with a HTTP request!
      *   The requestmodel is only the input for the interactor.
      */
-    constructor(id, name) {
+    constructor(id) {
         this.id = id;
-        this.name = name;
     }
 }
 

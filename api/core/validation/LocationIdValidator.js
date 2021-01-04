@@ -3,7 +3,7 @@
 const IValidator = require('../validation/IValidator');
 const ValidationResult = require('../validation/ValidationResult');
 
-class LocationValidator extends IValidator {
+class LocationIdValidator extends IValidator {
     /**
      * Validator validates the input - the request-model - of the interactor and
      * returns an object of type ValidationResult.
@@ -12,13 +12,13 @@ class LocationValidator extends IValidator {
         super();
     }
 
-    validate(locationRequest) {
-        if(locationRequest.id < 0 || !locationRequest.name) {
-            return new ValidationResult("Id must not be less than zero and location name must be not empty!");
+    validate(request) {
+        if(request.id < 0) {
+            return new ValidationResult("Id must not be less than zero!");
         }
 
         return new ValidationResult();
     }
 }
 
-module.exports = LocationValidator;
+module.exports = LocationIdValidator;
