@@ -6,23 +6,25 @@ const ExpressServer = require('./expressServer');
 const create_config = require("./core/config");
 const core_cnf = create_config();
 
-//const { sync_models } = require("./core/repositories/models")
+const { create_models, sync_models, models } = require("./core/repositories/models")
 
-const models = require("./core/repositories/models")
+//const models = require("./core/repositories/models")
 /* USER ADDED - END */
+
+create_models(core_cnf);
 
 const launchServer = async () => {
   try {
     /* USER ADDED - START */
-    //sync_models(core_cnf);
-    (async () => {
+    sync_models(core_cnf);
+
+    /*(async () => {
       const result = await models.location.findAll({
         raw: true
       });
 
       console.log('result:', result);
-    })();
-
+    })();*/
 
     /*const result = models.location.findAll({
       raw: true

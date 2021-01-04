@@ -36,9 +36,11 @@ const db_connect = require('../index');
 const create_config = require("../../config")
 
 const cnf = create_config();
+
 const models = {};
 
-module.exports = (() => {
+const create_models = (config) => {
+    console.log("Try create models for postgres database...")
     if (!Object.keys(models).length) {
         const sequelize = db_connect(cnf);
         const files = fs.readdirSync(__dirname);
@@ -61,25 +63,29 @@ module.exports = (() => {
 
         models.sequelize = sequelize;
     }
-
+    console.log("Create models OK")
     return models;
-})();
+};
 
 
 /**
  * Will create all tables if the does not exist in the database.
  * @param config
  */
-/*const sync_models = (config) => {
+const sync_models = (config) => {
     console.log("Try sync models with postgres database...")
-    const models = create_models(config)
+    //const models = create_models(config)
     models.sequelize.sync({force: true})
         .then(() => {
-        console.log("OK")
+        console.log("Synced models OK")
+    }).catch(err => {
+        console.error('Unable to connect to the database:', err);
+        process.exit;
     });
 }
 
 module.exports = {
     create_models,
-    sync_models
-};*/
+    sync_models,
+    models
+};

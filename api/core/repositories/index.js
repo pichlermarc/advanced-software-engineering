@@ -2,14 +2,14 @@ const {Sequelize} = require('sequelize');
 
 let connection = null;
 
-const db_connect = (config) => {
+const create_db_connection = (config) => {
     if(!connection) {
         try {
             connection = new Sequelize(
                 config.db_name,
                 config.db_user,
                 config.db_passwd,
-                {dialect: "postgres"},
+                {dialect: "postgres", logging: true,},
                 config,
             );
         } catch (ex) {
@@ -21,4 +21,4 @@ const db_connect = (config) => {
     return connection;
 };
 
-module.exports = db_connect;
+module.exports = create_db_connection;
