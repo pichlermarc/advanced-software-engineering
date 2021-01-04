@@ -13,6 +13,7 @@ const config =
     development: {
         config_id: "development",
         app_name: "guest registration",
+        api_port: 3000,
         app_desc: "ase project",
         host_name: "localhost",
         db_name: "development",
@@ -23,15 +24,16 @@ const config =
     },
     testing: {
         config_id: "testing",
-        database: "my-app-db-test"
+        database: "my-app-db-test",
     },
     staging: {
         config_id: "staging",
-        database: "my-app-db-stag"
+        database: "my-app-db-stag",
     },
     production: {
         config_id: "production",
-        database: "my-app-db-prod"
+        database: "my-app-db-prod",
+        api_port: 8080,
     }
 };
 

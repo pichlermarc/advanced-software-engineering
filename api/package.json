@@ -6,7 +6,8 @@
   "scripts": {
     "prestart": "npm install",
     "start": "node index.js",
-    "test": "jest"
+    "test": "jest",
+    "sync": "node ./core/sync_models.js"
   },
   "keywords": [
     "openapi-generator",
@@ -25,6 +26,8 @@
     "ono": "^5.0.1",
     "openapi-sampler": "^1.0.0-beta.15",
     "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
     "swagger-ui-express": "^4.0.2",
     "winston": "^3.2.1"
   },
