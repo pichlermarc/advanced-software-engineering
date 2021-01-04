@@ -26,16 +26,17 @@ const config =
     },
     testing: {
         config_id: "testing",
-        database: "my-app-db-test",
+        db_name: "GuestRegistrationInMemRepository",
     },
     staging: {
         config_id: "staging",
-        database: "my-app-db-stag",
+        db_name: "my-app-db-stag",
     },
     production: {
         config_id: "production",
-        database: "my-app-db-prod",
         api_port: 8080,
+        db_name: "my-app-db-prod",
+
     }
 };
 

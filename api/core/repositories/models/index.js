@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const { Sequelize } = require('sequelize');
 
-const db_connect = require('../index');
+const create_db_connection = require('../index');
 const create_config = require("../../config")
 
 const basename = path.basename(__filename);
@@ -18,7 +18,7 @@ const create_models = (config) => {
     console.log("Try create models for postgres database...")
 
     const db = {};
-    const sequelize = db_connect(cnf);
+    const sequelize = create_db_connection(cnf);
 
     // loop through directory 'models' and import any js file (db-model)
     fs

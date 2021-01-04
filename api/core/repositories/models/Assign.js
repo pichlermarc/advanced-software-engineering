@@ -3,12 +3,20 @@
 const {Model} = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-    class AssignToGuestTable extends Model {
-        static associate(models) {
+    class Assign extends Model {
+        static associate({Location, Table}) {
+
+            this.belongsTo(Table, {
+                foreignKey: "table_id"
+            })
+
+            this.belongsTo(Location, {
+                foreignKey: "location_id"
+            })
         }
     };
 
-    AssignToGuestTable.init({
+    Assign.init({
         location_id: {
             allowNull: false,
             type: DataTypes.INTEGER,
@@ -40,8 +48,9 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {
         sequelize,
-        modelName: "AssignToGuestTable",
+        tableName: "assigns",
+        modelName: "Assign",
     });
 
-    return AssignToGuestTable;
+    return Assign;
 };

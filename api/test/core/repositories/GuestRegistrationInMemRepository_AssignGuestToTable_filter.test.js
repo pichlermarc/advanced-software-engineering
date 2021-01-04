@@ -1,7 +1,7 @@
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository');
 const Location = require('../../../core/entities/Location');
 const Table = require('../../../core/entities/Table');
-const AssignGuestToTable = require('../../../core/entities/AssignGuestToTable');
+const AssignGuestToTable = require('../../../core/entities/Assign');
 
 const repo = new GuestRegistrationInMemRepository();
 

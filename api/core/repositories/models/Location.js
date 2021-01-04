@@ -9,7 +9,15 @@ const {Model} = require("sequelize");
  */
 module.exports = (sequelize, DataTypes) => {
     class Location extends Model {
-        static associate(models) {
+        static associate({Table, Assign}) {
+            // howto: https://www.youtube.com/watch?v=3qlnR9hK-lQ => min 27:44
+            this.hasMany(Table, {
+                foreignKey: "location_id"
+            })
+
+            this.hasMany(Assign, {
+                foreignKey: "location_id"
+            })
         }
     };
 
@@ -26,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
         sequelize,
+        tableName: "locations",
         modelName: "Location",
     });
 

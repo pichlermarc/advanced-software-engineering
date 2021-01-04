@@ -1,6 +1,6 @@
 "use strict";
 
-class AssignGuestToTable {
+class Assign {
     constructor(location_id, table_id, date_from, first_name, last_name, phone, email) {
         this.location_id = location_id;
         this.table_id = table_id;
@@ -14,4 +14,4 @@ class AssignGuestToTable {
     }
 }
 
-module.exports = AssignGuestToTable;
+module.exports = Assign;

@@ -1,10 +1,19 @@
 "use strict";
 
 const {Model} = require("sequelize");
+//const {Location} = require(".")
 
 module.exports = (sequelize, DataTypes) => {
     class Table extends Model {
-        static associate(models) {
+        static associate({Location, Assign}) {
+            // howto: https://www.youtube.com/watch?v=3qlnR9hK-lQ => min 27:44
+            this.belongsTo(Location, {
+                foreignKey: "location_id"
+            })
+
+            this.hasMany(Assign, {
+                foreignKey: "table_id"
+            })
         }
     };
 
@@ -25,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         },
     }, {
         sequelize,
+        tableName: "tables",
         modelName: "Table",
     });
 
