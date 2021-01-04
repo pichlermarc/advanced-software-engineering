@@ -1,7 +1,7 @@
-const Validator = require('../../../core/validation/LocationValidator')
+const Validator = require('../../../core/validation/LocationIdValidator')
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository')
 const DeleteLocationInteractor = require('../../../core/use_cases/DeleteLocationInteractor')
-const RequestModel = require('../../../core/requestModels/LocationRequestModel')
+const RequestModel = require('../../../core/requestModels/LocationIdRequestModel')
 const Location = require('../../../core/entities/Location');
 
 const LOCATION_ID = 4711
@@ -36,4 +36,13 @@ test('should return error since you try to delete an entity from repo which is n
   expect(res.location).toBeNull();
   expect(res.error_msg).toBeDefined();
   expect(res.error_msg).toBe("No Entity With That ID in DB");
+})
+
+test('should return validator error since location id < 0', () => {
+  let invalidid = -1;
+  let res = interactor.execute(new RequestModel(invalidid));
+  expect(res.id).toBe(invalidid);
+  expect(res.location).toBeNull();
+  expect(res.error_msg).toBeDefined();
+  expect(res.error_msg).toBe("Id must not be less than zero!");
 })
