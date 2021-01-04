@@ -1,7 +1,8 @@
-const { Sequelize } = require('sequelize');
+/*const { Sequelize } = require('sequelize');
 
 // example from:
 // https://www.youtube.com/watch?v=BpEw1PNdvkg
+// NOTE: only works vor sequelize v5!
 
 const create_models = (config) => {
 
@@ -27,13 +28,49 @@ const create_models = (config) => {
 
     models.sequelize = sequelize;
     return models;
-}
+}*/
+
+const path = require('path');
+const fs = require('fs');
+const db_connect = require('../index');
+const create_config = require("../../config")
+
+const cnf = create_config();
+const models = {};
+
+module.exports = (() => {
+    if (!Object.keys(models).length) {
+        const sequelize = db_connect(cnf);
+        const files = fs.readdirSync(__dirname);
+        const excludedFiles = ['.', '..', 'index.js'];
+
+        for(const fileName of files) {
+            if(!excludedFiles.includes(fileName) && (path.extname(fileName) === '.js')) {
+                const modelFile = require(path.join(__dirname, fileName));
+                models[modelFile.getTableName()] = modelFile;
+            }
+        }
+
+        Object
+            .values(models)
+            .forEach(model => {
+                if(typeof model.associate === 'function') {
+                    model.associate(models);
+                }
+            });
+
+        models.sequelize = sequelize;
+    }
+
+    return models;
+})();
+
 
 /**
  * Will create all tables if the does not exist in the database.
  * @param config
  */
-const sync_models = (config) => {
+/*const sync_models = (config) => {
     console.log("Try sync models with postgres database...")
     const models = create_models(config)
     models.sequelize.sync({force: true})
@@ -45,4 +82,4 @@ const sync_models = (config) => {
 module.exports = {
     create_models,
     sync_models
-};
+};*/
