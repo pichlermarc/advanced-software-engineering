@@ -1,5 +1,8 @@
 const {Sequelize} = require('sequelize');
-
+/*
+ * This factory method creates a connection via sequelize to the DB.
+ * A valid config has to be passed to.
+ */
 let connection = null;
 
 const create_db_connection = (config) => {
@@ -11,7 +14,7 @@ const create_db_connection = (config) => {
                 password: config.db_passwd,
                 host: config.host_name,
                 port: config.db_port,
-                dialect: "postgres",
+                dialect: config.db_dialect,
         });
         } catch (ex) {
             console.error(__filename, ex);

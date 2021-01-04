@@ -20,7 +20,9 @@ const config =
         db_user: "ase",
         db_passwd: "ase",
         db_schema: "public",
-        db_port: 5051
+        db_port: 5051,
+        db_dialect: "postgres",
+
     },
     testing: {
         config_id: "testing",

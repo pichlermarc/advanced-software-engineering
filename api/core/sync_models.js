@@ -1,10 +1,10 @@
 "use strict";
-
 /*
  * Run 'npm sync_models.js' to sync the models with the database.
+ *
+ * Tutorial: Working code for sequelize version v6:
+ * https://www.youtube.com/watch?v=3qlnR9hK-lQ
  */
-
-//const { create_models, sync_models } = require("./repositories/models")
 const create_models = require("./repositories/models")
 
 const create_config = require("./config");

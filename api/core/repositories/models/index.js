@@ -1,35 +1,9 @@
-/*const { Sequelize } = require('sequelize');
-
-// example from:
-// https://www.youtube.com/watch?v=BpEw1PNdvkg
-// NOTE: only works vor sequelize v5!
-
-const create_models = (config) => {
-
-    console.log("Try create models for postgres database...")
-
-    const sequelize = new Sequelize(config.db_name,
-        config.db_user, config.db_passwd,
-        {dialect: "postgres"}
-    );
-
-    const models = {
-        // NOTE: auto-pluralization for models in implicit!
-        Location: sequelize.import("../../entities/Location"),
-        Table: sequelize.import("../../entities/Tables"),
-        AssignGuestToTable: sequelize.import("../../entities/AssignGuestToTable"),
-    };
-
-    Object.keys(models).forEach((model_name) => {
-        if ("associate" in models[model_name]) {
-            models[model_name].associate(models);
-        }
-    })
-
-    models.sequelize = sequelize;
-    return models;
-}*/
-
+/*
+ * The models/index.js imports all model-file in 'models' directory and
+ * creates an object 'db' that can be synchronized with the postgres DB.
+ * Tutorial: Working code for sequelize version v6:
+ * https://www.youtube.com/watch?v=3qlnR9hK-lQ
+ */
 const fs = require('fs');
 const path = require('path');
 const { Sequelize } = require('sequelize');
@@ -72,28 +46,5 @@ const create_models = (config) => {
     console.log("Create models OK")
     return db;
 };
-
-
-/**
- * Will create all tables if the does not exist in the database.
- * @param config
- */
-/*const sync_models = (config) => {
-    console.log("Try sync models with postgres database...")
-    //const models = create_models(config)
-    db.sequelize.sync({force: true})
-        .then(() => {
-        console.log("Synced models OK")
-    }).catch(err => {
-        console.error('Unable to connect to the database:', err);
-        process.exit;
-    });
-}*/
-
-/*module.exports = {
-    create_models,
-    //sync_models,
-    //models: db
-};*/
 
 module.exports = create_models;

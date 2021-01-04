@@ -16,7 +16,7 @@ const create_connection_pool = config => {
         password: config.db_passwd,
         host: config.host_name,
         port: config.db_port,
-        dialect: "postgres",
+        dialect: config.db_dialect,
     });
 }
 
