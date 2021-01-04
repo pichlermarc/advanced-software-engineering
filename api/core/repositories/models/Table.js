@@ -1,4 +1,4 @@
-const {DataTypes} = require('sequelize');
+/*const {DataTypes} = require('sequelize');
 const name = require('path').basename(__filename, '.js');
 
 const create_db_connection = require('../index');
@@ -29,10 +29,44 @@ const Model = sequelize.define(name, {
 });
 
 Model.associate = models => {
-    /*Table.belongsTo(models.Location, {
-        through: "location",
-        foreignKey: "location_id"
-    })*/
+    //Table.belongsTo(models.Location, {
+    //    through: "location",
+    //   foreignKey: "location_id"
+    //})
 };
 
 module.exports = Model;
+*/
+
+"use strict";
+
+const {Model} = require("sequelize");
+
+module.exports = (sequelize, DataTypes) => {
+    class Table extends Model {
+        static associate(models) {
+        }
+    };
+
+    Table.init({
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER,
+        },
+        name: {
+            allowNull: false,
+            type: DataTypes.STRING,
+        },
+        location_id: {
+            allowNull: false,
+            type: DataTypes.INTEGER,
+        },
+    }, {
+        sequelize,
+        modelName: "Table",
+    });
+
+    return Table;
+};

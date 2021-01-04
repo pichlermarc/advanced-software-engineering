@@ -9,7 +9,7 @@ const create_db_connection = (config) => {
                 config.db_name,
                 config.db_user,
                 config.db_passwd,
-                {dialect: "postgres", logging: true,},
+                {dialect: "postgres"},
                 config,
             );
         } catch (ex) {

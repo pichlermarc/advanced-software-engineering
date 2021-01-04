@@ -30,41 +30,47 @@ const create_models = (config) => {
     return models;
 }*/
 
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
+const { Sequelize } = require('sequelize');
+
 const db_connect = require('../index');
 const create_config = require("../../config")
 
+const basename = path.basename(__filename);
 const cnf = create_config();
-
-const models = {};
 
 const create_models = (config) => {
     console.log("Try create models for postgres database...")
-    if (!Object.keys(models).length) {
-        const sequelize = db_connect(cnf);
-        const files = fs.readdirSync(__dirname);
-        const excludedFiles = ['.', '..', 'index.js'];
 
-        for(const fileName of files) {
-            if(!excludedFiles.includes(fileName) && (path.extname(fileName) === '.js')) {
-                const modelFile = require(path.join(__dirname, fileName));
-                models[modelFile.getTableName()] = modelFile;
-            }
+    const db = {};
+    const sequelize = db_connect(cnf);
+
+    // loop through directory 'models' and import any js file (db-model)
+    fs
+        .readdirSync(__dirname)
+        .filter(filename => (filename.indexOf('.') !== 0) && (filename !== basename) && (filename.slice(-3) === ".js"))
+        .forEach(file => {
+            // import the model
+            const model = require(path.join(__dirname, file))(
+                // passes the 2 parameter for the ctor of each model
+                sequelize,              // db-connection
+                Sequelize.DataTypes,    // data-types from Sequelize
+            );
+            // add each model to db object
+            db[model.name] = model;
+        });
+
+    Object.keys(db).forEach(model_name => {
+        if(db[model_name].associate) {
+            db[model_name].associate(db);
         }
+    })
 
-        Object
-            .values(models)
-            .forEach(model => {
-                if(typeof model.associate === 'function') {
-                    model.associate(models);
-                }
-            });
+    db.sequelize = sequelize;
 
-        models.sequelize = sequelize;
-    }
     console.log("Create models OK")
-    return models;
+    return db;
 };
 
 
@@ -72,20 +78,22 @@ const create_models = (config) => {
  * Will create all tables if the does not exist in the database.
  * @param config
  */
-const sync_models = (config) => {
+/*const sync_models = (config) => {
     console.log("Try sync models with postgres database...")
     //const models = create_models(config)
-    models.sequelize.sync({force: true})
+    db.sequelize.sync({force: true})
         .then(() => {
         console.log("Synced models OK")
     }).catch(err => {
         console.error('Unable to connect to the database:', err);
         process.exit;
     });
-}
+}*/
 
-module.exports = {
+/*module.exports = {
     create_models,
-    sync_models,
-    models
-};
+    //sync_models,
+    //models: db
+};*/
+
+module.exports = create_models;
