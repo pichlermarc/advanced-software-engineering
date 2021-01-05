@@ -21,7 +21,7 @@ const LocationRequestModel = require('../core/requestModels/LocationRequestModel
 const LocationValidator = require('../core/validation/LocationValidator');
 const UpdateLocationInteractor = require('../core/use_cases/UpdateLocationInteractor');
 const UpdateLocationByIdInteractor = require('../core/use_cases/UpdateLocationByIdInteractor');
-
+const GetLocationTablesInteractor = require('../core/use_cases/GetLocationTablesInteractor');
 /**
 * Get your locations
 * Get locations associated with your user
@@ -185,10 +185,28 @@ const locationLocationIdPOST = ({ locationId, location }) => new Promise(
 * */
 const locationLocationIdTableGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationLocationIdTableGET---return list of tables associated with this location---");
     try {
-      resolve(Service.successResponse({
-        locationId,
-      }));
+      let requestmodel = new LocationIdRequestModel(locationId);
+      let validator = new LocationIdValidator();
+      let interactor = new GetLocationTablesInteractor(repository, validator);
+
+      let responsemodel = interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "LocationNotFoundException",
+          message: responsemodel.error_msg,
+          status: 405,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+
+      resolve(Service.successResponse(
+        responsemodel.location_list
+      ));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
