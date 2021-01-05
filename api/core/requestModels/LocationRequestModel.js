@@ -1,6 +1,6 @@
 "use strict";
 
-class LocationIdRequestModel {
+class LocationRequestModel {
     /**
      * The requestmodel is the input data-structure for the interactor.
      * It is a raw data object an stores the necessary fields needed for the use-case.
@@ -14,4 +14,4 @@ class LocationIdRequestModel {
     }
 }
 
-module.exports = LocationIdRequestModel;
+module.exports = LocationRequestModel;
