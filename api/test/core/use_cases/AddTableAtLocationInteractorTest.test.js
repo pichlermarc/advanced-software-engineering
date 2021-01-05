@@ -1,5 +1,5 @@
 const TableValidator = require('../../../core/validation/TableValidator')
-const LocationIdValidator = require('../../../core/validation/LocationIdValidator')
+const IdValidator = require('../../../core/validation/IdValidator')
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository')
 const AddTableAtLocationInteractor = require('../../../core/use_cases/AddTableAtLocationInteractor')
 const EntityRequestModel = require('../../../core/requestModels/EntityRequestModel')
@@ -13,7 +13,7 @@ const NEW_LOCATION_NAME = "new location";
 const TABLE_NAME = 'Last table next to window';
 const TABLE_ID = 1;
 
-let idvalidator = new LocationIdValidator();
+let idvalidator = new IdValidator();
 let tablevalidator = new TableValidator();
 let repo = new GuestRegistrationInMemRepository();
 let interactor = new AddTableAtLocationInteractor(repo, idvalidator, tablevalidator);

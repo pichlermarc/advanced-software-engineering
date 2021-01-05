@@ -3,7 +3,7 @@
 const IValidator = require('../validation/IValidator');
 const ValidationResult = require('../validation/ValidationResult');
 
-class LocationIdValidator extends IValidator {
+class IdValidator extends IValidator {
     /**
      * Validator validates the input - the request-model - of the interactor and
      * returns an object of type ValidationResult.
@@ -21,4 +21,4 @@ class LocationIdValidator extends IValidator {
     }
 }
 
-module.exports = LocationIdValidator;
+module.exports = IdValidator;

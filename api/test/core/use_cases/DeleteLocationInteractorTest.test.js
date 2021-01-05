@@ -1,4 +1,4 @@
-const Validator = require('../../../core/validation/LocationIdValidator')
+const Validator = require('../../../core/validation/IdValidator')
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository')
 const DeleteLocationInteractor = require('../../../core/use_cases/DeleteLocationInteractor')
 const RequestModel = require('../../../core/requestModels/LocationIdRequestModel')

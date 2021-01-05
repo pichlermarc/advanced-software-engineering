@@ -1,12 +1,12 @@
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository');
 const Location = require('../../../core/entities/Location');
 const Table = require('../../../core/entities/Table');
-const LocationIdValidator = require('../../../core/validation/LocationIdValidator');
+const IdValidator = require('../../../core/validation/IdValidator');
 const RequestModel = require('../../../core/requestModels/LocationIdRequestModel');
 const GetLocationTablesInteractor = require('../../../core/use_cases/GetLocationTablesInteractor');
 
 let repo = new GuestRegistrationInMemRepository();
-let validator = new LocationIdValidator();
+let validator = new IdValidator();
 let interactor = new GetLocationTablesInteractor(repo, validator);
 let LOCATION_ID_1 = 1;
 let LOCATION_ID_2 = 2;

@@ -16,7 +16,7 @@ const GetLocationInteractor = require('../core/use_cases/GetLocationInteractor')
 const GetLocationsInteractor = require('../core/use_cases/GetLocationsInteractor');
 const DeleteLocationInteractor = require('../core/use_cases/DeleteLocationInteractor');
 const LocationIdRequestModel = require('../core/requestModels/LocationIdRequestModel');
-const LocationIdValidator = require('../core/validation/LocationIdValidator');
+const IdValidator = require('../core/validation/IdValidator');
 const LocationRequestModel = require('../core/requestModels/LocationRequestModel');
 const LocationValidator = require('../core/validation/LocationValidator');
 const UpdateLocationInteractor = require('../core/use_cases/UpdateLocationInteractor');
@@ -24,6 +24,9 @@ const UpdateLocationByIdInteractor = require('../core/use_cases/UpdateLocationBy
 const GetLocationTablesInteractor = require('../core/use_cases/GetLocationTablesInteractor');
 const EntityRequestModel = require('../core/requestModels/EntityRequestModel');
 const TableValidator = require('../core/validation/TableValidator');
+const LocationIdTableIdRequestModel = require('../core/requestModels/LocationIdTableIdRequestModel');
+const GetLocationTableInteractor = require('../core/use_cases/GetLocationTableInteractor');
+const LocationIdTableIdValidator = require('../core/validation/LocationIdTableIdValidator');
 
 /**
 * Get your locations
@@ -72,7 +75,7 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
     try {
       let requestmodel = new LocationIdRequestModel(locationId);
 
-      let validator = new LocationIdValidator();
+      let validator = new IdValidator();
       let interactor = new DeleteLocationInteractor(repository, validator);
 
       let responsemodel = interactor.execute(requestmodel);
@@ -108,7 +111,7 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
       console.log("---locationLocationIdGET---process-the-stub-usecase---");
     try {
         let requestmodel = new LocationIdRequestModel(locationId);
-        let validator = new LocationIdValidator();
+        let validator = new IdValidator();
         let interactor = new GetLocationInteractor(repository, validator);
 
         let responsemodel = interactor.execute(requestmodel);
@@ -150,7 +153,7 @@ const locationLocationIdPOST = ({ locationId, location }) => new Promise(
     try {
       let requestmodel = new LocationRequestModel(locationId, location);
 
-      let idvalidator = new LocationIdValidator();
+      let idvalidator = new IdValidator();
       let locationvalidator = new LocationValidator();
       let interactor = new UpdateLocationByIdInteractor(repository, idvalidator, locationvalidator);
 
@@ -191,7 +194,7 @@ const locationLocationIdTableGET = ({ locationId }) => new Promise(
     console.log("---locationLocationIdTableGET---return list of tables associated with this location---");
     try {
       let requestmodel = new LocationIdRequestModel(locationId);
-      let validator = new LocationIdValidator();
+      let validator = new IdValidator();
       let interactor = new GetLocationTablesInteractor(repository, validator);
 
       let responsemodel = interactor.execute(requestmodel);
@@ -232,7 +235,7 @@ const locationLocationIdTablePOST = ({ locationId, table }) => new Promise(
     try {
       let requestmodel = new EntityRequestModel(locationId, table);
 
-      let idvalidator = new LocationIdValidator();
+      let idvalidator = new IdValidator();
       let tablevalidator = new TableValidator();
 
       let interactor = new AddTableAtLocationInteractor(repository, idvalidator, tablevalidator);
@@ -295,11 +298,29 @@ const locationLocationIdTableTableIdDELETE = ({ locationId, tableId }) => new Pr
 * */
 const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationLocationIdTableTableIdGET---return one specific table from the specified location---");
     try {
+      let requestmodel = new LocationIdTableIdRequestModel(locationId, tableId);
+      let validator = new LocationIdTableIdValidator();
+      let interactor = new GetLocationTableInteractor(repository, validator);
+
+      let responsemodel = interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "LocationOrTableNotFoundException",
+          message: responsemodel.error_msg,
+          status: 405,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+
       resolve(Service.successResponse({
-        locationId,
-        tableId,
-      }));
+        "name": responsemodel.entity.name,
+        "id": responsemodel.entity.id
+      }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',

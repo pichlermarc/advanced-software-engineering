@@ -1,5 +1,5 @@
 const LocationValidator = require('../../../core/validation/LocationValidator')
-const LocationIdValidator = require('../../../core/validation/LocationIdValidator')
+const IdValidator = require('../../../core/validation/IdValidator')
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository')
 const UpdateLocationByIdInteractor = require('../../../core/use_cases/UpdateLocationByIdInteractor')
 const LocationRequestModel = require('../../../core/requestModels/LocationRequestModel')
@@ -10,7 +10,7 @@ const OLD_LOCATION_NAME = "location-dummy";
 const NEW_LOCATION_ID = 815;
 const NEW_LOCATION_NAME = "new location";
 
-let idvalidator = new LocationIdValidator();
+let idvalidator = new IdValidator();
 let locationvalidator = new LocationValidator();
 let repo = new GuestRegistrationInMemRepository();
 let interactor = new UpdateLocationByIdInteractor(repo, idvalidator, locationvalidator);
