@@ -39,14 +39,12 @@ class GetLocationTableInteractor {
 
         // 4. return response
         let response_model;
-/*        if (foundtables.length > 1) {
-            response_model = new ResponseModel(null, `Found more than one
-            table with the specified tableid(${request_model.table_id})
-            at the location with the specified locationId(${request_model.location_id})!`);
-        } else */ if (foundtables.length === 1) { // successful retrieval of the given table from the given location
+        if (foundtables.length === 1) { // successful retrieval of the given table from the given location
             response_model = new ResponseModel(foundtables[0], null);
         } else { // in case table with tableId does not exist at location with locationId
-            response_model = new ResponseModel(null, `No table with id=${request_model.table_id} at location with id=${request_model.location_id}`);
+            response_model = new ResponseModel(null,
+              `No table with id=${request_model.table_id} at location with id=${request_model.location_id}`,
+              403);
         }
         return response_model;
     }

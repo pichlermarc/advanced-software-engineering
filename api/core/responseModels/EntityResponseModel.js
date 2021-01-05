@@ -8,9 +8,10 @@ class EntityResponseModel {
      *   The naming "Response" has nothing to do with a HTTP response!
      *   The responsemodel is only the output from the interactor.
      */
-    constructor(entity, error_msg = null) {
+    constructor(entity, error_msg = null, status = null) {
         this.entity = entity;
         this.error_msg = error_msg;
+        this.status = status;
     }
 }
 

@@ -307,16 +307,26 @@ const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promi
       let responsemodel = interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
-        throw {
-          name: "LocationOrTableNotFoundException",
-          message: responsemodel.error_msg,
-          status: 405,
-          toString: function() {
-            return this.name + ": " + this.message;
-          }
-        };
+        if (responsemodel.status !== null) {
+          throw {
+            name: "LocationOrTableNotFoundException",
+            message: responsemodel.error_msg,
+            status: 403,
+            toString: function () {
+              return this.name + ": " + this.message;
+            }
+          };
+        } else {
+          throw {
+            name: "LocationOrTableNotFoundException",
+            message: responsemodel.error_msg,
+            status: 405,
+            toString: function () {
+              return this.name + ": " + this.message;
+            }
+          };
+        }
       }
-
       resolve(Service.successResponse({
         "name": responsemodel.entity.name,
         "id": responsemodel.entity.id
