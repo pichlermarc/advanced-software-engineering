@@ -1,7 +1,7 @@
 @page "/location/{LocationId}/edit"
 <h3>Edit Location</h3>
 <LocationEditForm LocationId="long.Parse(LocationId)"></LocationEditForm>
-
+<TableList LocationId="long.Parse(LocationId)"></TableList>
 @code {
     [Parameter]
     public string LocationId { get; set; }

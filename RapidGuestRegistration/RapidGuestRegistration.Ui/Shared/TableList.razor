@@ -1,5 +1,34 @@
-<h3>$COMPONENTNAME$</h3>
+@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@inject IDefaultApi Api
+<h3>Tables</h3>
+
+<div class="row">
+    <ul>
+        @foreach (var table in _tables)
+        {
+            <li>
+                @table.Name
+            </li>
+        }
+    </ul>
+</div>
+
 
 @code {
-  $END$
+    [Parameter]
+    public long LocationId { get; set; }
+    
+    private List<Table> _tables;
+
+    protected override void OnInitialized()
+    {
+        _tables = Api.LocationLocationIdTableGet(LocationId);
+    }
+
+    private void UpdateTables()
+    {
+        _tables = Api.LocationLocationIdTableGet(LocationId) ?? new List<Table>();
+    }
+
 }

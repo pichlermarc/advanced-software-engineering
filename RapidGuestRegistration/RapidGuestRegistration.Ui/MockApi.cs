@@ -19,6 +19,11 @@ namespace RapidGuestRegistration.Ui
                 new Location {Id = 2, Name = "Location #2"},
                 new Location {Id = 3, Name = "Location #3"}
             };
+
+            _tables = new Dictionary<long, List<Table>>()
+            {
+                {1L, new List<Table>() {new Table(1L, "table1")}}
+            };
         }
 
         public IReadableConfiguration Configuration { get; set; }
@@ -30,6 +35,7 @@ namespace RapidGuestRegistration.Ui
 
         public ExceptionFactory ExceptionFactory { get; set; }
         private List<Location> _locations;
+        private Dictionary<long, List<Table>> _tables;
 
         public List<Location> LocationGet()
         {
@@ -76,7 +82,7 @@ namespace RapidGuestRegistration.Ui
 
         public List<Table> LocationLocationIdTableGet(long locationId)
         {
-            throw new System.NotImplementedException();
+            return _tables[locationId];
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableGetWithHttpInfo(long locationId)
