@@ -20,6 +20,8 @@ const LocationIdValidator = require('../core/validation/LocationIdValidator');
 const LocationRequestModel = require('../core/requestModels/LocationRequestModel');
 const LocationValidator = require('../core/validation/LocationValidator');
 const UpdateLocationInteractor = require('../core/use_cases/UpdateLocationInteractor');
+const UpdateLocationByIdInteractor = require('../core/use_cases/UpdateLocationByIdInteractor');
+
 /**
 * Get your locations
 * Get locations associated with your user
@@ -141,15 +143,35 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
 * */
 const locationLocationIdPOST = ({ locationId, location }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationLocationIdPOST---update existing Location---");
     try {
+      let requestmodel = new LocationRequestModel(locationId, location);
+
+      let idvalidator = new LocationIdValidator();
+      let locationvalidator = new LocationValidator();
+      let interactor = new UpdateLocationByIdInteractor(repository, idvalidator, locationvalidator);
+
+      let responsemodel = interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "UpdateLocationException",
+          message: responsemodel.error_msg,
+          status: 400,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+
       resolve(Service.successResponse({
-        locationId,
-        location,
-      }));
+        "id": responsemodel.id,
+        "name": responsemodel.location
+      }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
-        e.status || 405,
+        e.status || 400,
       ));
     }
   },
