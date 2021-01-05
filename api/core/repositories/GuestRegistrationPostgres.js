@@ -1,19 +1,20 @@
 "use strict";
 
-const create_config = require("../config");
-const create_db_connection = require("./index")
+//const create_config = require("../config");
+//const create_db_connection = require("./index")
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
-const {Location, Table, Assign} = require("./models")
+const {sequelize, Location, Table, Assign} = require("./models")
 
 // docu of node-postgres:
 // https://node-postgres.com/
 
 class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
-    constructor(config) {
+    constructor() {
         super();
-        this.db = create_db_connection(config);
-        //this.db.authenticate();
+        //this.db = create_db_connection(config);
+        this.db = sequelize;
+        this.db.authenticate();
     }
 
     connection_close() {
@@ -27,7 +28,8 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
           .catch(throw new Error("Not implemented yet!"));*/
 
         // syntax: DatabaseModel.create({key:value, ...});
-        const m_loc = Location.create(location);
+        const m_loc = Location.create(location, {raw: true});
+        return m_loc;
     }
 
     load_location(id) {

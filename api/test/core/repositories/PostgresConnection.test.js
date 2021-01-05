@@ -1,4 +1,4 @@
-const create_config = require('../../../core/config')
+/*const create_config = require('../../../core/config')
 const create_connection_pool = require('../../../core/repositories/ConnectionPool')
 
 const config = create_config("development")
@@ -9,7 +9,7 @@ const TRANSACTION_BEGIN = "BEGIN";
 const TRANSACTION_ROLLBACK = "ROLLBACK";
 
 console.log("config : " + JSON.stringify(config));
-
+*/
 describe('Integration test - pg postgres', () => {
 
     test("dummy", () => {

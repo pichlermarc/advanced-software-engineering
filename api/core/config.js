@@ -28,13 +28,6 @@ const config =
     },
     test: {
         config_id: "test",
-        host_name: "localhost",
-        db_name: "development",
-        db_user: "ase",
-        db_passwd: "ase",
-        db_schema: "public",
-        db_port: 5051,
-        db_dialect: "sqlite",
     },
     staging: {
         config_id: "staging",

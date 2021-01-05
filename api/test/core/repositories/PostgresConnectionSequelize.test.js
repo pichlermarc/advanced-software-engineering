@@ -1,19 +1,21 @@
-const create_config = require("../../../core/config")
-const create_db_connection = require("../../../core/repositories")
+//const create_config = require("../../../core/config")
+//const create_db_connection = require("../../../core/repositories")
 
-const cnf = create_config("development")
-const sequelize = create_db_connection(cnf)
+//const cnf = create_config("development")
+//const sequelize = create_db_connection(cnf)
+const {sequelize} = require("../../../core/repositories/models")
 const query_maths = "SELECT 2*2 AS \"result\";"
 
 describe('Integration test - sequelize postgres', () => {
 
-    test("should execute simple query after connecting to postgres", () => {
+    test("should execute simple query after connecting to postgres", async () => {
         try {
-            sequelize.authenticate();
-            console.log('Connection has been established successfully.');
+            await sequelize.authenticate();
+            await console.log('Connection has been established successfully.');
 
             sequelize.query(query_maths).then(results => {
                 console.log(results);
+                expect(results).toBeDefined();
             }).catch(err => {
                 console.error(err);
             });

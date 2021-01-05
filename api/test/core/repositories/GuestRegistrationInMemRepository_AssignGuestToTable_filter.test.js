@@ -1,7 +1,5 @@
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository');
-const Location = require('../../../core/entities/Location');
-const Table = require('../../../core/entities/Table');
-const AssignGuestToTable = require('../../../core/entities/Assign');
+const {Location, Table, Assign} = require('../../../core/entities');
 
 const repo = new GuestRegistrationInMemRepository();
 
@@ -19,12 +17,12 @@ const guest4 = ["6914", "guest4-dummy", "guest.dummy-4@x.y", "01-234-567894"];
 const guest5 = ["6915", "guest5-dummy", "guest.dummy-5@x.y", "01-234-567895"];
 
 const date_from1 = 1;
-const assign1 = new AssignGuestToTable(location1.id, table1.id, date_from1, guest1[0], guest1[1], guest1[2], guest1[3]);
-const assign2 = new AssignGuestToTable(location1.id, table1.id, date_from1, guest2[0], guest2[1], guest2[2], guest2[3]);
-const assign3 = new AssignGuestToTable(location1.id, table1.id, date_from1, guest3[0], guest3[1], guest3[2], guest3[3]);
+const assign1 = new Assign(location1.id, table1.id, date_from1, guest1[0], guest1[1], guest1[2], guest1[3]);
+const assign2 = new Assign(location1.id, table1.id, date_from1, guest2[0], guest2[1], guest2[2], guest2[3]);
+const assign3 = new Assign(location1.id, table1.id, date_from1, guest3[0], guest3[1], guest3[2], guest3[3]);
 
-const assign4 = new AssignGuestToTable(location2.id, table5.id, date_from1, guest4[0], guest4[1], guest4[2], guest4[3]);
-const assign5 = new AssignGuestToTable(location2.id, table5.id, date_from1, guest5[0], guest5[1], guest5[2], guest5[3]);
+const assign4 = new Assign(location2.id, table5.id, date_from1, guest4[0], guest4[1], guest4[2], guest4[3]);
+const assign5 = new Assign(location2.id, table5.id, date_from1, guest5[0], guest5[1], guest5[2], guest5[3]);
 
 
 repo.save_location(location1);
@@ -44,7 +42,6 @@ beforeEach(() => {
     repo.save_assign_g2t(assign3);
     repo.save_assign_g2t(assign4);
     repo.save_assign_g2t(assign5);
-
 })
 
 test('should setup the repo of assignments as well', () => {
