@@ -21,7 +21,7 @@ test('should return stored location from repository', () => {
   expect(res.error_msg).toBeNull()
 })
 
-test('should creae response with 0 locations, since repo is empty', () => {
+test('should create response with 0 locations, since repo is empty', () => {
   repo.clear();
   res = interactor.execute();
   expect(res).toBeDefined();
