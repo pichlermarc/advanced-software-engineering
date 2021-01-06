@@ -22,14 +22,31 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     }
 
     /* ----- location START ----- */
-    save_location(location) {
-        /*this.pool.query('insert into location(id, name) values($1, $2)', [location.id, location.name])
-          .then(res => {return res})
-          .catch(throw new Error("Not implemented yet!"));*/
+    /*save_location(location) {
+        //this.pool.query('insert into location(id, name) values($1, $2)', [location.id, location.name])
+        //  .then(res => {return res})
+        //  .catch(throw new Error("Not implemented yet!"));
 
         // syntax: DatabaseModel.create({key:value, ...});
-        const m_loc = Location.create(location, {raw: true});
+        let m_loc;
+        try {
+            m_loc = Location.create(location, {raw: true});
+        } catch(err) {
+            console.log("Error save_location:", err);
+        }
+        console.log(m_loc);
         return m_loc;
+    }*/
+
+    save_location(location) {
+        try {
+            const m_loc = Location.create(location, {raw: true});
+            console.log(m_loc);
+            return m_loc;
+        } catch (err) {
+            console.log("Error save_location:", err);
+            return undefined;
+        }
     }
 
     load_location(id) {

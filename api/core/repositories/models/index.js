@@ -16,7 +16,7 @@ const env = process.env.NODE_ENV || "development";
 const cnf = create_config(env);
 
 
-console.log("Try create models for postgres database...")
+//console.log("Try create models for postgres database...")
 
 const db = {};
 const sequelize = create_db_connection(cnf);
@@ -44,7 +44,7 @@ Object.keys(db).forEach(model_name => {
 
 db.sequelize = sequelize;
 
-console.log("Create models OK")
+//console.log("Create models OK")
 
 
 module.exports = db
