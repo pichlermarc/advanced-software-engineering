@@ -1,6 +1,6 @@
 "use strict";
 
-class Table {
+class eTable {
     constructor(id, name, location_id) {
         this.id = id;
         this.name = name;
@@ -8,4 +8,4 @@ class Table {
     }
 }
 
-module.exports = Table;
+module.exports = eTable;

@@ -8,20 +8,20 @@ const {Model} = require("sequelize");
  *      - 'Datatypes': types from Sequelize
  */
 module.exports = (sequelize, DataTypes) => {
-    class Location extends Model {
-        static associate({Table, Assign}) {
+    class mLocation extends Model {
+        static associate({mTable, mAssign}) {
             // howto: https://www.youtube.com/watch?v=3qlnR9hK-lQ => min 27:44
-            this.hasMany(Table, {
+            this.hasMany(mTable, {
                 foreignKey: "location_id"
             })
 
-            this.hasMany(Assign, {
+            this.hasMany(mAssign, {
                 foreignKey: "location_id"
             })
         }
     };
 
-    Location.init({
+    mLocation.init({
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -35,8 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         tableName: "locations",
-        modelName: "Location",
+        modelName: "mLocation",
     });
 
-    return Location;
+    return mLocation;
 };

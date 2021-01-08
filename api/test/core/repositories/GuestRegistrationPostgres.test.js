@@ -1,7 +1,7 @@
 //const create_config = require("../../../core/config")
 //const create_db_connection = require("../../../core/repositories")
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
-const {Location, Table, Assign} = require("../../../core/entities")
+const {eLocation, eTable, eAssign} = require("../../../core/entities")
 
 //const cnf = create_config("development")
 
@@ -10,7 +10,7 @@ const {Location, Table, Assign} = require("../../../core/entities")
 describe('Integration test - sequelize postgres db models', () => {
 
     let postgres;
-    const location1 = new Location(4711, "dummy-location")
+    const location1 = new eLocation()
 
     beforeAll(() => {
         postgres = new GuestRegistrationPostgres();
@@ -23,9 +23,10 @@ describe('Integration test - sequelize postgres db models', () => {
     test("should save location to postgres", async () => {
 
         try {
-            const location_saved = await postgres.save_location(location1);
+            //const location_saved = await postgres.save_location(location1);
+            const location_saved = await postgres.save_location({name: "dummy-loc"});
             expect(location_saved).toBeDefined();
-            expect(4).not.toBe(3)
+            expect(location_saved).not.toBe(location1);
 
         } catch (err) {
             throw err;
@@ -33,4 +34,6 @@ describe('Integration test - sequelize postgres db models', () => {
             //postgres.connection_close();
         }
     })
+
+    //test("should return an empty list after load from emtpy DB")
 })

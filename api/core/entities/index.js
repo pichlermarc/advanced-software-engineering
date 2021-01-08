@@ -1,9 +1,9 @@
-const Location = require("./Location")
-const Table = require("./Table")
-const Assign = require("./Assign")
+const eLocation = require("./Location")
+const eTable = require("./Table")
+const eAssign = require("./Assign")
 
 module.exports = {
-    Location,
-    Table,
-    Assign
+    eLocation,
+    eTable,
+    eAssign
 }

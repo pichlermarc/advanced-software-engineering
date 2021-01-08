@@ -3,20 +3,20 @@
 const {Model} = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-    class Assign extends Model {
-        static associate({Location, Table}) {
+    class mAssign extends Model {
+        static associate({mLocation, mTable}) {
 
-            this.belongsTo(Table, {
+            this.belongsTo(mTable, {
                 foreignKey: "table_id"
             })
 
-            this.belongsTo(Location, {
+            this.belongsTo(mLocation, {
                 foreignKey: "location_id"
             })
         }
     };
 
-    Assign.init({
+    mAssign.init({
         location_id: {
             allowNull: false,
             type: DataTypes.INTEGER,
@@ -49,8 +49,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         tableName: "assigns",
-        modelName: "Assign",
+        modelName: "mAssign",
     });
 
-    return Assign;
+    return mAssign;
 };

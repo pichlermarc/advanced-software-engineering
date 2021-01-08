@@ -1,23 +1,22 @@
 "use strict";
 
 const {Model} = require("sequelize");
-//const {Location} = require(".")
 
 module.exports = (sequelize, DataTypes) => {
-    class Table extends Model {
-        static associate({Location, Assign}) {
+    class mTable extends Model {
+        static associate({mLocation, mAssign}) {
             // howto: https://www.youtube.com/watch?v=3qlnR9hK-lQ => min 27:44
-            this.belongsTo(Location, {
+            this.belongsTo(mLocation, {
                 foreignKey: "location_id"
             })
 
-            this.hasMany(Assign, {
+            this.hasMany(mAssign, {
                 foreignKey: "table_id"
             })
         }
     };
 
-    Table.init({
+    mTable.init({
         id: {
             allowNull: false,
             autoIncrement: true,
@@ -35,8 +34,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         tableName: "tables",
-        modelName: "Table",
+        modelName: "mTable",
     });
 
-    return Table;
+    return mTable;
 };

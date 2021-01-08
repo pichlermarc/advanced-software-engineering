@@ -3,7 +3,8 @@
 //const create_config = require("../config");
 //const create_db_connection = require("./index")
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
-const {sequelize, Location, Table, Assign} = require("./models")
+const {sequelize, mLocation, mTable, mAssign} = require("./models")
+const {eLocation, eTable, eAssign} = require("../entities")
 
 // docu of node-postgres:
 // https://node-postgres.com/
@@ -22,27 +23,24 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     }
 
     /* ----- location START ----- */
-    /*save_location(location) {
-        //this.pool.query('insert into location(id, name) values($1, $2)', [location.id, location.name])
-        //  .then(res => {return res})
-        //  .catch(throw new Error("Not implemented yet!"));
-
-        // syntax: DatabaseModel.create({key:value, ...});
-        let m_loc;
-        try {
-            m_loc = Location.create(location, {raw: true});
-        } catch(err) {
-            console.log("Error save_location:", err);
-        }
-        console.log(m_loc);
-        return m_loc;
-    }*/
-
     save_location(location) {
+        // template of sequelize and usage of db-models:
+        // https://github.com/hidjou/classsed-orms-sequelize
+
+        // todo: return raw-js-object from DB => does NOT work!
+        // https://stackoverflow.com/a/43411373/7421890
         try {
-            const m_loc = Location.create(location, {raw: true});
-            console.log(m_loc);
-            return m_loc;
+            const e_loc = mLocation.create(location, {raw: true})
+                .then((v) => {
+                    console.log(v)
+                    return new eLocation(v.dataValues.id, v.dataValues.name);
+                })
+                .catch((err) => {
+                    console.error("save_location fails!", err)
+                    return undefined;
+                });
+            // TODO: why is return-stmt needed ?!?!
+            return e_loc;
         } catch (err) {
             console.log("Error save_location:", err);
             return undefined;
