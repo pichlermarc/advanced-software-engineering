@@ -30,7 +30,8 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         // todo: return raw-js-object from DB => does NOT work!
         // https://stackoverflow.com/a/43411373/7421890
         try {
-            const e_loc = mLocation.create(location, {raw: true})
+            const {id, name} = location;
+            const e_loc = mLocation.create({name: name}, {raw: true})
                 .then((v) => {
                     console.log(v)
                     return new eLocation(v.dataValues.id, v.dataValues.name);
@@ -48,10 +49,22 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     }
 
     load_location(id) {
-        /*
-        this.pool.query('select * from location where location.id=$1', id)
-          .then(res => {return res})
-          .catch(throw new Error("Not implemented yet!"));*/
+        try {
+            const e_loc = mLocation.findOne({where: id}, {raw: true})
+                .then((v) => {
+                    console.log(v)
+                    return new eLocation(v.dataValues.id, v.dataValues.name);
+                })
+                .catch((err) => {
+                    console.error("load_location fails!", err)
+                    return undefined;
+                });
+            // TODO: why is return-stmt needed ?!?!
+            return e_loc;
+        } catch (err) {
+            console.log("Error save_location:", err);
+            return undefined;
+        }
     }
     load_all_locations() {
         /*this.pool.query('select * from location;')

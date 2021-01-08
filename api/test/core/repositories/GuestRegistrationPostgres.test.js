@@ -10,7 +10,7 @@ const {eLocation, eTable, eAssign} = require("../../../core/entities")
 describe('Integration test - sequelize postgres db models', () => {
 
     let postgres;
-    const location1 = new eLocation()
+    const location1 = new eLocation(null, "dummy-loc")
 
     beforeAll(() => {
         postgres = new GuestRegistrationPostgres();
@@ -23,10 +23,22 @@ describe('Integration test - sequelize postgres db models', () => {
     test("should save location to postgres", async () => {
 
         try {
-            //const location_saved = await postgres.save_location(location1);
-            const location_saved = await postgres.save_location({name: "dummy-loc"});
+            const location_saved = await postgres.save_location(location1);
             expect(location_saved).toBeDefined();
-            expect(location_saved).not.toBe(location1);
+            expect(location_saved.name).toBe(location1.name);
+
+        } catch (err) {
+            throw err;
+        } finally {
+            //postgres.connection_close();
+        }
+    })
+
+    test("should load location with id = 1", async () => {
+        try {
+            const location_load = await postgres.load_location(1);
+            expect(location_load).toBeDefined();
+            expect(location_load.name).toBe(location1.name);
 
         } catch (err) {
             throw err;
