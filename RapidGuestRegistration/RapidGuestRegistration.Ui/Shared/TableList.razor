@@ -8,9 +8,7 @@
 
     @foreach (var table in _tables)
     {
-        <TableDisplay Table="@table">
-
-        </TableDisplay>
+        <TableDisplay LocationId="@LocationId" Table="@table" OnTablesChanged="@UpdateTables"></TableDisplay>
     }
 
      <h3>
@@ -20,7 +18,7 @@
          <div class="col-12">
              <div class="card">
                  <div class="card-header">
-                     <input placeholder="Table Name" @bind="@_tablename"/>
+                     <input placeholder="Table Name" @bind="@_tableName"/>
                      <button class="btn btn-primary" @onclick="AddTable">
                          Add
                      </button>
@@ -40,7 +38,7 @@
 
     private List<Table> _tables;
 
-    private string _tablename;
+    private string _tableName;
 
     protected override void OnInitialized()
     {
@@ -54,7 +52,7 @@
 
     private async void AddTable()
     {
-        Api.LocationLocationIdTablePost(LocationId, new Table() { Name = _tablename });
+        Api.LocationLocationIdTablePost(LocationId, new Table { Name = _tableName });
         UpdateTables();
     }
 

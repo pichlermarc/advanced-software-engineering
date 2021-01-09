@@ -1,5 +1,7 @@
-﻿
-@using RapidGuestRegistration.Client.Model
+﻿@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@inject IDefaultApi Api
+
 <div class="row">
 
     <div class="col-12">
@@ -11,7 +13,7 @@
                 <button class="btn btn-primary">
                     Edit
                 </button>
-                <button class="btn btn-outline-danger">
+                <button class="btn btn-outline-danger" @onclick="DeleteTable">
                     Delete
                 </button>
             </div>
@@ -25,5 +27,16 @@
 @code {
     [Parameter]
     public Table Table { get; set; }
+    
+    [Parameter]
+    public long LocationId { get; set; }
+    
+    [Parameter]
+    public EventCallback OnTablesChanged { get; set; }
 
+    private async void DeleteTable()
+    {
+        Api.LocationLocationIdTableTableIdDelete(LocationId, Table.Id);
+        await OnTablesChanged.InvokeAsync(this);
+    }
 }
