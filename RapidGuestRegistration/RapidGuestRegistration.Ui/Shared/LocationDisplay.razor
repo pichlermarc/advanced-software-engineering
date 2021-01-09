@@ -23,13 +23,13 @@
     [Parameter]
     public EventCallback OnLocationsChanged { get; set; }
     
-    private async void DeleteLocation()
+    private async Task DeleteLocation()
     {
         var location = Api.LocationLocationIdDelete(Location.Id);
         await OnLocationsChanged.InvokeAsync(location);
     }
 
-    private async void NavigateToEdit()
+    private async Task NavigateToEdit()
     {
         NavigationManager.NavigateTo($"/location/{Location.Id}/edit");
     }

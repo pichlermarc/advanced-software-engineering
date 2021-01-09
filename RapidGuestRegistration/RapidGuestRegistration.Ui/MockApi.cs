@@ -128,7 +128,14 @@ namespace RapidGuestRegistration.Ui
 
         public List<Table> LocationLocationIdTableTableIdGet(long locationId, long tableId)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return new List<Table>() { _tables[locationId].First(table => table.Id == tableId) };
+            }catch(Exception e)
+            {
+                throw new ApiException();
+            }
+            
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableTableIdGetWithHttpInfo(long locationId, long tableId)
@@ -138,7 +145,17 @@ namespace RapidGuestRegistration.Ui
 
         public Table LocationLocationIdTableTableIdPost(long locationId, long tableId, Table table = default(Table))
         {
-            throw new System.NotImplementedException();
+
+            try
+            {
+                var updatedTable = _tables[locationId].First(table => table.Id == tableId);
+                updatedTable.Name = table.Name;
+                return updatedTable;
+            }catch(Exception e)
+            {
+                throw new ApiException();
+            }
+            
         }
 
         public ApiResponse<Table> LocationLocationIdTableTableIdPostWithHttpInfo(long locationId, long tableId,
