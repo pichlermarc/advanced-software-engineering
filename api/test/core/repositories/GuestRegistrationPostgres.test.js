@@ -17,6 +17,7 @@ describe('Integration test - sequelize postgres db models', () => {
     });
 
     afterAll( () => {
+        postgres.connection_close();
         postgres.close();
     });
 
