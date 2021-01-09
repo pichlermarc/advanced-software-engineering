@@ -103,6 +103,7 @@ namespace RapidGuestRegistration.Ui
             {
                 _tables[locationId] = new List<Table>();
             }
+            table.Id = _tables[locationId].Select(existingTable => existingTable.Id).DefaultIfEmpty(0).Max() + 1;
             _tables[locationId].Add(table);
             return table;
         }
@@ -114,6 +115,7 @@ namespace RapidGuestRegistration.Ui
 
         public List<Table> LocationLocationIdTableTableIdDelete(long locationId, long tableId)
         {
+
             throw new System.NotImplementedException();
         }
 
