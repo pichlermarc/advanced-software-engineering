@@ -99,6 +99,8 @@ namespace RapidGuestRegistration.Ui
 
         public Table LocationLocationIdTablePost(long locationId, Table table = default(Table))
         {
+            if (table == null)
+                throw new ArgumentNullException(nameof(table));
             if (!_tables.ContainsKey(locationId)) 
             {
                 _tables[locationId] = new List<Table>();
@@ -115,8 +117,8 @@ namespace RapidGuestRegistration.Ui
 
         public List<Table> LocationLocationIdTableTableIdDelete(long locationId, long tableId)
         {
-
-            throw new System.NotImplementedException();
+            _tables[locationId].RemoveAll(table => table.Id == tableId);
+            return new List<Table>();
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableTableIdDeleteWithHttpInfo(long locationId, long tableId)
