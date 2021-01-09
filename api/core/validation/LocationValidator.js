@@ -1,9 +1,9 @@
 "use strict";
 
-const IValidator = require('../../validation/IValidator');
-const ValidationResult = require('../../validation/ValidationResult');
+const IValidator = require('../validation/IValidator');
+const ValidationResult = require('../validation/ValidationResult');
 
-class StubValidator extends IValidator {
+class LocationValidator extends IValidator {
     /**
      * Validator validates the input - the request-model - of the interactor and
      * returns an object of type ValidationResult.
@@ -21,4 +21,4 @@ class StubValidator extends IValidator {
     }
 }
 
-module.exports = StubValidator;
+module.exports = LocationValidator;
