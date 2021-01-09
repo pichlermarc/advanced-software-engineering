@@ -1,34 +1,61 @@
 @using RapidGuestRegistration.Client.Model
+
 @using RapidGuestRegistration.Client.Api
 @inject IDefaultApi Api
 <h3>Tables</h3>
 
-<div class="row">
-    <ul>
-        @foreach (var table in _tables)
-        {
-            <li>
-                @table.Name
-            </li>
-        }
-    </ul>
-</div>
+
+
+    @foreach (var table in _tables)
+    {
+        <TableDisplay Table="@table">
+
+        </TableDisplay>
+    }
+
+     <h3>
+         Add Table
+     </h3>
+     <div class="row">
+         <div class="col-12">
+             <div class="card">
+                 <div class="card-header">
+                     <input placeholder="Table Name" @bind="@_tablename"/>
+                     <button class="btn btn-primary" @onclick="AddTable">
+                         Add
+                     </button>
+                 </div>
+
+             </div>
+
+         </div>
+     </div>
+
+
 
 
 @code {
     [Parameter]
     public long LocationId { get; set; }
-    
+
     private List<Table> _tables;
+
+    private string _tablename;
 
     protected override void OnInitialized()
     {
-        _tables = Api.LocationLocationIdTableGet(LocationId);
+        _tables = Api.LocationLocationIdTableGet(LocationId)??new List<Table>();
     }
 
     private void UpdateTables()
     {
         _tables = Api.LocationLocationIdTableGet(LocationId) ?? new List<Table>();
+    }
+
+    private async void AddTable()
+    {
+        Api.LocationLocationIdTablePost(LocationId, new Table() { Name = _tablename });
+        UpdateTables();
     }
 
 }

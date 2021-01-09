@@ -82,7 +82,14 @@ namespace RapidGuestRegistration.Ui
 
         public List<Table> LocationLocationIdTableGet(long locationId)
         {
-            return _tables[locationId];
+            try
+            {
+                return _tables[locationId].Select(table => new Table(table.Id, table.Name)).ToList();
+            } catch(Exception emptyList)
+            {
+                return new List<Table>();
+            }
+            
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableGetWithHttpInfo(long locationId)
@@ -92,7 +99,12 @@ namespace RapidGuestRegistration.Ui
 
         public Table LocationLocationIdTablePost(long locationId, Table table = default(Table))
         {
-            throw new System.NotImplementedException();
+            if (!_tables.ContainsKey(locationId)) 
+            {
+                _tables[locationId] = new List<Table>();
+            }
+            _tables[locationId].Add(table);
+            return table;
         }
 
         public ApiResponse<Table> LocationLocationIdTablePostWithHttpInfo(long locationId, Table table = default(Table))
