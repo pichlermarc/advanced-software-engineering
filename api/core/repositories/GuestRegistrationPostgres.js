@@ -48,20 +48,29 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         }
     }
 
-    load_location(id) {
+    async load_location(id) {
         try {
-            const e_loc = mLocation.findOne({where: id}, {raw: true})
-                .then((v) => {
-                    console.log(v)
-                    return new eLocation(v.dataValues.id, v.dataValues.name);
-                })
-                .catch((err) => {
-                    console.error("load_location fails!", err)
-                    return undefined;
-                });
-            // TODO: why is return-stmt needed ?!?!
-            return e_loc;
+            // const e_loc = mLocation.findOne({where: id}, {raw: true})
+            //     .then((v) => {
+            //         console.log(v)
+            //         return new eLocation(v.dataValues.id, v.dataValues.name);
+            //     })
+            //     .catch((err) => {
+            //         console.error("load_location fails!", err)
+            //         return undefined;
+            //     });
+
+            // If it is easier, use this syntax for the async JS stuff. just put await before DB calls.
+            // This has to be in "async" functions. Errors are handled via try/catch.
+            const e_loc = await mLocation.findOne({where: id}, {raw: true});
+            console.log(e_loc)
+            return new eLocation(e_loc.dataValues.id, e_loc.dataValues.name);
+            // TODO: why is return-stmt needed ?!?! Only needed in case of promise, which the new demoonstrated syntax doesnt need.
+            // It was needed since the jest framework finished the test function before the async call was conpleted, Therefore the
+            // promise had to be returned to jest/test-function.
+//            return e_loc;
         } catch (err) {
+            console.error("load_location fails!", err)
             console.log("Error save_location:", err);
             return undefined;
         }
