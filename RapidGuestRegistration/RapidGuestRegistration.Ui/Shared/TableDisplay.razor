@@ -1,0 +1,29 @@
+﻿
+@using RapidGuestRegistration.Client.Model
+<div class="row">
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    @Table.Name
+                </h4>
+                <button class="btn btn-primary">
+                    Edit
+                </button>
+                <button class="btn btn-outline-danger">
+                    Delete
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+    [Parameter]
+    public Table Table { get; set; }
+
+}
