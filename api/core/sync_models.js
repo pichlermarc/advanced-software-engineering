@@ -28,3 +28,5 @@ async function sync_models(sync_options = null) {
 }
 
 sync_models();
+
+module.exports = sync_models;
