@@ -48,7 +48,7 @@ describe('Integration test - sequelize postgres db models', () => {
         }
     })
 
-    test("should update 'name' of location with id = 1", async () => {
+    test("should update field 'name' of location with id = 1", async () => {
         try {
             const name_update = "updated-location-name";
             const location_update = new eLocation(1, name_update);
@@ -66,6 +66,27 @@ describe('Integration test - sequelize postgres db models', () => {
             const name_update = "updated-location-name";
             const location_update = new eLocation(999999, name_update);
             const location_fetched = await postgres.update_location(location_update);
+            expect(location_fetched).toBeUndefined();
+
+        } catch (err) {
+            throw err;
+        }
+    })
+
+    test("should remove location with id = 1", async () => {
+        try {
+            const location_fetched = await postgres.remove_location(1);
+            expect(location_fetched).toBeDefined();
+            expect(location_fetched.id).toBe(1);
+
+        } catch (err) {
+            throw err;
+        }
+    })
+
+    test("should return undefined if remove location with id = 999999", async () => {
+        try {
+            const location_fetched = await postgres.remove_location(999999);
             expect(location_fetched).toBeUndefined();
 
         } catch (err) {

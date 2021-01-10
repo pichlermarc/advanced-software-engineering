@@ -83,8 +83,19 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         }
     }
 
-    remove_location(id) {
-        throw new Error("Not implemented yet!")
+    async remove_location(id) {
+        try {
+            const e_loc = await mLocation.destroy({where: {id: id}}, {force: true});
+            if(e_loc == 0) {
+                // zero record could be removed
+                return undefined;
+            }
+            return new eLocation(id, "name");
+        } catch(err) {
+            console.error("remove_location fails!", err)
+            console.log("Error remove_location:", err);
+            return undefined;
+        }
     }
     load_all_locations() {
         /*this.pool.query('select * from location;')
