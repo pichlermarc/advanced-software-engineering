@@ -6,7 +6,7 @@ class IGatewayLocation {
 
     save_location(location) {}
     load_location(id) {}
-    update_location(id) {}
+    update_location(location) {}
     remove_location(id) {}
     load_all_locations() {}
     size_location() {}

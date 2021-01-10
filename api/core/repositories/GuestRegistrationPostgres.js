@@ -66,13 +66,30 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return undefined;
         }
     }
+
+    async update_location(location) {
+        // update DB: https://stackoverflow.com/a/61648385/7421890
+        try {
+            const e_loc = await mLocation.update({name: location.name}, {where: {id: location.id}}, {raw: true});
+            if(e_loc[0] == 0) {
+                // zero record could be updated
+                return undefined;
+            }
+            return location;
+        } catch(err) {
+            console.error("update_location fails!", err)
+            console.log("Error update_location:", err);
+            return undefined;
+        }
+    }
+
+    remove_location(id) {
+        throw new Error("Not implemented yet!")
+    }
     load_all_locations() {
         /*this.pool.query('select * from location;')
             .then(res => {return res})
             .catch(throw new Error("Not implemented yet!"));*/
-    }
-    remove_location(id) {
-        throw new Error("Not implemented yet!")
     }
     size_location() { throw new Error("Not implemented yet!") }
     clear_location() { throw new Error("Not implemented yet!") }
