@@ -23,7 +23,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     }
 
     /* ----- location START ----- */
-    save_location(location) {
+    async save_location(location) {
         // template of sequelize and usage of db-models:
         // https://github.com/hidjou/classsed-orms-sequelize
 
@@ -31,19 +31,10 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         // https://stackoverflow.com/a/43411373/7421890
         try {
             const {id, name} = location;
-            const e_loc = mLocation.create({name: name}, {raw: true})
-                .then((v) => {
-                    console.log(v)
-                    return new eLocation(v.dataValues.id, v.dataValues.name);
-                })
-                .catch((err) => {
-                    console.error("save_location fails!", err)
-                    return undefined;
-                });
-            // TODO: why is return-stmt needed ?!?!
-            return e_loc;
+            const e_loc = await mLocation.create({name: name}, {raw: true});
+            return new eLocation(e_loc.dataValues.id, e_loc.dataValues.name);
         } catch (err) {
-            console.log("Error save_location:", err);
+            console.error("save_location fails!", err)
             return undefined;
         }
     }
@@ -63,7 +54,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             // If it is easier, use this syntax for the async JS stuff. just put await before DB calls.
             // This has to be in "async" functions. Errors are handled via try/catch.
             const e_loc = await mLocation.findOne({where: id}, {raw: true});
-            console.log(e_loc)
+            //console.log(e_loc)
             return new eLocation(e_loc.dataValues.id, e_loc.dataValues.name);
             // TODO: why is return-stmt needed ?!?! Only needed in case of promise, which the new demoonstrated syntax doesnt need.
             // It was needed since the jest framework finished the test function before the async call was conpleted, Therefore the
