@@ -1,13 +1,9 @@
 "use strict";
 
-//const create_config = require("../config");
-//const create_db_connection = require("./index")
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
 const {sequelize, mLocation, mTable, mAssign} = require("./models")
 const {eLocation, eTable, eAssign} = require("../entities")
 
-// docu of node-postgres:
-// https://node-postgres.com/
 
 class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
@@ -28,9 +24,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     async save_location(location) {
         // template of sequelize and usage of db-models:
         // https://github.com/hidjou/classsed-orms-sequelize
-
-        // todo: return raw-js-object from DB => does NOT work!
-        // https://stackoverflow.com/a/43411373/7421890
         try {
             const result = await mLocation.create({name: location.name}, {raw: true});
             return eLocation.from_object(result.dataValues);

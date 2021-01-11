@@ -1,12 +1,7 @@
-//const create_config = require("../../../core/config")
-//const create_db_connection = require("../../../core/repositories")
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
 const {eLocation, eTable, eAssign} = require("../../../core/entities")
 const {sequelize, gte} = require("../../../core/repositories")
 
-//const cnf = create_config("development")
-
-// todo: set env var or use 'development' config
 
 describe('Integration test - postgres/sequelize: filter assign testing ', () => {
 
