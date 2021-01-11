@@ -25,7 +25,7 @@ const config =
     },
     test: {
         config_id: "test",
-        db_logging_sequelize: false,
+        db_logging_sequelize: true,
     },
     staging: {
         config_id: "staging",
