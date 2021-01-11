@@ -12,8 +12,9 @@ const create_config = require("../../config")
 
 const basename = path.basename(__filename);
 
-const env = process.env.NODE_ENV || "development";
-const cnf = create_config(env);
+//const env = process.env.NODE_ENV || "development";
+//const cnf = create_config(env);
+const cnf = create_config();
 
 
 //console.log("Try create models for postgres database...")
