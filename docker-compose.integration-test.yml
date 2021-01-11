@@ -6,10 +6,7 @@ services:
       - 8080:8080
   api-test:
     build: ./api
-    environment:
-      - DB_HOSTNAME=postgres
-      - DB_PORT=5432
-    command: npm test
+    command: npm run integrationtest
   ui:
     build: ./RapidGuestRegistration/
     ports:
