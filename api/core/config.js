@@ -31,9 +31,16 @@ const config =
     },
     staging: {
         config_id: "staging",
-        db_name: "my-app-db-stag",
-        hostname: "postgres",
-        port: 5432
+        app_name: "guest registration",
+        api_port: 3000,
+        app_desc: "ase project",
+        host_name: "postgres",
+        db_port: 5432,
+        db_name: "development",
+        db_user: "ase",
+        db_passwd: "ase",
+        db_schema: "public",
+        db_dialect: "postgres"
     },
     production: {
         config_id: "production",
@@ -50,9 +57,10 @@ const create_config = (config_type=null) => {
 
     // take 'config_type' or env-var or default-config
     const env = config_type || process.env.NODE_ENV || "development";
-
+console.log('used env: '+env);
     // valid config or empty object
     const wanted_config = config[env] || {};
+    console.log('config: '+JSON.stringify(wanted_config));
 
     // merge objects: https://stackoverflow.com/a/171256/7421890
     return Object.assign({}, default_config, wanted_config)
