@@ -65,6 +65,11 @@ test('should return undefined if table is not found', () => {
     expect(table_loaded).toBeUndefined();
 })
 
+test('should return undefined if no parameters are given', () => {
+    let table_loaded = repo.load_table();
+    expect(table_loaded).toBeNull();
+})
+
 test('should throw an error if save table and location_id of new table is not in repo', () => {
     let table_location_not_exists = new Table(5811, "table-dummy-1", 123456789);
     expect(() => {
