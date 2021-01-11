@@ -14,7 +14,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     constructor() {
         super();
         // todo: usage of config?!
-        //this.db = create_db_connection(config);
         this.db = sequelize;
 
         // NOTE: opens DB connection!

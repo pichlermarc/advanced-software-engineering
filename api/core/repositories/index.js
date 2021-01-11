@@ -5,7 +5,7 @@ const {Sequelize} = require('sequelize');
  */
 let connection = null;
 
-const create_db_connection = config => {
+const create_db_connection = (config) => {
     if(!connection) {
         try {
             connection = new Sequelize({
@@ -17,8 +17,7 @@ const create_db_connection = config => {
                 dialect: config.db_dialect,
 
                 logging: config.db_logging_sequelize,
-            });
-
+        });
         } catch (ex) {
             console.error(__filename, ex);
             process.exit(1);
