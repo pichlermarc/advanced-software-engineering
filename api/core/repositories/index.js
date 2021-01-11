@@ -8,14 +8,15 @@ let connection = null;
 const create_db_connection = (config) => {
     if(!connection) {
         try {
-            const host_name = process.env.POSTGRES_HOSTNAME;
-            if (host_name) { // postgres hostname from env-variable for CI
+            const db_port = process.env.DB_PORT;
+            const db_host_name = process.env.DB_HOSTNAME;
+            if (db_host_name && db_port) { // postgres hostname from env-variable for CI
                 connection = new Sequelize({
                     database: config.db_name,
                     username: config.db_user,
                     password: config.db_passwd,
-                    host: host_name,
-                    port: config.db_port,
+                    host: db_host_name,
+                    port: db_port,
                     dialect: config.db_dialect,
                 });
             } else { // postgres hostname default from config
