@@ -1,8 +1,3 @@
-//const create_config = require("../../../core/config")
-//const create_db_connection = require("../../../core/repositories")
-
-//const cnf = create_config("development")
-//const sequelize = create_db_connection(cnf)
 const {sequelize} = require("../../../core/repositories/models")
 const query_maths = "SELECT 2*2 AS \"result\";"
 
