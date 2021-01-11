@@ -3,6 +3,8 @@ services:
   api-test:
     build: ./api
     command: npm run integrationtest
+    depends_on: 
+      - postgres
   postgres:
     container_name: postgres_container
     image: postgres:12.2
