@@ -34,7 +34,13 @@ test('should created correct response for valid request', () => {
 
 test('should save new entity to DB', () => {
     expect(stub_repo.saveMethodWasCalled).toBe(true);
+    expect(stub_repo.size()).toBe(1);
     expect(stub_repo.entityReceivedToTheSaveMethod).toBeDefined()
     expect(stub_repo.entityReceivedToTheSaveMethod.id).toBe(stub_entity.id)
     expect(stub_repo.entityReceivedToTheSaveMethod.location).toBe(stub_entity.location)
+})
+
+test('should save new entity to DB and remove it afterwards', () => {
+    stub_repo.remove(STUB_ID);
+    expect(stub_repo.size()).toBe(0);
 })

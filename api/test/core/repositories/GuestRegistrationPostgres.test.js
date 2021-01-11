@@ -23,6 +23,9 @@ afterAll(async () => {
     await pgPool.end();
 });
 
+test('should return null as config is empty', () => {
+    expect(create_connection_pool(null)).toBeNull();
+})
 
 test('should query simple maths', async () => {
     const client = await pgPool.connect();

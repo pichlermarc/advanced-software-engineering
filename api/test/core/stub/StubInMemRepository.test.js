@@ -31,6 +31,13 @@ test('should return right size for repo after saving entity', () => {
     expect(stub_repo.size()).toBe(1)
 })
 
+test('should return an array with one element after saving one entity', () => {
+    stub_repo.save(stub_entity);
+    let entities = [];
+    entities.push(stub_entity);
+    expect(stub_repo.load()).toStrictEqual(entities);
+})
+
 test('should load same entity from repo that has recently been stored', () => {
     stub_repo.save(stub_entity)
     let entity_loaded = stub_repo.load(stub_entity.id)

@@ -25,6 +25,13 @@ test('should return right size for repo after saving one guest', () => {
     expect(repo.size_guest()).toBe(1)
 })
 
+test('should return list with all guests when one is added', () => {
+    repo.save_guest(guest);
+    let guestArray = [];
+    guestArray.push(guest);
+    expect(repo.load_guest()).toStrictEqual(guestArray);
+})
+
 test('should load same guest from repo that has recently been stored', () => {
     repo.save_guest(guest)
     let guest_loaded = repo.load_guest(guest.id)
