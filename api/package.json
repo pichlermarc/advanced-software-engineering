@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node index.js",
-    "test": "jest --coverage"
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development node index.js",
+    "test": "NODE_ENV=test jest --runInBand --coverage",
+    "sync": "node ./core/sync_models.js"
   },
   "keywords": [
     "openapi-generator",
@@ -25,6 +27,9 @@
     "ono": "^5.0.1",
     "openapi-sampler": "^1.0.0-beta.15",
     "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0",
     "swagger-ui-express": "^4.0.2",
     "winston": "^3.2.1"
   },
@@ -37,7 +42,8 @@
     "eslint-plugin-import": "^2.17.2",
     "jest": "^26.6.3",
     "jest-each": "^26.6.2",
-    "mocha": "^7.1.1"
+    "mocha": "^7.1.1",
+    "sequelize-cli": "^6.2.0"
   },
   "eslintConfig": {
     "env": {

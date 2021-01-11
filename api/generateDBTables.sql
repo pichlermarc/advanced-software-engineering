@@ -177,10 +177,10 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: AssignGuestToTable; Type: TABLE; Schema: public; Owner: postgres
+-- Name: Assign; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."AssignGuestToTable" (
+CREATE TABLE public."Assign" (
     location_id integer NOT NULL,
     table_id integer NOT NULL,
     guest_id integer NOT NULL,
@@ -189,7 +189,7 @@ CREATE TABLE public."AssignGuestToTable" (
 );
 
 
-ALTER TABLE public."AssignGuestToTable" OWNER TO postgres;
+ALTER TABLE public."Assign" OWNER TO postgres;
 
 --
 -- Name: Guests; Type: TABLE; Schema: public; Owner: postgres
@@ -231,10 +231,10 @@ CREATE TABLE public."Tables" (
 ALTER TABLE public."Tables" OWNER TO postgres;
 
 --
--- Data for Name: AssignGuestToTable; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: Assign; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."AssignGuestToTable" (location_id, table_id, guest_id, date_from, date_to) FROM stdin;
+COPY public."Assign" (location_id, table_id, guest_id, date_from, date_to) FROM stdin;
 \.
 
 
@@ -263,10 +263,10 @@ COPY public."Tables" (id, name, location_id) FROM stdin;
 
 
 --
--- Name: AssignGuestToTable AssignGuestToTable_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Assign AssignGuestToTable_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."AssignGuestToTable"
+ALTER TABLE ONLY public."Assign"
     ADD CONSTRAINT "AssignGuestToTable_pkey" PRIMARY KEY (location_id, table_id, guest_id);
 
 
@@ -295,10 +295,10 @@ ALTER TABLE ONLY public."Tables"
 
 
 --
--- Name: AssignGuestToTable fk_guest_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Assign fk_guest_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."AssignGuestToTable"
+ALTER TABLE ONLY public."Assign"
     ADD CONSTRAINT fk_guest_id FOREIGN KEY (guest_id) REFERENCES public."Guests"(id);
 
 
@@ -311,18 +311,18 @@ ALTER TABLE ONLY public."Tables"
 
 
 --
--- Name: AssignGuestToTable fk_location_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Assign fk_location_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."AssignGuestToTable"
+ALTER TABLE ONLY public."Assign"
     ADD CONSTRAINT fk_location_id FOREIGN KEY (location_id) REFERENCES public."Locations"(id);
 
 
 --
--- Name: AssignGuestToTable fk_table_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Assign fk_table_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."AssignGuestToTable"
+ALTER TABLE ONLY public."Assign"
     ADD CONSTRAINT fk_table_id FOREIGN KEY (table_id) REFERENCES public."Tables"(id);
 
 
@@ -435,10 +435,10 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: AssignGuestToTable; Type: TABLE; Schema: public; Owner: postgres
+-- Name: Assign; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public."AssignGuestToTable" (
+CREATE TABLE public."Assign" (
     location_id integer NOT NULL,
     table_id integer NOT NULL,
     guest_id integer NOT NULL,
@@ -447,7 +447,7 @@ CREATE TABLE public."AssignGuestToTable" (
 );
 
 
-ALTER TABLE public."AssignGuestToTable" OWNER TO postgres;
+ALTER TABLE public."Assign" OWNER TO postgres;
 
 --
 -- Name: Guests; Type: TABLE; Schema: public; Owner: postgres
@@ -489,10 +489,10 @@ CREATE TABLE public."Tables" (
 ALTER TABLE public."Tables" OWNER TO postgres;
 
 --
--- Data for Name: AssignGuestToTable; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: Assign; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."AssignGuestToTable" (location_id, table_id, guest_id, date_from, date_to) FROM stdin;
+COPY public."Assign" (location_id, table_id, guest_id, date_from, date_to) FROM stdin;
 \.
 
 
@@ -521,10 +521,10 @@ COPY public."Tables" (id, name, location_id) FROM stdin;
 
 
 --
--- Name: AssignGuestToTable AssignGuestToTable_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Assign AssignGuestToTable_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."AssignGuestToTable"
+ALTER TABLE ONLY public."Assign"
     ADD CONSTRAINT "AssignGuestToTable_pkey" PRIMARY KEY (location_id, table_id, guest_id);
 
 
@@ -553,10 +553,10 @@ ALTER TABLE ONLY public."Tables"
 
 
 --
--- Name: AssignGuestToTable fk_guest_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Assign fk_guest_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."AssignGuestToTable"
+ALTER TABLE ONLY public."Assign"
     ADD CONSTRAINT fk_guest_id FOREIGN KEY (guest_id) REFERENCES public."Guests"(id);
 
 
@@ -569,18 +569,18 @@ ALTER TABLE ONLY public."Tables"
 
 
 --
--- Name: AssignGuestToTable fk_location_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Assign fk_location_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."AssignGuestToTable"
+ALTER TABLE ONLY public."Assign"
     ADD CONSTRAINT fk_location_id FOREIGN KEY (location_id) REFERENCES public."Locations"(id);
 
 
 --
--- Name: AssignGuestToTable fk_table_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: Assign fk_table_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public."AssignGuestToTable"
+ALTER TABLE ONLY public."Assign"
     ADD CONSTRAINT fk_table_id FOREIGN KEY (table_id) REFERENCES public."Tables"(id);
 
 

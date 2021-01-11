@@ -1,10 +1,6 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
 
-const StubRequestModel = require('../core/stub/StubRequestModel');
-const StubValidator = require('../core/stub/StubValidator');
-const StubInteractor = require('../core/stub/StubInteractor');
-
 const AddLocationRequestModel = require('../core/requestModels/AddLocationRequestModel');
 const GuestRegistrationPostgres = require('../core/repositories/GuestRegistrationPostgres');
 const AddLocationValidator = require('../core/validation/AddLocationValidator');

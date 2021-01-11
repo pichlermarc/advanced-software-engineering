@@ -24,4 +24,7 @@ Then restart containers with `docker-compose up`, which should also run the .sql
 + postgres DB server: hostname/port/user/password: `postgres/5432/postgres/postgres`
 
 ## Start only the API (without container)
-Execute `npm --prefix ./api start` in project root directory.
+Execute command `npm --prefix ./api start` in project root directory.
+
+## Sync models with postgres database
+Execute command `npm run sync` in directory `./api`.
