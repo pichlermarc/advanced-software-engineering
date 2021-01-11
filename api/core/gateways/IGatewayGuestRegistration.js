@@ -22,7 +22,6 @@ class IGatewayLocation {
     load_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {}
     remove_assign_g2t(id) {}
     size_assign_g2t() {}
-    clear_assign_g2t() {}
 }
 
 module.exports = IGatewayLocation;
