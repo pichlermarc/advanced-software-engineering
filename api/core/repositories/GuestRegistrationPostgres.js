@@ -15,6 +15,8 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         super();
         //this.db = create_db_connection(config);
         this.db = sequelize;
+
+        // NOTE: opens connection!
         this.db.authenticate();
     }
 
@@ -30,11 +32,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         // todo: return raw-js-object from DB => does NOT work!
         // https://stackoverflow.com/a/43411373/7421890
         try {
-            const {id, name} = location;
-            const e_loc = await mLocation.create({name: name}, {raw: true});
+            const e_loc = await mLocation.create({name: location.name}, {raw: true});
             return new eLocation(e_loc.dataValues.id, e_loc.dataValues.name);
         } catch (err) {
-            console.error("save_location fails!", err)
+            console.error("Method save_location fails!", err)
+            // todo: better throw err?
             return undefined;
         }
     }
@@ -61,8 +63,8 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             // promise had to be returned to jest/test-function.
 //            return e_loc;
         } catch (err) {
-            console.error("load_location fails!", err)
-            console.log("Error save_location:", err);
+            console.error("Method load_location fails!", err)
+            // todo: better throw err?
             return undefined;
         }
     }
@@ -77,8 +79,8 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             }
             return location;
         } catch(err) {
-            console.error("update_location fails!", err)
-            console.log("Error update_location:", err);
+            console.error("Method update_location fails!", err)
+            // todo: better throw err?
             return undefined;
         }
     }
@@ -92,18 +94,38 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             }
             return new eLocation(id, "name");
         } catch(err) {
-            console.error("remove_location fails!", err)
-            console.log("Error remove_location:", err);
+            console.error("Method remove_location fails!", err)
+            // todo: better throw err?
             return undefined;
         }
     }
-    load_all_locations() {
-        /*this.pool.query('select * from location;')
-            .then(res => {return res})
-            .catch(throw new Error("Not implemented yet!"));*/
+
+    async load_all_locations() {
+        try {
+            const result = await mLocation.findAll({raw: true});
+            if(result.length == 0) {
+                return [];
+            }
+            return result.map(r => new eLocation(r.id, r.name));
+
+        } catch(err) {
+            console.error("Method load_all_locations fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
     }
-    size_location() { throw new Error("Not implemented yet!") }
-    clear_location() { throw new Error("Not implemented yet!") }
+
+    async size_location() {
+        try {
+            const result = await mLocation.findAndCountAll({raw: true});
+            return result.count;
+
+        } catch(err) {
+            console.error("size_locations fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
+    }
     /* ----- location END ----- */
 
     /* ----- table START ----- */
@@ -117,7 +139,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         throw new Error("Not implemented yet!")
     }
     size_table() { throw new Error("Not implemented yet!") }
-    clear_table() { throw new Error("Not implemented yet!") }
     /* ----- table END ----- */
 
     /* ----- assign-guest-to-table START ----- */
@@ -134,7 +155,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         throw new Error("Not implemented yet!")
     }
     size_assign_g2t() { throw new Error("Not implemented yet!") }
-    clear_assign_g2t() { throw new Error("Not implemented yet!") }
     /* ----- assign-guest-to-table END ----- */
 }
 
