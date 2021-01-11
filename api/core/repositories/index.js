@@ -12,9 +12,11 @@ const create_db_connection = (config) => {
                 database: config.db_name,
                 username: config.db_user,
                 password: config.db_passwd,
-                host: config.host_name,
+                host: config.db_host_name,
                 port: config.db_port,
                 dialect: config.db_dialect,
+
+                logging: config.db_logging_sequelize,
             });
 
         } catch (ex) {
