@@ -32,6 +32,8 @@ const config =
     staging: {
         config_id: "staging",
         db_name: "my-app-db-stag",
+        hostname: "postgres",
+        port: 5432
     },
     production: {
         config_id: "production",
