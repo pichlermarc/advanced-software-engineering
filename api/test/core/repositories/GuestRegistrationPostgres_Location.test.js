@@ -43,7 +43,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         }
     })
 
-    test("should load location with id = 1", async () => {
+    test("should load location with", async () => {
         try {
             const location_saved = await postgres.save_location(location_1);
             const location_fetched = await postgres.load_location(location_saved.id);
@@ -56,7 +56,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         }
     })
 
-    test("should update field 'name' of location with id = 1", async () => {
+    test("should update field 'name' of location", async () => {
         try {
             const location_saved = await postgres.save_location(location_1);
             const name_update = "updated-location-name";
@@ -73,7 +73,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         }
     })
 
-    test("should return undefined if update a not existing location with id = 999999", async () => {
+    test("should return undefined if update a not existing location", async () => {
         try {
             await postgres.save_location(location_1);
             const id_update = 99999;
@@ -89,7 +89,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         }
     })
 
-    test("should remove location with id = 1", async () => {
+    test("should remove location", async () => {
         try {
             const location_saved = await postgres.save_location(location_1);
 
@@ -103,7 +103,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         }
     })
 
-    test("should return undefined if remove a not existing location with id = 999999", async () => {
+    test("should return undefined if remove a not existing location", async () => {
         try {
             await postgres.save_location(location_1);
             const id_remove = 99999;

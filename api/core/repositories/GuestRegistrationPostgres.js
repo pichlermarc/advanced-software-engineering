@@ -13,10 +13,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     constructor() {
         super();
+        // todo: usage of config?!
         //this.db = create_db_connection(config);
         this.db = sequelize;
 
-        // NOTE: opens connection!
+        // NOTE: opens DB connection!
         this.db.authenticate();
     }
 
@@ -32,71 +33,50 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         // todo: return raw-js-object from DB => does NOT work!
         // https://stackoverflow.com/a/43411373/7421890
         try {
-            const e_loc = await mLocation.create({name: location.name}, {raw: true});
-            return new eLocation(e_loc.dataValues.id, e_loc.dataValues.name);
+            const result = await mLocation.create({name: location.name}, {raw: true});
+            return eLocation.from_object(result.dataValues);
         } catch (err) {
             console.error("Method save_location fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
     async load_location(id) {
         try {
-            // const e_loc = mLocation.findOne({where: id}, {raw: true})
-            //     .then((v) => {
-            //         console.log(v)
-            //         return new eLocation(v.dataValues.id, v.dataValues.name);
-            //     })
-            //     .catch((err) => {
-            //         console.error("load_location fails!", err)
-            //         return undefined;
-            //     });
-
-            // If it is easier, use this syntax for the async JS stuff. just put await before DB calls.
-            // This has to be in "async" functions. Errors are handled via try/catch.
-            const e_loc = await mLocation.findOne({where: id}, {raw: true});
-            //console.log(e_loc)
-            return new eLocation(e_loc.dataValues.id, e_loc.dataValues.name);
-            // TODO: why is return-stmt needed ?!?! Only needed in case of promise, which the new demoonstrated syntax doesnt need.
-            // It was needed since the jest framework finished the test function before the async call was conpleted, Therefore the
-            // promise had to be returned to jest/test-function.
-//            return e_loc;
+            const result = await mLocation.findOne({where: id}, {raw: true});
+            return eLocation.from_object(result.dataValues);
         } catch (err) {
             console.error("Method load_location fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
     async update_location(location) {
         // update DB: https://stackoverflow.com/a/61648385/7421890
         try {
-            const e_loc = await mLocation.update({name: location.name}, {where: {id: location.id}}, {raw: true});
-            if(e_loc[0] == 0) {
+            const result = await mLocation.update({name: location.name}, {where: {id: location.id}}, {raw: true});
+            if(result[0] == 0) {
                 // zero record could be updated
                 return undefined;
             }
             return location;
         } catch(err) {
             console.error("Method update_location fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
     async remove_location(id) {
         try {
-            const e_loc = await mLocation.destroy({where: {id: id}}, {force: true});
-            if(e_loc == 0) {
+            const result = await mLocation.destroy({where: {id}}, {force: true});
+            if(result == 0) {
                 // zero record could be removed
                 return undefined;
             }
             return new eLocation(id, "location-removed");
         } catch(err) {
             console.error("Method remove_location fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
@@ -106,12 +86,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             if(result.length == 0) {
                 return [];
             }
-            return result.map(r => new eLocation(r.id, r.name));
+            return result.map(r => eLocation.from_object(r));
 
         } catch(err) {
             console.error("Method load_all_locations fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
@@ -122,8 +101,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
         } catch(err) {
             console.error("Method size_location fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
     /* ----- location END ----- */
@@ -132,22 +110,20 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     async save_table(table) {
         try {
             const result = await mTable.create({name: table.name, location_id: table.location_id}, {raw: true});
-            return new eTable(result.dataValues.id, result.dataValues.name, result.dataValues.location_id);
+            return eTable.from_object(result.dataValues);
         } catch (err) {
             console.error("Method save_table fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
     async load_table(id, location_id) {
         try {
             const result = await mTable.findOne({where: {id: id, location_id: location_id}}, {raw: true});
-            return new eTable(result.dataValues.id, result.dataValues.name, result.dataValues.location_id);
+            return eTable.from_object(result.dataValues);
         } catch (err) {
             console.error("Method load_table fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
@@ -161,8 +137,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return table;
         } catch(err) {
             console.error("Method update_table fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
@@ -176,8 +151,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return new eTable(id, "table-removed", location_id);
         } catch(err) {
             console.error("Method remove_table fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
@@ -187,12 +161,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             if(result.length == 0) {
                 return [];
             }
-            return result.map(r => new eTable(r.id, r.name, r.location_id));
+            return result.map(r => eTable.from_object(r));
 
         } catch(err) {
             console.error("Method load_all_tables fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
@@ -203,8 +176,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
         } catch(err) {
             console.error("Method size_table fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
     /* ----- table END ----- */
@@ -219,8 +191,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             //return new eAssign(a.location_id, a.table_id, a.date_from, a.first_name, a.last_name, a.phone, a.email);
         } catch (err) {
             console.error("Method save_assign fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
@@ -230,11 +201,16 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return eAssign.from_object(result.dataValues);
         } catch (err) {
             console.error("Method load_assign fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
+    /**
+     *
+     * @param where_clause: Plane JS object that conaints the keys that should be filtered for:
+     *                      Filter key-value filters field-names and values.
+     *                      Take a look on the tests to see examples!
+     */
     async filter_assign(where_clause) {
         try {
             // remove key-value pairs that value is null
@@ -243,8 +219,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return eAssign(result.dataValues);
         } catch (err) {
             console.error("Method filter_assign fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
@@ -259,8 +234,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
         } catch(err) {
             console.error("Method load_all_assigns fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
 
@@ -271,8 +245,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
         } catch(err) {
             console.error("Method size_assign fails!", err)
-            // todo: better throw err?
-            return undefined;
+            throw err;
         }
     }
     /* ----- assign-guest-to-table END ----- */

@@ -55,7 +55,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         }
     })
 
-    test("should load table with id = 1", async () => {
+    test("should load table", async () => {
         try {
             const table_saved = await postgres.save_table(table_1);
             const table_fetched = await postgres.load_table(table_saved.id, table_saved.location_id);
@@ -69,7 +69,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         }
     })
 
-    test("should update field 'name' of table with id = 1", async () => {
+    test("should update field 'name' of table", async () => {
         try {
             const table_saved = await postgres.save_table(table_1);
             const name_update = "updated-table-name";
@@ -87,7 +87,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         }
     })
 
-    test("should return undefined if update a not existing table with id = 999999", async () => {
+    test("should return undefined if update a not existing table", async () => {
         try {
             const table_saved = await postgres.save_table(table_1);
             const id_update = 99999;
@@ -118,7 +118,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         }
     })
 
-    test("should return undefined if remove a not existing table with id = 999999", async () => {
+    test("should return undefined if remove a not existing table", async () => {
         try {
             const table_saved = await postgres.save_table(table_1);
             const id_remove = 99999;
