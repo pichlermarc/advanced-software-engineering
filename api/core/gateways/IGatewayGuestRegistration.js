@@ -18,10 +18,11 @@ class IGatewayLocation {
     load_all_tables(location_id) {}
     size_table() {}
 
-    save_assign_g2t(assign) {}
-    load_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {}
-    remove_assign_g2t(id) {}
-    size_assign_g2t() {}
+    save_assign(assign) {}
+    load_assign(assign) {}
+    filter_assign(where_clause) {}
+    load_all_assigns() {}
+    size_assign() {}
 }
 
 module.exports = IGatewayLocation;

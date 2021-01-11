@@ -215,8 +215,12 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         try {
             // remove key-value pairs that value is null
             where_clause = Object.fromEntries(Object.entries(where_clause).filter(([key, val]) => val !== null));
-            const result = await mAssign.findOne({where: where_clause}, {raw: true});
-            return eAssign(result.dataValues);
+            const result = await mAssign.findAll({where: where_clause}, {raw: true});
+            if(result.length == 0) {
+                return [];
+            }
+            return result.map(r => eAssign.from_object(r.dataValues));
+
         } catch (err) {
             console.error("Method filter_assign fails!", err)
             throw err;
@@ -229,8 +233,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             if(result.length == 0) {
                 return [];
             }
-            const ret = result.map(r => eAssign.from_object(r));
-            return ret;
+            return result.map(r => eAssign.from_object(r));
 
         } catch(err) {
             console.error("Method load_all_assigns fails!", err)

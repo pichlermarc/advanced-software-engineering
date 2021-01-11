@@ -17,27 +17,29 @@ const config =
         app_name: "guest registration",
         api_port: 3000,
         app_desc: "ase project",
-        host_name: "localhost",
+        db_host_name: "localhost",
         db_name: "development",
         db_user: "ase",
         db_passwd: "ase",
         db_schema: "public",
         db_port: 5051,
         db_dialect: "postgres",
-
+        db_logging_sequelize: false,
     },
     test: {
         config_id: "test",
+        db_logging_sequelize: false,
     },
     staging: {
         config_id: "staging",
         db_name: "my-app-db-stag",
+        db_logging_sequelize: false,
     },
     production: {
         config_id: "production",
         api_port: 8080,
         db_name: "my-app-db-prod",
-
+        db_logging_sequelize: false,
     }
 };
 

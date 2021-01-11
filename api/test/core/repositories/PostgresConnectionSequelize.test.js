@@ -11,11 +11,11 @@ describe('Integration test - sequelize postgres', () => {
     test("should execute simple query after connecting to postgres", async () => {
         try {
             await sequelize.authenticate();
-            console.log('Connection has been established successfully.');
+            //console.log('Connection has been established successfully.');
 
             let results = await sequelize.query(query_maths)
-            console.log(results);
             expect(results).toBeDefined();
+
         } catch (error) {
             console.error('Unable to connect to the database:', error);
         } finally {
