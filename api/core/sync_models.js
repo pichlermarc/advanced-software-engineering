@@ -19,7 +19,9 @@ async function sync_models(sync_options = null) {
         console.log("Try sync models with postgres database...")
         await sequelize.sync(sync_options)
         console.log("Synced models OK")
-        sequelize.close();
+        /*
+         *   NOTE: keeps connection open -> close manually!
+         */
     } catch(err) {
         console.error('Sync: Unable to connect to the database:', err);
         sequelize.close();
@@ -27,6 +29,13 @@ async function sync_models(sync_options = null) {
     };
 }
 
-sync_models();
+sync_models()
+    .then(() => {
+        sequelize.close();      // close connection after executing module!
+        console.log("Closed DB connection after successful sync.")
+    })
+    .catch(err => {
+        console.error("Error executing module 'sync_models.js'!", err)
+    });
 
 module.exports = sync_models;
