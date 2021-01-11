@@ -121,7 +121,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.count;
 
         } catch(err) {
-            console.error("size_location fails!", err)
+            console.error("Method size_location fails!", err)
             // todo: better throw err?
             return undefined;
         }
@@ -202,7 +202,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.count;
 
         } catch(err) {
-            console.error("size_table fails!", err)
+            console.error("Method size_table fails!", err)
             // todo: better throw err?
             return undefined;
         }
@@ -210,19 +210,71 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     /* ----- table END ----- */
 
     /* ----- assign-guest-to-table START ----- */
-    save_assign_g2t(assign) {
-        throw new Error("Not implemented yet!")
+    async save_assign(assign) {
+        //const {location_id,  table_id, date_from, first_name, last_name, phone, email} = assign;
+        try {
+            /* NOTE: assign contains all key-value pairs to pass it as values-object */
+            const result = await mAssign.create(assign, {raw: true});
+            return eAssign.from_object(result.dataValues);
+            //return new eAssign(a.location_id, a.table_id, a.date_from, a.first_name, a.last_name, a.phone, a.email);
+        } catch (err) {
+            console.error("Method save_assign fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
     }
-    load_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {
-        throw new Error("Not implemented yet!")
+
+    async load_assign(assign) {
+        try {
+            const result = await mAssign.findOne({where: assign}, {raw: true});
+            return eAssign.from_object(result.dataValues);
+        } catch (err) {
+            console.error("Method load_assign fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
     }
-    filter_assign_g2t(location_id, table_id, guest_id, date_from, date_to) {
-        throw new Error("Not implemented yet!")
+
+    async filter_assign(where_clause) {
+        try {
+            // remove key-value pairs that value is null
+            where_clause = Object.fromEntries(Object.entries(where_clause).filter(([key, val]) => val !== null));
+            const result = await mAssign.findOne({where: where_clause}, {raw: true});
+            return eAssign(result.dataValues);
+        } catch (err) {
+            console.error("Method filter_assign fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
     }
-    remove_assign_g2t(id) {
-        throw new Error("Not implemented yet!")
+
+    async load_all_assigns() {
+        try {
+            const result = await mAssign.findAll({raw: true});
+            if(result.length == 0) {
+                return [];
+            }
+            const ret = result.map(r => eAssign.from_object(r));
+            return ret;
+
+        } catch(err) {
+            console.error("Method load_all_assigns fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
     }
-    size_assign_g2t() { throw new Error("Not implemented yet!") }
+
+    async size_assign() {
+        try {
+            const result = await mAssign.findAndCountAll({raw: true});
+            return result.count;
+
+        } catch(err) {
+            console.error("Method size_assign fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
+    }
     /* ----- assign-guest-to-table END ----- */
 }
 
