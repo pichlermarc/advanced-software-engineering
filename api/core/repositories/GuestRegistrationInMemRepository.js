@@ -79,6 +79,16 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             return this.table_repo.find(t => t.id == id && t.location_id === location_id);
         }
     }
+    update_table(table) {
+        if(this.load_table(table.id, table.location_id) !== undefined) {
+            this.remove_table(table.id, table.location_id);
+            this.save_table(table);
+            return this.load_table(table.id, table.location_id);
+        } else {
+            return undefined;
+        }
+
+    }
     remove_table(id, location_id) {
         const table = this.load_table(id, location_id);
         this.table_repo = this.table_repo.filter(t => t.id != id);

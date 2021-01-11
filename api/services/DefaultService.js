@@ -28,6 +28,9 @@ const LocationIdTableIdRequestModel = require('../core/requestModels/LocationIdT
 const GetLocationTableInteractor = require('../core/use_cases/GetLocationTableInteractor');
 const LocationIdTableIdValidator = require('../core/validation/LocationIdTableIdValidator');
 const DeleteTableAtLocation = require('../core/use_cases/DeleteTableAtLocationInteractor');
+const LocationIdTableIdTableRequestModel = require('../core/requestModels/LocationIdTableIdTableRequestModel');
+const LocationIdTableIdTableValidator = require('../core/validation/LocationIdTableIdTableValidator');
+const UpdateTableAtLocationInteractor = require('../core/use_cases/UpdateTableAtLocationInteractor');
 
 /**
 * Get your locations
@@ -366,18 +369,32 @@ const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promi
 * */
 const locationLocationIdTableTableIdPOST = ({ locationId, tableId, table }) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        locationId,
-        tableId,
-        table,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+      console.log("---locationLocationIdTableTableIdPOST---");
+      try {
+          let requestmodel = new LocationIdTableIdTableRequestModel(locationId, tableId, table);
+
+          let validator = new LocationIdTableIdTableValidator();
+          let interactor = new UpdateTableAtLocationInteractor(repository, validator);
+
+          let responsemodel = interactor.execute(requestmodel);
+
+          if(responsemodel.error_msg !== null) {
+              throw {
+                  name: "LocationOrTableNotFoundException",
+                  message: responsemodel.error_msg,
+                  status: 404,
+                  toString: function() {
+                      return this.name + ": " + this.message;
+                  }
+              };
+          }
+          resolve(Service.successResponse({"id": responsemodel.entity.id, "name": responsemodel.entity.name}));
+      } catch (e) {
+          reject(Service.rejectResponse(
+              e.message || 'Invalid input',
+              e.status || 405,
+          ));
+      }
   },
 );
 /**
