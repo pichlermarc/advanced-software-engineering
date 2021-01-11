@@ -6,11 +6,11 @@ const StubValidator = require('../core/stub/StubValidator');
 const StubInteractor = require('../core/stub/StubInteractor');
 
 const AddLocationRequestModel = require('../core/requestModels/AddLocationRequestModel');
-const GuestRegistrationInMemRepository = require('../core/repositories/GuestRegistrationInMemRepository');
+const GuestRegistrationPostgres = require('../core/repositories/GuestRegistrationPostgres');
 const AddLocationValidator = require('../core/validation/AddLocationValidator');
 const AddLocationInteractor = require('../core/use_cases/AddLocationInteractor');
 
-let repository = new GuestRegistrationInMemRepository();
+let repository = new GuestRegistrationPostgres();
 
 const GetLocationInteractor = require('../core/use_cases/GetLocationInteractor');
 const GetLocationsInteractor = require('../core/use_cases/GetLocationsInteractor');
@@ -27,6 +27,7 @@ const TableValidator = require('../core/validation/TableValidator');
 const LocationIdTableIdRequestModel = require('../core/requestModels/LocationIdTableIdRequestModel');
 const GetLocationTableInteractor = require('../core/use_cases/GetLocationTableInteractor');
 const LocationIdTableIdValidator = require('../core/validation/LocationIdTableIdValidator');
+const DeleteTableAtLocation = require('../core/use_cases/DeleteTableAtLocationInteractor');
 
 /**
 * Get your locations
@@ -275,17 +276,32 @@ const locationLocationIdTablePOST = ({ locationId, table }) => new Promise(
 * */
 const locationLocationIdTableTableIdDELETE = ({ locationId, tableId }) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        locationId,
-        tableId,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+      console.log("---locationLocationIdTableTableIdDELETE---");
+      try {
+          let requestmodel = new LocationIdTableIdRequestModel(locationId, tableId);
+
+          let validator = new LocationIdTableIdValidator();
+          let interactor = new DeleteTableAtLocation(repository, validator);
+
+          let responsemodel = interactor.execute(requestmodel);
+
+          if(responsemodel.error_msg !== null) {
+              throw {
+                  name: "LocationOrTableNotFoundException",
+                  message: responsemodel.error_msg,
+                  status: 404,
+                  toString: function() {
+                      return this.name + ": " + this.message;
+                  }
+              };
+          }
+          resolve(Service.successResponse({"id": responsemodel.entity.id, "name": responsemodel.entity.name}));
+      } catch (e) {
+          reject(Service.rejectResponse(
+              e.message || 'Invalid input',
+              e.status || 405,
+          ));
+      }
   },
 );
 /**
