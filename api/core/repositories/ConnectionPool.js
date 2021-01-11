@@ -5,9 +5,6 @@ const { Pool } = require('pg');
  *  If no config is given, it will return 'null'.
  */
 const create_connection_pool = config => {
-    if(config === undefined || config == null) {
-        return null;
-    }
 
     return new Pool({
         database: config.db_name,

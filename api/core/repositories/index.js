@@ -5,7 +5,7 @@ const {Sequelize} = require('sequelize');
  */
 let connection = null;
 
-const create_db_connection = (config) => {
+const create_db_connection = config => {
     if(!connection) {
         try {
             connection = new Sequelize({
