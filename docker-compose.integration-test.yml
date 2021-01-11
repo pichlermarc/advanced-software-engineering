@@ -1,16 +1,8 @@
 version: "3.5"
 services:
-  api:
-    build: ./api/
-    ports:
-      - 8080:8080
   api-test:
     build: ./api
     command: npm run integrationtest
-  ui:
-    build: ./RapidGuestRegistration/
-    ports:
-      - 5000:5000
   postgres:
     container_name: postgres_container
     image: postgres:12.2
@@ -24,21 +16,5 @@ services:
     ports:
       - "5051:5432"
     restart: unless-stopped
-
-  pgadmin:
-    container_name: pgadmin_container
-    image: dpage/pgadmin4
-    depends_on:
-      - postgres
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@pgadmin.org
-      PGADMIN_DEFAULT_PASSWORD: admin
-    volumes:
-      - ./db/pgadmin:/root/.pgadmin
-    ports:
-      - "${PGADMIN_PORT:-5050}:80"
-    restart: unless-stopped
-
 volumes:
   postgres:
-  pgadmin:
