@@ -8,7 +8,7 @@ services:
     build: ./api
     environment:
       - DB_HOSTNAME=postgres
-      - DB_PORT=5051
+      - DB_PORT=5432
     command: npm test
   ui:
     build: ./RapidGuestRegistration/
@@ -24,7 +24,6 @@ services:
       PGDATA: /db/postgres
     volumes:
       - ./api/generateDBTables.sql:/docker-entrypoint-initdb.d/1-schema.sql
-      - ./db/postgres:/db/postgres
     ports:
       - "5051:5432"
     restart: unless-stopped
