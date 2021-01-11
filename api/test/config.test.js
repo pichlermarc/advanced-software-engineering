@@ -20,12 +20,12 @@ test('should return test config', () => {
 
 test(`should return test config if config_type is empty string; NODE_ENV = ${env}`, () => {
     const cnf = create_config("")
-    expect(cnf.config_id).toBe("test")
+    expect(cnf.config_id).toBe(env)
 })
 
 test(`should return test config if config_type not passed; NODE_ENV = ${env}`, () => {
     const cnf = create_config()
-    expect(cnf.config_id).toBe("test")
+    expect(cnf.config_id).toBe(env)
 })
 
 test('should return default config if passed wrong type for config_type', () => {
