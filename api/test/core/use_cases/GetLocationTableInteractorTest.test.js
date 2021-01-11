@@ -58,7 +58,7 @@ test('test retrieval of non-existing tableid from specific locationid', () => {
   let request_model = new RequestModel(LOCATION_ID_2, NONEXISTING_TABLE_ID);
   let res = interactor.execute(request_model);
   expect(res).toBeDefined();
-  expect(res.entity).toBeDefined();
+  expect(res.entity).toBeNull();
   expect(res.error_msg).not.toBeNull();
   expect(res.entity).toBeNull();
 });

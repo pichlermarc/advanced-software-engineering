@@ -29,7 +29,7 @@ class AddTableAtLocationInteractor {
         const table = request_model.entity;
         let response_model;
         if(this.repository.load_location(request_model.id)) { // location was found in db
-            let dbtables = this.repository.load_table();
+            let dbtables = this.repository.load_table(table.location_id);
             dbtables = dbtables.filter(t => t.location_id === request_model.id); // all tables of the location
             dbtables = dbtables.filter(t => t.id === table.id)
             if (dbtables.length === 0) {// location does not already have a table with the same table-id

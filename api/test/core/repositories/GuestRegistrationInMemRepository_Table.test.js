@@ -33,9 +33,10 @@ test('should return right size for repo after saving one table', () => {
 
 test('should load same table from repo that has recently been stored', () => {
     repo.save_table(table)
-    let table_loaded = repo.load_table(table.id)
+    let table_loaded = repo.load_table(table.id, table.location_id)
     expect(table.id).toBe(table_loaded.id)
     expect(table.name).toBe(table_loaded.name)
+    expect(table.location_id).toBe(table_loaded.location_id)
 })
 
 test('should remove right table from repo', () => {
@@ -43,24 +44,24 @@ test('should remove right table from repo', () => {
     let table2 = new Table(4712, "table-dummy-2", location_id);
     repo.save_table(table2);
     expect(repo.size_table()).toBe(2);
-    let table_removed = repo.remove_table(table2.id);
+    let table_removed = repo.remove_table(table2.id, table2.location_id);
     expect(table2.id).toBe(table_removed.id)
     expect(repo.size_table()).toBe(1);
 })
 
 test('should clear repository: remove all tables', () => {
-    repo.save_table(new Table(5811, "table-dummy-1"), location_id);
-    repo.save_table(new Table(5812, "table-dummy-2"), location_id);
-    repo.save_table(new Table(5813, "table-dummy-3"), location_id);
+    repo.save_table(new Table(5811, "table-dummy-1", location_id));
+    repo.save_table(new Table(5812, "table-dummy-2", location_id));
+    repo.save_table(new Table(5813, "table-dummy-3", location_id));
     expect(repo.size_table()).toBe(3);
     repo.clear_table()
     expect(repo.size_table()).toBe(0);
-    repo.save_table(new Table(5813, "table-dummy-1"), location_id);
+    repo.save_table(new Table(5813, "table-dummy-1", location_id));
     expect(repo.size_table()).toBe(1);
 })
 
 test('should return undefined if table is not found', () => {
-    let table_loaded = repo.load_table(5811);
+    let table_loaded = repo.load_table(5811, 4711);
     expect(table_loaded).toBeUndefined();
 })
 

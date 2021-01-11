@@ -34,13 +34,14 @@ class GetLocationTableInteractor {
         }
 
         // 3. DB interaction
-        let tables = this.repository.load_table();
-        let foundtables = tables.filter(t => t.location_id === request_model.location_id && t.id === request_model.table_id);
+        let table = this.repository.load_table(request_model.table_id, request_model.location_id);
 
         // 4. return response
         let response_model;
-        if (foundtables.length === 1) { // successful retrieval of the given table from the given location
-            response_model = new ResponseModel(foundtables[0], null);
+        if(table === undefined) {
+            response_model = new ResponseModel(null, "No such table found for given location", 404);
+        } else if (!Array.isArray(table)) { // successful retrieval of the given table from the given location
+            response_model = new ResponseModel(table, null);
         } else { // in case table with tableId does not exist at location with locationId
             response_model = new ResponseModel(null,
               `No table with id=${request_model.table_id} at location with id=${request_model.location_id}`,

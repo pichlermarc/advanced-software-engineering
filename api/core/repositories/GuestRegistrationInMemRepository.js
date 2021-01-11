@@ -63,23 +63,24 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         if(location === undefined) {
             throw new Error("Repo: Location with id #" + table.location_id + " does not exist! Create location first!")
         }
-        let table_load = this.load_table(table.id);
+        let table_load = this.load_table(table.id, table.location_id);
         if(table_load !== undefined) {
             throw new Error("Repo: Table with id #" + table.id + " already exists!");
         }
         this.table_repo.push(table);
     }
-    load_table(id) {
-        let table;
+    load_table(id, location_id) {
         if (id === undefined) {
-            table = this.table_repo;
-        } else {
-            table = this.table_repo.find(t => t.id == id);
+            return null;
+        } else if(location_id === undefined) {
+            return this.table_repo;
         }
-        return table;
+        else {
+            return this.table_repo.find(t => t.id == id && t.location_id === location_id);
+        }
     }
-    remove_table(id) {
-        const table = this.load_table(id);
+    remove_table(id, location_id) {
+        const table = this.load_table(id, location_id);
         this.table_repo = this.table_repo.filter(t => t.id != id);
         return table;
     }
@@ -116,7 +117,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     /* ----- assign-guest-to-table START ----- */
     save_assign_g2t(assign) {
         let location = this.load_location(assign.location_id);
-        let table = this.load_table(assign.table_id);
+        let table = this.load_table(assign.table_id, assign.location_id);
         let guest = this.load_guest(assign.guest_id);
 
         if(some_undefined([location, table, guest])) {
