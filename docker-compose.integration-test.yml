@@ -1,8 +1,10 @@
 version: "3.5"
 services:
   api-test:
+    container_name: api_test_container
     build: ./api
     command: npm run integrationtest
+    #command: sleep infinity
     depends_on: 
       - postgres
   postgres:
