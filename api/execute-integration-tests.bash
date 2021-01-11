@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#set -vx
+set -vx
 
 echo "----- INTEGRATION TESTS -----"
 echo "Wait for DB container has started"
@@ -10,5 +10,5 @@ echo "....."
 export NODE_ENV=staging
 cd ./api
 npm run sync
-bash ./node_modules/.bin/jest ./api/test --notify --config=./jest.config.js --runInBand --coverage
+bash ./api/node_modules/.bin/jest ./api/test --notify --config=./api/jest.config.js --runInBand --coverage
 
