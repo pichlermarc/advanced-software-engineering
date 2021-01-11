@@ -1,10 +1,14 @@
 "use strict";
 
-class Location {
+class eLocation {
     constructor(id, name) {
         this.id = id;
         this.name = name;
     }
+
+    static from_object(o) {
+        return new eLocation(o.id, o.name)
+    }
 }
 
-module.exports = Location;
+module.exports = eLocation;

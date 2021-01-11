@@ -1,8 +1,11 @@
 const path = require('path');
 
+const create_config = require("./core/config");
+const core_cnf = create_config();
+
 const config = {
   ROOT_DIR: __dirname,
-  URL_PORT: 8080,
+  URL_PORT: core_cnf.api_port,
   URL_PATH: 'http://localhost',
   BASE_VERSION: '',
   CONTROLLER_DIRECTORY: path.join(__dirname, 'controllers'),
