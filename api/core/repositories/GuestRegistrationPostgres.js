@@ -92,7 +92,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
                 // zero record could be removed
                 return undefined;
             }
-            return new eLocation(id, "name");
+            return new eLocation(id, "location-removed");
         } catch(err) {
             console.error("Method remove_location fails!", err)
             // todo: better throw err?
@@ -121,7 +121,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.count;
 
         } catch(err) {
-            console.error("size_locations fails!", err)
+            console.error("size_location fails!", err)
             // todo: better throw err?
             return undefined;
         }
@@ -129,16 +129,84 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     /* ----- location END ----- */
 
     /* ----- table START ----- */
-    save_table(table) {
-        throw new Error("Not implemented yet!")
+    async save_table(table) {
+        try {
+            const result = await mTable.create({name: table.name, location_id: table.location_id}, {raw: true});
+            return new eTable(result.dataValues.id, result.dataValues.name, result.dataValues.location_id);
+        } catch (err) {
+            console.error("Method save_table fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
     }
-    load_table(id) {
-        throw new Error("Not implemented yet!")
+
+    async load_table(id, location_id) {
+        try {
+            const result = await mTable.findOne({where: {id: id, location_id: location_id}}, {raw: true});
+            return new eTable(result.dataValues.id, result.dataValues.name, result.dataValues.location_id);
+        } catch (err) {
+            console.error("Method load_table fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
     }
-    remove_table(id) {
-        throw new Error("Not implemented yet!")
+
+    async update_table(table) {
+        try {
+            const result = await mTable.update({name: table.name}, {where: {id: table.id, location_id: table.location_id}}, {raw: true});
+            if(result[0] == 0) {
+                // zero record could be updated
+                return undefined;
+            }
+            return table;
+        } catch(err) {
+            console.error("Method update_table fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
     }
-    size_table() { throw new Error("Not implemented yet!") }
+
+    async remove_table(id, location_id) {
+        try {
+            const result = await mTable.destroy({where: {id: id, location_id: location_id}}, {force: true});
+            if(result == 0) {
+                // zero record could be removed
+                return undefined;
+            }
+            return new eTable(id, "table-removed", location_id);
+        } catch(err) {
+            console.error("Method remove_table fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
+    }
+
+    async load_all_tables() {
+        try {
+            const result = await mTable.findAll({raw: true});
+            if(result.length == 0) {
+                return [];
+            }
+            return result.map(r => new eTable(r.id, r.name, r.location_id));
+
+        } catch(err) {
+            console.error("Method load_all_tables fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
+    }
+
+    async size_table() {
+        try {
+            const result = await mTable.findAndCountAll({raw: true});
+            return result.count;
+
+        } catch(err) {
+            console.error("size_table fails!", err)
+            // todo: better throw err?
+            return undefined;
+        }
+    }
     /* ----- table END ----- */
 
     /* ----- assign-guest-to-table START ----- */

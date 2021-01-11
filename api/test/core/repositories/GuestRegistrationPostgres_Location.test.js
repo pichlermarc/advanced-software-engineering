@@ -2,7 +2,6 @@
 //const create_db_connection = require("../../../core/repositories")
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
 const {eLocation} = require("../../../core/entities")
-const {sequelize} = require("../../../core/repositories/models")
 
 //const cnf = create_config("development")
 

@@ -12,9 +12,9 @@ class IGatewayLocation {
     size_location() {}
 
     save_table(table) {}
-    load_table(id) {}
-    update_table(id) {}
-    remove_table(id) {}
+    load_table(id, location_id) {}
+    update_table(table) {}
+    remove_table(id, location_id) {}
     load_all_tables(location_id) {}
     size_table() {}
 

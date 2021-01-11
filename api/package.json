@@ -7,7 +7,7 @@
     "prestart": "npm install",
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development node index.js",
-    "test": "NODE_ENV=test jest --detectOpenHandles --runInBand",
+    "test": "NODE_ENV=test jest --runInBand",
     "sync": "node ./core/sync_models.js"
   },
   "keywords": [
