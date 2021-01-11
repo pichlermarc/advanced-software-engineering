@@ -18,17 +18,18 @@ module.exports = (sequelize, DataTypes) => {
 
     mAssign.init({
         location_id: {
+            //primaryKey: true,
             allowNull: false,
             type: DataTypes.INTEGER,
         },
         table_id: {
+            //primaryKey: true,
             allowNull: false,
             type: DataTypes.INTEGER,
         },
         date_from: {
             allowNull: false,
-            defaultValue: DataTypes.NOW,
-            type: DataTypes.DATE,
+            type: DataTypes.BIGINT,
         },
         first_name: {
             allowNull: false,
@@ -51,6 +52,8 @@ module.exports = (sequelize, DataTypes) => {
         tableName: "assigns",
         modelName: "mAssign",
     });
+
+    mAssign.removeAttribute("id");
 
     return mAssign;
 };
