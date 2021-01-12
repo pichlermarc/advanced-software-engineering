@@ -1,5 +1,8 @@
-'use strict';
+"use strict";
 
 module.exports = {
   verbose: false,
+  
+  "collectCoverageFrom": [
+  ]
 };

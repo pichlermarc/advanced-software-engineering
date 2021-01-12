@@ -52,15 +52,15 @@ const create_config = (config_type=null) => {
 
     // take 'config_type' or env-var or default-config
     const env = config_type || process.env.NODE_ENV || "development";
-    console.log('used env:', env, "; NODE_ENV:", process.env.NODE_ENV);
+    //console.log('used env:', env, "; NODE_ENV:", process.env.NODE_ENV);
 
     // valid config or empty object
     const wanted_config = config[env] || {};
 
-
     // merge objects: https://stackoverflow.com/a/171256/7421890
     const merged_config = Object.assign({}, default_config, wanted_config)
-    console.log("config:", JSON.stringify(merged_config));
+    //console.log("config:", JSON.stringify(merged_config));
+
     return merged_config
 }
 
