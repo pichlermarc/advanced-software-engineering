@@ -36,5 +36,5 @@ test('validator must throw error because location name is empty', () => {
     request_model = new AddLocationRequestModel(location.name);
     res = interactor.execute(request_model);
     expect(res.error_msg).toBe("Name must not be empty!");
-    expect(repo.load_location(LOCATION_ID)).toBeUndefined();
+    expect(repo.load_location(LOCATION_ID)).toBeNull();
 })

@@ -38,11 +38,16 @@ class GetLocationInteractor {
         // 3. DB interaction
         //const stub_entity = new LocationEntity(request_model.id, request_model.name);
         //this.repository.save(stub_entity);
+        let response_model;
+        try {
+            let entity = this.repository.load_location(request_model.id);
+            // 4. return response
+            response_model = new ResponseModel(entity.id, entity.name);
+        } catch (e) {
+            console.error(e);
+            response_model = new ResponseModel(request_model.id, null, e.message);
+        }
 
-        let entity = this.repository.load_location(request_model.id);
-
-        // 4. return response
-        const response_model = new ResponseModel(entity.id, entity.name);
         return response_model;
     }
 }

@@ -55,7 +55,7 @@ test('should clear repository: remove all locations', () => {
 
 test('should return undefined if location is not found', () => {
     let location_loaded = repo.load_location(4711);
-    expect(location_loaded).toBeUndefined();
+    expect(location_loaded).toBeNull();
 })
 
 /**

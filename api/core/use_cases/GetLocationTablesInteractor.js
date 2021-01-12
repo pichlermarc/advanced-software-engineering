@@ -35,7 +35,7 @@ class GetLocationTablesInteractor {
         }
 
         // 3. DB interaction
-        let tables = this.repository.load_table(request_model.id);
+        let tables = this.repository.load_all_tables(request_model.id);
         tables = tables.filter(table => table.location_id === request_model.id);
 
         // 4. return response

@@ -23,7 +23,7 @@ class DeleteLocationAtTableInteractor {
         // 3. DB interaction
         let response_model;
         let table = this.repository.load_table(request_model.table_id, request_model.location_id);
-        if(table === undefined) {
+        if(table === null) {
             response_model = new ResponseModel(null, "The given location id or table id was not found in the database", 404);
         } else {
             const removed = this.repository.remove_table(request_model.table_id, request_model.location_id);

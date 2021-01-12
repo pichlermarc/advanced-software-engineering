@@ -27,7 +27,7 @@ class GetLocationsInteractor {
         // 2. validation not needed since no input/request data
 
         // 3. DB interaction
-        const locations = this.repository.load_location();
+        const locations = this.repository.load_all_locations();
 
         // 4. return response
         const response_model = new ResponseModel(locations);

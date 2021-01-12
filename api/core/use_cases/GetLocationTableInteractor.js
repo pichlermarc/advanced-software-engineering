@@ -38,7 +38,7 @@ class GetLocationTableInteractor {
 
         // 4. return response
         let response_model;
-        if(table === undefined) {
+        if(table === null) {
             response_model = new ResponseModel(null, "Table or location not found", 404);
         } else if (!Array.isArray(table)) { // successful retrieval of the given table from the given location
             response_model = new ResponseModel(table, null);

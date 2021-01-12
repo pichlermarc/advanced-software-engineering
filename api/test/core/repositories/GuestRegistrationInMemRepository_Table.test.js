@@ -62,12 +62,15 @@ test('should clear repository: remove all tables', () => {
 
 test('should return undefined if table is not found', () => {
     let table_loaded = repo.load_table(5811, 4711);
-    expect(table_loaded).toBeUndefined();
+    expect(table_loaded).toBeNull();
 })
 
 test('should return undefined if no parameters are given', () => {
-    let table_loaded = repo.load_table();
-    expect(table_loaded).toBeNull();
+    try {
+        let table_loaded = repo.load_table();
+    } catch (e) {
+        expect(e.message).toBe("Error in load_table: id is undefined!");
+    }
 })
 
 test('should throw an error if save table and location_id of new table is not in repo', () => {

@@ -21,12 +21,10 @@ class UpdateTableAtLocationInteractor {
         }
 
         // 3. DB interaction
-        let response_model;
+        let response_model = new ResponseModel(null, "The given location id or table id was not found in the database", 404);
         let table = this.repository.update_table(request_model.table);
-        if(table === undefined) {
-            response_model = new ResponseModel(null, "The given location id or table id was not found in the database", 404);
-        } else {
-            response_model = new ResponseModel(table, null, 200);
+        if (table && table.length > 0) {
+            response_model = new ResponseModel(table[0], null, 200);
         }
 
 
