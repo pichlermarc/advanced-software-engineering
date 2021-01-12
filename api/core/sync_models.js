@@ -6,17 +6,24 @@
  * https://www.youtube.com/watch?v=3qlnR9hK-lQ
  */
 
-const {sequelize} = require("./repositories/models")
+//const {sequelize} = require("./repositories/models")
+const create_db_models = require("./repositories/models")
+const create_config = require("./config")
 
+let sequelize;
 
-async function sync_models(sync_options = null) {
+async function sync_models(sync_options = null, config=null) {
     try {
         if (sync_options == null) {
             sync_options = {force: true};
         }
+        if(config === null) {
+            config = create_config()
+        }
         console.log("sync-options: ", sync_options);
 
         console.log("Try sync models with postgres database...")
+        sequelize = create_db_models(config).sequelize
         await sequelize.sync(sync_options)
         console.log("Synced models OK")
         /*

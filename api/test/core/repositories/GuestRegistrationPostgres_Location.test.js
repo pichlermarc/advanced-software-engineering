@@ -1,5 +1,6 @@
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
 const {eLocation} = require("../../../core/entities")
+const create_config = require("../../../core/config")
 
 
 describe('Integration test - postgres/sequelize: basic location testing ', () => {
@@ -10,13 +11,14 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
     const location_3 = new eLocation(null, "dummy-loc-#3");
 
     beforeAll(() => {
-        postgres = new GuestRegistrationPostgres();
+        const cnf =  create_config("test");
+        postgres = new GuestRegistrationPostgres(cnf);
     });
 
     beforeEach(async () => {
         try {
             // reset DB model of 'mLocation' (NOTE: includes empty table!)
-            await postgres.db.models.mLocation.sync({force: true});
+            await postgres.db.sequelize.models.mLocation.sync({force: true});
         } catch (err) {
             console.error('Sync-mLocation error:', err);
         }

@@ -1,23 +1,29 @@
 "use strict";
 
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
-const {sequelize, mLocation, mTable, mAssign} = require("./models")
+const {mLocation, mTable, mAssign} = require("./models")
 const {eLocation, eTable, eAssign} = require("../entities")
+const sync_models = require("../sync_models")
+const create_db_models = require("./models")
 
 
 class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
-    constructor() {
+    constructor(config) {
         super();
         // todo: usage of config?!
-        this.db = sequelize;
+        this.db = create_db_models(config);
 
         // NOTE: opens DB connection!
-        this.db.authenticate();
+        this.db.sequelize.authenticate();
     }
 
     connection_close() {
-        this.db.close()
+        this.db.sequelize.close()
+    }
+
+    sync_all_models() {
+        sync_models();
     }
 
     /* ----- location START ----- */
