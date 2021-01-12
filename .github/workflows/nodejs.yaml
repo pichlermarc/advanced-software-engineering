@@ -20,6 +20,6 @@ jobs:
       - name: Install dependencies
         run: npm --prefix ./api install
       - run: npm --prefix ./api run build --if-present
-      - run: npm --prefix ./api test
+      - run: cd api && ./node_modules/.bin/jest test/core/{stub,use_cases,util,validation} --coverage --runInBand
         env:
           CI: true
