@@ -11,8 +11,8 @@ SET standard_conforming_strings = on;
 -- Drop databases (except postgres and template1)
 --
 
-DROP DATABASE development;
-DROP DATABASE production;
+--DROP DATABASE development;
+--DROP DATABASE production;
 
 
 
@@ -21,8 +21,8 @@ DROP DATABASE production;
 -- Drop roles
 --
 
-DROP ROLE ase;
-DROP ROLE postgres;
+--DROP ROLE ase;
+--DROP ROLE postgres;
 
 
 --
@@ -31,7 +31,7 @@ DROP ROLE postgres;
 
 CREATE ROLE ase;
 ALTER ROLE ase WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD 'md503004ed5e8e2c9c815191f1628b0c5ec';
-CREATE ROLE postgres;
+--CREATE ROLE postgres;
 ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'md53175bce1d3201d16594cebf9d7eb3f9d';
 
 

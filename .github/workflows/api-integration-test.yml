@@ -1,0 +1,15 @@
+name: api-integration-test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Check if docker-compose is available.
+      run: docker-compose --version
+    - name: Build images
+      run: docker-compose -f docker-compose.integration-test.yml build
+    - name: Run services and tests
+      run: docker-compose -f docker-compose.integration-test.yml up --exit-code-from api-test
