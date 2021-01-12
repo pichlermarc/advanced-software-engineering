@@ -27,6 +27,9 @@ const DeleteTableAtLocation = require('../core/use_cases/DeleteTableAtLocationIn
 const LocationIdTableIdTableRequestModel = require('../core/requestModels/LocationIdTableIdTableRequestModel');
 const LocationIdTableIdTableValidator = require('../core/validation/LocationIdTableIdTableValidator');
 const UpdateTableAtLocationInteractor = require('../core/use_cases/UpdateTableAtLocationInteractor');
+const LocationIdTableIdGuestRequestModel = require('../core/requestModels/LocationIdTableIdGuestRequestModel');
+const LocationIdTableIdGuestValidator = require('../core/validation/LocationIdTableIdGuestValidator');
+const RegisterGuestAtTableAtLocationInteractor = require('../core/use_cases/RegisterGuestAtTableAtLocationInteractor');
 
 /**
 * Get your locations
@@ -404,18 +407,37 @@ const locationLocationIdTableTableIdPOST = ({ locationId, tableId, table }) => n
 * */
 const locationLocationIdTableTableIdRegisterPOST = ({ locationId, tableId, guest }) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        locationId,
-        tableId,
-        guest,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+      console.log("---locationLocationIdTableTableIdRegisterPOST---register a guest on a table---");
+      try {
+          let requestmodel = new LocationIdTableIdGuestRequestModel(locationId, tableId, guest);
+
+          let validator = new LocationIdTableIdGuestValidator();
+          let interactor = new RegisterGuestAtTableAtLocationInteractor(repository, validator);
+
+          let responsemodel = interactor.execute(requestmodel);
+
+          if(responsemodel.error_msg !== null) {
+              throw {
+                  name: "RegisterException",
+                  message: responsemodel.error_msg,
+                  status: 400,
+                  toString: function() {
+                      return this.name + ": " + this.message;
+                  }
+              };
+          }
+
+          resolve(Service.successResponse({
+              "phoneNumber": responsemodel.phoneNumber,
+              "name": responsemodel.name,
+              "email": responsemodel.email
+          }, 201));
+      } catch (e) {
+          reject(Service.rejectResponse(
+              e.message || 'Invalid input',
+              e.status || 400,
+          ));
+      }
   },
 );
 /**
