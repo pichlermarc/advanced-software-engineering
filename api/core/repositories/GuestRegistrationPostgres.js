@@ -1,7 +1,7 @@
 "use strict";
 
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
-const {mLocation, mTable, mAssign} = require("./models")
+//const {mLocation, mTable, mAssign} = require("./models")
 const {eLocation, eTable, eAssign} = require("../entities")
 const sync_models = require("../sync_models")
 const create_db_models = require("./models")
@@ -9,21 +9,32 @@ const create_db_models = require("./models")
 
 class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
-    constructor(config) {
+    constructor(config, sync_options=null) {
         super();
-        // todo: usage of config?!
-        this.db = create_db_models(config);
+        // make the constructor async:
+        return (async ()=> {
+            this.config = config;
+            this.db = await create_db_models(config);
 
-        // NOTE: opens DB connection!
-        this.db.sequelize.authenticate();
+            // NOTE: opens DB connection!
+            await this.db.sequelize.authenticate();
+
+            this.sync_options = sync_options;
+            if(sync_options === null) {
+                this.sync_options = {force: true}
+            }
+            await this.sync_all_models()
+            return this;
+        })();
+
     }
 
     connection_close() {
         this.db.sequelize.close()
     }
 
-    sync_all_models() {
-        sync_models();
+    async sync_all_models() {
+        await sync_models(this.sync_options, this.config);
     }
 
     /* ----- location START ----- */
@@ -31,7 +42,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         // template of sequelize and usage of db-models:
         // https://github.com/hidjou/classsed-orms-sequelize
         try {
-            const result = await mLocation.create({name: location.name}, {raw: true});
+            const result = await this.db.mLocation.create({name: location.name}, {raw: true});
             return eLocation.from_object(result.dataValues);
         } catch (err) {
             console.error("Method save_location fails!", err)
