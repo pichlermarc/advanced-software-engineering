@@ -1,3 +1,8 @@
+/**
+ * Integrationtests
+ * @group integrationtest
+ */
+
 const {sequelize} = require("../../../core/repositories/models")
 const query_maths = "SELECT 2*2 AS \"result\";"
 

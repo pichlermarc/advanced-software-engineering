@@ -1,3 +1,8 @@
+/**
+ * Integrationtests
+ * @group integrationtest
+ */
+
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
 const {eLocation} = require("../../../core/entities")
 const create_config = require("../../../core/config")

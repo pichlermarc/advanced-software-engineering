@@ -3,9 +3,9 @@
 module.exports = {
   verbose: false,
 
-  "collectCoverage": true,
+  collectCoverage: true,
 
-  "coverageThreshold": {
+  coverageThreshold: {
     // requested global coverage standards
     "global": {
         "branches": 95,
@@ -21,8 +21,13 @@ module.exports = {
   },
 
   // output directory for coverage report
-  "coverageDirectory": "",
+  coverageDirectory: "./coverage/",
+
+  globals: {
+    "myGlobalVariable": "each test has access to this global variable :)",
+  },
   
-  "collectCoverageFrom": [
-  ],
+  collectCoverageFrom: ["./core/**/*.{js,jsx}"],
+
+  runner: "groups",
 };

@@ -1,3 +1,8 @@
+/**
+ * Integrationtests
+ * @group integrationtest
+ */
+
 /*const create_config = require('../../../core/config')
 const create_connection_pool = require('../../../core/repositories/ConnectionPool')
 

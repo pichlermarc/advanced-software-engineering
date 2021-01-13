@@ -1,3 +1,8 @@
+/**
+ * Integrationtests
+ * @group integrationtest
+ */
+
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
 const {eLocation, eTable, eAssign} = require("../../../core/entities")
 
