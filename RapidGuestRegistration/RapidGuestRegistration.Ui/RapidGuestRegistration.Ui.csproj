@@ -8,4 +8,8 @@
     <ProjectReference Include="..\RapidGuestRegistration.Client\src\RapidGuestRegistration.Client\RapidGuestRegistration.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="QRCoder" Version="1.4.1" />
+  </ItemGroup>
+
 </Project>
