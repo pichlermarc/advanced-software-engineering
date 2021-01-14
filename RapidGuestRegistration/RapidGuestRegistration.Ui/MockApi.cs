@@ -167,7 +167,7 @@ namespace RapidGuestRegistration.Ui
         public Guest LocationLocationIdTableTableIdRegisterPost(long locationId, long tableId,
             Guest guest = default(Guest))
         {
-            throw new System.NotImplementedException();
+            throw new ApiException();
         }
 
         public ApiResponse<Guest> LocationLocationIdTableTableIdRegisterPostWithHttpInfo(long locationId, long tableId,
