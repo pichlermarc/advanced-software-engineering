@@ -1,7 +1,9 @@
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
+<a href="@_link">
+    <QrCode Text="@_link"></QrCode>
+</a>
 
-<QrCode Text="@_link"></QrCode>
 
 @code {
     [Parameter] public long TableId { get; set; }
