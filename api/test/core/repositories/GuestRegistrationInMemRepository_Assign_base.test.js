@@ -29,10 +29,6 @@ beforeEach(() => {
     repo.clear_assign_g2t();
 })
 
-test("should fail", () => {
-    expect(1).toBe(2)
-})
-
 test('fixture repo should be defined', () => {
     expect(repo).toBeDefined()
 })

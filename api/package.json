@@ -7,7 +7,7 @@
     "prestart": "npm install",
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development node index.js",
-    "test": "bash ./script/execute-unit-tests.bash",
+    "test": "NODE_ENV=test jest ./test --config=./jest.config.js --runInBand --coverage --group=-integrationtest",
     "integrationtest": "bash ./script/execute-integration-tests.bash",
     "sync": "node ./core/sync_models.js"
   },
