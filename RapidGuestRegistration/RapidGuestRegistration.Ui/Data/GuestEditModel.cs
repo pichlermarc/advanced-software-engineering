@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RapidGuestRegistration.Client.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,11 +17,18 @@ namespace RapidGuestRegistration.Ui.Data
         public string Name { get; set; }
 
         [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
         [Phone]
         public string Phonenumber { get; set; }
 
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+
+        public Guest ToGuest()
+        {
+            Guest guest = new Guest(Name, Email, Phonenumber);
+            return guest;
+        }
     }
 }
