@@ -27,16 +27,24 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             this.sync_all_models();
             return "GuestRegistrationPostgres init() successful!";
         } catch (e) {
-            console.error("Error initializing the db! (in guestregistrationpostgres.js - init()");
+            console.error("Error initializing the db! (in guestregistrationpostgres.js - init():", e);
         }
     }
 
     async connection_close() {
-        await this.db.sequelize.close()
+        try {
+            await this.db.sequelize.close()
+        } catch(err) {
+            console.error("Error on close db-connection:", err)
+        }
     }
 
-    sync_all_models() {
-        sync_models(this.sync_options, this.config);
+    async sync_all_models() {
+        try {
+            await sync_models(this.sync_options, this.config);
+        } catch(err) {
+            console.error("Error on sync_all_models:", err)
+        }
 
     }
 
