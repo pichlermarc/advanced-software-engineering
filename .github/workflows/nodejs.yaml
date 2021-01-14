@@ -20,6 +20,6 @@ jobs:
       - name: Install dependencies
         run: npm --prefix ./api install
       - run: npm --prefix ./api run build --if-present
-      - run: npm -prefix ./api test && exit 0
+      - run: npm -prefix ./api test
         env:
           CI: true
