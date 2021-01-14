@@ -17,7 +17,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
 
     beforeAll(( ) => {
         const cnf =  create_config("test");
-        postgres = new GuestRegistrationPostgres(cnf, false);
+        postgres = new GuestRegistrationPostgres(cnf);
         let c = postgres.init();
         return c;
     });
@@ -25,7 +25,6 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
     beforeEach(async () => {
         try {
             // reset DB model of 'mLocation' (NOTE: includes empty table!)
-            //await postgres.db.sequelize.authenticate();
             await postgres.db.mLocation.sync({force: true});
         } catch (err) {
             console.error('Sync-mLocation error:', err);
