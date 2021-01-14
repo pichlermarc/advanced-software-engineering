@@ -13,8 +13,6 @@ export NODE_ENV=staging
 #export NODE_ENV=test
 # ----- only for local use - END -----
 
-# NOTE: sync needs the env-var NODE_ENV
-npm run sync
 
 jest ./test --config=./jest.config.js --runInBand --coverage --group=-integrationtest
 
