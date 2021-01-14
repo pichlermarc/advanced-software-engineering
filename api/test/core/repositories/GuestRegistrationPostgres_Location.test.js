@@ -17,7 +17,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
 
     beforeAll(( ) => {
         const cnf =  create_config("test");
-        postgres = new GuestRegistrationPostgres(cnf);
+        postgres = new GuestRegistrationPostgres(cnf, false);
         let c = postgres.init();
         return c;
     });

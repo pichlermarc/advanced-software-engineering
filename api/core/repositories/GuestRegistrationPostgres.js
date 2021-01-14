@@ -208,7 +208,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async load_assign(assign) {
         try {
-            const result = await mAssign.findOne({where: assign}, {raw: true});
+            const result = await this.db.mAssign.findOne({where: assign}, {raw: true});
             return eAssign.from_object(result.dataValues);
         } catch (err) {
             console.error("Method load_assign fails!", err)

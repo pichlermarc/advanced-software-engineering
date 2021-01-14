@@ -5,7 +5,7 @@
 
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
 const {eLocation, eTable, eAssign} = require("../../../core/entities")
-const {sequelize, gte} = require("../../../core/repositories")
+const create_config = require("../../../core/config")
 
 
 describe('Integration test - postgres/sequelize: filter assign testing ', () => {
@@ -40,7 +40,8 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
     ]
 
     beforeAll(async () => {
-        postgres = new GuestRegistrationPostgres();
+        const cnf =  create_config("test");
+        postgres = new GuestRegistrationPostgres(cnf, false);
 
         try {
             location_1 = await postgres.save_location(new eLocation(null, "Seekaffee"));

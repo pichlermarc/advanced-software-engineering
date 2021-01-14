@@ -3,7 +3,7 @@
  * @group integrationtest
  */
 
-const {sequelize} = require("../../../core/repositories/models")
+/*const {sequelize} = require("../../../core/repositories/models")
 const query_maths = "SELECT 2*2 AS \"result\";"
 
 describe('Integration test - sequelize postgres', () => {
@@ -22,4 +22,11 @@ describe('Integration test - sequelize postgres', () => {
             sequelize.close()
         }
     })
-})
+})*/
+
+describe('Integration test - pg postgres', () => {
+
+    test("dummy", () => {
+        expect(4).not.toBe(3)
+    })
+});

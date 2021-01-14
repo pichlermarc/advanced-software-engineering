@@ -18,7 +18,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
 
     beforeAll(async () => {
         const cnf =  create_config("test");
-        postgres = new GuestRegistrationPostgres(cnf);
+        postgres = new GuestRegistrationPostgres(cnf, false);
         let c = postgres.init();
 
         try {

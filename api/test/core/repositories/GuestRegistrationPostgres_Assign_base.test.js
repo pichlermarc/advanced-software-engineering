@@ -5,7 +5,7 @@
 
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
 const {eLocation, eTable, eAssign} = require("../../../core/entities")
-
+const create_config = require("../../../core/config")
 
 describe('Integration test - postgres/sequelize: basic assign testing ', () => {
 
@@ -22,7 +22,8 @@ describe('Integration test - postgres/sequelize: basic assign testing ', () => {
     let assign_3;
 
     beforeAll(async () => {
-        postgres = new GuestRegistrationPostgres();
+        const cnf =  create_config("test");
+        postgres = new GuestRegistrationPostgres(cnf, false);
 
         try {
             location_1 = await postgres.save_location(new eLocation(null, "dummy-loc"));
@@ -40,7 +41,7 @@ describe('Integration test - postgres/sequelize: basic assign testing ', () => {
     beforeEach(async () => {
         try {
             // reset DB model of 'mAssign' (NOTE: includes empty assign!).
-            await postgres.db.models.mAssign.sync({force: true});
+            await postgres.db.mAssign.sync({force: true});
         } catch (err) {
             console.error('Sync-mAssign error:', err);
         }
