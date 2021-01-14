@@ -1,0 +1,48 @@
+﻿@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@inject IDefaultApi Api
+@inject NavigationManager NavigationManager 
+
+<div class="row">
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    @Table.Name
+                </h4>
+                <button class="btn btn-primary" @onclick="EditTable">
+                    Edit
+                </button>
+                <button class="btn btn-outline-danger" @onclick="DeleteTable">
+                    Delete
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+    [Parameter]
+    public Table Table { get; set; }
+
+    [Parameter]
+    public long LocationId { get; set; }
+
+    [Parameter]
+    public EventCallback OnTablesChanged { get; set; }
+
+    private async Task DeleteTable()
+    {
+        Api.LocationLocationIdTableTableIdDelete(LocationId, Table.Id);
+        await OnTablesChanged.InvokeAsync(this);
+    }
+
+    private async Task EditTable()
+    {
+        NavigationManager.NavigateTo($"/location/{LocationId}/table/{Table.Id}/edit");
+    }
+}

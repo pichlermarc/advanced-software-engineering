@@ -1,32 +1,33 @@
-@using RapidGuestRegistration.Client.Model
+﻿@using RapidGuestRegistration.Client.Model
 @using RapidGuestRegistration.Client.Api
 @using RapidGuestRegistration.Client.Client
 
 @inject IDefaultApi Api
 @inject NavigationManager NavigationManager
 
-@if (_location != null)
-{
-    <EditForm Model="@_location" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator/>
-        <ValidationSummary/>
 
-        <InputText id="name" @bind-Value="_location.Name"/>
+@if (_table != null)
+{
+    <EditForm Model="@_table" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <InputText id="name" @bind-Value="_table.Name" />
 
         <button class="btn btn-primary" type="submit">Save</button>
-    </EditForm>    
+    </EditForm>
 }
 else
 {
     <div class="alert alert-danger">
-        <strong>Error:</strong> Could not find the location with the ID @LocationId, maybe it has been deleted?
+        <strong>Error:</strong> Could not find the table with the ID @TableId, maybe it has been deleted?
     </div>
 }
 
 @if (_showUpdateError)
 {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Error:</strong> Something went wrong when updating this location. Does it still exist?
+        <strong>Error:</strong> Something went wrong when updating this table. Does it still exist?
         <button type="button" class="close" @onclick="() => _showUpdateError = false">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -34,25 +35,26 @@ else
 }
 
 @code {
-
     [Parameter]
     public long LocationId { get; set; }
+    [Parameter]
+    public long TableId { get; set; }
 
-    private Location _location;
+    private Table _table;
     private bool _showUpdateError;
 
     protected override void OnInitialized()
     {
         try
         {
-            _location = Api.LocationLocationIdGet(LocationId);
+            _table = Api.LocationLocationIdTableTableIdGet(LocationId, TableId).FirstOrDefault();
         }
         catch (ApiException e)
         {
             Console.WriteLine(e);
-            _location = null;
+            _table = null;
         }
-        
+
         base.OnInitialized();
     }
 
@@ -60,7 +62,7 @@ else
     {
         try
         {
-            Api.LocationPut(_location);
+            Api.LocationLocationIdTableTableIdPost(LocationId, TableId, _table);
         }
         catch (Exception e)
         {
@@ -68,7 +70,9 @@ else
             _showUpdateError = true;
             return;
         }
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo($"/location/{LocationId}/edit");
     }
-
 }
+
+
+

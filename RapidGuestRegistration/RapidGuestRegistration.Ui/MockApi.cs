@@ -19,6 +19,11 @@ namespace RapidGuestRegistration.Ui
                 new Location {Id = 2, Name = "Location #2"},
                 new Location {Id = 3, Name = "Location #3"}
             };
+
+            _tables = new Dictionary<long, List<Table>>()
+            {
+                {1L, new List<Table>() {new Table(1L, "table1")}}
+            };
         }
 
         public IReadableConfiguration Configuration { get; set; }
@@ -30,6 +35,7 @@ namespace RapidGuestRegistration.Ui
 
         public ExceptionFactory ExceptionFactory { get; set; }
         private List<Location> _locations;
+        private Dictionary<long, List<Table>> _tables;
 
         public List<Location> LocationGet()
         {
@@ -76,7 +82,14 @@ namespace RapidGuestRegistration.Ui
 
         public List<Table> LocationLocationIdTableGet(long locationId)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _tables[locationId].Select(table => new Table(table.Id, table.Name)).ToList();
+            } catch(Exception emptyList)
+            {
+                return new List<Table>();
+            }
+            
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableGetWithHttpInfo(long locationId)
@@ -86,7 +99,15 @@ namespace RapidGuestRegistration.Ui
 
         public Table LocationLocationIdTablePost(long locationId, Table table = default(Table))
         {
-            throw new System.NotImplementedException();
+            if (table == null)
+                throw new ArgumentNullException(nameof(table));
+            if (!_tables.ContainsKey(locationId)) 
+            {
+                _tables[locationId] = new List<Table>();
+            }
+            table.Id = _tables[locationId].Select(existingTable => existingTable.Id).DefaultIfEmpty(0).Max() + 1;
+            _tables[locationId].Add(table);
+            return table;
         }
 
         public ApiResponse<Table> LocationLocationIdTablePostWithHttpInfo(long locationId, Table table = default(Table))
@@ -96,7 +117,8 @@ namespace RapidGuestRegistration.Ui
 
         public List<Table> LocationLocationIdTableTableIdDelete(long locationId, long tableId)
         {
-            throw new System.NotImplementedException();
+            _tables[locationId].RemoveAll(table => table.Id == tableId);
+            return new List<Table>();
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableTableIdDeleteWithHttpInfo(long locationId, long tableId)
@@ -106,7 +128,14 @@ namespace RapidGuestRegistration.Ui
 
         public List<Table> LocationLocationIdTableTableIdGet(long locationId, long tableId)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return new List<Table>() { _tables[locationId].First(table => table.Id == tableId) };
+            }catch(Exception e)
+            {
+                throw new ApiException();
+            }
+            
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableTableIdGetWithHttpInfo(long locationId, long tableId)
@@ -116,7 +145,17 @@ namespace RapidGuestRegistration.Ui
 
         public Table LocationLocationIdTableTableIdPost(long locationId, long tableId, Table table = default(Table))
         {
-            throw new System.NotImplementedException();
+
+            try
+            {
+                var updatedTable = _tables[locationId].First(table => table.Id == tableId);
+                updatedTable.Name = table.Name;
+                return updatedTable;
+            }catch(Exception e)
+            {
+                throw new ApiException();
+            }
+            
         }
 
         public ApiResponse<Table> LocationLocationIdTableTableIdPostWithHttpInfo(long locationId, long tableId,
