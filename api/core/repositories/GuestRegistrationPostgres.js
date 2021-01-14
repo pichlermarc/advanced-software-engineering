@@ -11,7 +11,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     constructor(config, sync_options=null) {
         super();
-        // make the constructor async:
         this.config = config;
         this.db = create_db_models(config);
         this.sync_options = sync_options;
@@ -24,7 +23,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         // NOTE: opens DB connection!
         try {
             await this.db.sequelize.authenticate();
-            this.sync_all_models();
+            await this.sync_all_models();
             return "GuestRegistrationPostgres init() successful!";
         } catch (e) {
             console.error("Error initializing the db! (in guestregistrationpostgres.js - init():", e);
