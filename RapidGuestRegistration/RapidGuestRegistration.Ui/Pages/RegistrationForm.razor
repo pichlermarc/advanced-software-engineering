@@ -1,0 +1,10 @@
+@page "/locations/{LocationId}/table/{TableId}/register"
+<h3>RegistrationForm</h3>
+
+@code {
+    [Parameter]
+    public string LocationId { get; set; }
+    
+    [Parameter]
+    public string TableId { get; set; }
+}

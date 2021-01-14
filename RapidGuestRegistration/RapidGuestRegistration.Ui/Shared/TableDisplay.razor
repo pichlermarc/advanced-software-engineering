@@ -1,0 +1,64 @@
+﻿@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@inject IDefaultApi Api
+@inject NavigationManager NavigationManager
+
+<div class="row">
+
+    <div class="col-8">
+        <div class="card mb-1">
+            <div class="card-body bg-light">
+
+                <div class="row">
+                    <div class="d-flex mr-1 col-3">
+                        <h4 class="d-block align-self-center mb-0 pb-0 ml-1">
+                            @Table.Name
+                        </h4>
+                    </div>
+                    <div class="d-flex mr-1">
+                        <button class="btn btn-primary align-self-center" @onclick="EditTable">
+                            Edit
+                        </button>
+                    </div>
+                    <div class="d-flex">
+                        <button class="btn btn-outline-danger align-self-center" @onclick="DeleteTable">
+                            Delete
+                        </button>
+                    </div>
+                    <div class="col-sm-1 d-flex justify-content-center">
+                        <TableQrCode LocationId="@LocationId" TableId="@Table.Id"></TableQrCode>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@code {
+
+    [Parameter]
+    public Table Table { get; set; }
+
+    [Parameter]
+    public long LocationId { get; set; }
+
+    [Parameter]
+    public EventCallback OnTablesChanged { get; set; }
+
+    private async Task DeleteTable()
+    {
+        Api.LocationLocationIdTableTableIdDelete(LocationId, Table.Id);
+        await OnTablesChanged.InvokeAsync(this);
+    }
+
+    private async Task EditTable()
+    {
+        NavigationManager.NavigateTo($"/location/{LocationId}/table/{Table.Id}/edit");
+    }
+
+}
