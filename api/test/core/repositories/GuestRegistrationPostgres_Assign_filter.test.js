@@ -41,7 +41,7 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
 
     beforeAll(async () => {
         const cnf =  create_config("test");
-        postgres = new GuestRegistrationPostgres(cnf, false);
+        postgres = new GuestRegistrationPostgres(cnf);
 
         try {
             location_1 = await postgres.save_location(new eLocation(null, "Seekaffee"));

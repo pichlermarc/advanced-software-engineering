@@ -18,10 +18,11 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
 
     beforeAll(async () => {
         const cnf =  create_config("test");
-        postgres = new GuestRegistrationPostgres(cnf, false);
-        let c = postgres.init();
+        postgres = new GuestRegistrationPostgres(cnf);
+        let c;
 
         try {
+            c = await postgres.init();
             location_1 = await postgres.save_location(new eLocation(null, "dummy-loc"));
             table_1 = new eTable(null, "dummy-table-#1", location_1.id);
             table_2 = new eTable(null, "dummy-table-#2", location_1.id);
@@ -31,13 +32,12 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
             throw err;
         }
         return c;
-
     });
 
     beforeEach(async () => {
         try {
             // reset DB model of 'mTable' (NOTE: includes empty table!).
-            await postgres.db.mTable.sync({force: true});
+            await postgres.db.mTable.destroy({where: {}}, {truncate: true, force: true})
         } catch (err) {
             console.error('Sync-mTable error:', err);
         }

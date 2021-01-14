@@ -23,7 +23,7 @@ describe('Integration test - postgres/sequelize: basic assign testing ', () => {
 
     beforeAll(async () => {
         const cnf =  create_config("test");
-        postgres = new GuestRegistrationPostgres(cnf, false);
+        postgres = new GuestRegistrationPostgres(cnf);
 
         try {
             location_1 = await postgres.save_location(new eLocation(null, "dummy-loc"));
@@ -40,8 +40,8 @@ describe('Integration test - postgres/sequelize: basic assign testing ', () => {
 
     beforeEach(async () => {
         try {
-            // reset DB model of 'mAssign' (NOTE: includes empty assign!).
-            await postgres.db.mAssign.sync({force: true});
+            // drop all data from table 'Assign'
+            await postgres.db.mAssign.destroy({where: {}}, {truncate: true, force: true})
         } catch (err) {
             console.error('Sync-mAssign error:', err);
         }

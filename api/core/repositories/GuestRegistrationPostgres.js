@@ -20,8 +20,8 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     }
 
     async init() {
-        // NOTE: opens DB connection!
         try {
+            // NOTE: authenticate opens DB connection!
             await this.db.sequelize.authenticate();
             await this.sync_all_models();
             return "GuestRegistrationPostgres init() successful!";
