@@ -11,13 +11,15 @@ const create_config = require("../../../core/config")
 describe('Integration test - postgres/sequelize: basic location testing ', () => {
 
     let postgres;
-    const location_1 = new eLocation(null, "dummy-loc-#1");
-    const location_2 = new eLocation(null, "dummy-loc-#2");
-    const location_3 = new eLocation(null, "dummy-loc-#3");
+    const location_1 = new eLocation(1, "dummy-loc-#1");
+    const location_2 = new eLocation(2, "dummy-loc-#2");
+    const location_3 = new eLocation(3, "dummy-loc-#3");
 
-    beforeAll(async () => {
+    beforeAll(( ) => {
         const cnf =  create_config("test");
-        postgres = await new GuestRegistrationPostgres(cnf);
+        postgres = new GuestRegistrationPostgres(cnf);
+        let c = postgres.init();
+        return c;
     });
 
     beforeEach(async () => {

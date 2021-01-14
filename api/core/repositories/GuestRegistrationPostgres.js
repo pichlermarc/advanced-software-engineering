@@ -12,30 +12,32 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     constructor(config, sync_options=null) {
         super();
         // make the constructor async:
-        return (async ()=> {
-            this.config = config;
-            this.db = await create_db_models(config);
+        this.config = config;
+        this.db = create_db_models(config);
+        this.sync_options = sync_options;
+        if(sync_options === null) {
+            this.sync_options = {force: true}
+        }
+    }
 
-            // NOTE: opens DB connection!
+    async init() {
+        // NOTE: opens DB connection!
+        try {
             await this.db.sequelize.authenticate();
-
-            this.sync_options = sync_options;
-            if(sync_options === null) {
-                this.sync_options = {force: true}
-            }
-            await this.sync_all_models()
-            return this;
-        })();
-
+            this.sync_all_models();
+            return "GuestRegistrationPostgres init() successful!";
+        } catch (e) {
+            console.error("Error initializing the db! (in guestregistrationpostgres.js - init()");
+        }
     }
 
-    connection_close() {
-        this.db.sequelize.close()
+    async connection_close() {
+        await this.db.sequelize.close()
     }
 
-    async sync_all_models() {
-        //await sync_models(this.sync_options, this.config);
-        await this.db.sequelize.sync(this.sync_options);
+    sync_all_models() {
+        sync_models(this.sync_options, this.config);
+
     }
 
     /* ----- location START ----- */
@@ -53,7 +55,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async load_location(id) {
         try {
-            const result = await mLocation.findOne({where: id}, {raw: true});
+            const result = await this.db.mLocation.findOne({where: id}, {raw: true});
             return eLocation.from_object(result.dataValues);
         } catch (err) {
             console.error("Method load_location fails!", err)
@@ -64,7 +66,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     async update_location(location) {
         // update DB: https://stackoverflow.com/a/61648385/7421890
         try {
-            const result = await mLocation.update({name: location.name}, {where: {id: location.id}}, {raw: true});
+            const result = await this.db.mLocation.update({name: location.name}, {where: {id: location.id}}, {raw: true});
             if(result[0] == 0) {
                 // zero record could be updated
                 return undefined;
@@ -78,7 +80,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async remove_location(id) {
         try {
-            const result = await mLocation.destroy({where: {id}}, {force: true});
+            const result = await this.db.mLocation.destroy({where: {id}}, {force: true});
             if(result == 0) {
                 // zero record could be removed
                 return undefined;
@@ -92,7 +94,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async load_all_locations() {
         try {
-            const result = await mLocation.findAll({raw: true});
+            const result = await this.db.mLocation.findAll({raw: true});
             if(result.length == 0) {
                 return [];
             }
@@ -106,7 +108,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async size_location() {
         try {
-            const result = await mLocation.findAndCountAll({raw: true});
+            const result = await this.db.mLocation.findAndCountAll({raw: true});
             return result.count;
 
         } catch(err) {
@@ -119,7 +121,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     /* ----- table START ----- */
     async save_table(table) {
         try {
-            const result = await mTable.create({name: table.name, location_id: table.location_id}, {raw: true});
+            const result = await this.db.mTable.create({name: table.name, location_id: table.location_id}, {raw: true});
             return eTable.from_object(result.dataValues);
         } catch (err) {
             console.error("Method save_table fails!", err)
@@ -129,7 +131,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async load_table(id, location_id) {
         try {
-            const result = await mTable.findOne({where: {id: id, location_id: location_id}}, {raw: true});
+            const result = await this.db.mTable.findOne({where: {id: id, location_id: location_id}}, {raw: true});
             return eTable.from_object(result.dataValues);
         } catch (err) {
             console.error("Method load_table fails!", err)
@@ -139,7 +141,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async update_table(table) {
         try {
-            const result = await mTable.update({name: table.name}, {where: {id: table.id, location_id: table.location_id}}, {raw: true});
+            const result = await this.db.mTable.update({name: table.name}, {where: {id: table.id, location_id: table.location_id}}, {raw: true});
             if(result[0] == 0) {
                 // zero record could be updated
                 return undefined;
@@ -153,7 +155,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async remove_table(id, location_id) {
         try {
-            const result = await mTable.destroy({where: {id: id, location_id: location_id}}, {force: true});
+            const result = await this.db.mTable.destroy({where: {id: id, location_id: location_id}}, {force: true});
             if(result == 0) {
                 // zero record could be removed
                 return undefined;
@@ -167,7 +169,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async load_all_tables() {
         try {
-            const result = await mTable.findAll({raw: true});
+            const result = await this.db.mTable.findAll({raw: true});
             if(result.length == 0) {
                 return [];
             }
@@ -181,7 +183,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async size_table() {
         try {
-            const result = await mTable.findAndCountAll({raw: true});
+            const result = await this.db.mTable.findAndCountAll({raw: true});
             return result.count;
 
         } catch(err) {
@@ -196,7 +198,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         //const {location_id,  table_id, date_from, first_name, last_name, phone, email} = assign;
         try {
             /* NOTE: assign contains all key-value pairs to pass it as values-object */
-            const result = await mAssign.create(assign, {raw: true});
+            const result = await this.db.mAssign.create(assign, {raw: true});
             return eAssign.from_object(result.dataValues);
             //return new eAssign(a.location_id, a.table_id, a.date_from, a.first_name, a.last_name, a.phone, a.email);
         } catch (err) {
@@ -225,7 +227,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         try {
             // remove key-value pairs that value is null
             where_clause = Object.fromEntries(Object.entries(where_clause).filter(([key, val]) => val !== null));
-            const result = await mAssign.findAll({where: where_clause}, {raw: true});
+            const result = await this.db.mAssign.findAll({where: where_clause}, {raw: true});
             if(result.length == 0) {
                 return [];
             }
@@ -239,7 +241,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async load_all_assigns() {
         try {
-            const result = await mAssign.findAll({raw: true});
+            const result = await this.db.mAssign.findAll({raw: true});
             if(result.length == 0) {
                 return [];
             }
@@ -253,7 +255,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async size_assign() {
         try {
-            const result = await mAssign.findAndCountAll({raw: true});
+            const result = await this.db.mAssign.findAndCountAll({raw: true});
             return result.count;
 
         } catch(err) {

@@ -5,6 +5,7 @@
 
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
 const {eLocation, eTable} = require("../../../core/entities")
+const create_config = require("../../../core/config")
 
 
 describe('Integration test - postgres/sequelize: basic table testing ', () => {
@@ -16,7 +17,9 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
     let table_3;
 
     beforeAll(async () => {
-        postgres = new GuestRegistrationPostgres();
+        const cnf =  create_config("test");
+        postgres = new GuestRegistrationPostgres(cnf);
+        let c = postgres.init();
 
         try {
             location_1 = await postgres.save_location(new eLocation(null, "dummy-loc"));
@@ -27,12 +30,14 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
             console.error(err)
             throw err;
         }
+        return c;
+
     });
 
     beforeEach(async () => {
         try {
             // reset DB model of 'mTable' (NOTE: includes empty table!).
-            await postgres.db.models.mTable.sync({force: true});
+            await postgres.db.mTable.sync({force: true});
         } catch (err) {
             console.error('Sync-mTable error:', err);
         }

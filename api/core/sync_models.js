@@ -40,13 +40,17 @@ async function sync_models(sync_options = null, config=null) {
     };
 }
 
-sync_models()
-    .then(() => {
-        sequelize.close();      // close connection after executing module!
-        console.log("Closed DB connection after successful sync.")
-    })
-    .catch(err => {
-        console.error("Error executing module 'sync_models.js'!", err)
-    });
+
+if (require.main === module) {
+    sync_models()
+      .then(() => {
+          sequelize.close();      // close connection after executing module!
+          console.log("Closed DB connection after successful sync.")
+      })
+      .catch(err => {
+          console.error("Error executing module 'sync_models.js'!", err)
+      });
+}
+
 
 module.exports = sync_models;
