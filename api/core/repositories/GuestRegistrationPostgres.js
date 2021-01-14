@@ -34,7 +34,8 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     }
 
     async sync_all_models() {
-        await sync_models(this.sync_options, this.config);
+        //await sync_models(this.sync_options, this.config);
+        await this.db.sequelize.sync(this.sync_options);
     }
 
     /* ----- location START ----- */

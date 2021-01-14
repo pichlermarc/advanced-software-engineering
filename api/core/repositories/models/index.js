@@ -29,7 +29,7 @@ const create_db_models = (config) => {
             // import the model
             const model = require(path.join(__dirname, file))(
                 // passes the 2 parameter for the ctor of each model
-                sequelize,              // db-connection
+                sequelize,               // db-connection
                 Sequelize.DataTypes,    // data-types from Sequelize
             );
             // add each model to db object

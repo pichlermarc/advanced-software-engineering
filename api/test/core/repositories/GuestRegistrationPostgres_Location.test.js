@@ -17,12 +17,13 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
 
     beforeAll(async () => {
         const cnf =  create_config("test");
-        await postgres = new GuestRegistrationPostgres(cnf);
+        postgres = await new GuestRegistrationPostgres(cnf);
     });
 
     beforeEach(async () => {
         try {
             // reset DB model of 'mLocation' (NOTE: includes empty table!)
+            //await postgres.db.sequelize.authenticate();
             await postgres.db.mLocation.sync({force: true});
         } catch (err) {
             console.error('Sync-mLocation error:', err);
@@ -37,7 +38,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         expect(1).toBe(1);
     })
 
-    /*test("should save location to postgres", async () => {
+    test("should save location to postgres", async () => {
         try {
             const location_fetched = await postgres.save_location(location_1);
             expect(location_fetched).toBeDefined();
@@ -49,7 +50,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         }
     })
 
-    test("should load location with", async () => {
+    /*test("should load location with", async () => {
         try {
             const location_saved = await postgres.save_location(location_1);
             const location_fetched = await postgres.load_location(location_saved.id);
