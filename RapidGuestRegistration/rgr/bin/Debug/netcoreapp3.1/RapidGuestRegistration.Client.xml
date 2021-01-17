@@ -1,0 +1,2570 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RapidGuestRegistration.Client</name>
+    </assembly>
+    <members>
+        <member name="T:RapidGuestRegistration.Client.Api.IDefaultApiSync">
+            <summary>
+            Represents a collection of functions to interact with the API endpoints
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationGet">
+            <summary>
+            Get your locations
+            </summary>
+            <remarks>
+            Get locations associated with your user
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <returns>List&lt;Location&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationGetWithHttpInfo">
+            <summary>
+            Get your locations
+            </summary>
+            <remarks>
+            Get locations associated with your user
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <returns>ApiResponse of List&lt;Location&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdDelete(System.Int64)">
+            <summary>
+            Delete a specific location.
+            </summary>
+            <remarks>
+            Deletes the location with the location ID.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdDeleteWithHttpInfo(System.Int64)">
+            <summary>
+            Delete a specific location.
+            </summary>
+            <remarks>
+            Deletes the location with the location ID.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdGet(System.Int64)">
+            <summary>
+            Get a specific location.
+            </summary>
+            <remarks>
+            Gets the location with the location ID.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdGetWithHttpInfo(System.Int64)">
+            <summary>
+            Get a specific location.
+            </summary>
+            <remarks>
+            Gets the location with the location ID.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdPost(System.Int64,RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Update an existing location
+            </summary>
+            <remarks>
+            Update a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="location"> (optional)</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdPostWithHttpInfo(System.Int64,RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Update an existing location
+            </summary>
+            <remarks>
+            Update a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="location"> (optional)</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableGet(System.Int64)">
+            <summary>
+            Get your location&#39;s tables
+            </summary>
+            <remarks>
+            Get tables associated with this location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableGetWithHttpInfo(System.Int64)">
+            <summary>
+            Get your location&#39;s tables
+            </summary>
+            <remarks>
+            Get tables associated with this location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>ApiResponse of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTablePost(System.Int64,RapidGuestRegistration.Client.Model.Table)">
+            <summary>
+            Add a new table on this location
+            </summary>
+            <remarks>
+            Add a table
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <returns>Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTablePostWithHttpInfo(System.Int64,RapidGuestRegistration.Client.Model.Table)">
+            <summary>
+            Add a new table on this location
+            </summary>
+            <remarks>
+            Add a table
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <returns>ApiResponse of Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableTableIdDelete(System.Int64,System.Int64)">
+            <summary>
+            Delete this table
+            </summary>
+            <remarks>
+            Delete the table on this location.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <returns>List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableTableIdDeleteWithHttpInfo(System.Int64,System.Int64)">
+            <summary>
+            Delete this table
+            </summary>
+            <remarks>
+            Delete the table on this location.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <returns>ApiResponse of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableTableIdGet(System.Int64,System.Int64)">
+            <summary>
+            Get your tables
+            </summary>
+            <remarks>
+            Get tables associated with this location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <returns>List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableTableIdGetWithHttpInfo(System.Int64,System.Int64)">
+            <summary>
+            Get your tables
+            </summary>
+            <remarks>
+            Get tables associated with this location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <returns>ApiResponse of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableTableIdPost(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Table)">
+            <summary>
+            Update an existing table
+            </summary>
+            <remarks>
+            Update a table
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <returns>Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableTableIdPostWithHttpInfo(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Table)">
+            <summary>
+            Update an existing table
+            </summary>
+            <remarks>
+            Update a table
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <returns>ApiResponse of Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableTableIdRegisterPost(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Guest)">
+            <summary>
+            Register on this table on this location.
+            </summary>
+            <remarks>
+            Register on this table on this location.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to register on.</param>
+            <param name="tableId">ID of the table to register on.</param>
+            <param name="guest"> (optional)</param>
+            <returns>Guest</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationLocationIdTableTableIdRegisterPostWithHttpInfo(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Guest)">
+            <summary>
+            Register on this table on this location.
+            </summary>
+            <remarks>
+            Register on this table on this location.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to register on.</param>
+            <param name="tableId">ID of the table to register on.</param>
+            <param name="guest"> (optional)</param>
+            <returns>ApiResponse of Guest</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationPost(RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Add a new location
+            </summary>
+            <remarks>
+            Add a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationPostWithHttpInfo(RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Add a new location
+            </summary>
+            <remarks>
+            Add a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationPut(RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Update an existing location
+            </summary>
+            <remarks>
+            Update a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiSync.LocationPutWithHttpInfo(RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Update an existing location
+            </summary>
+            <remarks>
+            Update a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Api.IDefaultApiAsync">
+            <summary>
+            Represents a collection of functions to interact with the API endpoints
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationGetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get your locations
+            </summary>
+            <remarks>
+            Get locations associated with your user
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of List&lt;Location&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationGetWithHttpInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get your locations
+            </summary>
+            <remarks>
+            Get locations associated with your user
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (List&lt;Location&gt;)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdDeleteAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete a specific location.
+            </summary>
+            <remarks>
+            Deletes the location with the location ID.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdDeleteWithHttpInfoAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete a specific location.
+            </summary>
+            <remarks>
+            Deletes the location with the location ID.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdGetAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get a specific location.
+            </summary>
+            <remarks>
+            Gets the location with the location ID.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdGetWithHttpInfoAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get a specific location.
+            </summary>
+            <remarks>
+            Gets the location with the location ID.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdPostAsync(System.Int64,RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing location
+            </summary>
+            <remarks>
+            Update a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdPostWithHttpInfoAsync(System.Int64,RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing location
+            </summary>
+            <remarks>
+            Update a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableGetAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get your location&#39;s tables
+            </summary>
+            <remarks>
+            Get tables associated with this location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableGetWithHttpInfoAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get your location&#39;s tables
+            </summary>
+            <remarks>
+            Get tables associated with this location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (List&lt;Table&gt;)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTablePostAsync(System.Int64,RapidGuestRegistration.Client.Model.Table,System.Threading.CancellationToken)">
+            <summary>
+            Add a new table on this location
+            </summary>
+            <remarks>
+            Add a table
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTablePostWithHttpInfoAsync(System.Int64,RapidGuestRegistration.Client.Model.Table,System.Threading.CancellationToken)">
+            <summary>
+            Add a new table on this location
+            </summary>
+            <remarks>
+            Add a table
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Table)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableTableIdDeleteAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete this table
+            </summary>
+            <remarks>
+            Delete the table on this location.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableTableIdDeleteWithHttpInfoAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete this table
+            </summary>
+            <remarks>
+            Delete the table on this location.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (List&lt;Table&gt;)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableTableIdGetAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get your tables
+            </summary>
+            <remarks>
+            Get tables associated with this location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableTableIdGetWithHttpInfoAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get your tables
+            </summary>
+            <remarks>
+            Get tables associated with this location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (List&lt;Table&gt;)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableTableIdPostAsync(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Table,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing table
+            </summary>
+            <remarks>
+            Update a table
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableTableIdPostWithHttpInfoAsync(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Table,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing table
+            </summary>
+            <remarks>
+            Update a table
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Table)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableTableIdRegisterPostAsync(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Guest,System.Threading.CancellationToken)">
+            <summary>
+            Register on this table on this location.
+            </summary>
+            <remarks>
+            Register on this table on this location.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to register on.</param>
+            <param name="tableId">ID of the table to register on.</param>
+            <param name="guest"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Guest</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationLocationIdTableTableIdRegisterPostWithHttpInfoAsync(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Guest,System.Threading.CancellationToken)">
+            <summary>
+            Register on this table on this location.
+            </summary>
+            <remarks>
+            Register on this table on this location.
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to register on.</param>
+            <param name="tableId">ID of the table to register on.</param>
+            <param name="guest"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Guest)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationPostAsync(RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Add a new location
+            </summary>
+            <remarks>
+            Add a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationPostWithHttpInfoAsync(RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Add a new location
+            </summary>
+            <remarks>
+            Add a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationPutAsync(RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing location
+            </summary>
+            <remarks>
+            Update a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.IDefaultApiAsync.LocationPutWithHttpInfoAsync(RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing location
+            </summary>
+            <remarks>
+            Update a location
+            </remarks>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Api.IDefaultApi">
+            <summary>
+            Represents a collection of functions to interact with the API endpoints
+            </summary>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Api.DefaultApi">
+            <summary>
+            Represents a collection of functions to interact with the API endpoints
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Api.DefaultApi"/> class.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Api.DefaultApi"/> class.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.#ctor(RapidGuestRegistration.Client.Client.Configuration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Api.DefaultApi"/> class
+            using Configuration object
+            </summary>
+            <param name="configuration">An instance of Configuration</param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.#ctor(RapidGuestRegistration.Client.Client.ISynchronousClient,RapidGuestRegistration.Client.Client.IAsynchronousClient,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Api.DefaultApi"/> class
+            using a Configuration object and client instance.
+            </summary>
+            <param name="client">The client interface for synchronous API access.</param>
+            <param name="asyncClient">The client interface for asynchronous API access.</param>
+            <param name="configuration">The configuration object.</param>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Api.DefaultApi.AsynchronousClient">
+            <summary>
+            The client for accessing this underlying API asynchronously.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Api.DefaultApi.Client">
+            <summary>
+            The client for accessing this underlying API synchronously.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.GetBasePath">
+            <summary>
+            Gets the base path of the API client.
+            </summary>
+            <value>The base path</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Api.DefaultApi.Configuration">
+            <summary>
+            Gets or sets the configuration object
+            </summary>
+            <value>An instance of the Configuration</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Api.DefaultApi.ExceptionFactory">
+            <summary>
+            Provides a factory method hook for the creation of exceptions.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationGet">
+            <summary>
+            Get your locations Get locations associated with your user
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <returns>List&lt;Location&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationGetWithHttpInfo">
+            <summary>
+            Get your locations Get locations associated with your user
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <returns>ApiResponse of List&lt;Location&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationGetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get your locations Get locations associated with your user
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of List&lt;Location&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationGetWithHttpInfoAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get your locations Get locations associated with your user
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (List&lt;Location&gt;)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdDelete(System.Int64)">
+            <summary>
+            Delete a specific location. Deletes the location with the location ID.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdDeleteWithHttpInfo(System.Int64)">
+            <summary>
+            Delete a specific location. Deletes the location with the location ID.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdDeleteAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete a specific location. Deletes the location with the location ID.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdDeleteWithHttpInfoAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete a specific location. Deletes the location with the location ID.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdGet(System.Int64)">
+            <summary>
+            Get a specific location. Gets the location with the location ID.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdGetWithHttpInfo(System.Int64)">
+            <summary>
+            Get a specific location. Gets the location with the location ID.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdGetAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get a specific location. Gets the location with the location ID.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdGetWithHttpInfoAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get a specific location. Gets the location with the location ID.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdPost(System.Int64,RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Update an existing location Update a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="location"> (optional)</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdPostWithHttpInfo(System.Int64,RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Update an existing location Update a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="location"> (optional)</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdPostAsync(System.Int64,RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing location Update a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdPostWithHttpInfoAsync(System.Int64,RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing location Update a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableGet(System.Int64)">
+            <summary>
+            Get your location&#39;s tables Get tables associated with this location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableGetWithHttpInfo(System.Int64)">
+            <summary>
+            Get your location&#39;s tables Get tables associated with this location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <returns>ApiResponse of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableGetAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get your location&#39;s tables Get tables associated with this location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableGetWithHttpInfoAsync(System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get your location&#39;s tables Get tables associated with this location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (List&lt;Table&gt;)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTablePost(System.Int64,RapidGuestRegistration.Client.Model.Table)">
+            <summary>
+            Add a new table on this location Add a table
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <returns>Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTablePostWithHttpInfo(System.Int64,RapidGuestRegistration.Client.Model.Table)">
+            <summary>
+            Add a new table on this location Add a table
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <returns>ApiResponse of Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTablePostAsync(System.Int64,RapidGuestRegistration.Client.Model.Table,System.Threading.CancellationToken)">
+            <summary>
+            Add a new table on this location Add a table
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTablePostWithHttpInfoAsync(System.Int64,RapidGuestRegistration.Client.Model.Table,System.Threading.CancellationToken)">
+            <summary>
+            Add a new table on this location Add a table
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Table)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdDelete(System.Int64,System.Int64)">
+            <summary>
+            Delete this table Delete the table on this location.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <returns>List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdDeleteWithHttpInfo(System.Int64,System.Int64)">
+            <summary>
+            Delete this table Delete the table on this location.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <returns>ApiResponse of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdDeleteAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete this table Delete the table on this location.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdDeleteWithHttpInfoAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Delete this table Delete the table on this location.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (List&lt;Table&gt;)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdGet(System.Int64,System.Int64)">
+            <summary>
+            Get your tables Get tables associated with this location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <returns>List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdGetWithHttpInfo(System.Int64,System.Int64)">
+            <summary>
+            Get your tables Get tables associated with this location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <returns>ApiResponse of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdGetAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get your tables Get tables associated with this location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of List&lt;Table&gt;</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdGetWithHttpInfoAsync(System.Int64,System.Int64,System.Threading.CancellationToken)">
+            <summary>
+            Get your tables Get tables associated with this location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (List&lt;Table&gt;)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdPost(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Table)">
+            <summary>
+            Update an existing table Update a table
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <returns>Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdPostWithHttpInfo(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Table)">
+            <summary>
+            Update an existing table Update a table
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <returns>ApiResponse of Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdPostAsync(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Table,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing table Update a table
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Table</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdPostWithHttpInfoAsync(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Table,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing table Update a table
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to return.</param>
+            <param name="tableId">ID of the location to return.</param>
+            <param name="table"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Table)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdRegisterPost(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Guest)">
+            <summary>
+            Register on this table on this location. Register on this table on this location.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to register on.</param>
+            <param name="tableId">ID of the table to register on.</param>
+            <param name="guest"> (optional)</param>
+            <returns>Guest</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdRegisterPostWithHttpInfo(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Guest)">
+            <summary>
+            Register on this table on this location. Register on this table on this location.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to register on.</param>
+            <param name="tableId">ID of the table to register on.</param>
+            <param name="guest"> (optional)</param>
+            <returns>ApiResponse of Guest</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdRegisterPostAsync(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Guest,System.Threading.CancellationToken)">
+            <summary>
+            Register on this table on this location. Register on this table on this location.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to register on.</param>
+            <param name="tableId">ID of the table to register on.</param>
+            <param name="guest"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Guest</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationLocationIdTableTableIdRegisterPostWithHttpInfoAsync(System.Int64,System.Int64,RapidGuestRegistration.Client.Model.Guest,System.Threading.CancellationToken)">
+            <summary>
+            Register on this table on this location. Register on this table on this location.
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="locationId">ID of the location to register on.</param>
+            <param name="tableId">ID of the table to register on.</param>
+            <param name="guest"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Guest)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationPost(RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Add a new location Add a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationPostWithHttpInfo(RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Add a new location Add a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationPostAsync(RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Add a new location Add a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationPostWithHttpInfoAsync(RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Add a new location Add a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationPut(RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Update an existing location Update a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <returns>Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationPutWithHttpInfo(RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Update an existing location Update a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <returns>ApiResponse of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationPutAsync(RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing location Update a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of Location</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Api.DefaultApi.LocationPutWithHttpInfoAsync(RapidGuestRegistration.Client.Model.Location,System.Threading.CancellationToken)">
+            <summary>
+            Update an existing location Update a location
+            </summary>
+            <exception cref="T:RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+            <param name="location"> (optional)</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <returns>Task of ApiResponse (Location)</returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.CustomJsonCodec">
+            <summary>
+            Allows RestSharp to Serialize/Deserialize JSON using our custom logic, but only when ContentType is JSON.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.CustomJsonCodec.Serialize(System.Object)">
+            <summary>
+            Serialize the object into a JSON string.
+            </summary>
+            <param name="obj">Object to be serialized.</param>
+            <returns>A JSON string.</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.CustomJsonCodec.Deserialize(RestSharp.IRestResponse,System.Type)">
+            <summary>
+            Deserialize the JSON string into a proper object.
+            </summary>
+            <param name="response">The HTTP response.</param>
+            <param name="type">Object type.</param>
+            <returns>Object representation of the JSON string.</returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.ApiClient">
+            <summary>
+            Provides a default implementation of an Api client (both synchronous and asynchronous implementatios),
+            encapsulating general REST accessor use cases.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiClient.SerializerSettings">
+            <summary>
+            Specifies the settings on a <see cref="T:Newtonsoft.Json.JsonSerializer" /> object. 
+            These settings can be adjusted to accomodate custom serialization rules.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.ApiClient" />, defaulting to the global configurations' base url.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.ApiClient" />
+            </summary>
+            <param name="basePath">The target service's base path in URL format.</param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.Method(RapidGuestRegistration.Client.Client.HttpMethod)">
+            <summary>
+            Constructs the RestSharp version of an http method
+            </summary>
+            <param name="method">Swagger Client Custom HttpMethod</param>
+            <returns>RestSharp's HttpMethod instance.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.NewRequest(RapidGuestRegistration.Client.Client.HttpMethod,System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Provides all logic for constructing a new RestSharp <see cref="T:RestSharp.RestRequest"/>.
+            At this point, all information for querying the service is known. Here, it is simply
+            mapped into the RestSharp request.
+            </summary>
+            <param name="method">The http verb.</param>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <returns>[private] A new RestRequest instance.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.GetAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Make a HTTP GET request (async).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.PostAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Make a HTTP POST request (async).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.PutAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Make a HTTP PUT request (async).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.DeleteAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Make a HTTP DELETE request (async).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.HeadAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Make a HTTP HEAD request (async).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.OptionsAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Make a HTTP OPTION request (async).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.PatchAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Make a HTTP PATCH request (async).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <param name="cancellationToken">Token that enables callers to cancel the request.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.Get``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Make a HTTP GET request (synchronous).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.Post``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Make a HTTP POST request (synchronous).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.Put``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Make a HTTP PUT request (synchronous).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.Delete``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Make a HTTP DELETE request (synchronous).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.Head``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Make a HTTP HEAD request (synchronous).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.Options``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Make a HTTP OPTION request (synchronous).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiClient.Patch``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Make a HTTP PATCH request (synchronous).
+            </summary>
+            <param name="path">The target path (or resource).</param>
+            <param name="options">The additional request options.</param>
+            <param name="configuration">A per-request configuration object. It is assumed that any merge with
+            GlobalConfiguration has been done before calling this method.</param>
+            <returns>A Task containing ApiResponse</returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.ApiException">
+            <summary>
+            API Exception
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiException.ErrorCode">
+            <summary>
+            Gets or sets the error code (HTTP status code)
+            </summary>
+            <value>The error code (HTTP status code).</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiException.ErrorContent">
+            <summary>
+            Gets or sets the error content (body json object)
+            </summary>
+            <value>The error content (Http response body).</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiException.Headers">
+            <summary>
+            Gets or sets the HTTP headers
+            </summary>
+            <value>HTTP headers</value>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.ApiException"/> class.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiException.#ctor(System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.ApiException"/> class.
+            </summary>
+            <param name="errorCode">HTTP status code.</param>
+            <param name="message">Error message.</param>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiException.#ctor(System.Int32,System.String,System.Object,RapidGuestRegistration.Client.Client.Multimap{System.String,System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.ApiException"/> class.
+            </summary>
+            <param name="errorCode">HTTP status code.</param>
+            <param name="message">Error message.</param>
+            <param name="errorContent">Error content.</param>
+            <param name="headers">HTTP Headers.</param>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.IApiResponse">
+            <summary>
+            Provides a non-generic contract for the ApiResponse wrapper.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IApiResponse.ResponseType">
+            <summary>
+            The data type of <see cref="P:RapidGuestRegistration.Client.Client.IApiResponse.Content"/>
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IApiResponse.Content">
+            <summary>
+            The content of this response
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IApiResponse.StatusCode">
+            <summary>
+            Gets or sets the status code (HTTP status code)
+            </summary>
+            <value>The status code.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IApiResponse.Headers">
+            <summary>
+            Gets or sets the HTTP headers
+            </summary>
+            <value>HTTP headers</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IApiResponse.ErrorText">
+            <summary>
+            Gets or sets any error text defined by the calling client.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IApiResponse.Cookies">
+            <summary>
+            Gets or sets any cookies passed along on the response.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IApiResponse.RawContent">
+            <summary>
+            The raw content of this response
+            </summary>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.ApiResponse`1">
+            <summary>
+            API Response
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiResponse`1.StatusCode">
+            <summary>
+            Gets or sets the status code (HTTP status code)
+            </summary>
+            <value>The status code.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiResponse`1.Headers">
+            <summary>
+            Gets or sets the HTTP headers
+            </summary>
+            <value>HTTP headers</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiResponse`1.Data">
+            <summary>
+            Gets or sets the data (parsed HTTP body)
+            </summary>
+            <value>The data.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiResponse`1.ErrorText">
+            <summary>
+            Gets or sets any error text defined by the calling client.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiResponse`1.Cookies">
+            <summary>
+            Gets or sets any cookies passed along on the response.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiResponse`1.ResponseType">
+            <summary>
+            The content of this response
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiResponse`1.Content">
+            <summary>
+            The data type of <see cref="P:RapidGuestRegistration.Client.Client.ApiResponse`1.Content"/>
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.ApiResponse`1.RawContent">
+            <summary>
+            The raw content
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiResponse`1.#ctor(System.Net.HttpStatusCode,RapidGuestRegistration.Client.Client.Multimap{System.String,System.String},`0,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1" /> class.
+            </summary>
+            <param name="statusCode">HTTP status code.</param>
+            <param name="headers">HTTP headers.</param>
+            <param name="data">Data (parsed HTTP body)</param>
+            <param name="rawContent">Raw content.</param>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiResponse`1.#ctor(System.Net.HttpStatusCode,RapidGuestRegistration.Client.Client.Multimap{System.String,System.String},`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1" /> class.
+            </summary>
+            <param name="statusCode">HTTP status code.</param>
+            <param name="headers">HTTP headers.</param>
+            <param name="data">Data (parsed HTTP body)</param>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiResponse`1.#ctor(System.Net.HttpStatusCode,`0,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1" /> class.
+            </summary>
+            <param name="statusCode">HTTP status code.</param>
+            <param name="data">Data (parsed HTTP body)</param>
+            <param name="rawContent">Raw content.</param>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ApiResponse`1.#ctor(System.Net.HttpStatusCode,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1" /> class.
+            </summary>
+            <param name="statusCode">HTTP status code.</param>
+            <param name="data">Data (parsed HTTP body)</param>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.ClientUtils">
+            <summary>
+            Utility functions providing some benefit to API client consumers.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ClientUtils.SanitizeFilename(System.String)">
+            <summary>
+            Sanitize filename by removing the path
+            </summary>
+            <param name="filename">Filename</param>
+            <returns>Filename</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ClientUtils.ParameterToMultiMap(System.String,System.String,System.Object)">
+            <summary>
+            Convert params to key/value pairs.
+            Use collectionFormat to properly format lists and collections.
+            </summary>
+            <param name="collectionFormat">The swagger-supported collection format, one of: csv, tsv, ssv, pipes, multi</param>
+            <param name="name">Key name.</param>
+            <param name="value">Value object.</param>
+            <returns>A multimap of keys with 1..n associated values.</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(System.Object,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            If parameter is DateTime, output in a formatted string (default ISO 8601), customizable with Configuration.DateTime.
+            If parameter is a list, join the list with ",".
+            Otherwise just return the string.
+            </summary>
+            <param name="obj">The parameter (header, path, query, form).</param>
+            <param name="configuration">An optional configuration instance, providing formatting options used in processing.</param>
+            <returns>Formatted string.</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ClientUtils.UrlEncode(System.String)">
+            <summary>
+            URL encode a string
+            Credit/Ref: https://github.com/restsharp/RestSharp/blob/master/RestSharp/Extensions/StringExtensions.cs#L50
+            </summary>
+            <param name="input">String to be URL encoded</param>
+            <returns>Byte array</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ClientUtils.Base64Encode(System.String)">
+            <summary>
+            Encode string in base64 format.
+            </summary>
+            <param name="text">String to be encoded.</param>
+            <returns>Encoded string.</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ClientUtils.ReadAsBytes(System.IO.Stream)">
+            <summary>
+            Convert stream to byte array
+            </summary>
+            <param name="inputStream">Input stream to be converted</param>
+            <returns>Byte array</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(System.String[])">
+            <summary>
+            Select the Content-Type header's value from the given content-type array:
+            if JSON type exists in the given array, use it;
+            otherwise use the first one defined in 'consumes'
+            </summary>
+            <param name="contentTypes">The Content-Type array to select from.</param>
+            <returns>The Content-Type header to use.</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(System.String[])">
+            <summary>
+            Select the Accept header's value from the given accepts array:
+            if JSON exists in the given array, use it;
+            otherwise use all of them (joining into a string)
+            </summary>
+            <param name="accepts">The accepts array to select from.</param>
+            <returns>The Accept header to use.</returns>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.ClientUtils.JsonRegex">
+            <summary>
+            Provides a case-insensitive check that a provided content type is a known JSON-like content type.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ClientUtils.IsJsonMime(System.String)">
+            <summary>
+            Check if the given MIME is a JSON MIME.
+            JSON MIME examples:
+               application/json
+               application/json; charset=UTF8
+               APPLICATION/JSON
+               application/vnd.company+json
+            </summary>
+            <param name="mime">MIME</param>
+            <returns>Returns True if MIME type is json.</returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.Configuration">
+            <summary>
+            Represents a set of configuration settings
+            </summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.Configuration.Version">
+            <summary>
+            Version of the package.
+            </summary>
+            <value>Version of the package.</value>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.Configuration.ISO8601_DATETIME_FORMAT">
+            <summary>
+            Identifier for ISO 8601 DateTime Format
+            </summary>
+            <remarks>See https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx#Anchor_8 for more information.</remarks>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.Configuration.DefaultExceptionFactory">
+            <summary>
+            Default creation of exceptions for a given method name and response object
+            </summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.Configuration._basePath">
+            <summary>
+            Defines the base path of the target API server.
+            Example: http://localhost:3000/v1/
+            </summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.Configuration._apiKey">
+            <summary>
+            Gets or sets the API key based on the authentication name.
+            This is the key and value comprising the "secret" for acessing an API.
+            </summary>
+            <value>The API key.</value>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.Configuration._apiKeyPrefix">
+            <summary>
+            Gets or sets the prefix (e.g. Token) of the API key based on the authentication name.
+            </summary>
+            <value>The prefix of the API key.</value>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.Configuration._servers">
+            <summary>
+            Gets or sets the servers defined in the OpenAPI spec.
+            </summary>
+            <value>The servers</value>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Configuration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.Configuration" /> class
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Configuration.#ctor(System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.Configuration" /> class
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.BasePath">
+            <summary>
+            Gets or sets the base path for API access.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.DefaultHeader">
+            <summary>
+            Gets or sets the default header.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.DefaultHeaders">
+            <summary>
+            Gets or sets the default headers.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.Timeout">
+            <summary>
+            Gets or sets the HTTP timeout (milliseconds) of ApiClient. Default to 100000 milliseconds.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.Proxy">
+            <summary>
+            Gets or sets the proxy
+            </summary>
+            <value>Proxy.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.UserAgent">
+            <summary>
+            Gets or sets the HTTP user agent.
+            </summary>
+            <value>Http user agent.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.Username">
+            <summary>
+            Gets or sets the username (HTTP basic authentication).
+            </summary>
+            <value>The username.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.Password">
+            <summary>
+            Gets or sets the password (HTTP basic authentication).
+            </summary>
+            <value>The password.</value>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Configuration.GetApiKeyWithPrefix(System.String)">
+            <summary>
+            Gets the API key with prefix.
+            </summary>
+            <param name="apiKeyIdentifier">API key identifier (authentication scheme).</param>
+            <returns>API key with prefix.</returns>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.ClientCertificates">
+            <summary>
+            Gets or sets certificate collection to be sent with requests.
+            </summary>
+            <value>X509 Certificate collection.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.AccessToken">
+             <summary>
+             Gets or sets the access token for OAuth2 authentication.
+            
+             This helper property simplifies code generation.
+             </summary>
+             <value>The access token.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.TempFolderPath">
+            <summary>
+            Gets or sets the temporary folder path to store the files downloaded from the server.
+            </summary>
+            <value>Folder path.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.DateTimeFormat">
+            <summary>
+            Gets or sets the date time format used when serializing in the ApiClient
+            By default, it's set to ISO 8601 - "o", for others see:
+            https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx
+            and https://msdn.microsoft.com/en-us/library/8kb3ddd4(v=vs.110).aspx
+            No validation is done to ensure that the string you're providing is valid
+            </summary>
+            <value>The DateTimeFormat string</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.ApiKeyPrefix">
+             <summary>
+             Gets or sets the prefix (e.g. Token) of the API key based on the authentication name.
+            
+             Whatever you set here will be prepended to the value defined in AddApiKey.
+            
+             An example invocation here might be:
+             <example>
+             ApiKeyPrefix["Authorization"] = "Bearer";
+             </example>
+             … where ApiKey["Authorization"] would then be used to set the value of your bearer token.
+            
+             <remarks>
+             OAuth2 workflows should set tokens via AccessToken.
+             </remarks>
+             </summary>
+             <value>The prefix of the API key.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.ApiKey">
+            <summary>
+            Gets or sets the API key based on the authentication name.
+            </summary>
+            <value>The API key.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Configuration.Servers">
+            <summary>
+            Gets or sets the servers.
+            </summary>
+            <value>The servers.</value>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Configuration.GetServerUrl(System.Int32)">
+            <summary>
+            Returns URL based on server settings without providing values
+            for the variables
+            </summary>
+            <param name="index">Array index of the server settings.</param>
+            <return>The server URL.</return>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Configuration.GetServerUrl(System.Int32,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Returns URL based on server settings.
+            </summary>
+            <param name="index">Array index of the server settings.</param>
+            <param name="inputVariables">Dictionary of the variables and the corresponding values.</param>
+            <return>The server URL.</return>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Configuration.ToDebugReport">
+            <summary>
+            Returns a string with essential information for debugging.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Configuration.AddApiKey(System.String,System.String)">
+            <summary>
+            Add Api Key Header.
+            </summary>
+            <param name="key">Api Key name.</param>
+            <param name="value">Api Key value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Configuration.AddApiKeyPrefix(System.String,System.String)">
+            <summary>
+            Sets the API key prefix.
+            </summary>
+            <param name="key">Api Key name.</param>
+            <param name="value">Api Key value.</param>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Configuration.MergeConfigurations(RapidGuestRegistration.Client.Client.IReadableConfiguration,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Merge configurations.
+            </summary>
+            <param name="first">First configuration.</param>
+            <param name="second">Second configuration.</param>
+            <return>Merged configuration.</return>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.ExceptionFactory">
+            <summary>
+            A delegate to ExceptionFactory method
+            </summary>
+            <param name="methodName">Method name</param>
+            <param name="response">Response</param>
+            <returns>Exceptions</returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.GlobalConfiguration">
+            <summary>
+            <see cref="T:RapidGuestRegistration.Client.Client.GlobalConfiguration"/> provides a compile-time extension point for globally configuring
+            API Clients.
+            </summary>
+            <remarks>
+            A customized implementation via partial class may reside in another file and may
+            be excluded from automatic generation via a .openapi-generator-ignore file.
+            </remarks>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.GlobalConfiguration.#ctor">
+            <inheritdoc />
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.GlobalConfiguration.#ctor(System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.GlobalConfiguration.Instance">
+            <summary>
+            Gets or sets the default Configuration.
+            </summary>
+            <value>Configuration.</value>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.HttpMethod">
+            <summary>
+            Http methods supported by swagger
+            </summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.HttpMethod.Get">
+            <summary>HTTP GET request.</summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.HttpMethod.Post">
+            <summary>HTTP POST request.</summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.HttpMethod.Put">
+            <summary>HTTP PUT request.</summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.HttpMethod.Delete">
+            <summary>HTTP DELETE request.</summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.HttpMethod.Head">
+            <summary>HTTP HEAD request.</summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.HttpMethod.Options">
+            <summary>HTTP OPTIONS request.</summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Client.HttpMethod.Patch">
+            <summary>HTTP PATCH request.</summary>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.IApiAccessor">
+            <summary>
+            Represents configuration aspects required to interact with the API endpoints.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IApiAccessor.Configuration">
+            <summary>
+            Gets or sets the configuration object
+            </summary>
+            <value>An instance of the Configuration</value>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.IApiAccessor.GetBasePath">
+            <summary>
+            Gets the base path of the API client.
+            </summary>
+            <value>The base path</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IApiAccessor.ExceptionFactory">
+            <summary>
+            Provides a factory method hook for the creation of exceptions.
+            </summary>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.IAsynchronousClient">
+             <summary>
+             Contract for Asynchronous RESTful API interactions.
+            
+             This interface allows consumers to provide a custom API accessor client.
+             </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.IAsynchronousClient.GetAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Executes a non-blocking call to some <paramref name="path"/> using the GET http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>A task eventually representing the response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.IAsynchronousClient.PostAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Executes a non-blocking call to some <paramref name="path"/> using the POST http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>A task eventually representing the response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.IAsynchronousClient.PutAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Executes a non-blocking call to some <paramref name="path"/> using the PUT http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>A task eventually representing the response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.IAsynchronousClient.DeleteAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Executes a non-blocking call to some <paramref name="path"/> using the DELETE http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>A task eventually representing the response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.IAsynchronousClient.HeadAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Executes a non-blocking call to some <paramref name="path"/> using the HEAD http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>A task eventually representing the response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.IAsynchronousClient.OptionsAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Executes a non-blocking call to some <paramref name="path"/> using the OPTIONS http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>A task eventually representing the response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.IAsynchronousClient.PatchAsync``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration,System.Threading.CancellationToken)">
+            <summary>
+            Executes a non-blocking call to some <paramref name="path"/> using the PATCH http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>A task eventually representing the response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.IReadableConfiguration">
+            <summary>
+            Represents a readable-only configuration contract.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.AccessToken">
+            <summary>
+            Gets the access token.
+            </summary>
+            <value>Access token.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.ApiKey">
+            <summary>
+            Gets the API key.
+            </summary>
+            <value>API key.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.ApiKeyPrefix">
+            <summary>
+            Gets the API key prefix.
+            </summary>
+            <value>API key prefix.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.BasePath">
+            <summary>
+            Gets the base path.
+            </summary>
+            <value>Base path.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.DateTimeFormat">
+            <summary>
+            Gets the date time format.
+            </summary>
+            <value>Date time foramt.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.DefaultHeader">
+            <summary>
+            Gets the default header.
+            </summary>
+            <value>Default header.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.DefaultHeaders">
+            <summary>
+            Gets the default headers.
+            </summary>
+            <value>Default headers.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.TempFolderPath">
+            <summary>
+            Gets the temp folder path.
+            </summary>
+            <value>Temp folder path.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.Timeout">
+            <summary>
+            Gets the HTTP connection timeout (in milliseconds)
+            </summary>
+            <value>HTTP connection timeout.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.Proxy">
+            <summary>
+            Gets the proxy.
+            </summary>
+            <value>Proxy.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.UserAgent">
+            <summary>
+            Gets the user agent.
+            </summary>
+            <value>User agent.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.Username">
+            <summary>
+            Gets the username.
+            </summary>
+            <value>Username.</value>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.Password">
+            <summary>
+            Gets the password.
+            </summary>
+            <value>Password.</value>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.IReadableConfiguration.GetApiKeyWithPrefix(System.String)">
+            <summary>
+            Gets the API key with prefix.
+            </summary>
+            <param name="apiKeyIdentifier">API key identifier (authentication scheme).</param>
+            <returns>API key with prefix.</returns>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.IReadableConfiguration.ClientCertificates">
+            <summary>
+            Gets certificate collection to be sent with requests.
+            </summary>
+            <value>X509 Certificate collection.</value>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.ISynchronousClient">
+             <summary>
+             Contract for Synchronous RESTful API interactions.
+            
+             This interface allows consumers to provide a custom API accessor client.
+             </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ISynchronousClient.Get``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Executes a blocking call to some <paramref name="path"/> using the GET http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>The response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ISynchronousClient.Post``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Executes a blocking call to some <paramref name="path"/> using the POST http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>The response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ISynchronousClient.Put``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Executes a blocking call to some <paramref name="path"/> using the PUT http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>The response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ISynchronousClient.Delete``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Executes a blocking call to some <paramref name="path"/> using the DELETE http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>The response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ISynchronousClient.Head``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Executes a blocking call to some <paramref name="path"/> using the HEAD http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>The response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ISynchronousClient.Options``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Executes a blocking call to some <paramref name="path"/> using the OPTIONS http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>The response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.ISynchronousClient.Patch``1(System.String,RapidGuestRegistration.Client.Client.RequestOptions,RapidGuestRegistration.Client.Client.IReadableConfiguration)">
+            <summary>
+            Executes a blocking call to some <paramref name="path"/> using the PATCH http verb.
+            </summary>
+            <param name="path">The relative path to invoke.</param>
+            <param name="options">The request parameters to pass along to the client.</param>
+            <param name="configuration">Per-request configurable settings.</param>
+            <typeparam name="T">The return type.</typeparam>
+            <returns>The response data, decorated with <see cref="T:RapidGuestRegistration.Client.Client.ApiResponse`1"/></returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.Multimap`2">
+            <summary>
+            A dictionary in which one key has many associated values.
+            </summary>
+            <typeparam name="TKey">The type of the key</typeparam>
+            <typeparam name="TValue">The type of the value associated with the key.</typeparam>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.#ctor">
+            <summary>
+            Empty Constructor.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.#ctor(System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Constructor with comparer.
+            </summary>
+            <param name="comparer"></param>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.GetEnumerator">
+            <summary>
+            To get the enumerator.
+            </summary>
+            <returns>Enumerator</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            To get the enumerator.
+            </summary>
+            <returns>Enumerator</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.Add(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.IList{`1}})">
+            <summary>
+            Add values to Multimap
+            </summary>
+            <param name="item">Key value pair</param>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.Add(RapidGuestRegistration.Client.Client.Multimap{`0,`1})">
+            <summary>
+            Add Multimap to Multimap
+            </summary>
+            <param name="multimap">Multimap</param>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.Clear">
+            <summary>
+            Clear Multimap
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.Contains(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.IList{`1}})">
+            <summary>
+            Determines whether Multimap contains the specified item.
+            </summary>
+            <param name="item">Key value pair</param>
+            <exception cref="T:System.NotImplementedException">Method needs to be implemented</exception>
+            <returns>true if the Multimap contains the item; otherwise, false.</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.IList{`1}}[],System.Int32)">
+            <summary>
+             Copy items of the Multimap to an array,
+                starting at a particular array index.
+            </summary>
+            <param name="array">The array that is the destination of the items copied
+                from Multimap. The array must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+            <exception cref="T:System.NotImplementedException">Method needs to be implemented</exception>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.Remove(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.IList{`1}})">
+            <summary>
+            Removes the specified item from the Multimap.
+            </summary>
+            <param name="item">Key value pair</param>
+            <returns>true if the item is successfully removed; otherwise, false.</returns>
+            <exception cref="T:System.NotImplementedException">Method needs to be implemented</exception>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Multimap`2.Count">
+            <summary>
+            Gets the number of items contained in the Multimap.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Multimap`2.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the Multimap is read-only.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.Add(`0,System.Collections.Generic.IList{`1})">
+            <summary>
+            Adds an item with the provided key and value to the Multimap.
+            </summary>
+            <param name="key">The object to use as the key of the item to add.</param>
+            <param name="value">The object to use as the value of the item to add.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when couldn't add the value to Multimap.</exception>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.ContainsKey(`0)">
+            <summary>
+            Determines whether the Multimap contains an item with the specified key.
+            </summary>
+            <param name="key">The key to locate in the Multimap.</param>
+            <returns>true if the Multimap contains an item with
+                the key; otherwise, false.</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.Remove(`0)">
+            <summary>
+            Removes item with the specified key from the Multimap.
+            </summary>
+            <param name="key">The key to locate in the Multimap.</param>
+            <returns>true if the item is successfully removed; otherwise, false.</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.TryGetValue(`0,System.Collections.Generic.IList{`1}@)">
+            <summary>
+            Gets the value associated with the specified key.
+            </summary>
+            <param name="key">The key whose value to get.</param>
+            <param name="value">When this method returns, the value associated with the specified key, if the
+                key is found; otherwise, the default value for the type of the value parameter.
+                This parameter is passed uninitialized.</param>
+            <returns> true if the object that implements Multimap contains
+                an item with the specified key; otherwise, false.</returns>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Multimap`2.Item(`0)">
+            <summary>
+            Gets or sets the item with the specified key.
+            </summary>
+            <param name="key">The key of the item to get or set.</param>
+            <returns>The value of the specified key.</returns>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Multimap`2.Keys">
+            <summary>
+            Gets a System.Collections.Generic.ICollection containing the keys of the Multimap.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.Multimap`2.Values">
+            <summary>
+            Gets a System.Collections.Generic.ICollection containing the values of the Multimap.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.CopyTo(System.Array,System.Int32)">
+            <summary>
+             Copy the items of the Multimap to an System.Array,
+                starting at a particular System.Array index.
+            </summary>
+            <param name="array">The one-dimensional System.Array that is the destination of the items copied
+                from Multimap. The System.Array must have zero-based indexing.</param>
+            <param name="index">The zero-based index in array at which copying begins.</param>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.Add(`0,`1)">
+            <summary>
+            Adds an item with the provided key and value to the Multimap.
+            </summary>
+            <param name="key">The object to use as the key of the item to add.</param>
+            <param name="value">The object to use as the value of the item to add.</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when couldn't add value to Multimap.</exception>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.TryRemove(`0,System.Collections.Generic.IList{`1}@)">
+            Helper method to encapsulate generator differences between dictionary types.
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.Multimap`2.TryAdd(`0,System.Collections.Generic.IList{`1})">
+            Helper method to encapsulate generator differences between dictionary types.
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.OpenAPIDateConverter">
+            <summary>
+            Formatter for 'date' openapi formats ss defined by full-date - RFC3339
+            see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#data-types
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.OpenAPIDateConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Client.OpenAPIDateConverter" /> class.
+            </summary>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.RequestOptions">
+            <summary>
+            A container for generalized request inputs. This type allows consumers to extend the request functionality
+            by abstracting away from the default (built-in) request framework (e.g. RestSharp).
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.RequestOptions.PathParameters">
+            <summary>
+            Parameters to be bound to path parts of the Request's URL
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.RequestOptions.QueryParameters">
+            <summary>
+            Query parameters to be applied to the request.
+            Keys may have 1 or more values associated.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.RequestOptions.HeaderParameters">
+            <summary>
+            Header parameters to be applied to to the request.
+            Keys may have 1 or more values associated.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.RequestOptions.FormParameters">
+            <summary>
+            Form parameters to be sent along with the request.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.RequestOptions.FileParameters">
+            <summary>
+            File parameters to be sent along with the request.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.RequestOptions.Cookies">
+            <summary>
+            Cookies to be sent along with the request.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.RequestOptions.Data">
+            <summary>
+            Any data associated with a request body.
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Client.RequestOptions.#ctor">
+            <summary>
+            Constructs a new instance of <see cref="T:RapidGuestRegistration.Client.Client.RequestOptions"/>
+            </summary>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Client.RetryConfiguration">
+            <summary>
+            Configuration class to set the polly retry policies to be applied to the requests.
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.RetryConfiguration.RetryPolicy">
+            <summary>
+            Retry policy
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Client.RetryConfiguration.AsyncRetryPolicy">
+            <summary>
+            Async retry policy
+            </summary>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Model.AbstractOpenAPISchema">
+            <summary>
+             Abstract base class for oneOf, anyOf schemas in the OpenAPI specification
+            </summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Model.AbstractOpenAPISchema.SerializerSettings">
+            <summary>
+             Custom JSON serializer
+            </summary>
+        </member>
+        <member name="F:RapidGuestRegistration.Client.Model.AbstractOpenAPISchema.AdditionalPropertiesSerializerSettings">
+            <summary>
+             Custom JSON serializer for objects with additional properties
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.AbstractOpenAPISchema.ActualInstance">
+            <summary>
+            Gets or Sets the actual instance
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.AbstractOpenAPISchema.IsNullable">
+            <summary>
+            Gets or Sets IsNullable to indicate whether the instance is nullable
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.AbstractOpenAPISchema.SchemaType">
+            <summary>
+            Gets or Sets the schema type, which can be either `oneOf` or `anyOf`
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.AbstractOpenAPISchema.ToJson">
+            <summary>
+            Converts the instance into JSON string.
+            </summary>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Model.Guest">
+            <summary>
+            Guest
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Guest.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Model.Guest" /> class.
+            </summary>
+            <param name="name">name.</param>
+            <param name="email">email.</param>
+            <param name="phoneNumber">phoneNumber.</param>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.Guest.Name">
+            <summary>
+            Gets or Sets Name
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.Guest.Email">
+            <summary>
+            Gets or Sets Email
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.Guest.PhoneNumber">
+            <summary>
+            Gets or Sets PhoneNumber
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Guest.ToString">
+            <summary>
+            Returns the string presentation of the object
+            </summary>
+            <returns>String presentation of the object</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Guest.ToJson">
+            <summary>
+            Returns the JSON string presentation of the object
+            </summary>
+            <returns>JSON string presentation of the object</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Guest.Equals(System.Object)">
+            <summary>
+            Returns true if objects are equal
+            </summary>
+            <param name="input">Object to be compared</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Guest.Equals(RapidGuestRegistration.Client.Model.Guest)">
+            <summary>
+            Returns true if Guest instances are equal
+            </summary>
+            <param name="input">Instance of Guest to be compared</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Guest.GetHashCode">
+            <summary>
+            Gets the hash code
+            </summary>
+            <returns>Hash code</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Guest.System#ComponentModel#DataAnnotations#IValidatableObject#Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            To validate all properties of the instance
+            </summary>
+            <param name="validationContext">Validation context</param>
+            <returns>Validation Result</returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Model.Location">
+            <summary>
+            Location
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Location.#ctor(System.Int64,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Model.Location" /> class.
+            </summary>
+            <param name="id">id.</param>
+            <param name="name">name.</param>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.Location.Id">
+            <summary>
+            Gets or Sets Id
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.Location.Name">
+            <summary>
+            Gets or Sets Name
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Location.ToString">
+            <summary>
+            Returns the string presentation of the object
+            </summary>
+            <returns>String presentation of the object</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Location.ToJson">
+            <summary>
+            Returns the JSON string presentation of the object
+            </summary>
+            <returns>JSON string presentation of the object</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Location.Equals(System.Object)">
+            <summary>
+            Returns true if objects are equal
+            </summary>
+            <param name="input">Object to be compared</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Location.Equals(RapidGuestRegistration.Client.Model.Location)">
+            <summary>
+            Returns true if Location instances are equal
+            </summary>
+            <param name="input">Instance of Location to be compared</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Location.GetHashCode">
+            <summary>
+            Gets the hash code
+            </summary>
+            <returns>Hash code</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Location.System#ComponentModel#DataAnnotations#IValidatableObject#Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            To validate all properties of the instance
+            </summary>
+            <param name="validationContext">Validation context</param>
+            <returns>Validation Result</returns>
+        </member>
+        <member name="T:RapidGuestRegistration.Client.Model.Table">
+            <summary>
+            Table
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Table.#ctor(System.Int64,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:RapidGuestRegistration.Client.Model.Table" /> class.
+            </summary>
+            <param name="id">id.</param>
+            <param name="name">name.</param>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.Table.Id">
+            <summary>
+            Gets or Sets Id
+            </summary>
+        </member>
+        <member name="P:RapidGuestRegistration.Client.Model.Table.Name">
+            <summary>
+            Gets or Sets Name
+            </summary>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Table.ToString">
+            <summary>
+            Returns the string presentation of the object
+            </summary>
+            <returns>String presentation of the object</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Table.ToJson">
+            <summary>
+            Returns the JSON string presentation of the object
+            </summary>
+            <returns>JSON string presentation of the object</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Table.Equals(System.Object)">
+            <summary>
+            Returns true if objects are equal
+            </summary>
+            <param name="input">Object to be compared</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Table.Equals(RapidGuestRegistration.Client.Model.Table)">
+            <summary>
+            Returns true if Table instances are equal
+            </summary>
+            <param name="input">Instance of Table to be compared</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Table.GetHashCode">
+            <summary>
+            Gets the hash code
+            </summary>
+            <returns>Hash code</returns>
+        </member>
+        <member name="M:RapidGuestRegistration.Client.Model.Table.System#ComponentModel#DataAnnotations#IValidatableObject#Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            To validate all properties of the instance
+            </summary>
+            <param name="validationContext">Validation context</param>
+            <returns>Validation Result</returns>
+        </member>
+    </members>
+</doc>
