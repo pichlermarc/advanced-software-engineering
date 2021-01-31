@@ -368,6 +368,88 @@ paths:
           description: Invalid location or table ID
       summary: Register on this table on this location.
       x-eov-operation-handler: controllers/DefaultController
+  /location/{locationId}/table/{tableId}/report/{reportType}:
+    get:
+      description: Get report of reporttype on this table on this location.
+      operationId: locationLocationIdTableTableIdReportReportTypeGET
+      parameters:
+        - description: ID of the location to register on.
+          explode: false
+          in: path
+          name: locationId
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: ID of the table to register on.
+          explode: false
+          in: path
+          name: tableId
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: Datetime from which to search for guests at tableid locationid.
+          explode: false
+          in: query
+          name: datetimeFrom
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - description: Datetime to which to search for guests at tableid locationid.
+          explode: false
+          in: query
+          name: datetimeTo
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - description: type of report to retrieve.
+          explode: false
+          in: path
+          name: reportType
+          required: true
+          schema:
+            type: string
+            example: pdf or xls
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locationId:
+                    format: int64
+                    type: integer
+                    description: Id of the location at which to look for guests in time range
+                  tableId:
+                    format: int64
+                    type: integer
+                    description: Id of the table at which to look for guests in time range
+                  datetimeFrom:
+                    format: int64
+                    type: integer
+                    description: datetime from which was searched for guests at locationid, tableid
+                  datetimeTo:
+                    format: int64
+                    type: integer
+                    description: datetime up to which was searched for guests at locationid, tableid
+                  pdf:
+                    type: string
+                    format: base64
+                    description: Base64-encoded contents of pdf
+          description: Registration successful.
+        "400":
+          description: Invalid location or table ID
+      summary: Register on this table on this location.
+      x-eov-operation-handler: controllers/DefaultController
 components:
   schemas:
     Guest:
