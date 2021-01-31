@@ -6,8 +6,7 @@ class GetReportInteractor {
   constructor(repository, validator, reporter) {
     this.repository = repository;
     this.validator = validator;
-    // this.filepath = 'output.pdf';
-    this.reporter = reporter; // Type === 'pdf' ? new PDFReporter(this.filepath) : new XLSReporter();
+    this.reporter = reporter;
   }
 
   // 1. call process use-case
@@ -16,8 +15,6 @@ class GetReportInteractor {
     let validation_result = this.validator.validate(request_model);
     if(!validation_result.isValid) {
       const response_model = new ResponseModel(null,
-        null,
-        null,
         validation_result.error_msg,
         400);
       return response_model;

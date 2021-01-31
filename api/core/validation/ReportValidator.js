@@ -15,10 +15,10 @@ class ReportValidator extends IValidator {
     validate(request) { // ReportRequestModel
         if(request.location_id < 0 || request.table_id < 0) {
             return new ValidationResult("Id must not be less than zero!");
-        } else if(!request.datetimeFrom && request.datetimeFrom <= Date.now()) {
-            return new ValidationResult("From-time is needed for request and must be in the past!");
-        } else if(!request.datetimeTo && request.datetimeTo > request.datetimeFrom) {
-            return new ValidationResult("To-time is needed for request and must be later than From-time!");
+        } else if(!request.datetimeFrom || !request.datetimeTo) {
+            return new ValidationResult("From-time and To-time are needed for request!");
+        } else if(request.datetimeFrom >= Date.now() || request.datetimeTo < request.datetimeFrom) {
+            return new ValidationResult("From-time must be in the past and To-time must be later than From-time!");
         }
 
         return new ValidationResult();
