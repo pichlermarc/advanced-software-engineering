@@ -18,6 +18,10 @@ class eAssign {
         return new eAssign(o.location_id, o.table_id, o.date_from,
             o.first_name, o.last_name, o.phone, o.email)
     }
+
+    accept(r) {
+        return r.report(this);
+    }
 }
 
 module.exports = eAssign;
