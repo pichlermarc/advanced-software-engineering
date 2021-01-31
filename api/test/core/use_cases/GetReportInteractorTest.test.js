@@ -3,7 +3,7 @@ const GetReportInteractor = require('../../../core/use_cases/GetReportInteractor
 const RequestModel = require('../../../core/requestModels/ReportRequestModel')
 const {eLocation, eTable, eAssign} = require("../../../core/entities")
 const fs = require('fs');
-const GuestRegistrationPostgres = require('../../../core/repositories/GuestRegistrationPostgres');
+const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository');
 const PDFReporter = require('../../../core/use_cases/report/PDFReporter').PDFReporter;
 // const XLSReporter = require('../../../core/use_cases/report/XLSReporter').XLSReporter;
 
@@ -14,13 +14,13 @@ let interactor;
 let pdfreporter;
 let xlsreporter;
 let postgres;
-let location_1;
-let location_2;
-let table_1;
-let table_2;
-let table_3;
-let table_4;
-let table_5;
+let location_1 = new eLocation(0, "Seekaffee");
+let location_2 = new eLocation(1, "Hafenstadt");
+let table_1 = new eTable(2, "vip", location_1.id);
+let table_2 = new eTable(3, "black", location_1.id);
+let table_3 = new eTable(4, "vip", location_1.id);
+let table_4 = new eTable(5, "vip", location_1.id);
+let table_5 = new eTable(6, "vip", location_1.id);
 
 const hour_in_seconds = 1 * 60 * 60;
 const time_1 = new Date().getTime();
@@ -45,17 +45,17 @@ let assign_list = [
 describe('Integration test - postgres/sequelize: filter assign testing ', () => {
 
   beforeAll(async () => {
-    postgres = new GuestRegistrationPostgres();
+    postgres = new GuestRegistrationInMemRepository();
 
     try {
-      location_1 = await postgres.save_location(new eLocation(null, "Seekaffee"));
-      location_2 = await postgres.save_location(new eLocation(null, "Hafenstadt"));
+      await postgres.save_location(location_1);
+      await postgres.save_location(location_2);
 
-      table_1 = await postgres.save_table(new eTable(null, "vip", location_1.id));
-      table_2 = await postgres.save_table(new eTable(null, "black", location_1.id));
-      table_3 = await postgres.save_table(new eTable(null, "vip", location_1.id));
-      table_4 = await postgres.save_table(new eTable(null, "vip", location_1.id));
-      table_5 = await postgres.save_table(new eTable(null, "vip", location_1.id));
+      await postgres.save_table(table_1);
+      await postgres.save_table(table_2);
+      await postgres.save_table(table_3);
+      await postgres.save_table(table_4);
+      await postgres.save_table(table_5);
 
       assign_1 = await postgres.save_assign(new eAssign(location_1.id, table_1.id, time_1, "Sepp", "Forcher", "01 234567", "sepp@tv.at"));
       assign_2 = await postgres.save_assign(new eAssign(location_1.id, table_1.id, time_2, "Richard", "Stallman", "02 234567", "robert@freedom.org"));

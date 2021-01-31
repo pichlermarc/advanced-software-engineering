@@ -1,10 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidGuestRegistration.Client", "RapidGuestRegistration.Client\src\RapidGuestRegistration.Client\RapidGuestRegistration.Client.csproj", "{3CB3CD8A-C725-47E1-A340-A4B7BCC9B8DF}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapidGuestRegistration.Client", "RapidGuestRegistration.Client\src\RapidGuestRegistration.Client\RapidGuestRegistration.Client.csproj", "{3CB3CD8A-C725-47E1-A340-A4B7BCC9B8DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidGuestRegistration.Client.Test", "RapidGuestRegistration.Client\src\RapidGuestRegistration.Client.Test\RapidGuestRegistration.Client.Test.csproj", "{EFD635EE-A083-4B35-A063-69966577A82D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapidGuestRegistration.Client.Test", "RapidGuestRegistration.Client\src\RapidGuestRegistration.Client.Test\RapidGuestRegistration.Client.Test.csproj", "{EFD635EE-A083-4B35-A063-69966577A82D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidGuestRegistration.Ui", "RapidGuestRegistration.Ui\RapidGuestRegistration.Ui.csproj", "{66C91C90-A5E0-4C9E-BC33-FF57551C41A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapidGuestRegistration.Ui", "RapidGuestRegistration.Ui\RapidGuestRegistration.Ui.csproj", "{66C91C90-A5E0-4C9E-BC33-FF57551C41A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +27,11 @@ Global
 		{66C91C90-A5E0-4C9E-BC33-FF57551C41A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66C91C90-A5E0-4C9E-BC33-FF57551C41A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66C91C90-A5E0-4C9E-BC33-FF57551C41A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C945C1B-ED6F-4817-8A65-8065C5D20B40}
 	EndGlobalSection
 EndGlobal

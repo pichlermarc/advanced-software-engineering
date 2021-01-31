@@ -1,0 +1,20 @@
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+<a href="@_link">
+    <QrCode Text="@_link"></QrCode>
+</a>
+
+
+@code {
+    [Parameter] public long TableId { get; set; }
+    [Parameter] public long LocationId { get; set; }
+    private string _link;
+    
+    protected override void OnInitialized()
+    {
+        var baseUrl = Configuration.GetSection("registration").GetValue<string>("baseUrl");
+        // TODO: Join URLs in a way that eliminates duplicate /, similar to Path.Combine maybe?
+        _link = $"{baseUrl}/locations/{LocationId}/table/{TableId}/register";
+    }
+    
+}
