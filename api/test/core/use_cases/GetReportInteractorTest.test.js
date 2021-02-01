@@ -3,6 +3,7 @@ const GetReportInteractor = require('../../../core/use_cases/GetReportInteractor
 const RequestModel = require('../../../core/requestModels/ReportRequestModel')
 const {eLocation, eTable, eAssign} = require("../../../core/entities")
 const fs = require('fs');
+const path = require('path');
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository');
 const PDFReporter = require('../../../core/use_cases/report/PDFReporter').PDFReporter;
 // const XLSReporter = require('../../../core/use_cases/report/XLSReporter').XLSReporter;
@@ -41,12 +42,17 @@ let assign_list = [
   assign_1, assign_2, assign_3, assign_4, assign_5,
   assign_6, assign_7, assign_8, assign_9
 ]
+let dirpath = path.join(__dirname,'/buildOfTests_canBeDeleted');
 
-describe('Integration test - postgres/sequelize: filter assign testing ', () => {
+describe('Test GetReportInteractor UnitTests ', () => {
 
   beforeAll(async () => {
     postgres = new GuestRegistrationInMemRepository();
-
+    fs.mkdir(dirpath,(err) => {
+      if (err) {
+        return console.error(err);
+      }}
+    ); // temp dir for test outputs, is removed in afterAll
     try {
       await postgres.save_location(location_1);
       await postgres.save_location(location_2);
@@ -73,12 +79,13 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
     }
   });
 
-  afterAll( () => {
+  afterAll(  () => {
+    fs.rmdirSync(dirpath, {recursive:true});
     postgres.connection_close();
   });
 
   test('Should return the report as base64 string', async () => {
-    pdfreporter = new PDFReporter('output.pdf');
+    pdfreporter = new PDFReporter(path.join(dirpath,'output.pdf'));
     let pdfreporterSpy = jest.spyOn(pdfreporter, 'createDocument').mockImplementation(() => Promise.resolve('done'));
 
     //  xlsreporter = new XLSReporter('output.pdf');
@@ -92,7 +99,7 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
   })
 
   test('Should fail in report generation and throw error', async () => {
-    pdfreporter = new PDFReporter('output.pdf');
+    pdfreporter = new PDFReporter(path.join(dirpath,'output.pdf'));
     let pdfreporterSpy = jest.spyOn(pdfreporter, 'createDocument').mockImplementation(() => Promise.reject(new Error('Report generation failed!')));
 
     //  xlsreporter = new XLSReporter('output.pdf');
@@ -105,7 +112,7 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
   })
 
   test("should fail in validator due to datetimeFrom after datetimeTo", async () => {
-    pdfreporter = new PDFReporter('output.pdf');
+    pdfreporter = new PDFReporter(path.join(dirpath,'output.pdf'));
     let pdfreporterSpy = jest.spyOn(pdfreporter, 'createDocument').mockImplementation(() => Promise.resolve('done'));
 
     interactor = new GetReportInteractor(postgres, validator, pdfreporter);
@@ -117,7 +124,7 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
   })
 
   test("should fail due to invalid table id", async () => {
-    pdfreporter = new PDFReporter('output.pdf');
+    pdfreporter = new PDFReporter(path.join(dirpath,'output.pdf'));
     let pdfreporterSpy = jest.spyOn(pdfreporter, 'createDocument').mockImplementation(() => Promise.resolve('done'));
 
     interactor = new GetReportInteractor(postgres, validator, pdfreporter);
@@ -129,7 +136,7 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
   })
 
   test("should fail due to invalid location id", async () => {
-    pdfreporter = new PDFReporter('output.pdf');
+    pdfreporter = new PDFReporter(path.join(dirpath,'output.pdf'));
     let pdfreporterSpy = jest.spyOn(pdfreporter, 'createDocument').mockImplementation(() => Promise.resolve('done'));
 
     interactor = new GetReportInteractor(postgres, validator, pdfreporter);
@@ -141,7 +148,7 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
   })
 
   test("should fail due to missing To-time", async () => {
-    pdfreporter = new PDFReporter('output.pdf');
+    pdfreporter = new PDFReporter(path.join(dirpath,'output.pdf'));
     let pdfreporterSpy = jest.spyOn(pdfreporter, 'createDocument').mockImplementation(() => Promise.resolve('done'));
 
     interactor = new GetReportInteractor(postgres, validator, pdfreporter);
@@ -153,7 +160,7 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
   })
 
   test("should fail due to missing From-time", async () => {
-    pdfreporter = new PDFReporter('output.pdf');
+    pdfreporter = new PDFReporter(path.join(dirpath,'output.pdf'));
     let pdfreporterSpy = jest.spyOn(pdfreporter, 'createDocument').mockImplementation(() => Promise.resolve('done'));
 
     interactor = new GetReportInteractor(postgres, validator, pdfreporter);
