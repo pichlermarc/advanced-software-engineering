@@ -2,7 +2,7 @@
 
 const ResponseModel = require('../responseModels/EntityResponseModel');
 const Table = require('../entities/Table');
-class DeleteLocationAtTableInteractor {
+class DeleteTableAtLocationInteractor {
 
     constructor(repository, validator) {
         this.repository = repository;
@@ -36,4 +36,4 @@ class DeleteLocationAtTableInteractor {
     }
 }
 
-module.exports = DeleteLocationAtTableInteractor;
+module.exports = DeleteTableAtLocationInteractor;

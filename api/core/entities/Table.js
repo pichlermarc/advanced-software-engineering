@@ -10,6 +10,10 @@ class eTable {
     static from_object(o) {
         return new eTable(o.id, o.name, o.location_id)
     }
+
+    accept(r) {
+        return r.report(this);
+    }
 }
 
 module.exports = eTable;

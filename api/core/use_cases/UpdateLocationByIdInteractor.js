@@ -3,7 +3,7 @@
 const LocationResponseModel = require('../responseModels/LocationResponseModel');
 const Location = require('../entities/Location');
 
-class UpdateLocationInteractor {
+class UpdateLocationByIdInteractor {
     constructor(repository, idvalidator, locationvalidator) {
         this.repository = repository;
         this.idvalidator = idvalidator;
@@ -48,4 +48,4 @@ class UpdateLocationInteractor {
     };
 }
 
-module.exports = UpdateLocationInteractor;
+module.exports = UpdateLocationByIdInteractor;

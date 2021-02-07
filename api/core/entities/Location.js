@@ -9,6 +9,10 @@ class eLocation {
     static from_object(o) {
         return new eLocation(o.id, o.name)
     }
+
+    accept(r) {
+        return r.report(this);
+    }
 }
 
 module.exports = eLocation;
