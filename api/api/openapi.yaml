@@ -328,7 +328,7 @@ paths:
   /location/{locationId}/table/{tableId}/activity:
     get:
       description: Get the amount of people registered on this table in the given time-range.
-      operationId: tableActivity
+      operationId: locationLocationIdTableTableIdActivityGET
       parameters:
       - description: ID of the location to get activity from
         explode: false
@@ -424,7 +424,7 @@ paths:
   /location/{locationId}/table/{tableId}/report/{reportType}:
     get:
       description: Get report of reporttype on this table on this location.
-      operationId: locationLocationIdTableTableIdReportReportTypeGET
+      operationId: locationLocationIdTableTableIdReportGET
       parameters:
         - description: ID of the location to register on.
           explode: false

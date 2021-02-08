@@ -34,7 +34,10 @@ const ReportRequestModel = require('../core/requestModels/ReportRequestModel');
 const ReportValidator = require('../core/validation/ReportValidator');
 const GetReportInteractor = require('../core/use_cases/GetReportInteractor');
 const PDFReporter = require('../core/use_cases/report/PDFReporter').PDFReporter;
-const XLSReporter = require('../core/use_cases/report/XLSReporter').XLSReporter;
+//const XLSReporter = require('../core/use_cases/report/XLSReporter').XLSReporter;
+const LocationIdTableIdActivityRequestModel = require('../core/requestModels/LocationIdTableIdActivityRequestModel');
+const LocationIdTableIdActivityValidator = require('../core/validation/LocationIdTableIdActivityValidator');
+const GetLocationTableActivityInteractor = require('../core/use_cases/GetLocationTableActivityInteractor');
 
 /**
 * Get your locations
@@ -540,44 +543,87 @@ const locationPUT = ({ location }) => new Promise(
  * returns report of all assigns in requested period at Location and table
  * */
 const locationLocationIdTableTableIdReportGET = ({ locationId, tableId, datetimeFrom, datetimeTo, reportType }) => new Promise(
-  async (resolve, reject) => {
-    console.log("---locationLocationIdTableTableIdReportGET---get report---");
-    try {
-      let requestmodel = new ReportRequestModel(locationId, tableId, datetimeFrom, datetimeTo);
+    async (resolve, reject) => {
+        console.log("---locationLocationIdTableTableIdReportGET---get report---");
+        try {
+            let requestmodel = new ReportRequestModel(locationId, tableId, datetimeFrom, datetimeTo);
 
-      let validator = new ReportValidator();
-      let reporter = reportType === 'pdf' ? new PDFReporter('output.pdf') : new XLSReporter();
-      let interactor = new GetReportInteractor(repository, validator, reporter);
+            let validator = new ReportValidator();
+            let reporter = reportType === 'pdf' ? new PDFReporter('output.pdf') : new XLSReporter();
+            let interactor = new GetReportInteractor(repository, validator, reporter);
 
-      let responsemodel = interactor.execute(requestmodel);
+            let responsemodel = interactor.execute(requestmodel);
 
-      if(responsemodel.error_msg !== null) {
-        throw {
-          name: "GetReportException",
-          message: responsemodel.error_msg,
-          status: 400,
-          toString: function() {
-            return this.name + ": " + this.message;
-          }
-        };
-      }
+            if(responsemodel.error_msg !== null) {
+                throw {
+                    name: "GetReportException",
+                    message: responsemodel.error_msg,
+                    status: 400,
+                    toString: function() {
+                        return this.name + ": " + this.message;
+                    }
+                };
+            }
 
-      resolve(Service.successResponse({
-        'locationId': requestmodel.location_id,
-        'tableId': requestmodel.table_id,
-        'datetimeFrom': requestmodel.datetimeFrom,
-        'datetimeTo': requestmodel.datetimeTo,
-        'pdf': responsemodel.entity
-      }, 200));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 400,
-      ));
-    }
-  },
+            resolve(Service.successResponse({
+                'locationId': requestmodel.location_id,
+                'tableId': requestmodel.table_id,
+                'datetimeFrom': requestmodel.datetimeFrom,
+                'datetimeTo': requestmodel.datetimeTo,
+                'pdf': responsemodel.entity
+            }, 200));
+        } catch (e) {
+            reject(Service.rejectResponse(
+                e.message || 'Invalid input',
+                e.status || 400,
+            ));
+        }
+    },
 );
 
+/**
+ * Get the amount of people registered on a given table in the given time-range.
+ *
+ * locationId
+ * tableId
+ * datetimeFrom
+ * datetimeTo
+ *
+ * returns number of guests as int
+ * */
+const locationLocationIdTableTableIdActivityGET = ({ locationId, tableId, from, to }) => new Promise(
+    async (resolve, reject) => {
+        console.log("---locationLocationIdTableTableIdActivityGET---get current activity for a table---");
+        try {
+            let requestmodel = new LocationIdTableIdActivityRequestModel(locationId, tableId, from, to);
+
+            let validator = new LocationIdTableIdActivityValidator();
+            let interactor = new GetLocationTableActivityInteractor(repository, validator);
+
+            let responsemodel = await interactor.execute(requestmodel);
+
+            if(responsemodel.error_msg !== null) {
+                throw {
+                    name: "GetActivityException",
+                    message: responsemodel.error_msg,
+                    status: 400,
+                    toString: function() {
+                        return this.name + ": " + this.message;
+                    }
+                };
+            }
+
+            resolve(Service.successResponse({
+                'activity': responsemodel.activity
+            }, 200));
+        } catch (e) {
+            reject(Service.rejectResponse(
+                e.message || 'Invalid input',
+                e.status || 400,
+            ));
+        }
+    },
+);
 
 module.exports = {
   locationGET,
@@ -592,5 +638,6 @@ module.exports = {
   locationLocationIdTableTableIdRegisterPOST,
   locationPOST,
   locationPUT,
-  locationLocationIdTableTableIdReportGET
+  locationLocationIdTableTableIdReportGET,
+  locationLocationIdTableTableIdActivityGET
 };

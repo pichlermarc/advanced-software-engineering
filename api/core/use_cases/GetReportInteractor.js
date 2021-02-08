@@ -1,4 +1,4 @@
-const sequalize = require('sequelize');
+const sequelize = require('sequelize');
 const ResponseModel = require('../responseModels/EntityResponseModel');
 const fs = require('fs');
 
@@ -24,7 +24,7 @@ class GetReportInteractor {
     let response_model;
     let where = {
       date_from: {
-        [sequalize.Op.between]: [request_model.datetimeFrom, request_model.datetimeTo]
+        [sequelize.Op.between]: [request_model.datetimeFrom, request_model.datetimeTo]
       }
     }
     try {

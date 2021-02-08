@@ -171,6 +171,31 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             throw err;
         }
     }
+
+    async get_table_activity(where_clause) {
+        try {
+            await this.load_location(where_clause.location_id);
+            await this.load_table(where_clause.table_id, where_clause.location_id);
+
+        } catch (err) {
+            console.error("Method get_table_activity fails!", "Location or table not found")
+            throw new Error("Location or table not found");
+        }
+
+        try {
+            where_clause = Object.fromEntries(Object.entries(where_clause).filter(([key, val]) => val !== null));
+            const result = await mAssign.findAll({where: where_clause}, {raw: true});
+            if(result.length == 0) {
+                return 0;
+            }
+
+            return result.map(r => eAssign.from_object(r.dataValues)).length;
+
+        } catch (err) {
+            console.error("Method get_table_activity fails!", err)
+            throw err;
+        }
+    }
     /* ----- table END ----- */
 
     /* ----- assign-guest-to-table START ----- */
@@ -199,7 +224,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     /**
      *
-     * @param where_clause: Plane JS object that conaints the keys that should be filtered for:
+     * @param where_clause: Plane JS object that contains the keys that should be filtered for:
      *                      Filter key-value filters field-names and values.
      *                      Take a look on the tests to see examples!
      */
