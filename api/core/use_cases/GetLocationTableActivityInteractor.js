@@ -23,15 +23,9 @@ class GetLocationTableActivityInteractor {
 
         // 3. DB interaction
         let response_model;
-        let where = {
-            location_id: request_model.location_id,
-            table_id: request_model.table_id,
-            date_from: {
-                [sequelize.Op.between]: [Date.parse(request_model.from), Date.parse(request_model.to)]
-            }
-        }
+
         try {
-            let activityCount = await this.repository.get_table_activity(where);
+            let activityCount = await this.repository.get_table_activity(request_model.location_id, request_model.table_id, request_model.from, request_model.to);
             response_model = new ResponseModel(activityCount,
                 null,
                 200);

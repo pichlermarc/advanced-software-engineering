@@ -192,6 +192,33 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     }
     size_table() { return this.table_repo.length; }
     clear_table() { this.table_repo = []; }
+
+    get_table_activity(location_id, table_id, dateFrom, dateTo) {
+        try {
+            this.load_location(location_id);
+            this.load_table(table_id, location_id);
+
+        } catch (err) {
+            console.error("Method get_table_activity fails!", "Location or table not found")
+            throw new Error("Location or table not found");
+        }
+
+        try {
+            let assign = this.assign_g2t_repo.filter(a =>
+                a.location_id == location_id &&
+                a.table_id == table_id &&
+                a.date_from >= Date.parse(dateFrom) &&
+                a.date_from <= Date.parse(dateTo)
+            );
+
+            return assign.length;
+
+        } catch (err) {
+            console.error("Method get_table_activity fails!", err)
+            throw err;
+        }
+    }
+
     /* ----- table END ----- */
 
     /* ----- guest START ----- */

@@ -3,7 +3,7 @@
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
 const {sequelize, mLocation, mTable, mAssign} = require("./models")
 const {eLocation, eTable, eAssign} = require("../entities")
-
+const seq = require('sequelize');
 
 class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
@@ -172,10 +172,10 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         }
     }
 
-    async get_table_activity(where_clause) {
+    async get_table_activity(location_id, table_id, dateFrom, dateTo) {
         try {
-            await this.load_location(where_clause.location_id);
-            await this.load_table(where_clause.table_id, where_clause.location_id);
+            await this.load_location(location_id);
+            await this.load_table(table_id, location_id);
 
         } catch (err) {
             console.error("Method get_table_activity fails!", "Location or table not found")
@@ -183,6 +183,13 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         }
 
         try {
+            let where_clause = {
+                location_id: location_id,
+                table_id: table_id,
+                date_from: {
+                    [seq.Op.between]: [Date.parse(dateFrom), Date.parse(dateTo)]
+                }
+            }
             where_clause = Object.fromEntries(Object.entries(where_clause).filter(([key, val]) => val !== null));
             const result = await mAssign.findAll({where: where_clause}, {raw: true});
             if(result.length == 0) {
