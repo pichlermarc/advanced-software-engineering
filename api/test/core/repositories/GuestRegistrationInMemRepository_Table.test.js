@@ -51,6 +51,11 @@ test('should remove right table from repo', () => {
     expect(repo.size_table()).toBe(1);
 })
 
+test('should not remove table from repo as it is unknown', () => {
+    let table_removed = repo.remove_table(123, 123);
+    expect(table_removed).toBeUndefined();
+})
+
 test('should clear repository: remove all tables', () => {
     repo.save_table(new Table(5811, "table-dummy-1", location_id));
     repo.save_table(new Table(5812, "table-dummy-2", location_id));
@@ -95,7 +100,7 @@ test('should throw an error if try to save an existing table', () => {
     }).toThrowError(/^Repo: Table.*already exists!$/);
 })
 
-test('should return 1 as there is one assignment for the given time period', async () => {
+test('should return 1 as there is one assignment for the given time period', () => {
     repo.save_table(table);
     const time_1 = Date.parse("2021-02-06T18:32:30.000+0200");
     const time_2 = Date.parse("2021-02-06T18:42:00.000+0200");
@@ -105,7 +110,7 @@ test('should return 1 as there is one assignment for the given time period', asy
     expect(activity).toBe(1);
 })
 
-test('should return 0 as there is no assignment for the given time period', async () => {
+test('should return 0 as there is no assignment for the given time period', () => {
     repo.save_table(table);
     const time_1 = Date.parse("2021-02-06T18:22:30.000+0200");
     const time_2 = Date.parse("2021-02-06T18:42:00.000+0200");
@@ -115,7 +120,7 @@ test('should return 0 as there is no assignment for the given time period', asyn
     expect(activity).toBe(0);
 })
 
-test('should return 2 as there are two assignments for the given time period', async () => {
+test('should return 2 as there are two assignments for the given time period', () => {
     repo.save_table(table);
     const time_1 = Date.parse("2021-02-06T18:32:30.000+0200");
     const time_2 = Date.parse("2021-02-06T18:32:50.000+0200");
@@ -125,7 +130,7 @@ test('should return 2 as there are two assignments for the given time period', a
     expect(activity).toBe(2);
 })
 
-test('should throw an error as the location for an activity request does not exist', async () => {
+test('should throw an error as the location for an activity request does not exist', () => {
     repo.save_table(table);
     const time_1 = Date.parse("2021-02-06T18:32:30.000+0200");
     const time_2 = Date.parse("2021-02-06T18:32:50.000+0200");
@@ -139,7 +144,7 @@ test('should throw an error as the location for an activity request does not exi
     }
 })
 
-test('should throw an error as the table for an activity request does not exist', async () => {
+test('should throw an error as the table for an activity request does not exist', () => {
     repo.save_table(table);
     const time_1 = Date.parse("2021-02-06T18:32:30.000+0200");
     const time_2 = Date.parse("2021-02-06T18:32:50.000+0200");

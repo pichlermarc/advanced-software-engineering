@@ -123,7 +123,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         try {
             const result = await mTable.update({name: table.name}, {where: {id: table.id, location_id: table.location_id}}, {raw: true});
             if(result[0] == 0) {
-                // zero record could be updated
+                // no record could be updated
                 return undefined;
             }
             return table;
@@ -137,7 +137,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         try {
             const result = await mTable.destroy({where: {id: id, location_id: location_id}}, {force: true});
             if(result == 0) {
-                // zero record could be removed
+                // no record could be removed
                 return undefined;
             }
             return new eTable(id, "table-removed", location_id);

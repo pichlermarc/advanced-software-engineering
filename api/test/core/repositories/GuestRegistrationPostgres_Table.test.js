@@ -12,25 +12,21 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
 
     beforeAll(async () => {
         postgres = new GuestRegistrationPostgres();
+    });
 
+    beforeEach(async () => {
         try {
+            // reset DB models
+            await postgres.db.models.mLocation.sync({force: true});
+            await postgres.db.models.mTable.sync({force: true});
+            await postgres.db.models.mAssign.sync({force: true});
+
             location_1 = await postgres.save_location(new eLocation(null, "dummy-loc"));
             table_1 = new eTable(null, "dummy-table-#1", location_1.id);
             table_2 = new eTable(null, "dummy-table-#2", location_1.id);
             table_3 = new eTable(null, "dummy-table-#3", location_1.id);
         } catch (err) {
-            console.error(err)
-            throw err;
-        }
-    });
-
-    beforeEach(async () => {
-        try {
-            // reset DB model of 'mTable' (NOTE: includes empty table!).
-            await postgres.db.models.mTable.sync({force: true});
-            await postgres.db.models.mAssign.sync({force: true});
-        } catch (err) {
-            console.error('Sync-mTable error:', err);
+            console.error('Sync error:', err);
         }
     })
 
@@ -48,6 +44,17 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         } catch (err) {
             console.error(err)
             throw err;
+        }
+    })
+
+    test("should not save table to postgres as location is invalid", async () => {
+        try {
+            table_1.location_id = 123;
+            const table_fetched = await postgres.save_table(table_1);
+            fail("Exception not thrown");
+
+        } catch (err) {
+            expect(err.name).toBe("SequelizeForeignKeyConstraintError");
         }
     })
 
@@ -99,6 +106,18 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         }
     })
 
+    test("should not update table in postgres as name is null", async () => {
+        try {
+            const table_saved = await postgres.save_table(table_1);
+            table_saved.name = null;
+            await postgres.update_table(table_saved);
+            fail("Exception not thrown");
+
+        } catch (err) {
+            expect(err.name).toBe("SequelizeValidationError");
+        }
+    })
+
     test("should remove table with id = 1", async () => {
         try {
             const table_saved = await postgres.save_table(table_1);
@@ -125,6 +144,17 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         } catch (err) {
             console.error(err)
             throw err;
+        }
+    })
+
+    test("should throw an error when deleting a table with location id null", async () => {
+        try {
+            const table_saved = await postgres.save_table(table_1);
+            await postgres.remove_table(table_saved.id, undefined);
+            fail("Exception not thrown");
+
+        } catch (err) {
+            expect(err.name).toBe("Error");
         }
     })
 
@@ -161,6 +191,16 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         }
     })
 
+    test("should throw an error when reading from not existent mTable table", async () => {
+        try {
+            await postgres.db.models.mTable.drop({force: true});
+            await postgres.load_all_tables();
+            fail("Exception not thrown");
+        } catch (err) {
+            expect(err.name).toBe("SequelizeDatabaseError");
+        }
+    })
+
     test("should return size zero after load from emtpy DB", async () => {
         try {
             const tables_size = await postgres.size_table();
@@ -183,6 +223,16 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         } catch (err) {
             console.error(err)
             throw err;
+        }
+    })
+
+    test("should throw an error when reading the size from not existent mTable table", async () => {
+        try {
+            await postgres.db.models.mTable.drop({force: true});
+            await postgres.size_table();
+            fail("Exception not thrown");
+        } catch (err) {
+            expect(err.name).toBe("SequelizeDatabaseError");
         }
     })
 
@@ -241,6 +291,16 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
             fail("Exception not thrown");
         } catch (e) {
             expect(e.message).toBe("Location or table not found");
+        }
+    })
+
+    test('should throw an error as the date for an activity request is undefined', async () => {
+        const table_saved = await postgres.save_table(table_1);
+        try {
+            let activity = await postgres.get_table_activity(location_1.id, table_saved.id, undefined, "2021-02-06T18:34:00.000+0200");
+            fail("Exception not thrown");
+        } catch (e) {
+            expect(e.name).toBe("SequelizeDatabaseError");
         }
     })
 

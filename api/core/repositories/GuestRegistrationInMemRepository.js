@@ -74,7 +74,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             } else {
                 return undefined;
             }
-            return [location];
+            return location;
         } catch (e) {
             throw new Error("Method update_location fails." + e);
         }
@@ -200,49 +200,17 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         if(this.load_table(table_id, location_id) == null)
             throw new Error("Table not found!");
 
-        try {
-            let assign = this.assign_g2t_repo.filter(a =>
-                a.location_id == location_id &&
-                a.table_id == table_id &&
-                a.date_from >= Date.parse(dateFrom) &&
-                a.date_from <= Date.parse(dateTo)
-            );
+        let assign = this.assign_g2t_repo.filter(a =>
+            a.location_id == location_id &&
+            a.table_id == table_id &&
+            a.date_from >= Date.parse(dateFrom) &&
+            a.date_from <= Date.parse(dateTo)
+        );
 
-            return assign.length;
-
-        } catch (err) {
-            console.error("Method get_table_activity fails!", err)
-            throw err;
-        }
+        return assign.length;
     }
 
     /* ----- table END ----- */
-
-    /* ----- guest START ----- */
-    save_guest(guest) {
-        let guest_load = this.load_guest(guest.id);
-        if(guest_load !== undefined) {
-            throw new Error("Repo: Guest with id #" + guest.id + " already exists!");
-        }
-        this.guest_repo.push(guest);
-    }
-    load_guest(id) {
-        let guest;
-        if (id === undefined) {
-            guest = this.guest_repo;
-        } else {
-            guest = this.guest_repo.find(g => g.id == id);
-        }
-        return guest;
-    }
-    remove_guest(id) {
-        const guest = this.load_guest(id);
-        this.guest_repo = this.guest_repo.filter(g => g.id != id);
-        return guest;
-    }
-    size_guest() { return this.guest_repo.length; }
-    clear_guest() { this.guest_repo = []; }
-    /* ----- guest END ----- */
 
     /* ----- assign-guest-to-table START ----- */
     save_assign_g2t(assign) {
@@ -313,9 +281,18 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         }
         return assign;
     }
-    remove_assign_g2t(id) {
-        const assign = this.load_assign_g2t(id);
-        this.assign_g2t_repo = this.assign_g2t_repo.filter(t => arguments);
+    remove_assign_g2t(assignment) {
+        const assign = this.load_assign_g2t(assignment.location_id,
+            assignment.table_id,
+            assignment.date_from,
+            assignment.first_name,
+            assignment.last_name);
+        this.assign_g2t_repo = this.assign_g2t_repo.filter(a =>
+            a.location_id != assignment.location_id &&
+            a.table_id != assignment.table_id &&
+            a.date_from != assignment.date_from &&
+            a.first_name != assignment.first_name &&
+            a.last_name != assignment.last_name);
         return assign;
     }
     size_assign_g2t() { return this.assign_g2t_repo.length; }

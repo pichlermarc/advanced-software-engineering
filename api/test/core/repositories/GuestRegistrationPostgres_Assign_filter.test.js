@@ -38,6 +38,11 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
         postgres = new GuestRegistrationPostgres();
 
         try {
+            // reset DB models
+            await postgres.db.models.mLocation.sync({force: true});
+            await postgres.db.models.mTable.sync({force: true});
+            await postgres.db.models.mAssign.sync({force: true});
+
             location_1 = await postgres.save_location(new eLocation(null, "Seekaffee"));
             location_2 = await postgres.save_location(new eLocation(null, "Hafenstadt"));
 
@@ -145,4 +150,12 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
         }
     })
 
+    test("should throw an error when filtering an assign with null as where_clause", async () => {
+        try {
+            await postgres.filter_assign(null);
+            fail("Exception not thrown");
+        } catch (err) {
+            expect(err.name).toBe("TypeError");
+        }
+    })
 })

@@ -132,3 +132,10 @@ test('should throw an error if try to save an existing assignment', () => {
         repo.save_assign_g2t(assign);
     }).toThrowError(/^Repo: Assignment already exists!$/);
 })
+
+test('should remove correct assignment after saving', () => {
+    repo.save_assign_g2t(assign);
+    expect(repo.size_assign_g2t()).toBe(1);
+    repo.remove_assign_g2t(assign);
+    expect(repo.size_assign_g2t()).toBe(0);
+});

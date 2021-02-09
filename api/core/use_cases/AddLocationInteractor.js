@@ -23,7 +23,7 @@ class AddLocationInteractor {
         // 3. DB interaction
         let response_model;
         try {
-            const location = new Location(Math.floor(Math.random() * (100 - 1 + 1)) + 1, request_model.name);
+            const location = new Location(null, request_model.name);
             if (this.repository.load_location(location.id) == null) {
                 this.repository.save_location(location);
             }
