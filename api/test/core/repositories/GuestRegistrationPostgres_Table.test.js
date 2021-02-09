@@ -1,5 +1,5 @@
 const GuestRegistrationPostgres = require("../../../core/repositories/GuestRegistrationPostgres")
-const {eLocation, eTable} = require("../../../core/entities")
+const {eLocation, eTable, eAssign} = require("../../../core/entities")
 
 
 describe('Integration test - postgres/sequelize: basic table testing ', () => {
@@ -28,6 +28,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         try {
             // reset DB model of 'mTable' (NOTE: includes empty table!).
             await postgres.db.models.mTable.sync({force: true});
+            await postgres.db.models.mAssign.sync({force: true});
         } catch (err) {
             console.error('Sync-mTable error:', err);
         }
@@ -184,4 +185,71 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
             throw err;
         }
     })
+
+    test('should return 1 as there is one assignment for the given time period', async () => {
+        const table_saved = await postgres.save_table(table_1);
+        const time_1 = Date.parse("2021-02-06T18:32:30.000+0200");
+        const time_2 = Date.parse("2021-02-06T18:42:00.000+0200");
+        const time_3 = Date.parse("2021-02-06T18:52:00.000+0200");
+        await save_assignments(table_saved.id, time_1, time_2, time_3);
+        let activity = await postgres.get_table_activity(location_1.id, table_saved.id, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:34:00.000+0200");
+        expect(activity).toBe(1);
+    })
+
+    test('should return 0 as there is no assignment for the given time period', async () => {
+        const table_saved = await postgres.save_table(table_1);
+        const time_1 = Date.parse("2021-02-06T18:22:30.000+0200");
+        const time_2 = Date.parse("2021-02-06T18:42:00.000+0200");
+        const time_3 = Date.parse("2021-02-06T18:52:00.000+0200");
+        await save_assignments(table_saved.id, time_1, time_2, time_3);
+        let activity = await postgres.get_table_activity(location_1.id, table_saved.id, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:34:00.000+0200");
+        expect(activity).toBe(0);
+    })
+
+    test('should return 2 as there are two assignments for the given time period', async () => {
+        const table_saved = await postgres.save_table(table_1);
+        const time_1 = Date.parse("2021-02-06T18:32:30.000+0200");
+        const time_2 = Date.parse("2021-02-06T18:32:50.000+0200");
+        const time_3 = Date.parse("2021-02-06T18:52:00.000+0200");
+        await save_assignments(table_saved.id, time_1, time_2, time_3);
+        let activity = await postgres.get_table_activity(location_1.id, table_saved.id, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:34:00.000+0200");
+        expect(activity).toBe(2);
+    })
+
+    test('should throw an error as the location for an activity request does not exist', async () => {
+        const table_saved = await postgres.save_table(table_1);
+        const time_1 = Date.parse("2021-02-06T18:32:30.000+0200");
+        const time_2 = Date.parse("2021-02-06T18:32:50.000+0200");
+        const time_3 = Date.parse("2021-02-06T18:52:00.000+0200");
+        await save_assignments(table_saved.id, time_1, time_2, time_3);
+        try {
+            let activity = await postgres.get_table_activity(123, table_saved.id, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:34:00.000+0200");
+            fail("Exception not thrown");
+        } catch (e) {
+            expect(e.message).toBe("Location or table not found");
+        }
+    })
+
+    test('should throw an error as the table for an activity request does not exist', async () => {
+        const table_saved = await postgres.save_table(table_1);
+        const time_1 = Date.parse("2021-02-06T18:32:30.000+0200");
+        const time_2 = Date.parse("2021-02-06T18:32:50.000+0200");
+        const time_3 = Date.parse("2021-02-06T18:52:00.000+0200");
+        await save_assignments(table_saved.id, time_1, time_2, time_3);
+        try {
+            let activity = await postgres.get_table_activity(location_1.id, 123, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:34:00.000+0200");
+            fail("Exception not thrown");
+        } catch (e) {
+            expect(e.message).toBe("Location or table not found");
+        }
+    })
+
+    async function save_assignments(table_id, time_1, time_2, time_3) {
+        let assign_1 = new eAssign(location_1.id, table_id, time_1, "Sepp", "Forcher", "01 234567", "sepp@tv.at");
+        let assign_2 = new eAssign(location_1.id, table_id, time_2, "Richard", "Stallman", "02 234567", "robert@freedom.org");
+        let assign_3 = new eAssign(location_1.id, table_id, time_3, "Dr.", "Oetker", "03 234567", "dr.oetker@schoko.muffin");
+        await postgres.save_assign(assign_1);
+        await postgres.save_assign(assign_2);
+        await postgres.save_assign(assign_3);
+    }
 })

@@ -194,14 +194,11 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     clear_table() { this.table_repo = []; }
 
     get_table_activity(location_id, table_id, dateFrom, dateTo) {
-        try {
-            this.load_location(location_id);
-            this.load_table(table_id, location_id);
+        if(this.load_location(location_id) == null)
+            throw new Error("Location not found!");
 
-        } catch (err) {
-            console.error("Method get_table_activity fails!", "Location or table not found")
-            throw new Error("Location or table not found");
-        }
+        if(this.load_table(table_id, location_id) == null)
+            throw new Error("Table not found!");
 
         try {
             let assign = this.assign_g2t_repo.filter(a =>

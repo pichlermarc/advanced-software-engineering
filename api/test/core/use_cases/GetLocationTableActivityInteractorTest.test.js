@@ -38,11 +38,65 @@ test('should return 0 as there is no assignment for the given time period', asyn
     expect(res.status).toBe(200);
 })
 
-test('should return 2 as there are assignments for the given time period', async () => {
+test('should return 2 as there are two assignments for the given time period', async () => {
     requestModel = new RequestModel(1, 1, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:37:00.000+0200");
     res = await interactor.execute(requestModel);
     expect(res).toBeDefined();
     expect(res.activity).toBe(2);
     expect(res.error_msg).toBeNull();
     expect(res.status).toBe(200);
+})
+
+test('should return validator error as the location id is below 0', async () => {
+    requestModel = new RequestModel(-1, 1, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:37:00.000+0200");
+    res = await interactor.execute(requestModel);
+    expect(res).toBeDefined();
+    expect(res.activity).toBeNull();
+    expect(res.error_msg).toBe("Id must not be less than zero!");
+    expect(res.status).toBe(400);
+})
+
+test('should return validator error as the table id is below 0', async () => {
+    requestModel = new RequestModel(1, -1, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:37:00.000+0200");
+    res = await interactor.execute(requestModel);
+    expect(res).toBeDefined();
+    expect(res.activity).toBeNull();
+    expect(res.error_msg).toBe("Id must not be less than zero!");
+    expect(res.status).toBe(400);
+})
+
+test('should return validator error as the date time from is empty', async () => {
+    requestModel = new RequestModel(1, 1, "", "2021-02-06T18:37:00.000+0200");
+    res = await interactor.execute(requestModel);
+    expect(res).toBeDefined();
+    expect(res.activity).toBeNull();
+    expect(res.error_msg).toBe("DateTimeFrom must not be empty!");
+    expect(res.status).toBe(400);
+})
+
+test('should return validator error as the date time to is empty', async () => {
+    requestModel = new RequestModel(1, 1, "2021-02-06T18:37:00.000+0200", "");
+    res = await interactor.execute(requestModel);
+    expect(res).toBeDefined();
+    expect(res.activity).toBeNull();
+    expect(res.error_msg).toBe("DateTimeTo must not be empty!");
+    expect(res.status).toBe(400);
+})
+
+test('should return error as the location does not exist', async () => {
+    requestModel = new RequestModel(2, 1, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:37:00.000+0200");
+    res = await interactor.execute(requestModel);
+    expect(res).toBeDefined();
+    expect(res.activity).toBeNull();
+    expect(res.error_msg).toBe("Location not found!");
+    expect(res.status).toBe(400);
+})
+
+test('should return error as the table does not exist', async () => {
+    requestModel = new RequestModel(1, 2, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:37:00.000+0200");
+    res = await interactor.execute(requestModel);
+    expect(res).toBeDefined();
+    expect(res.activity).toBeNull();
+    expect(res.error_msg).toBe("Table not found!");
+    expect(res.status).toBe(400);
 })

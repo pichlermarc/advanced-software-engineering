@@ -15,9 +15,9 @@ class LocationIdTableIdActivityValidator extends IValidator {
     validate(request) {
         if(request.location_id < 0 || request.table_id < 0) {
             return new ValidationResult("Id must not be less than zero!");
-        } else if(request.datetimefrom === "") {
+        } else if(request.from === "") {
             return new ValidationResult("DateTimeFrom must not be empty!");
-        } else if(request.datetimeto === "") {
+        } else if(request.to === "") {
             return new ValidationResult("DateTimeTo must not be empty!");
         }
 
