@@ -49,10 +49,7 @@ describe('Test GetReportInteractor UnitTests ', () => {
   beforeAll(() => {
     postgres = new GuestRegistrationInMemRepository();
     fs.mkdir(dirpath,(err) => {
-      if (err) {
-        return console.error(err);
-      }}
-    ); // temp dir for test outputs, is removed in afterAll
+      }); // temp dir for test outputs, is removed in afterAll
     try {
       location_1 = postgres.save_location(location_1);
       location_2 = postgres.save_location(location_2);
