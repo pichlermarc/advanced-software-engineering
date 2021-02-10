@@ -39,7 +39,10 @@ class GetLocationInteractor {
         let response_model;
         try {
             let entity = await this.repository.load_location(request_model.id);
-            response_model = new ResponseModel(entity.id, entity.name);
+            if(entity == null)
+                response_model = new ResponseModel(null, null, "No such location found");
+            else
+                response_model = new ResponseModel(entity.id, entity.name);
         } catch (e) {
             console.error(e);
             response_model = new ResponseModel(request_model.id, null, e.message);

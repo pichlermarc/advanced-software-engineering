@@ -25,6 +25,7 @@ class UpdateTableAtLocationInteractor {
         let response_model = new ResponseModel(null, "The given location id or table id was not found in the database", 404);
         let table = await this.repository.load_table(request_model.table_id, request_model.location_id);
         if (table) {
+            table.name = request_model.table.name;
             table = await this.repository.update_table(table);
             response_model = new ResponseModel(table, null, 200);
         }

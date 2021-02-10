@@ -96,7 +96,7 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
         throw {
           name: "LocationNotFoundException",
           message: responsemodel.error_msg,
-          status: 405,
+          status: responsemodel.status || 404,
           toString: function() {
             return this.name + ": " + this.message;
           }
@@ -134,7 +134,7 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
             throw {
                 name: "LocationNotFoundException",
                 message: responsemodel.error_msg,
-                status: 405,
+                status: 404,
                 toString: function() {
                     return this.name + ": " + this.message;
                 }
@@ -272,7 +272,7 @@ const locationLocationIdTablePOST = ({ locationId, table }) => new Promise(
           "name": responsemodel.entity.name,
           "xCoordinate": responsemodel.entity.xCoordinate,
           "yCoordinate": responsemodel.entity.yCoordinate
-      }, 201));
+      }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -342,25 +342,14 @@ const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promi
       let responsemodel = await interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
-        if (responsemodel.status !== null) {
           throw {
             name: "LocationOrTableNotFoundException",
             message: responsemodel.error_msg,
-            status: 403,
+            status: 404,
             toString: function () {
               return this.name + ": " + this.message;
             }
           };
-        } else {
-          throw {
-            name: "LocationOrTableNotFoundException",
-            message: responsemodel.error_msg,
-            status: 405,
-            toString: function () {
-              return this.name + ": " + this.message;
-            }
-          };
-        }
       }
       resolve(Service.successResponse({
           "name": responsemodel.entity.name,
@@ -400,7 +389,7 @@ const locationLocationIdTableTableIdPOST = ({ locationId, tableId, table }) => n
               throw {
                   name: "LocationOrTableNotFoundException",
                   message: responsemodel.error_msg,
-                  status: 404,
+                  status: 400,
                   toString: function() {
                       return this.name + ": " + this.message;
                   }
@@ -455,7 +444,7 @@ const locationLocationIdTableTableIdRegisterPOST = ({ locationId, tableId, guest
               "phoneNumber": responsemodel.phoneNumber,
               "name": responsemodel.name,
               "email": responsemodel.email
-          }, 201));
+          }, 200));
       } catch (e) {
           reject(Service.rejectResponse(
               e.message || 'Invalid input',
@@ -527,7 +516,7 @@ const locationPUT = ({ location }) => new Promise(
         throw {
           name: "UpdateLocationException",
           message: responsemodel.error_msg,
-          status: 400,
+          status: responsemodel.status || 404,
           toString: function() {
             return this.name + ": " + this.message;
           }
@@ -622,7 +611,7 @@ const locationLocationIdTableTableIdActivityGET = ({ locationId, tableId, from, 
                 throw {
                     name: "GetActivityException",
                     message: responsemodel.error_msg,
-                    status: 400,
+                    status: 404,
                     toString: function() {
                         return this.name + ": " + this.message;
                     }

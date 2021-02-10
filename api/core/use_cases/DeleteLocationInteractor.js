@@ -29,7 +29,8 @@ class DeleteLocationInteractor {
         if(!validation_result.isValid) {
             const response_model = new ResponseModel(request_model.id,
               null,
-              validation_result.error_msg);
+              validation_result.error_msg,
+              400);
             return response_model;
         }
 

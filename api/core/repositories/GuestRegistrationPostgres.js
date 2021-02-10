@@ -36,6 +36,9 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     async load_location(id) {
         try {
             const result = await mLocation.findOne({where: id}, {raw: true});
+            if(result == null)
+                return null;
+
             return eLocation.from_object(result.dataValues);
         } catch (err) {
             console.error("Method load_location fails!", err)
@@ -116,6 +119,9 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     async load_table(id, location_id) {
         try {
             const result = await mTable.findOne({where: {id: id, location_id: location_id}}, {raw: true});
+            if(result == null)
+                return null;
+
             return eTable.from_object(result.dataValues);
         } catch (err) {
             console.error("Method load_table fails!", err)
@@ -181,14 +187,12 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     }
 
     async get_table_activity(location_id, table_id, dateFrom, dateTo) {
-        try {
-            await this.load_location(location_id);
-            await this.load_table(table_id, location_id);
 
-        } catch (err) {
-            console.error("Method get_table_activity fails!", "Location or table not found")
-            throw new Error("Location or table not found");
-        }
+        if(await this.load_location(location_id) == null)
+            throw new Error("Location not found");
+
+        if(await this.load_table(table_id, location_id) == null)
+            throw new Error("Table not found");
 
         try {
             let where_clause = {

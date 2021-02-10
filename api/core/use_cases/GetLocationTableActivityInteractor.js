@@ -30,7 +30,7 @@ class GetLocationTableActivityInteractor {
                 null,
                 200);
         } catch (e) {
-            response_model = new ResponseModel(null, e.message, 400);
+            response_model = new ResponseModel(null, e.message, 404);
         }
 
         // 4. return response
