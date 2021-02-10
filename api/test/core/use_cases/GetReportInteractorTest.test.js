@@ -17,11 +17,11 @@ let xlsreporter;
 let postgres;
 let location_1 = new eLocation(0, "Seekaffee");
 let location_2 = new eLocation(1, "Hafenstadt");
-let table_1 = new eTable(2, "vip", location_1.id);
-let table_2 = new eTable(3, "black", location_1.id);
-let table_3 = new eTable(4, "vip", location_1.id);
-let table_4 = new eTable(5, "vip", location_1.id);
-let table_5 = new eTable(6, "vip", location_1.id);
+let table_1;
+let table_2;
+let table_3;
+let table_4;
+let table_5;
 
 const hour_in_seconds = 1 * 60 * 60;
 const time_1 = new Date().getTime();
@@ -46,7 +46,7 @@ let dirpath = path.join(__dirname,'/buildOfTests_canBeDeleted');
 
 describe('Test GetReportInteractor UnitTests ', () => {
 
-  beforeAll(async () => {
+  beforeAll(() => {
     postgres = new GuestRegistrationInMemRepository();
     fs.mkdir(dirpath,(err) => {
       if (err) {
@@ -54,24 +54,30 @@ describe('Test GetReportInteractor UnitTests ', () => {
       }}
     ); // temp dir for test outputs, is removed in afterAll
     try {
-      await postgres.save_location(location_1);
-      await postgres.save_location(location_2);
+      location_1 = postgres.save_location(location_1);
+      location_2 = postgres.save_location(location_2);
 
-      await postgres.save_table(table_1);
-      await postgres.save_table(table_2);
-      await postgres.save_table(table_3);
-      await postgres.save_table(table_4);
-      await postgres.save_table(table_5);
+      table_1 = new eTable(2, "vip", location_1.id);
+      table_2 = new eTable(3, "black", location_1.id);
+      table_3 = new eTable(4, "vip", location_1.id);
+      table_4 = new eTable(5, "vip", location_1.id);
+      table_5 = new eTable(6, "vip", location_1.id);
 
-      assign_1 = await postgres.save_assign(new eAssign(location_1.id, table_1.id, time_1, "Sepp", "Forcher", "01 234567", "sepp@tv.at"));
-      assign_2 = await postgres.save_assign(new eAssign(location_1.id, table_1.id, time_2, "Richard", "Stallman", "02 234567", "robert@freedom.org"));
-      assign_3 = await postgres.save_assign(new eAssign(location_1.id, table_1.id, time_3, "Dr.", "Oetker", "03 234567", "dr.oetker@schoko.muffin"));
-      assign_4 = await postgres.save_assign(new eAssign(location_1.id, table_2.id, time_4, "Arabella", "Kiesbauer", "04 234567", "arabella@kiesi.at"));
-      assign_5 = await postgres.save_assign(new eAssign(location_1.id, table_3.id, time_5, "Martin", "Puntigam", "05 234567", "martin@sience-busters.at"));
-      assign_6 = await postgres.save_assign(new eAssign(location_1.id, table_3.id, time_1, "Robert", "Martin", "06 234567", "oncle-bob@clean.code"));
-      assign_7 = await postgres.save_assign(new eAssign(location_2.id, table_4.id, time_2, "Cpt.", "Picard", "07 234567", "Cpt.Picard@energy.com"));
-      assign_8 = await postgres.save_assign(new eAssign(location_2.id, table_4.id, time_3, "Richard", "Lugner", "08 234567", "richard.lugner@loewe.sex"));
-      assign_9 = await postgres.save_assign(new eAssign(location_2.id, table_5.id, time_4, "Christine", "Aschbacher", "09 234567", "c.aschi@meine.idee"));
+      table_1 = postgres.save_table(table_1);
+      table_2 = postgres.save_table(table_2);
+      table_3 = postgres.save_table(table_3);
+      table_4 = postgres.save_table(table_4);
+      table_5 = postgres.save_table(table_5);
+
+      assign_1 = postgres.save_assign(new eAssign(location_1.id, table_1.id, time_1, "Sepp", "Forcher", "01 234567", "sepp@tv.at"));
+      assign_2 = postgres.save_assign(new eAssign(location_1.id, table_1.id, time_2, "Richard", "Stallman", "02 234567", "robert@freedom.org"));
+      assign_3 = postgres.save_assign(new eAssign(location_1.id, table_1.id, time_3, "Dr.", "Oetker", "03 234567", "dr.oetker@schoko.muffin"));
+      assign_4 = postgres.save_assign(new eAssign(location_1.id, table_2.id, time_4, "Arabella", "Kiesbauer", "04 234567", "arabella@kiesi.at"));
+      assign_5 = postgres.save_assign(new eAssign(location_1.id, table_3.id, time_5, "Martin", "Puntigam", "05 234567", "martin@sience-busters.at"));
+      assign_6 = postgres.save_assign(new eAssign(location_1.id, table_3.id, time_1, "Robert", "Martin", "06 234567", "oncle-bob@clean.code"));
+      assign_7 = postgres.save_assign(new eAssign(location_1.id, table_4.id, time_2, "Cpt.", "Picard", "07 234567", "Cpt.Picard@energy.com"));
+      assign_8 = postgres.save_assign(new eAssign(location_1.id, table_4.id, time_3, "Richard", "Lugner", "08 234567", "richard.lugner@loewe.sex"));
+      assign_9 = postgres.save_assign(new eAssign(location_1.id, table_5.id, time_4, "Christine", "Aschbacher", "09 234567", "c.aschi@meine.idee"));
 
     } catch (err) {
       console.error(err)

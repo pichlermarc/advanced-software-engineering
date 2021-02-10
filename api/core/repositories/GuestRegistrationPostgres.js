@@ -247,8 +247,15 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
      *                      Filter key-value filters field-names and values.
      *                      Take a look on the tests to see examples!
      */
-    async filter_assign(where_clause) {
+    async filter_assign(location_id, table_id, datetimeFrom, datetimeTo) {
         try {
+            let where_clause = {
+                location_id: location_id,
+                table_id: table_id,
+                date_from: {
+                    [seq.Op.between]: [datetimeFrom, datetimeTo]
+                }
+            }
             // remove key-value pairs that value is null
             where_clause = Object.fromEntries(Object.entries(where_clause).filter(([key, val]) => val !== null));
             const result = await mAssign.findAll({where: where_clause}, {raw: true});

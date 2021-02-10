@@ -21,26 +21,26 @@ beforeEach(() => {
   repo.save_location(location);
 })
 
-test('should correctly update a location', () => {
+test('should correctly update a location', async () => {
   let re = repo.load();
   let request_model = new LocationRequestModel(LOCATION_ID, NEW_LOCATION_NAME); //old id, new name
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
-  expect(res.location).toBe(NEW_LOCATION_NAME);
+  expect(res.name).toBe(NEW_LOCATION_NAME);
   expect(res.error_msg).toBeNull();
   expect(repo.location_repo[0].name).toBe(NEW_LOCATION_NAME);
   expect(repo.location_repo[0].id).toBe(LOCATION_ID);
 })
 
-test('should try to update non-existing location', () => {
-  res = interactor.execute(request_model);
+test('should try to update non-existing location', async () => {
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.error_msg).not.toBeNull();
 })
 
-test('validator must throw error because location name is empty', () => {
+test('validator must throw error because location name is empty', async () => {
   location = new Location(LOCATION_ID, "");
   request_model = new LocationRequestModel(location.name);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res.error_msg).toBe("Id must not be less than zero and location name must be not empty!");
 })

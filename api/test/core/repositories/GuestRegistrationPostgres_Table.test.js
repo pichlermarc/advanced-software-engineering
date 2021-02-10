@@ -76,7 +76,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
         try {
             const table_saved = await postgres.save_table(table_1);
             const name_update = "updated-table-name";
-            const table_update = new eTable(table_saved.id, name_update, table_saved.location_id);
+            const table_update = new eTable(table_saved.id, name_update, table_saved.location_id, -2.5, 3.66);
 
             const table_fetched = await postgres.update_table(table_update);
             expect(table_fetched).toBeDefined();
@@ -95,7 +95,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
             const table_saved = await postgres.save_table(table_1);
             const id_update = 99999;
             const name_update = "updated-table-name";
-            const table_update = new eTable(id_update, name_update, table_saved.location_id);
+            const table_update = new eTable(id_update, name_update, table_saved.location_id, -2.5, 3.66);
 
             const table_fetched = await postgres.update_table(table_update);
             expect(table_fetched).toBeUndefined();
@@ -276,7 +276,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
             let activity = await postgres.get_table_activity(123, table_saved.id, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:34:00.000+0200");
             fail("Exception not thrown");
         } catch (e) {
-            expect(e.message).toBe("Location or table not found");
+            expect(e.message).toBe("Location not found");
         }
     })
 
@@ -290,7 +290,7 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
             let activity = await postgres.get_table_activity(location_1.id, 123, "2021-02-06T18:32:00.000+0200", "2021-02-06T18:34:00.000+0200");
             fail("Exception not thrown");
         } catch (e) {
-            expect(e.message).toBe("Location or table not found");
+            expect(e.message).toBe("Table not found");
         }
     })
 

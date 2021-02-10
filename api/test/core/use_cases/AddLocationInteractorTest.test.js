@@ -19,22 +19,22 @@ beforeEach(() => {
 })
 
 
-test('should create correct response for valid request', () => {
-    res = interactor.execute(request_model);
+test('should create correct response for valid request', async () => {
+    res = await interactor.execute(request_model);
     expect(res).toBeDefined()
     expect(res.name).toBe(LOCATION_NAME)
     expect(res.error_msg).toBeNull()
 })
 
-test('should save new entity to DB', () => {
-    res = interactor.execute(request_model);
+test('should save new entity to DB', async () => {
+    res = await interactor.execute(request_model);
     expect(repo.load_location(res.id)).toStrictEqual(new Location(res.id, LOCATION_NAME));
 })
 
-test('validator must throw error because location name is empty', () => {
+test('validator must throw error because location name is empty', async () => {
     location = new Location(LOCATION_ID, "");
     request_model = new AddLocationRequestModel(location.name);
-    res = interactor.execute(request_model);
+    res = await interactor.execute(request_model);
     expect(res.error_msg).toBe("Name must not be empty!");
     expect(repo.load_location(LOCATION_ID)).toBeNull();
 })

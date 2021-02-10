@@ -36,36 +36,36 @@ repo.save_table(table5);
 
 
 beforeEach(() => {
-    repo.clear_assign_g2t();
-    repo.save_assign_g2t(assign1);
-    repo.save_assign_g2t(assign2);
-    repo.save_assign_g2t(assign3);
-    repo.save_assign_g2t(assign4);
-    repo.save_assign_g2t(assign5);
+    repo.clear_assign();
+    repo.save_assign(assign1);
+    repo.save_assign(assign2);
+    repo.save_assign(assign3);
+    repo.save_assign(assign4);
+    repo.save_assign(assign5);
 })
 
 test('should setup the repo of assignments as well', () => {
     expect(repo).toBeDefined();
     expect(repo.size_location()).toBe(2);
     expect(repo.size_table()).toBe(5);
-    expect(repo.size_assign_g2t()).toBe(5);
+    expect(repo.size_assign()).toBe(5);
 })
 
 test('should return all 5 assignments if passing all parameter as undefined', () => {
-    const all_guest_on_table = repo.filter_assign_g2t(undefined, undefined, undefined,
+    const all_guest_on_table = repo.filter_assign(undefined, undefined, undefined,
         undefined, undefined);
     expect(all_guest_on_table).toBeDefined();
     expect(all_guest_on_table.length).toBe(5);
 })
 
 test('should return all 5 assignments if passing no parameter', () => {
-    const all_guest_on_table = repo.filter_assign_g2t();
+    const all_guest_on_table = repo.filter_assign();
     expect(all_guest_on_table).toBeDefined();
     expect(all_guest_on_table.length).toBe(5);
 })
 
 test('should return list of assignments if passing only location and table', () => {
-    const all_guest_on_table = repo.filter_assign_g2t(location1.id, table1.id);
+    const all_guest_on_table = repo.filter_assign(location1.id, table1.id);
     expect(all_guest_on_table).toBeDefined();
     expect(all_guest_on_table.length).toBe(3);
     expect(all_guest_on_table[0]).toBe(assign1);
@@ -74,19 +74,19 @@ test('should return list of assignments if passing only location and table', () 
 })
 
 test('should return empty list of assignments if passing location1 and wrong table2', () => {
-    const all_guest_on_table = repo.filter_assign_g2t(location1.id, table2.id);
+    const all_guest_on_table = repo.filter_assign(location1.id, table2.id);
     expect(all_guest_on_table).toBeDefined();
     expect(all_guest_on_table.length).toBe(0);
 })
 
 test('should return empty list of assignments if passing location2 and wrong table4', () => {
-    const all_guest_on_table = repo.filter_assign_g2t(location2.id, table4.id);
+    const all_guest_on_table = repo.filter_assign(location2.id, table4.id);
     expect(all_guest_on_table).toBeDefined();
     expect(all_guest_on_table.length).toBe(0);
 })
 
 test('should return list of assignments if passing only location1', () => {
-    const all_guest_on_table = repo.filter_assign_g2t(location1.id);
+    const all_guest_on_table = repo.filter_assign(location1.id);
     expect(all_guest_on_table).toBeDefined();
     expect(all_guest_on_table.length).toBe(3);
     expect(all_guest_on_table[0]).toBe(assign1);
@@ -95,16 +95,9 @@ test('should return list of assignments if passing only location1', () => {
 })
 
 test('should return list of assignments if passing only location2', () => {
-    const all_guest_on_table = repo.filter_assign_g2t(location2.id);
+    const all_guest_on_table = repo.filter_assign(location2.id);
     expect(all_guest_on_table).toBeDefined();
     expect(all_guest_on_table.length).toBe(2);
     expect(all_guest_on_table[0]).toBe(assign4);
     expect(all_guest_on_table[1]).toBe(assign5);
-})
-
-test('should return all 5 assignments if passing only date_from1', () => {
-    const all_guest_on_table = repo.filter_assign_g2t(undefined, undefined, undefined,
-        date_from1);
-    expect(all_guest_on_table).toBeDefined();
-    expect(all_guest_on_table.length).toBe(5);
 })

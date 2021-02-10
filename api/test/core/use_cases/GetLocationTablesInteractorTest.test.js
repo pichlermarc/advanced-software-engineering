@@ -27,9 +27,9 @@ beforeEach(() => {
   repo.save_table(new Table(6, TABLE_NAME_6, LOCATION_ID_2, -2.5, 3.66));
 });
 
-test('should return stored tables associated with a locationId from repository', () => {
+test('should return stored tables associated with a locationId from repository', async () => {
   let request_model = new RequestModel(LOCATION_ID_1);
-  let res = interactor.execute(request_model);
+  let res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.location_list.length).toBe(3);
   expect(res.error_msg).toBeNull();
@@ -37,7 +37,7 @@ test('should return stored tables associated with a locationId from repository',
   expect(res.location_list[2].name).toBe(TABLE_NAME_3);
 
   request_model = new RequestModel(LOCATION_ID_2);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.location_list.length).toBe(3);
   expect(res.error_msg).toBeNull();
@@ -45,29 +45,29 @@ test('should return stored tables associated with a locationId from repository',
   expect(res.location_list[2].name).toBe(TABLE_NAME_6);
 });
 
-test('should create response with 0 locations, since location has no tables', () => {
+test('should create response with 0 locations, since location has no tables', async () => {
   repo.clear();
   let request_model = new RequestModel(LOCATION_ID_2);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.error_msg).toBeNull();
   expect(res.location_list).toBeDefined();
   expect(res.location_list.length).toBe(0);
 });
 
-test('Test with non-existing locationId', () => {
+test('Test with non-existing locationId', async () => {
   let INVALID_LOCATION_ID = 3;
   let request_model = new RequestModel(INVALID_LOCATION_ID);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.error_msg).toBeNull();
   expect(res.location_list.length).toBe(0);
 });
 
-test('Test with invalid locationId', () => {
+test('Test with invalid locationId', async () => {
   let INVALID_LOCATION_ID = -3;
   let request_model = new RequestModel(INVALID_LOCATION_ID);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.error_msg).not.toBeNull();
   expect(res.error_msg).toBe('Id must not be less than zero!');

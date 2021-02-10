@@ -13,7 +13,7 @@ repo.save_location(location);
 beforeEach(() => {
     // fixture setup
     repo.clear_table();
-    repo.clear_assign_g2t();
+    repo.clear_assign();
 })
 
 test('fixture repo should be defined', () => {
@@ -162,7 +162,7 @@ function save_assignments(table_id, time_1, time_2, time_3) {
     let assign_1 = new Assign(location_id, table_id, time_1, "Sepp", "Forcher", "01 234567", "sepp@tv.at");
     let assign_2 = new Assign(location_id, table_id, time_2, "Richard", "Stallman", "02 234567", "robert@freedom.org");
     let assign_3 = new Assign(location_id, table_id, time_3, "Dr.", "Oetker", "03 234567", "dr.oetker@schoko.muffin");
-    repo.save_assign_g2t(assign_1);
-    repo.save_assign_g2t(assign_2);
-    repo.save_assign_g2t(assign_3);
+    repo.save_assign(assign_1);
+    repo.save_assign(assign_2);
+    repo.save_assign(assign_3);
 }

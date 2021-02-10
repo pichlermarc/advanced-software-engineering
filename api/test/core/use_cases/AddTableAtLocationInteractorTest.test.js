@@ -28,10 +28,10 @@ beforeEach(() => {
   repo.save_location(new_location);
 })
 
-test('should correctly add a new table to a specified location', () => {
+test('should correctly add a new table to a specified location', async () => {
   let new_table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
   let request_model = new EntityRequestModel(OLD_LOCATION_ID, new_table);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.entity).toBe(new_table);
   expect(res.error_msg).toBeNull();
@@ -40,47 +40,39 @@ test('should correctly add a new table to a specified location', () => {
   expect(repo.table_repo.length).toBe(1);
 })
 
-test('should try to add already existing table to a location', () => {
+test('should try to add already existing table to a location', async () => {
   let table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
   repo.save_table(table);
   let request_model = new EntityRequestModel(OLD_LOCATION_ID, table);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.error_msg).not.toBeNull();
   expect(repo.table_repo.length).toBe(1);
 })
 
-test('should try to add table to non-existing location', () => {
+test('should try to add table to non-existing location', async () => {
   let table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
   let NONEXISTING_LOCATION_ID = 500;
   let request_model = new EntityRequestModel(NONEXISTING_LOCATION_ID, table);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.error_msg).not.toBeNull();
   expect(repo.table_repo.length).toBe(0);
 })
 
-test('should try to add table from location X to location Y', () => {
-  let table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
-  request_model = new EntityRequestModel(NEW_LOCATION_ID, table);
-  res = interactor.execute(request_model);
-  expect(res.error_msg).not.toBeNull();
-  expect(repo.table_repo.length).toBe(0);
-})
-
-test('test request with invalid location-id', () => {
+test('test request with invalid location-id', async () => {
   let table = new Table(TABLE_ID,TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
   let INVALID_LOCATION_ID = -1;
   request_model = new EntityRequestModel(INVALID_LOCATION_ID, table);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res.error_msg).not.toBeNull();
   expect(repo.table_repo.length).toBe(0);
 })
 
-test('test request with invalid table', () => {
+test('test request with invalid table', async () => {
   let table_with_invalid_locationId = new Table(TABLE_ID,TABLE_NAME, -1, -2.5, 3.66);
   request_model = new EntityRequestModel(OLD_LOCATION_ID, table_with_invalid_locationId);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res.error_msg).not.toBeNull();
   expect(repo.table_repo.length).toBe(0);
 })

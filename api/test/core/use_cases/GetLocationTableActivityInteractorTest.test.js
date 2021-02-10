@@ -16,8 +16,8 @@ beforeAll(() => {
     repo.clear();
     repo.save_location(new Location(1,"loc1"));
     repo.save_table(new Table(1, "tab1", 1));
-    repo.save_assign_g2t(new Assign(1, 1, Date.parse("2021-02-06T18:33:00.000+0200"), "Sepp", "Forcher", "+43 0000", "sepp@forcher.at"));
-    repo.save_assign_g2t(new Assign(1, 1, Date.parse("2021-02-06T18:36:00.000+0200"), "Max", "Mustermann", "+43 0000", "max@mustermann.at"));
+    repo.save_assign(new Assign(1, 1, Date.parse("2021-02-06T18:33:00.000+0200"), "Sepp", "Forcher", "+43 0000", "sepp@forcher.at"));
+    repo.save_assign(new Assign(1, 1, Date.parse("2021-02-06T18:36:00.000+0200"), "Max", "Mustermann", "+43 0000", "max@mustermann.at"));
 })
 
 test('should return 1 as there is one assignment for the given time period', async () => {
@@ -89,7 +89,7 @@ test('should return error as the location does not exist', async () => {
     expect(res).toBeDefined();
     expect(res.activity).toBeNull();
     expect(res.error_msg).toBe("Location not found!");
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(404);
 })
 
 test('should return error as the table does not exist', async () => {
@@ -98,5 +98,5 @@ test('should return error as the table does not exist', async () => {
     expect(res).toBeDefined();
     expect(res.activity).toBeNull();
     expect(res.error_msg).toBe("Table not found!");
-    expect(res.status).toBe(400);
+    expect(res.status).toBe(404);
 })

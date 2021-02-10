@@ -72,45 +72,10 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
         postgres.connection_close();
     });
 
-    test("should return whole assigns-table content if pass empty object for where-clause", async () => {
-        try {
-            const wc = {};
-            const a_filter = await postgres.filter_assign(wc);
-            expect(a_filter.length).toBeGreaterThanOrEqual(assign_list.length);
-
-        } catch (err) {
-            console.error(err)
-            throw err;
-        }
-    })
-
     test("should return zero entries because of impossible where-clause", async () => {
         try {
-            const wc = {
-                location_id: 999_999,
-                table_id: 888_888,
-                date_from: time_1 + 100 * hour_in_seconds,
-                first_name: "xxx",
-                last_name: "yyy",
-                phone: "555-333111",
-                email: "xxx.yyy@zzz"
-            };
-            const a_filter = await postgres.filter_assign(wc);
+            const a_filter = await postgres.filter_assign(999, 888, time_1 + 100 * hour_in_seconds, time_1 + 100 * hour_in_seconds);
             expect(a_filter.length).toBe(0);
-
-        } catch (err) {
-            console.error(err)
-            throw err;
-        }
-    })
-
-    test("should return 6 assignments, only at location_1", async () => {
-        try {
-            const wc = {
-                location_id: location_1.id,
-            };
-            const a_filter = await postgres.filter_assign(wc);
-            expect(a_filter.length).toBe(6);
 
         } catch (err) {
             console.error(err)
@@ -120,11 +85,7 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
 
     test("should return 3 assignments, only at location_1 and table_1", async () => {
         try {
-            const wc = {
-                location_id: location_1.id,
-                table_id: table_1.id,
-            };
-            const a_filter = await postgres.filter_assign(wc);
+            const a_filter = await postgres.filter_assign(location_1.id, table_1.id, Date.parse("2019-02-06T18:32:30.000+0200"), Date.parse("2023-02-06T18:32:30.000+0200"));
             expect(a_filter.length).toBe(3);
 
         } catch (err) {
@@ -133,16 +94,10 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
         }
     })
 
-    test("should return 3 assignments, only at location_1 and table_1 and from time_1 on", async () => {
+    test("should return 1 assignment, only at location_1 and table_1 and from time_1 on", async () => {
         try {
-            const wc = {
-                location_id: location_1.id,
-                table_id: table_1.id,
-                // todo: check for >
-                //date_from: {[gte]: time_1}
-            };
-            const a_filter = await postgres.filter_assign(wc);
-            expect(a_filter.length).toBe(3);
+            const a_filter = await postgres.filter_assign(location_1.id, table_1.id, time_1, Date.parse("2023-02-06T18:32:30.000+0200"));
+            expect(a_filter.length).toBe(1);
 
         } catch (err) {
             console.error(err)
@@ -155,7 +110,7 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
             await postgres.filter_assign(null);
             fail("Exception not thrown");
         } catch (err) {
-            expect(err.name).toBe("TypeError");
+            expect(err.name).toBe("Error");
         }
     })
 })
