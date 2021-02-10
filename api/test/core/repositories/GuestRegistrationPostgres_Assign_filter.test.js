@@ -46,11 +46,11 @@ describe('Integration test - postgres/sequelize: filter assign testing ', () => 
             location_1 = await postgres.save_location(new eLocation(null, "Seekaffee"));
             location_2 = await postgres.save_location(new eLocation(null, "Hafenstadt"));
 
-            table_1 = await postgres.save_table(new eTable(null, "vip", location_1.id));
-            table_2 = await postgres.save_table(new eTable(null, "black", location_1.id));
-            table_3 = await postgres.save_table(new eTable(null, "vip", location_1.id));
-            table_4 = await postgres.save_table(new eTable(null, "vip", location_1.id));
-            table_5 = await postgres.save_table(new eTable(null, "vip", location_1.id));
+            table_1 = await postgres.save_table(new eTable(null, "vip", location_1.id, -2.5, 3.66));
+            table_2 = await postgres.save_table(new eTable(null, "black", location_1.id, -2.5, 3.66));
+            table_3 = await postgres.save_table(new eTable(null, "vip", location_1.id, -2.5, 3.66));
+            table_4 = await postgres.save_table(new eTable(null, "vip", location_1.id, -2.5, 3.66));
+            table_5 = await postgres.save_table(new eTable(null, "vip", location_1.id, -2.5, 3.66));
 
             assign_1 = await postgres.save_assign(new eAssign(location_1.id, table_1.id, time_1, "Sepp", "Forcher", "01 234567", "sepp@tv.at"));
             assign_2 = await postgres.save_assign(new eAssign(location_1.id, table_1.id, time_2, "Richard", "Stallman", "02 234567", "robert@freedom.org"));

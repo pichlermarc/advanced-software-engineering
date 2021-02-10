@@ -23,7 +23,7 @@ let location;
 beforeEach(() => {
   // fixture setup before each test
   location = new Location(LOCATION_ID, LOCATION_NAME);
-  table = new Table(TABLE_ID, TABLE_NAME, LOCATION_ID);
+  table = new Table(TABLE_ID, TABLE_NAME, LOCATION_ID, -2.5, 3.66);
   repo.save_location(location);
   repo.save_table(table);
 

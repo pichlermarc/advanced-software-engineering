@@ -25,11 +25,11 @@ beforeEach(() => {
   repo.clear();
   repo.save_location(new Location(LOCATION_ID_1,"location-test1"));
   repo.save_location(new Location(LOCATION_ID_2,"location-test2"));
-  repo.save_table(new Table(TABLE_ID_1, TABLE_NAME_1, LOCATION_ID_1));
-  repo.save_table(new Table(TABLE_ID_2, TABLE_NAME_2, LOCATION_ID_1));
-  repo.save_table(new Table(TABLE_ID_3, TABLE_NAME_3, LOCATION_ID_1));
-  repo.save_table(new Table(TABLE_ID_4, TABLE_NAME_4, LOCATION_ID_2));
-  repo.save_table(new Table(TABLE_ID_5, TABLE_NAME_5, LOCATION_ID_2));
+  repo.save_table(new Table(TABLE_ID_1, TABLE_NAME_1, LOCATION_ID_1, -2.5, 3.66));
+  repo.save_table(new Table(TABLE_ID_2, TABLE_NAME_2, LOCATION_ID_1, -2.5, 3.66));
+  repo.save_table(new Table(TABLE_ID_3, TABLE_NAME_3, LOCATION_ID_1, -2.5, 3.66));
+  repo.save_table(new Table(TABLE_ID_4, TABLE_NAME_4, LOCATION_ID_2, -2.5, 3.66));
+  repo.save_table(new Table(TABLE_ID_5, TABLE_NAME_5, LOCATION_ID_2, -2.5, 3.66));
 });
 
 test('should return a specific stored table from a specific location with id locationId', () => {

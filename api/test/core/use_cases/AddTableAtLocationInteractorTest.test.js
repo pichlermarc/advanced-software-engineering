@@ -29,7 +29,7 @@ beforeEach(() => {
 })
 
 test('should correctly add a new table to a specified location', () => {
-  let new_table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID);
+  let new_table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
   let request_model = new EntityRequestModel(OLD_LOCATION_ID, new_table);
   res = interactor.execute(request_model);
   expect(res).toBeDefined();
@@ -41,7 +41,7 @@ test('should correctly add a new table to a specified location', () => {
 })
 
 test('should try to add already existing table to a location', () => {
-  let table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID);
+  let table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
   repo.save_table(table);
   let request_model = new EntityRequestModel(OLD_LOCATION_ID, table);
   res = interactor.execute(request_model);
@@ -51,7 +51,7 @@ test('should try to add already existing table to a location', () => {
 })
 
 test('should try to add table to non-existing location', () => {
-  let table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID);
+  let table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
   let NONEXISTING_LOCATION_ID = 500;
   let request_model = new EntityRequestModel(NONEXISTING_LOCATION_ID, table);
   res = interactor.execute(request_model);
@@ -61,7 +61,7 @@ test('should try to add table to non-existing location', () => {
 })
 
 test('should try to add table from location X to location Y', () => {
-  let table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID);
+  let table = new Table(TABLE_ID, TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
   request_model = new EntityRequestModel(NEW_LOCATION_ID, table);
   res = interactor.execute(request_model);
   expect(res.error_msg).not.toBeNull();
@@ -69,7 +69,7 @@ test('should try to add table from location X to location Y', () => {
 })
 
 test('test request with invalid location-id', () => {
-  let table = new Table(TABLE_ID,TABLE_NAME, OLD_LOCATION_ID);
+  let table = new Table(TABLE_ID,TABLE_NAME, OLD_LOCATION_ID, -2.5, 3.66);
   let INVALID_LOCATION_ID = -1;
   request_model = new EntityRequestModel(INVALID_LOCATION_ID, table);
   res = interactor.execute(request_model);
@@ -78,7 +78,7 @@ test('test request with invalid location-id', () => {
 })
 
 test('test request with invalid table', () => {
-  let table_with_invalid_locationId = new Table(TABLE_ID,TABLE_NAME, -1);
+  let table_with_invalid_locationId = new Table(TABLE_ID,TABLE_NAME, -1, -2.5, 3.66);
   request_model = new EntityRequestModel(OLD_LOCATION_ID, table_with_invalid_locationId);
   res = interactor.execute(request_model);
   expect(res.error_msg).not.toBeNull();

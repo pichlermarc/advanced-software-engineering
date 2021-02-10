@@ -28,7 +28,7 @@ describe('Integration test - postgres/sequelize: basic assign testing ', () => {
             await postgres.db.models.mAssign.sync({force: true});
 
             location_1 = await postgres.save_location(new eLocation(null, "dummy-loc"));
-            table_1 = await postgres.save_table(new eTable(null, "dummy-table-#1", location_1.id));
+            table_1 = await postgres.save_table(new eTable(null, "dummy-table-#1", location_1.id, -2.5, 3.66));
             assign_1 = new eAssign(location_1.id, table_1.id, time_1, "Sepp", "Forcher", "01 234567", "sepp@tv.at");
             assign_2 = new eAssign(location_1.id, table_1.id, time_2, "Richard", "Stallman", "02 234567", "robert@freedom.org");
             assign_3 = new eAssign(location_1.id, table_1.id, time_3, "Dr.", "Oetker", "03 234567", "dr.oetker@schoko.muffin");

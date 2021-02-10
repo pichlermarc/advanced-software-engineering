@@ -19,12 +19,12 @@ beforeEach(() => {
   repo.clear();
   repo.save_location(new Location(LOCATION_ID_1,"location-test1"));
   repo.save_location(new Location(LOCATION_ID_2,"location-test2"));
-  repo.save_table(new Table(1, TABLE_NAME_1, LOCATION_ID_1));
-  repo.save_table(new Table(2,"table-2", LOCATION_ID_1));
-  repo.save_table(new Table(3, TABLE_NAME_3, LOCATION_ID_1));
-  repo.save_table(new Table(4, TABLE_NAME_4, LOCATION_ID_2));
-  repo.save_table(new Table(5,"table-5", LOCATION_ID_2));
-  repo.save_table(new Table(6, TABLE_NAME_6, LOCATION_ID_2));
+  repo.save_table(new Table(1, TABLE_NAME_1, LOCATION_ID_1, -2.5, 3.66));
+  repo.save_table(new Table(2,"table-2", LOCATION_ID_1, -2.5, 3.66));
+  repo.save_table(new Table(3, TABLE_NAME_3, LOCATION_ID_1, -2.5, 3.66));
+  repo.save_table(new Table(4, TABLE_NAME_4, LOCATION_ID_2, -2.5, 3.66));
+  repo.save_table(new Table(5,"table-5", LOCATION_ID_2, -2.5, 3.66));
+  repo.save_table(new Table(6, TABLE_NAME_6, LOCATION_ID_2, -2.5, 3.66));
 });
 
 test('should return stored tables associated with a locationId from repository', () => {

@@ -19,7 +19,7 @@ beforeAll(() => {
   // fixture setup
   repo.clear();
   repo.save_location(new Location(LOCATION_ID, LOCATION_NAME));
-  repo.save_table(new Table(TABLE_ID, TABLE_NAME, LOCATION_ID));
+  repo.save_table(new Table(TABLE_ID, TABLE_NAME, LOCATION_ID, -2.5, 3.66));
 })
 
 afterAll(() => {

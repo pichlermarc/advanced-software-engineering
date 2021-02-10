@@ -22,9 +22,9 @@ describe('Integration test - postgres/sequelize: basic table testing ', () => {
             await postgres.db.models.mAssign.sync({force: true});
 
             location_1 = await postgres.save_location(new eLocation(null, "dummy-loc"));
-            table_1 = new eTable(null, "dummy-table-#1", location_1.id);
-            table_2 = new eTable(null, "dummy-table-#2", location_1.id);
-            table_3 = new eTable(null, "dummy-table-#3", location_1.id);
+            table_1 = new eTable(null, "dummy-table-#1", location_1.id, -2.5, 3.66);
+            table_2 = new eTable(null, "dummy-table-#2", location_1.id, -2.5, 3.66);
+            table_3 = new eTable(null, "dummy-table-#3", location_1.id, -2.5, 3.66);
         } catch (err) {
             console.error('Sync error:', err);
         }
