@@ -25,7 +25,7 @@ class GetLocationInteractor {
     }
 
     // 1. call process use-case
-    execute(request_model) {
+    async execute(request_model) {
         // 2. validation
         let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
@@ -36,18 +36,16 @@ class GetLocationInteractor {
         }
 
         // 3. DB interaction
-        //const stub_entity = new LocationEntity(request_model.id, request_model.name);
-        //this.repository.save(stub_entity);
         let response_model;
         try {
-            let entity = this.repository.load_location(request_model.id);
-            // 4. return response
+            let entity = await this.repository.load_location(request_model.id);
             response_model = new ResponseModel(entity.id, entity.name);
         } catch (e) {
             console.error(e);
             response_model = new ResponseModel(request_model.id, null, e.message);
         }
 
+        // 4. return response
         return response_model;
     }
 }

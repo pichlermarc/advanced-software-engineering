@@ -10,7 +10,7 @@ class UpdateLocationInteractor {
     }
 
     // 1. call process use-case
-    execute(location_request_model) {
+    async execute(location_request_model) {
         // 2. validation
         let validation_result = this.validator.validate(location_request_model);
         if(!validation_result.isValid) {
@@ -26,9 +26,8 @@ class UpdateLocationInteractor {
           location_request_model.name, `Location ${location_request_model.name} does not exist`
         );
         try {
-            if (this.repository.load_location(location_request_model.id)) { // if updating valid/existing location
-                this.repository.remove_location(location_request_model.id);
-                this.repository.save_location(location_request_model);
+            if (await this.repository.load_location(location_request_model.id)) { // if updating valid/existing location
+                await this.repository.update_location(location_request_model);
                 response_model = new LocationResponseModel(location_request_model.id, location_request_model.name);
             }
         } catch (e) {

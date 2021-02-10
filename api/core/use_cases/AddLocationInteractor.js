@@ -10,7 +10,7 @@ class AddLocationInteractor {
     }
 
     // 1. call process use-case
-    execute(request_model) {
+    async execute(request_model) {
         // 2. validation
         let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
@@ -24,11 +24,11 @@ class AddLocationInteractor {
         let response_model;
         try {
             const location = new Location(null, request_model.name);
-            if (this.repository.load_location(location.id) == null) {
-                this.repository.save_location(location);
-            }
+
+            const newLocation = await this.repository.save_location(location);
+
             // 4. return response
-            response_model = new AddLocationResponseModel(location.id, location.name);
+            response_model = new AddLocationResponseModel(newLocation.id, newLocation.name);
         } catch (e) {
             console.error(e);
             response_model = new AddLocationResponseModel(request_model.id, null, e.message);

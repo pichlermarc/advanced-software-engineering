@@ -2,6 +2,7 @@
 
 const ResponseModel = require('../responseModels/EntityResponseModel');
 const Table = require('../entities/Table');
+
 class DeleteTableAtLocationInteractor {
 
     constructor(repository, validator) {
@@ -10,7 +11,7 @@ class DeleteTableAtLocationInteractor {
     }
 
     // 1. call process use-case
-    execute(request_model) {
+    async execute(request_model) {
         // 2. validation
         let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
@@ -22,11 +23,11 @@ class DeleteTableAtLocationInteractor {
 
         // 3. DB interaction
         let response_model;
-        let table = this.repository.load_table(request_model.table_id, request_model.location_id);
+        let table = await this.repository.load_table(request_model.table_id, request_model.location_id);
         if(table === null) {
             response_model = new ResponseModel(null, "The given location id or table id was not found in the database", 404);
         } else {
-            const removed = this.repository.remove_table(request_model.table_id, request_model.location_id);
+            await this.repository.remove_table(request_model.table_id, request_model.location_id);
             response_model = new ResponseModel(table, null, 200);
         }
 

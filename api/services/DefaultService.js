@@ -38,6 +38,7 @@ const PDFReporter = require('../core/use_cases/report/PDFReporter').PDFReporter;
 const LocationIdTableIdActivityRequestModel = require('../core/requestModels/LocationIdTableIdActivityRequestModel');
 const LocationIdTableIdActivityValidator = require('../core/validation/LocationIdTableIdActivityValidator');
 const GetLocationTableActivityInteractor = require('../core/use_cases/GetLocationTableActivityInteractor');
+const AddTableAtLocationInteractor = require('../core/use_cases/AddTableAtLocationInteractor')
 
 /**
 * Get your locations
@@ -52,7 +53,7 @@ const locationGET = () => new Promise(
 
       let interactor = new GetLocationsInteractor(repository);
 
-      let responsemodel = interactor.execute();
+      let responsemodel = await interactor.execute();
 
       if(responsemodel.error_msg !== null) {
         throw {
@@ -89,7 +90,7 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
       let validator = new IdValidator();
       let interactor = new DeleteLocationInteractor(repository, validator);
 
-      let responsemodel = interactor.execute(requestmodel);
+      let responsemodel = await interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
         throw {
@@ -101,7 +102,9 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
           }
         };
       }
-      resolve(Service.successResponse({"id": responsemodel.entity.id, "name": responsemodel.entity.name}));
+      resolve(Service.successResponse({
+          "id": responsemodel.id,
+          "name": responsemodel.name}, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -119,13 +122,13 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
 * */
 const locationLocationIdGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
-      console.log("---locationLocationIdGET---process-the-stub-usecase---");
+      console.log("---locationLocationIdGET---get location with given id---");
     try {
         let requestmodel = new LocationIdRequestModel(locationId);
         let validator = new IdValidator();
         let interactor = new GetLocationInteractor(repository, validator);
 
-        let responsemodel = interactor.execute(requestmodel);
+        let responsemodel = await interactor.execute(requestmodel);
 
         if(responsemodel.error_msg !== null) {
             throw {
@@ -139,8 +142,8 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
         }
 
       resolve(Service.successResponse({
-        "id": responsemodel.id,
-          "name": responsemodel.location
+          "id": responsemodel.id,
+          "name": responsemodel.name
       }));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -162,13 +165,13 @@ const locationLocationIdPOST = ({ locationId, location }) => new Promise(
   async (resolve, reject) => {
     console.log("---locationLocationIdPOST---update existing Location---");
     try {
-      let requestmodel = new LocationRequestModel(locationId, location);
+      let requestmodel = new LocationRequestModel(locationId, location.name);
 
       let idvalidator = new IdValidator();
       let locationvalidator = new LocationValidator();
       let interactor = new UpdateLocationByIdInteractor(repository, idvalidator, locationvalidator);
 
-      let responsemodel = interactor.execute(requestmodel);
+      let responsemodel = await interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
         throw {
@@ -183,7 +186,7 @@ const locationLocationIdPOST = ({ locationId, location }) => new Promise(
 
       resolve(Service.successResponse({
         "id": responsemodel.id,
-        "name": responsemodel.location
+        "name": responsemodel.name
       }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -208,7 +211,7 @@ const locationLocationIdTableGET = ({ locationId }) => new Promise(
       let validator = new IdValidator();
       let interactor = new GetLocationTablesInteractor(repository, validator);
 
-      let responsemodel = interactor.execute(requestmodel);
+      let responsemodel = await interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
         throw {
@@ -251,7 +254,7 @@ const locationLocationIdTablePOST = ({ locationId, table }) => new Promise(
 
       let interactor = new AddTableAtLocationInteractor(repository, idvalidator, tablevalidator);
 
-      let responsemodel = interactor.execute(requestmodel);
+      let responsemodel = await interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
         throw {
@@ -265,10 +268,10 @@ const locationLocationIdTablePOST = ({ locationId, table }) => new Promise(
       }
 
       resolve(Service.successResponse({
-          "id": responsemodel.id,
-          "name": responsemodel.name,
-          "xCoordinate": responsemodel.xCoordinate,
-          "yCoordinate": responsemodel.yCoordinate
+          "id": responsemodel.entity.id,
+          "name": responsemodel.entity.name,
+          "xCoordinate": responsemodel.entity.xCoordinate,
+          "yCoordinate": responsemodel.entity.yCoordinate
       }, 201));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -295,7 +298,7 @@ const locationLocationIdTableTableIdDELETE = ({ locationId, tableId }) => new Pr
           let validator = new LocationIdTableIdValidator();
           let interactor = new DeleteTableAtLocation(repository, validator);
 
-          let responsemodel = interactor.execute(requestmodel);
+          let responsemodel = await interactor.execute(requestmodel);
 
           if(responsemodel.error_msg !== null) {
               throw {
@@ -336,7 +339,7 @@ const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promi
       let validator = new LocationIdTableIdValidator();
       let interactor = new GetLocationTableInteractor(repository, validator);
 
-      let responsemodel = interactor.execute(requestmodel);
+      let responsemodel = await interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
         if (responsemodel.status !== null) {
@@ -384,14 +387,14 @@ const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promi
 * */
 const locationLocationIdTableTableIdPOST = ({ locationId, tableId, table }) => new Promise(
   async (resolve, reject) => {
-      console.log("---locationLocationIdTableTableIdPOST---");
+      console.log("---locationLocationIdTableTableIdPOST---update an existing table---");
       try {
           let requestmodel = new LocationIdTableIdTableRequestModel(locationId, tableId, table);
 
           let validator = new LocationIdTableIdTableValidator();
           let interactor = new UpdateTableAtLocationInteractor(repository, validator);
 
-          let responsemodel = interactor.execute(requestmodel);
+          let responsemodel = await interactor.execute(requestmodel);
 
           if(responsemodel.error_msg !== null) {
               throw {
@@ -435,7 +438,7 @@ const locationLocationIdTableTableIdRegisterPOST = ({ locationId, tableId, guest
           let validator = new LocationIdTableIdGuestValidator();
           let interactor = new RegisterGuestAtTableAtLocationInteractor(repository, validator);
 
-          let responsemodel = interactor.execute(requestmodel);
+          let responsemodel = await interactor.execute(requestmodel);
 
           if(responsemodel.error_msg !== null) {
               throw {
@@ -518,7 +521,7 @@ const locationPUT = ({ location }) => new Promise(
       let validator = new LocationValidator();
       let interactor = new UpdateLocationInteractor(repository, validator);
 
-      let responsemodel = interactor.execute(requestmodel);
+      let responsemodel = await interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
         throw {

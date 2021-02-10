@@ -62,7 +62,7 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         try {
             const result = await mLocation.destroy({where: {id}}, {force: true});
             if(result == 0) {
-                // zero record could be removed
+                // zero records could be removed
                 return undefined;
             }
             return new eLocation(id, "location-removed");
@@ -101,7 +101,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     /* ----- table START ----- */
     async save_table(table) {
         try {
-            const result = await mTable.create({name: table.name, location_id: table.location_id}, {raw: true});
+            const result = await mTable.create({name: table.name,
+                location_id: table.location_id,
+                xCoordinate: table.xCoordinate,
+                yCoordinate: table.yCoordinate},
+                {raw: true});
             return eTable.from_object(result.dataValues);
         } catch (err) {
             console.error("Method save_table fails!", err)
@@ -121,7 +125,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
     async update_table(table) {
         try {
-            const result = await mTable.update({name: table.name}, {where: {id: table.id, location_id: table.location_id}}, {raw: true});
+            const result = await mTable.update({name: table.name}, {where: {id: table.id,
+                    location_id: table.location_id,
+                    xCoordinate: table.xCoordinate,
+                    yCoordinate: table.yCoordinate}},
+                {raw: true});
             if(result[0] == 0) {
                 // no record could be updated
                 return undefined;
