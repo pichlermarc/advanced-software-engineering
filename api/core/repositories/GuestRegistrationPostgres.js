@@ -28,7 +28,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             const result = await mLocation.create({name: location.name}, {raw: true});
             return eLocation.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method save_location fails!", err)
             throw err;
         }
     }
@@ -41,7 +40,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
             return eLocation.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method load_location fails!", err)
             throw err;
         }
     }
@@ -56,7 +54,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             }
             return location;
         } catch(err) {
-            console.error("Method update_location fails!", err)
             throw err;
         }
     }
@@ -70,7 +67,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             }
             return new eLocation(id, "location-removed");
         } catch(err) {
-            console.error("Method remove_location fails!", err)
             throw err;
         }
     }
@@ -84,7 +80,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.map(r => eLocation.from_object(r));
 
         } catch(err) {
-            console.error("Method load_all_locations fails!", err)
             throw err;
         }
     }
@@ -95,7 +90,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.count;
 
         } catch(err) {
-            console.error("Method size_location fails!", err)
             throw err;
         }
     }
@@ -111,7 +105,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
                 {raw: true});
             return eTable.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method save_table fails!", err)
             throw err;
         }
     }
@@ -124,7 +117,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
             return eTable.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method load_table fails!", err)
             throw err;
         }
     }
@@ -142,7 +134,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             }
             return table;
         } catch(err) {
-            console.error("Method update_table fails!", err)
             throw err;
         }
     }
@@ -156,7 +147,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             }
             return new eTable(id, "table-removed", location_id);
         } catch(err) {
-            console.error("Method remove_table fails!", err)
             throw err;
         }
     }
@@ -170,7 +160,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.map(r => eTable.from_object(r));
 
         } catch(err) {
-            console.error("Method load_all_tables fails!", err)
             throw err;
         }
     }
@@ -181,7 +170,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.count;
 
         } catch(err) {
-            console.error("Method size_table fails!", err)
             throw err;
         }
     }
@@ -211,7 +199,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.map(r => eAssign.from_object(r.dataValues)).length;
 
         } catch (err) {
-            console.error("Method get_table_activity fails!", err)
             throw err;
         }
     }
@@ -226,7 +213,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return eAssign.from_object(result.dataValues);
             //return new eAssign(a.location_id, a.table_id, a.date_from, a.first_name, a.last_name, a.phone, a.email);
         } catch (err) {
-            console.error("Method save_assign fails!", err)
             throw err;
         }
     }
@@ -236,7 +222,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             const result = await mAssign.findOne({where: assign}, {raw: true});
             return eAssign.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method load_assign fails!", err)
             throw err;
         }
     }
@@ -265,7 +250,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.map(r => eAssign.from_object(r.dataValues));
 
         } catch (err) {
-            console.error("Method filter_assign fails!", err)
             throw err;
         }
     }
@@ -279,7 +263,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.map(r => eAssign.from_object(r));
 
         } catch(err) {
-            console.error("Method load_all_assigns fails!", err)
             throw err;
         }
     }
@@ -290,7 +273,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.count;
 
         } catch(err) {
-            console.error("Method size_assign fails!", err)
             throw err;
         }
     }

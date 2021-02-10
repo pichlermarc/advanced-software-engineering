@@ -24,7 +24,7 @@ let dirpath = path.join(__dirname,'/buildOfTests_canBeDeleted');
 beforeAll(() => {
   fs.mkdir(dirpath,(err) => {
     if (err) {
-      return console.error(err);
+      return console.log(err);
     }}
   ); // temp dir for test outputs, is removed in afterAll
 })
