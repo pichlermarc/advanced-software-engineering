@@ -265,8 +265,10 @@ const locationLocationIdTablePOST = ({ locationId, table }) => new Promise(
       }
 
       resolve(Service.successResponse({
-        "id": responsemodel.id,
-        "name": responsemodel.name
+          "id": responsemodel.id,
+          "name": responsemodel.name,
+          "xCoordinate": responsemodel.xCoordinate,
+          "yCoordinate": responsemodel.yCoordinate
       }, 201));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -305,7 +307,12 @@ const locationLocationIdTableTableIdDELETE = ({ locationId, tableId }) => new Pr
                   }
               };
           }
-          resolve(Service.successResponse({"id": responsemodel.entity.id, "name": responsemodel.entity.name}));
+          resolve(Service.successResponse({
+              "id": responsemodel.entity.id,
+              "name": responsemodel.entity.name,
+              "xCoordinate": responsemodel.entity.xCoordinate,
+              "yCoordinate": responsemodel.entity.yCoordinate
+          }));
       } catch (e) {
           reject(Service.rejectResponse(
               e.message || 'Invalid input',
@@ -315,12 +322,11 @@ const locationLocationIdTableTableIdDELETE = ({ locationId, tableId }) => new Pr
   },
 );
 /**
-* Get your tables
-* Get tables associated with this location
+* Get table with given id
 *
 * locationId Long ID of the location to return.
-* tableId Long ID of the location to return.
-* returns List
+* tableId Long ID of the table to return.
+* returns single table
 * */
 const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promise(
   async (resolve, reject) => {
@@ -354,8 +360,10 @@ const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promi
         }
       }
       resolve(Service.successResponse({
-        "name": responsemodel.entity.name,
-        "id": responsemodel.entity.id
+          "name": responsemodel.entity.name,
+          "id": responsemodel.entity.id,
+          "xCoordinate": responsemodel.entity.xCoordinate,
+          "yCoordinate": responsemodel.entity.yCoordinate
       }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -395,7 +403,12 @@ const locationLocationIdTableTableIdPOST = ({ locationId, tableId, table }) => n
                   }
               };
           }
-          resolve(Service.successResponse({"id": responsemodel.entity.id, "name": responsemodel.entity.name}));
+          resolve(Service.successResponse({
+              "id": responsemodel.entity.id,
+              "name": responsemodel.entity.name,
+              "xCoordinate": responsemodel.entity.xCoordinate,
+              "yCoordinate": responsemodel.entity.yCoordinate
+          }));
       } catch (e) {
           reject(Service.rejectResponse(
               e.message || 'Invalid input',
@@ -464,7 +477,7 @@ const locationPOST = ({ location }) => new Promise(
           let validator = new AddLocationValidator();
           let interactor = new AddLocationInteractor(repository, validator);
 
-          let responsemodel = interactor.execute(requestmodel);
+          let responsemodel = await interactor.execute(requestmodel);
 
           if(responsemodel.error_msg !== null) {
               throw {
@@ -586,8 +599,8 @@ const locationLocationIdTableTableIdReportGET = ({ locationId, tableId, datetime
  *
  * locationId
  * tableId
- * datetimeFrom
- * datetimeTo
+ * from
+ * to
  *
  * returns number of guests as int
  * */

@@ -15,8 +15,12 @@ class LocationIdTableIdTableValidator extends IValidator {
     validate(request) {
         if(request.location_id < 0 || request.table_id < 0 || request.table.id < 0) {
             return new ValidationResult("Id must not be less than zero!");
-        } else if(request.table.name === "") {
+        }
+        if(request.table.name === "") {
             return new ValidationResult("Name must not be empty!");
+        }
+        if(request.table.xCoordinate == "" || request.table.yCoordinate == "") {
+            return new ValidationResult("Values for coordinates must be given");
         }
 
         return new ValidationResult();
