@@ -485,7 +485,7 @@ const locationPOST = ({ location }) => new Promise(
           resolve(Service.successResponse({
               "id": responsemodel.id,
               "name": responsemodel.name
-          }, 201));
+          }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -557,7 +557,7 @@ const locationLocationIdTableTableIdReportGET = ({ locationId, tableId, datetime
             let reporter = reportType === 'pdf' ? new PDFReporter('output.pdf') : new XLSReporter();
             let interactor = new GetReportInteractor(repository, validator, reporter);
 
-            let responsemodel = interactor.execute(requestmodel);
+            let responsemodel = await interactor.execute(requestmodel);
 
             if(responsemodel.error_msg !== null) {
                 throw {
