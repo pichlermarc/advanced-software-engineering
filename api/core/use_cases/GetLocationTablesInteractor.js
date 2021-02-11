@@ -25,7 +25,7 @@ class GetLocationTablesInteractor {
     }
 
     // 1. call process use-case
-    execute(request_model) {
+    async execute(request_model) {
         // 2. validation
         let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
@@ -35,7 +35,7 @@ class GetLocationTablesInteractor {
         }
 
         // 3. DB interaction
-        let tables = this.repository.load_all_tables(request_model.id);
+        let tables = await this.repository.load_all_tables(request_model.id);
         tables = tables.filter(table => table.location_id === request_model.id);
 
         // 4. return response

@@ -18,24 +18,21 @@ describe('Integration test - postgres/sequelize: basic assign testing ', () => {
 
     beforeAll(async () => {
         postgres = new GuestRegistrationPostgres();
-
-        try {
-            location_1 = await postgres.save_location(new eLocation(null, "dummy-loc"));
-            table_1 = await postgres.save_table(new eTable(null, "dummy-table-#1", location_1.id));
-            assign_1 = new eAssign(location_1.id, table_1.id, time_1, "Sepp", "Forcher", "01 234567", "sepp@tv.at");
-            assign_2 = new eAssign(location_1.id, table_1.id, time_2, "Richard", "Stallman", "02 234567", "robert@freedom.org");
-            assign_3 = new eAssign(location_1.id, table_1.id, time_3, "Dr.", "Oetker", "03 234567", "dr.oetker@schoko.muffin");
-
-        } catch (err) {
-            console.error(err)
-            throw err;
-        }
     });
 
     beforeEach(async () => {
         try {
-            // reset DB model of 'mAssign' (NOTE: includes empty assign!).
+            // reset DB models
+            await postgres.db.models.mLocation.sync({force: true});
+            await postgres.db.models.mTable.sync({force: true});
             await postgres.db.models.mAssign.sync({force: true});
+
+            location_1 = await postgres.save_location(new eLocation(null, "dummy-loc"));
+            table_1 = await postgres.save_table(new eTable(null, "dummy-table-#1", location_1.id, -2.5, 3.66));
+            assign_1 = new eAssign(location_1.id, table_1.id, time_1, "Sepp", "Forcher", "01 234567", "sepp@tv.at");
+            assign_2 = new eAssign(location_1.id, table_1.id, time_2, "Richard", "Stallman", "02 234567", "robert@freedom.org");
+            assign_3 = new eAssign(location_1.id, table_1.id, time_3, "Dr.", "Oetker", "03 234567", "dr.oetker@schoko.muffin");
+
         } catch (err) {
             console.error('Sync-mAssign error:', err);
         }
@@ -86,6 +83,36 @@ describe('Integration test - postgres/sequelize: basic assign testing ', () => {
         }
     })
 
+    test("should throw an error when reading all assigns from not existent mAssign table", async () => {
+        try {
+            await postgres.db.models.mAssign.drop({force: true});
+            await postgres.load_all_assigns();
+            fail("Exception not thrown");
+        } catch (err) {
+            expect(err.name).toBe("SequelizeDatabaseError");
+        }
+    })
+
+    test("should throw an error when creating assignment with invalid location id", async () => {
+        try {
+            assign_1.location_id = 123;
+            await postgres.save_assign(assign_1);
+            fail("Exception not thrown");
+        } catch (err) {
+            expect(err.name).toBe("SequelizeForeignKeyConstraintError");
+        }
+    })
+
+    test("should throw an error when reading a single assign from not existent mAssign table", async () => {
+        try {
+            await postgres.db.models.mAssign.drop({force: true});
+            await postgres.load_assign(assign_1);
+            fail("Exception not thrown");
+        } catch (err) {
+            expect(err.name).toBe("SequelizeDatabaseError");
+        }
+    })
+
     test("should return an empty list after load from emtpy DB", async () => {
         try {
             const assigns_fetched = await postgres.load_all_assigns();
@@ -119,6 +146,16 @@ describe('Integration test - postgres/sequelize: basic assign testing ', () => {
         } catch (err) {
             console.error(err)
             throw err;
+        }
+    })
+
+    test("should throw an error when reading the size from not existent mAssign table", async () => {
+        try {
+            await postgres.db.models.mAssign.drop({force: true});
+            await postgres.size_assign();
+            fail("Exception not thrown");
+        } catch (err) {
+            expect(err.name).toBe("SequelizeDatabaseError");
         }
     })
 })

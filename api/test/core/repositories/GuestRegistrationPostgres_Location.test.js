@@ -5,9 +5,9 @@ const {eLocation} = require("../../../core/entities")
 describe('Integration test - postgres/sequelize: basic location testing ', () => {
 
     let postgres;
-    const location_1 = new eLocation(null, "dummy-loc-#1");
-    const location_2 = new eLocation(null, "dummy-loc-#2");
-    const location_3 = new eLocation(null, "dummy-loc-#3");
+    let location_1;
+    let location_2;
+    let location_3;
 
     beforeAll(() => {
         postgres = new GuestRegistrationPostgres();
@@ -17,6 +17,9 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         try {
             // reset DB model of 'mLocation' (NOTE: includes empty table!)
             await postgres.db.models.mLocation.sync({force: true});
+            location_1 = new eLocation(null, "dummy-loc-#1");
+            location_2 = new eLocation(null, "dummy-loc-#2");
+            location_3 = new eLocation(null, "dummy-loc-#3");
         } catch (err) {
             console.error('Sync-mLocation error:', err);
         }
@@ -35,6 +38,17 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         } catch (err) {
             console.error(err)
             throw err;
+        }
+    })
+
+    test("should not save location to postgres as name is undefined", async () => {
+        try {
+            location_1.name = undefined;
+            const location_fetched = await postgres.save_location(location_1);
+            fail("Exception not thrown");
+
+        } catch (err) {
+            expect(err.name).toBe("SequelizeValidationError");
         }
     })
 
@@ -68,7 +82,32 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         }
     })
 
-    test("should return undefined if update a not existing location", async () => {
+    test("should not update location in postgres as name is null", async () => {
+        try {
+            const location_fetched = await postgres.save_location(location_1);
+            location_fetched.name = null;
+            await postgres.update_location(location_fetched);
+            fail("Exception not thrown");
+
+        } catch (err) {
+            expect(err.name).toBe("SequelizeValidationError");
+        }
+    })
+
+    test("should not update location in postgres as it is unknown", async () => {
+        try {
+            const location_fetched = await postgres.save_location(location_1);
+            location_fetched.id = 123;
+            let affected = await postgres.update_location(location_fetched);
+            expect(affected).toBeUndefined();
+
+        } catch (err) {
+            console.error(err)
+            throw err;
+        }
+    })
+
+    test("should return undefined if updating a not existing location", async () => {
         try {
             await postgres.save_location(location_1);
             const id_update = 99999;
@@ -98,7 +137,7 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         }
     })
 
-    test("should return undefined if remove a not existing location", async () => {
+    test("should return undefined if removing a not existing location", async () => {
         try {
             await postgres.save_location(location_1);
             const id_remove = 99999;
@@ -109,6 +148,18 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         } catch (err) {
             console.error(err)
             throw err;
+        }
+    })
+
+    test("should throw an error when deleting a location from not existent mLocation location", async () => {
+        try {
+            const location_saved = await postgres.save_location(location_1);
+            postgres.db.models.mLocation.drop({force: true});
+            await postgres.remove_location(location_saved.id);
+            fail("Exception not thrown");
+
+        } catch (err) {
+            expect(err.name).toBe("SequelizeDatabaseError");
         }
     })
 
@@ -128,6 +179,16 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         } catch (err) {
             console.error(err)
             throw err;
+        }
+    })
+
+    test("should throw an error when reading from not existent mLocation table", async () => {
+        try {
+            await postgres.db.models.mLocation.drop({force: true});
+            await postgres.load_all_locations();
+            fail("Exception not thrown");
+        } catch (err) {
+            expect(err.name).toBe("SequelizeDatabaseError");
         }
     })
 
@@ -164,6 +225,16 @@ describe('Integration test - postgres/sequelize: basic location testing ', () =>
         } catch (err) {
             console.error(err)
             throw err;
+        }
+    })
+
+    test("should throw an error when reading the size from not existent mLocation table", async () => {
+        try {
+            await postgres.db.models.mLocation.drop({force: true});
+            await postgres.size_location();
+            fail("Exception not thrown");
+        } catch (err) {
+            expect(err.name).toBe("SequelizeDatabaseError");
         }
     })
 })

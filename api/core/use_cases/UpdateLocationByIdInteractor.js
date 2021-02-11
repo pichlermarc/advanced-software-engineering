@@ -11,10 +11,10 @@ class UpdateLocationByIdInteractor {
     }
 
     // 1. call process use-case
-    execute(location_request_model) {
+    async execute(location_request_model) {
         // 2. validation
         let validation_result_id = this.idvalidator.validate(location_request_model);
-        let validation_result_location = this.locationvalidator.validate(location_request_model.name);
+        let validation_result_location = this.locationvalidator.validate(location_request_model);
         if(!validation_result_id.isValid) {
             return this.generateErrorResponseModel(location_request_model, validation_result_id);
         } else if (!validation_result_location.isValid) {
@@ -27,10 +27,9 @@ class UpdateLocationByIdInteractor {
           location_request_model.name, `Location ${location_request_model.name} does not exist`
         );
         try {
-            if (this.repository.load_location(location_request_model.id)) { // if updating valid/existing location
-                this.repository.remove_location(location_request_model.id);
-                this.repository.save_location(location_request_model.name); // this is the new location not just the name
-                response_model = new LocationResponseModel(location_request_model.name.id, location_request_model.name.name);
+            if (await this.repository.load_location(location_request_model.id)) { // if updating valid/existing location
+                await this.repository.update_location(location_request_model);
+                response_model = new LocationResponseModel(location_request_model.id, location_request_model.name);
             }
         } catch (e) {
             response_model = new LocationResponseModel(location_request_model.id, null, e.message);

@@ -23,26 +23,26 @@ afterAll(() => {
   repo.clear();
 });
 
-test(`Should return the id from the deleted location: ${LOCATION_ID}`, () => {
-  let res = interactor.execute(req);
+test(`Should return the id from the deleted location: ${LOCATION_ID}`, async () => {
+  let res = await interactor.execute(req);
   expect(res).toBeDefined();
   expect(res.id).toBe(LOCATION_ID);
   expect(res.error_msg).toBeNull();
 })
 
-test('should return error since you try to delete an entity from repo which is not there', () => {
-  let res = interactor.execute(new RequestModel(LOCATION_ID+1));
+test('should return error since you try to delete an entity from repo which is not there', async () => {
+  let res = await interactor.execute(new RequestModel(LOCATION_ID+1));
   expect(res.id).toBeNull();
-  expect(res.location).toBeNull();
+  expect(res.name).toBeNull();
   expect(res.error_msg).toBeDefined();
   expect(res.error_msg).toBe("No Entity With That ID in DB");
 })
 
-test('should return validator error since location id < 0', () => {
+test('should return validator error since location id < 0', async () => {
   let invalidid = -1;
-  let res = interactor.execute(new RequestModel(invalidid));
+  let res = await interactor.execute(new RequestModel(invalidid));
   expect(res.id).toBe(invalidid);
-  expect(res.location).toBeNull();
+  expect(res.name).toBeNull();
   expect(res.error_msg).toBeDefined();
   expect(res.error_msg).toBe("Id must not be less than zero!");
 })

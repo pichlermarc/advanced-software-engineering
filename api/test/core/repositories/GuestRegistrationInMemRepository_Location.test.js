@@ -1,11 +1,12 @@
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository');
 const Location = require('../../../core/entities/Location');
 
-let location = new Location(4711, "location-dummy");
+let location;
 let repo = new GuestRegistrationInMemRepository();
 
 beforeEach(() => {
     repo.clear_location();
+    location = new Location(4711, "location-dummy");
 })
 
 test('fixture repo should be defined', () => {
@@ -81,4 +82,35 @@ test('should throw an error if try to save an existing location', () => {
     expect(() => {
         repo.save_location(location);
     }).toThrowError(/^Repo: Location.*already exists!$/);
+})
+
+test('should throw error when reading from location with undefined id', () => {
+    try {
+        repo.load_location(undefined);
+    } catch (e) {
+        expect(e.message).toBe("Error in load_location: id is missing!")
+    }
+})
+
+test('should update location with different name', () => {
+    repo.save_location(location);
+    location.name = "newLocation";
+    let updated_location = repo.update_location(location);
+    expect(repo.load_location(location.id).id).toBe(updated_location.id);
+    expect(repo.load_location(location.id).name).toBe(updated_location.name);
+})
+
+test('should not update location as id is undefined', () => {
+    try {
+        location.id = undefined;
+        let updated_location = repo.update_location(location);
+    } catch (e) {
+        expect(e.message).toBe("Method update_location fails.Error: Error in load_location: id is missing!");
+    }
+})
+
+test('should not update location as it is unknown', () => {
+    location.id = 123;
+    let updated_location = repo.update_location(location);
+    expect(updated_location).toBeUndefined();
 })

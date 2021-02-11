@@ -24,47 +24,27 @@ beforeEach(() => {
   repo.save_location(old_location);
 })
 
-test('should correctly update a location, update location name only', () => {
-  let request_model = new LocationRequestModel(OLD_LOCATION_ID, new Location(OLD_LOCATION_ID, NEW_LOCATION_NAME));
-  res = interactor.execute(request_model);
+test('should correctly update a location, update location name only', async () => {
+  let request_model = new LocationRequestModel(OLD_LOCATION_ID, NEW_LOCATION_NAME);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.id).toBe(OLD_LOCATION_ID);
-  expect(res.location).toBe(NEW_LOCATION_NAME);
+  expect(res.name).toBe(NEW_LOCATION_NAME);
   expect(res.error_msg).toBeNull();
   expect(repo.location_repo[0].name).toBe(NEW_LOCATION_NAME);
   expect(repo.location_repo[0].id).toBe(OLD_LOCATION_ID);
 })
 
-test('should correctly update a location, update locationId and location name both (= whole payload)', () => {
-  let request_model = new LocationRequestModel(OLD_LOCATION_ID, new_location);
-  res = interactor.execute(request_model);
-  expect(res).toBeDefined();
-  expect(res.id).toBe(new_location.id);
-  expect(res.location).toBe(new_location.name);
-  expect(res.error_msg).toBeNull();
-  expect(repo.location_repo[0].name).toBe(NEW_LOCATION_NAME);
-  expect(repo.location_repo[0].id).toBe(NEW_LOCATION_ID);
-  expect(repo.location_repo.length).toBe(1);
-})
-
-test('should try to update non-existing location', () => {
+test('should try to update non-existing location', async () => {
   repo.clear();
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.error_msg).not.toBeNull();
 })
 
-test('test request with invalid locationId', () => {
+test('test request with invalid locationId', async () => {
   let invalid_location = new Location(-2, 'new-location-name');
   request_model = new LocationRequestModel(-1, invalid_location);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res.error_msg).toBe("Id must not be less than zero!");
-})
-
-
-test('test request with invalid location', () => {
-  let invalid_location = new Location(-2, 'new-location-name');
-  request_model = new LocationRequestModel(OLD_LOCATION_ID, invalid_location);
-  res = interactor.execute(request_model);
-  expect(res.error_msg).toBe("Id must not be less than zero and location name must be not empty!");
 })

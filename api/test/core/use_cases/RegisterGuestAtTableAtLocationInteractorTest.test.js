@@ -23,7 +23,7 @@ let location;
 beforeEach(() => {
   // fixture setup before each test
   location = new Location(LOCATION_ID, LOCATION_NAME);
-  table = new Table(TABLE_ID, TABLE_NAME, LOCATION_ID);
+  table = new Table(TABLE_ID, TABLE_NAME, LOCATION_ID, -2.5, 3.66);
   repo.save_location(location);
   repo.save_table(table);
 
@@ -39,8 +39,8 @@ afterEach(() => {
   repo.clear();
 });
 
-test('Should return the guest on successful registration', () => {
-  let res = interactor.execute(new RequestModel(LOCATION_ID, TABLE_ID, guest));
+test('Should return the guest on successful registration', async () => {
+  let res = await interactor.execute(new RequestModel(LOCATION_ID, TABLE_ID, guest));
   expect(res).toBeDefined();
   expect(res.phoneNumber).toBe(PHONE);
   expect(res.name).toBe(NAME);
@@ -49,9 +49,9 @@ test('Should return the guest on successful registration', () => {
   expect(res.status).toBe(200);
 })
 
-test('should return error since you try to update a table from repo which is not there', () => {
+test('should return error since you try to update a table from repo which is not there', async () => {
   repo.clear_table();
-  let res = interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
+  let res = await interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
   expect(res.phoneNumber).toBeNull();
   expect(res.name).toBeNull();
   expect(res.email).toBeNull();
@@ -59,10 +59,10 @@ test('should return error since you try to update a table from repo which is not
   expect(res.status).toBe(400);
 })
 
-test('should return error since you try to delete a table from a location which is not there', () => {
+test('should return error since you try to delete a table from a location which is not there', async () => {
   repo.clear_location();
   repo.clear_table(); //also needs to be done, as the InMem-repo is not aware that the reference from a table to its location is not valid any more
-  let res = interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
+  let res = await interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
   expect(res.phoneNumber).toBeNull();
   expect(res.name).toBeNull();
   expect(res.email).toBeNull();
@@ -70,8 +70,8 @@ test('should return error since you try to delete a table from a location which 
   expect(res.status).toBe(400);
 })
 
-test('should return validator error since location id < 0', () => {
-  let res = interactor.execute(new RequestModel(TABLE_ID, -1, guest));
+test('should return validator error since location id < 0', async () => {
+  let res = await interactor.execute(new RequestModel(TABLE_ID, -1, guest));
   expect(res.phoneNumber).toBeNull();
   expect(res.name).toBeNull();
   expect(res.email).toBeNull();
@@ -79,8 +79,8 @@ test('should return validator error since location id < 0', () => {
   expect(res.status).toBe(400);
 })
 
-test('should return validator error since table id < 0', () => {
-  let res = interactor.execute(new RequestModel(-1, LOCATION_ID, guest));
+test('should return validator error since table id < 0', async () => {
+  let res = await interactor.execute(new RequestModel(-1, LOCATION_ID, guest));
   expect(res.phoneNumber).toBeNull();
   expect(res.name).toBeNull();
   expect(res.email).toBeNull();
@@ -88,9 +88,9 @@ test('should return validator error since table id < 0', () => {
   expect(res.status).toBe(400);
 })
 
-test('should return validator error since phone number is empty', () => {
+test('should return validator error since phone number is empty', async () => {
   guest.phoneNumber = "";
-  let res = interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
+  let res = await interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
   expect(res.phoneNumber).toBeNull();
   expect(res.name).toBeNull();
   expect(res.email).toBeNull();
@@ -98,9 +98,9 @@ test('should return validator error since phone number is empty', () => {
   expect(res.status).toBe(400);
 })
 
-test('should return validator error since name is empty', () => {
+test('should return validator error since name is empty', async () => {
   guest.name = "";
-  let res = interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
+  let res = await interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
   expect(res.phoneNumber).toBeNull();
   expect(res.name).toBeNull();
   expect(res.email).toBeNull();
@@ -108,9 +108,9 @@ test('should return validator error since name is empty', () => {
   expect(res.status).toBe(400);
 })
 
-test('should return validator error since email is empty', () => {
+test('should return validator error since email is empty', async () => {
   guest.email = "";
-  let res = interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
+  let res = await interactor.execute(new RequestModel(TABLE_ID, LOCATION_ID, guest));
   expect(res.phoneNumber).toBeNull();
   expect(res.name).toBeNull();
   expect(res.email).toBeNull();

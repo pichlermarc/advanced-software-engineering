@@ -56,8 +56,12 @@ const locationPUT = async (request, response) => {
   await Controller.handleRequest(request, response, service.locationPUT);
 };
 
-const locationLocationIdTableTableIdReportGET = async () => {
+const locationLocationIdTableTableIdReportGET = async (request, response) => {
   await Controller.handleRequest(request, response, service.locationLocationIdTableTableIdReportGET);
+}
+
+const locationLocationIdTableTableIdActivityGET = async (request, response) => {
+  await Controller.handleRequest(request, response, service.locationLocationIdTableTableIdActivityGET);
 }
 
 
@@ -74,5 +78,6 @@ module.exports = {
   locationLocationIdTableTableIdRegisterPOST,
   locationPOST,
   locationPUT,
-  locationLocationIdTableTableIdReportGET
+  locationLocationIdTableTableIdReportGET,
+  locationLocationIdTableTableIdActivityGET
 };

@@ -23,21 +23,23 @@ class DeleteLocationInteractor {
     }
 
     // 1. call process use-case
-    execute(request_model) {
+    async execute(request_model) {
         // 2. validation not needed since no input/request data
         let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
             const response_model = new ResponseModel(request_model.id,
               null,
-              validation_result.error_msg);
+              validation_result.error_msg,
+              400);
             return response_model;
         }
 
         // 3. DB interaction
         let response_model;
-        const location_removed_id = this.repository.remove_location(request_model.id);
-        if(location_removed_id != null) {
-            response_model = new ResponseModel(request_model.id, request_model.name);
+        let location;
+        if(location = await this.repository.load_location(request_model.id)) {
+            await this.repository.remove_location(request_model.id);
+            response_model = new ResponseModel(request_model.id, location.name);
         } else {
             response_model = new ResponseModel(null, null, "No Entity With That ID in DB")
         }

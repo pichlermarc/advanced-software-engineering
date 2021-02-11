@@ -23,11 +23,11 @@ class GetLocationsInteractor {
     }
 
     // 1. call process use-case
-    execute() {
+    async execute() {
         // 2. validation not needed since no input/request data
 
         // 3. DB interaction
-        const locations = this.repository.load_all_locations();
+        const locations = await this.repository.load_all_locations();
 
         // 4. return response
         const response_model = new ResponseModel(locations);

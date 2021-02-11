@@ -10,7 +10,7 @@ class RegisterGuestAtTableAtLocationInteractor {
     }
 
     // 1. call process use-case
-    execute(request_model) { // EntityRequestModel: id, entity(=table)
+    async execute(request_model) { // EntityRequestModel: id, entity(=table)
         // 2. validation
         let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
@@ -32,7 +32,7 @@ class RegisterGuestAtTableAtLocationInteractor {
             request_model.guest.phoneNumber,
             request_model.guest.email);
         try {
-            this.repository.save_assign_g2t(assign);
+            await this.repository.save_assign(assign);
             response_model = new ResponseModel(request_model.guest.phoneNumber,
                 request_model.guest.name,
                 request_model.guest.email,

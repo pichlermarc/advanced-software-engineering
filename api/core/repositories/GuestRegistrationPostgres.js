@@ -3,7 +3,7 @@
 const IGatewayGuestRegistration = require('../gateways/IGatewayGuestRegistration');
 const {sequelize, mLocation, mTable, mAssign} = require("./models")
 const {eLocation, eTable, eAssign} = require("../entities")
-
+const seq = require('sequelize');
 
 class GuestRegistrationPostgres extends IGatewayGuestRegistration {
 
@@ -28,7 +28,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             const result = await mLocation.create({name: location.name}, {raw: true});
             return eLocation.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method save_location fails!", err)
             throw err;
         }
     }
@@ -36,9 +35,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     async load_location(id) {
         try {
             const result = await mLocation.findOne({where: id}, {raw: true});
+            if(result == null)
+                return null;
+
             return eLocation.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method load_location fails!", err)
             throw err;
         }
     }
@@ -53,7 +54,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             }
             return location;
         } catch(err) {
-            console.error("Method update_location fails!", err)
             throw err;
         }
     }
@@ -62,12 +62,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         try {
             const result = await mLocation.destroy({where: {id}}, {force: true});
             if(result == 0) {
-                // zero record could be removed
+                // zero records could be removed
                 return undefined;
             }
             return new eLocation(id, "location-removed");
         } catch(err) {
-            console.error("Method remove_location fails!", err)
             throw err;
         }
     }
@@ -81,7 +80,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.map(r => eLocation.from_object(r));
 
         } catch(err) {
-            console.error("Method load_all_locations fails!", err)
             throw err;
         }
     }
@@ -92,7 +90,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.count;
 
         } catch(err) {
-            console.error("Method size_location fails!", err)
             throw err;
         }
     }
@@ -101,10 +98,13 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     /* ----- table START ----- */
     async save_table(table) {
         try {
-            const result = await mTable.create({name: table.name, location_id: table.location_id}, {raw: true});
+            const result = await mTable.create({name: table.name,
+                location_id: table.location_id,
+                xCoordinate: table.xCoordinate,
+                yCoordinate: table.yCoordinate},
+                {raw: true});
             return eTable.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method save_table fails!", err)
             throw err;
         }
     }
@@ -112,23 +112,28 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
     async load_table(id, location_id) {
         try {
             const result = await mTable.findOne({where: {id: id, location_id: location_id}}, {raw: true});
+            if(result == null)
+                return null;
+
             return eTable.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method load_table fails!", err)
             throw err;
         }
     }
 
     async update_table(table) {
         try {
-            const result = await mTable.update({name: table.name}, {where: {id: table.id, location_id: table.location_id}}, {raw: true});
+            const result = await mTable.update({name: table.name}, {where: {id: table.id,
+                    location_id: table.location_id,
+                    xCoordinate: table.xCoordinate,
+                    yCoordinate: table.yCoordinate}},
+                {raw: true});
             if(result[0] == 0) {
-                // zero record could be updated
+                // no record could be updated
                 return undefined;
             }
             return table;
         } catch(err) {
-            console.error("Method update_table fails!", err)
             throw err;
         }
     }
@@ -137,12 +142,11 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
         try {
             const result = await mTable.destroy({where: {id: id, location_id: location_id}}, {force: true});
             if(result == 0) {
-                // zero record could be removed
+                // no record could be removed
                 return undefined;
             }
             return new eTable(id, "table-removed", location_id);
         } catch(err) {
-            console.error("Method remove_table fails!", err)
             throw err;
         }
     }
@@ -156,7 +160,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.map(r => eTable.from_object(r));
 
         } catch(err) {
-            console.error("Method load_all_tables fails!", err)
             throw err;
         }
     }
@@ -167,7 +170,35 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.count;
 
         } catch(err) {
-            console.error("Method size_table fails!", err)
+            throw err;
+        }
+    }
+
+    async get_table_activity(location_id, table_id, dateFrom, dateTo) {
+
+        if(await this.load_location(location_id) == null)
+            throw new Error("Location not found");
+
+        if(await this.load_table(table_id, location_id) == null)
+            throw new Error("Table not found");
+
+        try {
+            let where_clause = {
+                location_id: location_id,
+                table_id: table_id,
+                date_from: {
+                    [seq.Op.between]: [Date.parse(dateFrom), Date.parse(dateTo)]
+                }
+            }
+            where_clause = Object.fromEntries(Object.entries(where_clause).filter(([key, val]) => val !== null));
+            const result = await mAssign.findAll({where: where_clause}, {raw: true});
+            if(result.length == 0) {
+                return 0;
+            }
+
+            return result.map(r => eAssign.from_object(r.dataValues)).length;
+
+        } catch (err) {
             throw err;
         }
     }
@@ -182,7 +213,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return eAssign.from_object(result.dataValues);
             //return new eAssign(a.location_id, a.table_id, a.date_from, a.first_name, a.last_name, a.phone, a.email);
         } catch (err) {
-            console.error("Method save_assign fails!", err)
             throw err;
         }
     }
@@ -192,19 +222,25 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             const result = await mAssign.findOne({where: assign}, {raw: true});
             return eAssign.from_object(result.dataValues);
         } catch (err) {
-            console.error("Method load_assign fails!", err)
             throw err;
         }
     }
 
     /**
      *
-     * @param where_clause: Plane JS object that conaints the keys that should be filtered for:
+     * @param where_clause: Plane JS object that contains the keys that should be filtered for:
      *                      Filter key-value filters field-names and values.
      *                      Take a look on the tests to see examples!
      */
-    async filter_assign(where_clause) {
+    async filter_assign(location_id, table_id, datetimeFrom, datetimeTo) {
         try {
+            let where_clause = {
+                location_id: location_id,
+                table_id: table_id,
+                date_from: {
+                    [seq.Op.between]: [datetimeFrom, datetimeTo]
+                }
+            }
             // remove key-value pairs that value is null
             where_clause = Object.fromEntries(Object.entries(where_clause).filter(([key, val]) => val !== null));
             const result = await mAssign.findAll({where: where_clause}, {raw: true});
@@ -214,7 +250,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.map(r => eAssign.from_object(r.dataValues));
 
         } catch (err) {
-            console.error("Method filter_assign fails!", err)
             throw err;
         }
     }
@@ -228,7 +263,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.map(r => eAssign.from_object(r));
 
         } catch(err) {
-            console.error("Method load_all_assigns fails!", err)
             throw err;
         }
     }
@@ -239,7 +273,6 @@ class GuestRegistrationPostgres extends IGatewayGuestRegistration {
             return result.count;
 
         } catch(err) {
-            console.error("Method size_assign fails!", err)
             throw err;
         }
     }

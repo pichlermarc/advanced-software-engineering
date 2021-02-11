@@ -25,16 +25,16 @@ beforeEach(() => {
   repo.clear();
   repo.save_location(new Location(LOCATION_ID_1,"location-test1"));
   repo.save_location(new Location(LOCATION_ID_2,"location-test2"));
-  repo.save_table(new Table(TABLE_ID_1, TABLE_NAME_1, LOCATION_ID_1));
-  repo.save_table(new Table(TABLE_ID_2, TABLE_NAME_2, LOCATION_ID_1));
-  repo.save_table(new Table(TABLE_ID_3, TABLE_NAME_3, LOCATION_ID_1));
-  repo.save_table(new Table(TABLE_ID_4, TABLE_NAME_4, LOCATION_ID_2));
-  repo.save_table(new Table(TABLE_ID_5, TABLE_NAME_5, LOCATION_ID_2));
+  repo.save_table(new Table(TABLE_ID_1, TABLE_NAME_1, LOCATION_ID_1, -2.5, 3.66));
+  repo.save_table(new Table(TABLE_ID_2, TABLE_NAME_2, LOCATION_ID_1, -2.5, 3.66));
+  repo.save_table(new Table(TABLE_ID_3, TABLE_NAME_3, LOCATION_ID_1, -2.5, 3.66));
+  repo.save_table(new Table(TABLE_ID_4, TABLE_NAME_4, LOCATION_ID_2, -2.5, 3.66));
+  repo.save_table(new Table(TABLE_ID_5, TABLE_NAME_5, LOCATION_ID_2, -2.5, 3.66));
 });
 
-test('should return a specific stored table from a specific location with id locationId', () => {
+test('should return a specific stored table from a specific location with id locationId', async () => {
   let request_model = new RequestModel(LOCATION_ID_1, TABLE_ID_2);
-  let res = interactor.execute(request_model);
+  let res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.entity).toBeDefined();
   expect(res.error_msg).toBeNull();
@@ -43,7 +43,7 @@ test('should return a specific stored table from a specific location with id loc
   expect(res.entity.location_id).toBe(LOCATION_ID_1);
 
   request_model = new RequestModel(LOCATION_ID_2, TABLE_ID_5);
-  res = interactor.execute(request_model);
+  res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.entity).toBeDefined();
   expect(res.error_msg).toBeNull();
@@ -52,21 +52,21 @@ test('should return a specific stored table from a specific location with id loc
   expect(res.entity.location_id).toBe(LOCATION_ID_2);
 });
 
-test('test retrieval of non-existing tableid from specific locationid', () => {
+test('test retrieval of non-existing tableid from specific locationid', async () => {
   repo.clear();
   let NONEXISTING_TABLE_ID = 70;
   let request_model = new RequestModel(LOCATION_ID_2, NONEXISTING_TABLE_ID);
-  let res = interactor.execute(request_model);
+  let res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.entity).toBeNull();
   expect(res.error_msg).not.toBeNull();
   expect(res.entity).toBeNull();
 });
 
-test('Test with invalid locationId', () => {
+test('Test with invalid locationId', async () => {
   let INVALID_LOCATION_ID = -3;
   let request_model = new RequestModel(INVALID_LOCATION_ID, TABLE_ID_2);
-  let res = interactor.execute(request_model);
+  let res = await interactor.execute(request_model);
   expect(res).toBeDefined();
   expect(res.error_msg).not.toBeNull();
   expect(res.error_msg).toBe('Id must not be less than zero!');

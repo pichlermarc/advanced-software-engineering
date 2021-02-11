@@ -17,17 +17,17 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         this.location_repo = [];
         this.table_repo = [];
         this.guest_repo = [];
-        this.assign_g2t_repo = [];
+        this.assign_repo = [];
     }
 
     load() {
-        return [this.location_repo, this.table_repo, this.guest_repo, this.assign_g2t_repo];
+        return [this.location_repo, this.table_repo, this.guest_repo, this.assign_repo];
     }
     clear() {
         this.location_repo = [];
         this.table_repo = [];
         this.guest_repo = [];
-        this.assign_g2t_repo = [];
+        this.assign_repo = [];
     }
 
     /* ----- location START ----- */
@@ -37,6 +37,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             throw new Error("Repo: Location with id #" + location.id + " already exists!");
         }
         this.location_repo.push(location);
+        return location;
     }
 
     /**
@@ -74,7 +75,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             } else {
                 return undefined;
             }
-            return [location];
+            return location;
         } catch (e) {
             throw new Error("Method update_location fails." + e);
         }
@@ -121,6 +122,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             throw new Error("Repo: Table with id #" + table.id + " already exists!");
         }
         this.table_repo.push(table);
+        return table;
     }
     /**
      *
@@ -158,7 +160,7 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             } else {
                 return undefined;
             }
-            return [table];
+            return table;
         } catch (e) {
             throw new Error("Method update_table fails! To be updated table could not be found" +e);
         }
@@ -192,36 +194,28 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
     }
     size_table() { return this.table_repo.length; }
     clear_table() { this.table_repo = []; }
+
+    get_table_activity(location_id, table_id, dateFrom, dateTo) {
+        if(this.load_location(location_id) == null)
+            throw new Error("Location not found!");
+
+        if(this.load_table(table_id, location_id) == null)
+            throw new Error("Table not found!");
+
+        let assign = this.assign_repo.filter(a =>
+            a.location_id == location_id &&
+            a.table_id == table_id &&
+            a.date_from >= Date.parse(dateFrom) &&
+            a.date_from <= Date.parse(dateTo)
+        );
+
+        return assign.length;
+    }
+
     /* ----- table END ----- */
 
-    /* ----- guest START ----- */
-    save_guest(guest) {
-        let guest_load = this.load_guest(guest.id);
-        if(guest_load !== undefined) {
-            throw new Error("Repo: Guest with id #" + guest.id + " already exists!");
-        }
-        this.guest_repo.push(guest);
-    }
-    load_guest(id) {
-        let guest;
-        if (id === undefined) {
-            guest = this.guest_repo;
-        } else {
-            guest = this.guest_repo.find(g => g.id == id);
-        }
-        return guest;
-    }
-    remove_guest(id) {
-        const guest = this.load_guest(id);
-        this.guest_repo = this.guest_repo.filter(g => g.id != id);
-        return guest;
-    }
-    size_guest() { return this.guest_repo.length; }
-    clear_guest() { this.guest_repo = []; }
-    /* ----- guest END ----- */
-
     /* ----- assign-guest-to-table START ----- */
-    save_assign_g2t(assign) {
+    save_assign(assign) {
         let location = this.load_location(assign.location_id);
         let table = this.load_table(assign.table_id, assign.location_id);
 
@@ -229,20 +223,20 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             throw new Error("Repo: FK Constraint violated: Location, or table is not existing!");
         }
 
-        let assign_load = this.load_assign_g2t(assign.location_id, assign.table_id,
+        let assign_load = this.load_assign(assign.location_id, assign.table_id,
             assign.date_from, assign.first_name, assign.last_name);
         if(assign_load !== undefined) {
              throw new Error("Repo: Assignment already exists!");
         }
-        this.assign_g2t_repo.push(assign);
+        this.assign_repo.push(assign);
     }
-    load_assign_g2t(location_id, table_id, date_from, first_name, last_name) {
+    load_assign(location_id, table_id, date_from, first_name, last_name) {
         let assign;
         if (arguments.length == 0) {
             // return all assignments
-            assign = this.assign_g2t_repo;
+            assign = this.assign_repo;
         } else {
-            assign = this.assign_g2t_repo.find(a =>
+            assign = this.assign_repo.find(a =>
               a.location_id == location_id &&
               a.table_id == table_id &&
               a.date_from == date_from &&
@@ -258,11 +252,11 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
         }
         return assign;
     }
-    filter_assign_g2t(location_id, table_id, date_from) {
+    filter_assign(location_id, table_id, date_from, date_to) {
         let assign;
         if (arguments.length == 0) {
             // return all assignments
-            assign = this.assign_g2t_repo;
+            assign = this.assign_repo;
         } else {
             // filter assignments
             let filters = {};
@@ -282,20 +276,29 @@ class GuestRegistrationInMemRepository extends IGatewayGuestRegistration {
             if(date_from !== undefined) {
                 filters["date_from"] = [date_from];
             }
-            // if(date_to !== undefined) {
-            //     filters["date_to"] = [date_to];
-            // }
-            assign = multifilter(this.assign_g2t_repo, filters);
+            if(date_to !== undefined) {
+                 filters["date_to"] = [date_to];
+            }
+            assign = multifilter(this.assign_repo, filters);
         }
         return assign;
     }
-    remove_assign_g2t(id) {
-        const assign = this.load_assign_g2t(id);
-        this.assign_g2t_repo = this.assign_g2t_repo.filter(t => arguments);
+    remove_assign(assignment) {
+        const assign = this.load_assign(assignment.location_id,
+            assignment.table_id,
+            assignment.date_from,
+            assignment.first_name,
+            assignment.last_name);
+        this.assign_repo = this.assign_repo.filter(a =>
+            a.location_id != assignment.location_id &&
+            a.table_id != assignment.table_id &&
+            a.date_from != assignment.date_from &&
+            a.first_name != assignment.first_name &&
+            a.last_name != assignment.last_name);
         return assign;
     }
-    size_assign_g2t() { return this.assign_g2t_repo.length; }
-    clear_assign_g2t() { this.assign_g2t_repo = []; }
+    size_assign() { return this.assign_repo.length; }
+    clear_assign() { this.assign_repo = []; }
     /* ----- assign-guest-to-table END ----- */
 }
 

@@ -24,7 +24,7 @@ class GetLocationTableInteractor {
     }
 
     // 1. call process use-case
-    execute(request_model) {
+    async execute(request_model) {
         // 2. validation
         let validation_result = this.validator.validate(request_model);
         if(!validation_result.isValid) {
@@ -34,13 +34,13 @@ class GetLocationTableInteractor {
         }
 
         // 3. DB interaction
-        let table = this.repository.load_table(request_model.table_id, request_model.location_id);
+        let table = await this.repository.load_table(request_model.table_id, request_model.location_id);
 
         // 4. return response
         let response_model;
         if(table === null) {
             response_model = new ResponseModel(null, "Table or location not found", 404);
-        } else if (!Array.isArray(table)) { // successful retrieval of the given table from the given location
+        } else { // successful retrieval of the given table from the given location
             response_model = new ResponseModel(table, null);
         }
         return response_model;

@@ -1,4 +1,4 @@
-const sequalize = require('sequelize');
+const sequelize = require('sequelize');
 const ResponseModel = require('../responseModels/EntityResponseModel');
 const fs = require('fs');
 
@@ -22,16 +22,17 @@ class GetReportInteractor {
 
     // 3. DB interaction
     let response_model;
-    let where = {
-      date_from: {
-        [sequalize.Op.between]: [request_model.datetimeFrom, request_model.datetimeTo]
-      }
-    }
+
     try {
-      let assigns = await this.repository.filter_assign(where);
-      let report = await this.reporter.createDocument(assigns);
-      let report_b64 = report.toString('base64');
-      response_model = new ResponseModel(report_b64, null, 200);
+        if(await this.repository.load_location(request_model.location_id) && await this.repository.load_table(request_model.table_id, request_model.location_id)) {
+            let assigns = await this.repository.filter_assign(request_model.location_id, request_model.table_id, request_model.datetimeFrom, request_model.datetimeTo);
+            let report = await this.reporter.createDocument(assigns);
+            let report_b64 = report.toString('base64');
+            response_model = new ResponseModel(report_b64, null, 200);
+        }
+        else
+            response_model = new ResponseModel(null, "Table or location not found", 400);
+
     } catch (e) {
       response_model = new ResponseModel(null, e.message, 400);
     }

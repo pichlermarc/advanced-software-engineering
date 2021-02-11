@@ -10,5 +10,5 @@ echo "....."
 
 export NODE_ENV=staging
 npm run sync
-jest ./test --notify --config=./jest.config.js --runInBand --coverage
+jest ./test --notify --config=./jest.config.js --runInBand --coverage --forceExit
 

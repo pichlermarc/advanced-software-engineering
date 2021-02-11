@@ -8,10 +8,11 @@ class LocationResponseModel {
      *   The naming "Response" has nothing to do with a HTTP response!
      *   The responsemodel is only the output from the interactor.
      */
-    constructor(id, location = null, error_msg = null) {
+    constructor(id, name = null, error_msg = null, status = null) {
         this.id = id;
-        this.location = location;
+        this.name = name;
         this.error_msg = error_msg;
+        this.status = status;
     }
 }
 
