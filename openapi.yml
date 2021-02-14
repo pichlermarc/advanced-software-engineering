@@ -1,302 +1,558 @@
 openapi: 3.0.0
 info:
-  title: RapidGuestRegistration - OpenAPI 3.0
-  description: |-
-    This is the RapidGuestRegistration API, used for everything from creating tables to managing users, as well as registering for guests.
   contact:
     email: group-b@rapidguestregistration.com
+  description: This is the RapidGuestRegistration API, used for everything from creating
+    tables to managing users, as well as registering for guests.
   license:
     name: MIT
-    url: 'https://github.com/' # TODO: Add link to license.
+    url: https://github.com/
+  title: RapidGuestRegistration - OpenAPI 3.0
   version: 3.0.2
 externalDocs:
   description: Read the Documentation
-  url: 'http://github.com/' # TODO: Add link to documentation.
-
+  url: http://github.com/
+servers:
+- url: /
 paths:
   /location:
-    put:
-      summary: Update an existing location
-      description: Update a location 
-      requestBody:
-        content: 
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Location'
-      responses:
-        '200':
-          description: Update successful.
-          content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Location'
-        '400':
-          description: Invalid location ID
-        '404':
-          description: Location not found
-        '403':
-          description: You are not allowed to change this location.
     get:
-      summary: Get your locations
       description: Get locations associated with your user
+      operationId: GetLocations
       responses:
-        '200':
-          description: Locations retrieved successfully.
-          content: 
+        "200":
+          content:
             application/json:
               schema:
-                type: array
                 items:
                   $ref: '#/components/schemas/Location'
+                type: array
+          description: Locations retrieved successfully.
+      summary: Get your locations
+      x-eov-operation-handler: controllers/DefaultController
     post:
+      description: Add a location
+      operationId: AddLocation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: Insert successful.
+        "400":
+          description: Invalid location ID
       summary: Add a new location
-      description: Add a location 
+      x-eov-operation-handler: controllers/DefaultController
+    put:
+      description: Update a location
+      operationId: UpdateLocation
       requestBody:
-        content: 
+        content:
           application/json:
             schema:
               $ref: '#/components/schemas/Location'
       responses:
-        '200':
-          description: Insert successful.
-          content: 
+        "200":
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Location'
-        '400':
-          description: Invalid location ID
-  '/location/{locationId}':
-    parameters:
-      - name: locationId
-        in: path
-        description: ID of the location to return.
-        required: true
-        schema:
-          type: integer
-          format: int64
-    get:
-      summary: Get a specific location.
-      description: Gets the location with the location ID.
-      responses:
-        '200':
           description: Update successful.
-          content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Location'
-        '400':
+        "400":
           description: Invalid location ID
-        '404':
+        "404":
           description: Location not found
-        '403':
-          description: You are not allowed to access this location.
-    post:
+        "403":
+          description: You are not allowed to change this location.
       summary: Update an existing location
-      description: Update a location 
+      x-eov-operation-handler: controllers/DefaultController
+  /location/{locationId}:
+    delete:
+      description: Deletes the location with the location ID.
+      operationId: DeleteLocation
+      parameters:
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: Delete successful.
+        "400":
+          description: Invalid location ID
+        "404":
+          description: Location not found
+        "403":
+          description: You are not allowed to delete this location.
+      summary: Delete a specific location.
+      x-eov-operation-handler: controllers/DefaultController
+    get:
+      description: Gets the location with the location ID.
+      operationId: GetLocation
+      parameters:
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: Update successful.
+        "400":
+          description: Invalid location ID
+        "404":
+          description: Location not found
+        "403":
+          description: You are not allowed to access this location.
+      summary: Get a specific location.
+      x-eov-operation-handler: controllers/DefaultController
+    post:
+      description: Update a location
+      operationId: UpdateLocationWithId
+      parameters:
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
       requestBody:
-        content: 
+        content:
           application/json:
             schema:
               $ref: '#/components/schemas/Location'
       responses:
-        '200':
-          description: Update successful.
-          content: 
+        "200":
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Location'
-        '400':
-          description: Invalid location ID
-    delete:
-      summary: Delete a specific location.
-      description: Deletes the location with the location ID.
-      responses:
-        '200':
-          description: Delete successful.
-          content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Location'
-        '400':
-          description: Invalid location ID
-        '404':
-          description: Location not found
-        '403':
-          description: You are not allowed to delete this location.
-  '/location/{locationId}/table':
-    parameters:
-      - name: locationId
-        in: path
-        description: ID of the location to return.
-        required: true
-        schema:
-          type: integer
-          format: int64
-    get:
-      summary: Get your location's tables
-      description: Get tables associated with this location
-      
-      responses:
-        '200':
           description: Update successful.
-          content: 
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Table'
-    post:
-      summary: Add a new table on this location
-      description: Add a table 
-      requestBody:
-        content: 
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Table'
-      responses:
-        '200':
-          description: Insert successful.
-          content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Table'
-        '400':
-          description: Invalid location ID.
-        '403':
-          description: You are not allowed to modify this location
-  '/location/{locationId}/table/{tableId}':
-    parameters:
-      - name: locationId
-        in: path
-        description: ID of the location to return.
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: tableId
-        in: path
-        description: ID of the location to return.
-        required: true
-        schema:
-          type: integer
-          format: int64
+        "400":
+          description: Invalid location ID
+      summary: Update an existing location
+      x-eov-operation-handler: controllers/DefaultController
+  /location/{locationId}/table:
     get:
-      summary: Get your tables
       description: Get tables associated with this location
-      responses:
-        '200':
-          description: Table retrieval successful.
-          content: 
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Table'
-        '403':
-          description: Table or location does not exist.
-        '404':
-          description: Table or location does not exist.
-    post:
-      summary: Update an existing table
-      description: Update a table 
-      
-      requestBody:
-        content: 
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Table'
-      responses:
-        '200':
-          description: Update successful.
-          content: 
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Table'
-        '400':
-          description: Invalid location or table ID
-        '403':
-          description: You are not allowed to edit this table.
-    delete:
-      summary: Delete this table
-      description: Delete the table on this location.
-      responses:
-        '200':
-          description: Table deletion successful.
-          content: 
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Table'
-        '403':
-          description: Table or location does not exist.
-        '404':
-          description: Table or location does not exist.
-  '/location/{locationId}/table/{tableId}/register':
-    post:
-      summary: Register on this table on this location.
-      description: Register on this table on this location.
+      operationId: GetTablesAtLocation
       parameters:
-        - name: locationId
-          in: path
-          description: ID of the location to register on.
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: tableId
-          in: path
-          description: ID of the table to register on.
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Table'
+                type: array
+          description: Update successful.
+      summary: Get your location's tables
+      x-eov-operation-handler: controllers/DefaultController
+    post:
+      description: Add a table
+      operationId: AddTableAtLocation
+      parameters:
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
       requestBody:
-        content: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Table'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+          description: Insert successful.
+        "400":
+          description: Invalid location ID.
+        "403":
+          description: You are not allowed to modify this location
+      summary: Add a new table on this location
+      x-eov-operation-handler: controllers/DefaultController
+  /location/{locationId}/table/{tableId}:
+    delete:
+      description: Delete the table on this location.
+      operationId: DeleteTableAtLocation
+      parameters:
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: tableId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+          description: Table deletion successful.
+        "403":
+          description: Table or location does not exist.
+        "404":
+          description: Table or location does not exist.
+      summary: Delete this table
+      x-eov-operation-handler: controllers/DefaultController
+    get:
+      description: Get table with the given ID associated with this location
+      operationId: GetTableAtLocation
+      parameters:
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: tableId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+          description: Table retrieval successful.
+        "403":
+          description: Table or location does not exist.
+        "404":
+          description: Table or location does not exist.
+      summary: Get your tables
+      x-eov-operation-handler: controllers/DefaultController
+    post:
+      description: Update a table
+      operationId: UpdateTableAtLocation
+      parameters:
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: ID of the location to return.
+        explode: false
+        in: path
+        name: tableId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Table'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Table'
+          description: Update successful.
+        "400":
+          description: Invalid location or table ID
+        "403":
+          description: You are not allowed to edit this table.
+      summary: Update an existing table
+      x-eov-operation-handler: controllers/DefaultController
+  /location/{locationId}/table/{tableId}/activity:
+    get:
+      description: Get the amount of people registered on this table in the given time-range.
+      operationId: GetTableActivity
+      parameters:
+      - description: ID of the location to get activity from
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: ID of the table to get activity from
+        explode: false
+        in: path
+        name: tableId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Activity from
+        explode: false
+        in: query
+        name: from
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: Activity to
+        explode: false
+        in: query
+        name: to
+        required: true
+        schema:
+          format: date-time
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activity:
+                    type: number
+                    example: 4.5
+                    description: number of visitors in the specified time range
+          description: Activity lookup successful.
+        "404":
+          description: Location Id or Table Id not found.
+        "400":
+          description: Invalid location or table ID
+      summary: Register on this table on this location.
+      x-eov-operation-handler: controllers/DefaultController
+  /location/{locationId}/table/{tableId}/register:
+    post:
+      description: Register on this table on this location.
+      operationId: RegisterAtTable
+      parameters:
+      - description: ID of the location to register on.
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: ID of the table to register on.
+        explode: false
+        in: path
+        name: tableId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
           application/json:
             schema:
               $ref: '#/components/schemas/Guest'
       responses:
-        '200':
-          description: Registration successful.
-          content: 
+        "200":
+          content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Guest'
-        '400':
+          description: Registration successful.
+        "400":
           description: Invalid location or table ID
+      summary: Register on this table on this location.
+      x-eov-operation-handler: controllers/DefaultController
+  /location/{locationId}/table/{tableId}/report/{reportType}:
+    get:
+      description: Get report of reporttype on this table on this location.
+      operationId: GetReportForTable
+      parameters:
+        - description: ID of the location to register on.
+          explode: false
+          in: path
+          name: locationId
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: ID of the table to register on.
+          explode: false
+          in: path
+          name: tableId
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: Datetime from which to search for guests at tableid locationid.
+          explode: false
+          in: query
+          name: datetimeFrom
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - description: Datetime to which to search for guests at tableid locationid.
+          explode: false
+          in: query
+          name: datetimeTo
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - description: type of report to retrieve.
+          explode: false
+          in: path
+          name: reportType
+          required: true
+          schema:
+            type: string
+            example: pdf or xls
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locationId:
+                    format: int64
+                    type: integer
+                    description: Id of the location at which to look for guests in time range
+                  tableId:
+                    format: int64
+                    type: integer
+                    description: Id of the table at which to look for guests in time range
+                  datetimeFrom:
+                    format: int64
+                    type: integer
+                    description: datetime from which was searched for guests at locationid, tableid
+                  datetimeTo:
+                    format: int64
+                    type: integer
+                    description: datetime up to which was searched for guests at locationid, tableid
+                  pdf:
+                    type: string
+                    format: base64
+                    description: Base64-encoded contents of pdf
+          description: Registration successful.
+        "400":
+          description: Invalid location or table ID
+      summary: Register on this table on this location.
+      x-eov-operation-handler: controllers/DefaultController
 components:
   schemas:
     Guest:
-      type: object
+      example:
+        phoneNumber: +43 420 69696969
+        name: Sepp Forcher
+        email: sepp.forcher@orf.at
       properties:
         name:
+          example: Sepp Forcher
           type: string
-          example: "Sepp Forcher"
         email:
-          type: string
+          example: sepp.forcher@orf.at
           format: email
-          example: "sepp.forcher@orf.at"
+          type: string
         phoneNumber:
+          example: +43 420 69696969
           type: string
-          example: "+43 420 69696969"
+      type: object
     Location:
-      type: object
+      example:
+        name: Coolstreet 123
+        id: 69
       properties:
         id:
-          type: integer
-          format: int64
           example: 69
+          format: int64
+          type: integer
         name:
+          example: Coolstreet 123
           type: string
-          example: "Coolstreet 123"
-    Table:
       type: object
+    Table:
+      example:
+        name: 'Table #12'
+        id: 420
+        xCoordinate: 1.23
+        yCoordinate: -4.56
       properties:
         id:
-            type: integer
-            format: int64
-            example: 420
+          example: 420
+          format: int64
+          type: integer
         name:
+          example: 'Table #12'
           type: string
-          example: "Table #12"
+        xCoordinate:
+          example: 12.56
+          type: number
+        yCoordinate:
+          example: -3.5
+          type: number
+      type: object

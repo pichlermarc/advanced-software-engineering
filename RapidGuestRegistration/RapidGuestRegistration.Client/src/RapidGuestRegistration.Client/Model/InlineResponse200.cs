@@ -27,49 +27,26 @@ using OpenAPIDateConverter = RapidGuestRegistration.Client.Client.OpenAPIDateCon
 namespace RapidGuestRegistration.Client.Model
 {
     /// <summary>
-    /// Table
+    /// InlineResponse200
     /// </summary>
-    [DataContract(Name = "Table")]
-    public partial class Table : IEquatable<Table>, IValidatableObject
+    [DataContract(Name = "inline_response_200")]
+    public partial class InlineResponse200 : IEquatable<InlineResponse200>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Table" /> class.
+        /// Initializes a new instance of the <see cref="InlineResponse200" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="name">name.</param>
-        /// <param name="xCoordinate">xCoordinate.</param>
-        /// <param name="yCoordinate">yCoordinate.</param>
-        public Table(long id = default(long), string name = default(string), decimal xCoordinate = default(decimal), decimal yCoordinate = default(decimal))
+        /// <param name="activity">number of visitors in the specified time range.</param>
+        public InlineResponse200(decimal activity = default(decimal))
         {
-            this.Id = id;
-            this.Name = name;
-            this.XCoordinate = xCoordinate;
-            this.YCoordinate = yCoordinate;
+            this.Activity = activity;
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// number of visitors in the specified time range
         /// </summary>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
-        public long Id { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Name
-        /// </summary>
-        [DataMember(Name = "name", EmitDefaultValue = false)]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or Sets XCoordinate
-        /// </summary>
-        [DataMember(Name = "xCoordinate", EmitDefaultValue = false)]
-        public decimal XCoordinate { get; set; }
-
-        /// <summary>
-        /// Gets or Sets YCoordinate
-        /// </summary>
-        [DataMember(Name = "yCoordinate", EmitDefaultValue = false)]
-        public decimal YCoordinate { get; set; }
+        /// <value>number of visitors in the specified time range</value>
+        [DataMember(Name = "activity", EmitDefaultValue = false)]
+        public decimal Activity { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -78,11 +55,8 @@ namespace RapidGuestRegistration.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Table {\n");
-            sb.Append("  Id: ").Append(Id).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  XCoordinate: ").Append(XCoordinate).Append("\n");
-            sb.Append("  YCoordinate: ").Append(YCoordinate).Append("\n");
+            sb.Append("class InlineResponse200 {\n");
+            sb.Append("  Activity: ").Append(Activity).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,36 +77,23 @@ namespace RapidGuestRegistration.Client.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Table);
+            return this.Equals(input as InlineResponse200);
         }
 
         /// <summary>
-        /// Returns true if Table instances are equal
+        /// Returns true if InlineResponse200 instances are equal
         /// </summary>
-        /// <param name="input">Instance of Table to be compared</param>
+        /// <param name="input">Instance of InlineResponse200 to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Table input)
+        public bool Equals(InlineResponse200 input)
         {
             if (input == null)
                 return false;
 
             return 
                 (
-                    this.Id == input.Id ||
-                    this.Id.Equals(input.Id)
-                ) && 
-                (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
-                ) && 
-                (
-                    this.XCoordinate == input.XCoordinate ||
-                    this.XCoordinate.Equals(input.XCoordinate)
-                ) && 
-                (
-                    this.YCoordinate == input.YCoordinate ||
-                    this.YCoordinate.Equals(input.YCoordinate)
+                    this.Activity == input.Activity ||
+                    this.Activity.Equals(input.Activity)
                 );
         }
 
@@ -145,11 +106,7 @@ namespace RapidGuestRegistration.Client.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                hashCode = hashCode * 59 + this.Id.GetHashCode();
-                if (this.Name != null)
-                    hashCode = hashCode * 59 + this.Name.GetHashCode();
-                hashCode = hashCode * 59 + this.XCoordinate.GetHashCode();
-                hashCode = hashCode * 59 + this.YCoordinate.GetHashCode();
+                hashCode = hashCode * 59 + this.Activity.GetHashCode();
                 return hashCode;
             }
         }
