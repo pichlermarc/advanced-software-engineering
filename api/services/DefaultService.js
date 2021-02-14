@@ -34,7 +34,7 @@ const ReportRequestModel = require('../core/requestModels/ReportRequestModel');
 const ReportValidator = require('../core/validation/ReportValidator');
 const GetReportInteractor = require('../core/use_cases/GetReportInteractor');
 const PDFReporter = require('../core/use_cases/report/PDFReporter').PDFReporter;
-//const XLSReporter = require('../core/use_cases/report/XLSReporter').XLSReporter;
+const XLSReporter = require('../core/use_cases/report/XLSReporter').XLSReporter;
 const LocationIdTableIdActivityRequestModel = require('../core/requestModels/LocationIdTableIdActivityRequestModel');
 const LocationIdTableIdActivityValidator = require('../core/validation/LocationIdTableIdActivityValidator');
 const GetLocationTableActivityInteractor = require('../core/use_cases/GetLocationTableActivityInteractor');
@@ -554,7 +554,7 @@ const locationLocationIdTableTableIdReportGET = ({ locationId, tableId, datetime
             let requestmodel = new ReportRequestModel(locationId, tableId, datetimeFrom, datetimeTo);
 
             let validator = new ReportValidator();
-            let reporter = reportType === 'pdf' ? new PDFReporter('output.pdf') : new XLSReporter();
+            let reporter = reportType === 'pdf' ? new PDFReporter('output.pdf') : new XLSReporter('output.xlsx');
             let interactor = new GetReportInteractor(repository, validator, reporter);
 
             let responsemodel = await interactor.execute(requestmodel);
