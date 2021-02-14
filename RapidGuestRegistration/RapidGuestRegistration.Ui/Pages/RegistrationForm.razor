@@ -95,6 +95,7 @@
         }
         catch (ApiException ae)
         {
+            Console.WriteLine(ae.ToString());
             ApiErrorOccured = true;
         }
     }

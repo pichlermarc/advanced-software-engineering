@@ -53,9 +53,6 @@ namespace RapidGuestRegistration.Client.Test.Api
         [Fact]
         public void InstanceTest()
         {
-            // TODO uncomment below to test 'IsType' DefaultApi
-            //Assert.IsType<DefaultApi>(instance);
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -64,14 +61,6 @@ namespace RapidGuestRegistration.Client.Test.Api
         [Fact]
         public void AddLocationTest()
         {
-            var location = new Location()
-            {
-                Id = 0,
-                Name = "MyLocation"
-            };
-            
-            var response = instance.AddLocation(location);
-            Assert.Equal(location.Name, response.Name);
         }
 
         /// <summary>
@@ -80,11 +69,6 @@ namespace RapidGuestRegistration.Client.Test.Api
         [Fact]
         public void AddTableAtLocationTest()
         {
-            // TODO uncomment below to test the method and replace null with proper value
-            //long locationId = null;
-            //Table table = null;
-            //var response = instance.AddTableAtLocation(locationId, table);
-            //Assert.IsType<Table>(response);
         }
 
         /// <summary>

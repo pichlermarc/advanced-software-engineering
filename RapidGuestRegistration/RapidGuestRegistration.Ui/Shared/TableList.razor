@@ -5,34 +5,32 @@
 <h3>Tables</h3>
 
 
+@foreach (var table in _tables)
+{
+    <TableDisplay LocationId="@LocationId" Table="@table" OnTablesChanged="@UpdateTables"></TableDisplay>
+}
 
-    @foreach (var table in _tables)
-    {
-        <TableDisplay LocationId="@LocationId" Table="@table" OnTablesChanged="@UpdateTables"></TableDisplay>
-    }
+<h3>
+    Add Table
+</h3>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <input placeholder="Table Name" @bind="@_tableName"/>
+                <button class="btn btn-primary" @onclick="AddTable">
+                    Add
+                </button>
+            </div>
 
-     <h3>
-         Add Table
-     </h3>
-     <div class="row">
-         <div class="col-12">
-             <div class="card">
-                 <div class="card-header">
-                     <input placeholder="Table Name" @bind="@_tableName"/>
-                     <button class="btn btn-primary" @onclick="AddTable">
-                         Add
-                     </button>
-                 </div>
+        </div>
 
-             </div>
-
-         </div>
-     </div>
-
-
+    </div>
+</div>
 
 
 @code {
+
     [Parameter]
     public long LocationId { get; set; }
 
@@ -42,7 +40,7 @@
 
     protected override void OnInitialized()
     {
-        _tables = Api.GetTablesAtLocation(LocationId)??new List<Table>();
+        _tables = Api.GetTablesAtLocation(LocationId) ?? new List<Table>();
     }
 
     private void UpdateTables()
@@ -52,7 +50,7 @@
 
     private async void AddTable()
     {
-        Api.AddTableAtLocation(LocationId, new Table { Name = _tableName });
+        Api.AddTableAtLocation(LocationId, new Table {Name = _tableName, XCoordinate = 1, YCoordinate = 1});
         UpdateTables();
     }
 

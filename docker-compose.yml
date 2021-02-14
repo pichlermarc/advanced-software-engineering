@@ -6,6 +6,7 @@ services:
       - NODE_ENV=staging
     ports:
       - 8080:8080
+    command: /bin/bash -c "npm run sync && node index.js"
   ui:
     build: ./RapidGuestRegistration/
     ports:
