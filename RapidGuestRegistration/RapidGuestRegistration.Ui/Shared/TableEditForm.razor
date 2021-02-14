@@ -47,7 +47,7 @@ else
     {
         try
         {
-            _table = Api.LocationLocationIdTableTableIdGet(LocationId, TableId).FirstOrDefault();
+            _table = Api.GetTableAtLocation(LocationId, TableId);
         }
         catch (ApiException e)
         {
@@ -62,7 +62,7 @@ else
     {
         try
         {
-            Api.LocationLocationIdTableTableIdPost(LocationId, TableId, _table);
+            Api.UpdateTableAtLocation(LocationId, TableId, _table);
         }
         catch (Exception e)
         {

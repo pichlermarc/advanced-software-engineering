@@ -45,7 +45,7 @@ else
     {
         try
         {
-            _location = Api.LocationLocationIdGet(LocationId);
+            _location = Api.GetLocation(LocationId);
         }
         catch (ApiException e)
         {
@@ -60,7 +60,7 @@ else
     {
         try
         {
-            Api.LocationPut(_location);
+            Api.UpdateLocation(_location);
         }
         catch (Exception e)
         {

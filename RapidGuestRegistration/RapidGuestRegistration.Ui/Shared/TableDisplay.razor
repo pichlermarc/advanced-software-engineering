@@ -52,7 +52,7 @@
 
     private async Task DeleteTable()
     {
-        Api.LocationLocationIdTableTableIdDelete(LocationId, Table.Id);
+        Api.DeleteTableAtLocation(LocationId, Table.Id);
         await OnTablesChanged.InvokeAsync(this);
     }
 

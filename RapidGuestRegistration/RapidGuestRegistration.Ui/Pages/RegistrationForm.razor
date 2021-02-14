@@ -89,7 +89,7 @@ private GuestEditModel editmodel;
     {
         try
         {
-            Api.LocationLocationIdTableTableIdRegisterPost(castedLocationId, castedTableId, editmodel.ToGuest());
+            Api.RegisterAtTable(castedLocationId, castedTableId, editmodel.ToGuest());
         }
         catch (ApiException ae)
         {
