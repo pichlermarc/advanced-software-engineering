@@ -575,7 +575,7 @@ const locationLocationIdTableTableIdReportGET = ({ locationId, tableId, datetime
                 'tableId': requestmodel.table_id,
                 'datetimeFrom': requestmodel.datetimeFrom,
                 'datetimeTo': requestmodel.datetimeTo,
-                'pdf': responsemodel.entity
+                'report': responsemodel.entity
             }, 200));
         } catch (e) {
             reject(Service.rejectResponse(
