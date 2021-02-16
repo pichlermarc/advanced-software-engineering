@@ -4,7 +4,7 @@
 @inject IDefaultApi Api
 <h3>Generate Report</h3>
 
-
+<form>
     <label>
         <p>Location:</p>
         <select class="form-control selectpicker" @onchange="UpdateTables">
@@ -30,19 +30,19 @@
     <label>
         <p>Begin Date:</p>
         <input @bind="_startDate" type="date"/>
-        <input @bind="_startTime" type="date"/>
+        <input type="number" max="23" min="0"/>:<input type="number" max="59" min="0"/>
     </label>
     <br/>
     <label>
         <p>End Date:</p>
         <input @bind="_endDate" type="date"/>
-        <input @bind="_endTime" type="time"/>
+        <input type="number" max="23" min="0"/>:<input type="number" max="59" min="0"/>
     </label>
-    
+
     <br/>
 
-
     <button class="btn btn-primary" type="submit" @onclick="Generate">Generate</button>
+</form>
 
 @code {
     private long _selectedTable;
@@ -80,4 +80,5 @@
         Console.WriteLine(start);
         Console.WriteLine(end);
     }
+
 }
