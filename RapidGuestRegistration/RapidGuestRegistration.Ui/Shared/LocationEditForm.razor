@@ -11,9 +11,9 @@
         <DataAnnotationsValidator/>
         <ValidationSummary/>
 
-        <InputText id="name" @bind-Value="_location.Name"/>
+        <InputText id="editlocationname" @bind-Value="_location.Name"/>
 
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button id="saveeditedlocationbtn" class="btn btn-primary" type="submit">Save</button>
     </EditForm>    
 }
 else
