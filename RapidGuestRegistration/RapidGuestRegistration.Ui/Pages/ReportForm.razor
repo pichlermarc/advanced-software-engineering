@@ -1,0 +1,83 @@
+@page "/generate"
+@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@inject IDefaultApi Api
+<h3>Generate Report</h3>
+
+
+    <label>
+        <p>Location:</p>
+        <select class="form-control selectpicker" @onchange="UpdateTables">
+            @foreach (var location in _locations)
+            {
+                <option value=@location.Id>@location.Name</option>
+            }
+        </select>
+    </label>
+    <br/>
+
+    <label>
+        <p>Table:</p>
+        <select class="form-control selectpicker" @bind="_selectedTable">
+            @foreach (var table in _tables)
+            {
+                <option value="@table.Id">@table.Name</option>
+            }
+        </select>
+    </label>
+    <br/>
+
+    <label>
+        <p>Begin Date:</p>
+        <input @bind="_startDate" type="date"/>
+        <input @bind="_startTime" type="date"/>
+    </label>
+    <br/>
+    <label>
+        <p>End Date:</p>
+        <input @bind="_endDate" type="date"/>
+        <input @bind="_endTime" type="time"/>
+    </label>
+    
+    <br/>
+
+
+    <button class="btn btn-primary" type="submit" @onclick="Generate">Generate</button>
+
+@code {
+    private long _selectedTable;
+    private long _selectedLocation;
+
+    private DateTime _startDate;
+    private DateTime _startTime;
+    private DateTime _endDate;
+    private DateTime _endTime;
+
+
+    private List<Location> _locations;
+    private List<Table> _tables;
+
+    protected override void OnInitialized()
+    {
+        _startDate = DateTime.Today;
+        _endDate = DateTime.Today;
+        _locations = Api.GetLocations();
+        _tables = new List<Table>();
+    }
+
+    private async Task UpdateTables(ChangeEventArgs eventArgs)
+    {
+        _selectedLocation = long.Parse(eventArgs.Value.ToString());
+        _tables = await Api.GetTablesAtLocationAsync(_selectedLocation);
+    }
+
+    private void Generate()
+    {
+        var start = _startDate;
+        start = start.Add(TimeSpan.FromHours(_startTime.Hour)).Add(TimeSpan.FromHours(_startTime.Minute));
+        var end = _endDate;
+        end = end.Add(TimeSpan.FromHours(_endTime.Hour)).Add(TimeSpan.FromHours(_endTime.Minute));
+        Console.WriteLine(start);
+        Console.WriteLine(end);
+    }
+}
