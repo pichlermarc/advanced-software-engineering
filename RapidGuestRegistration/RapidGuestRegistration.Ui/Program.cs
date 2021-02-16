@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Syncfusion.Blazor;
 
 namespace RapidGuestRegistration.Ui
 {
@@ -15,7 +16,9 @@ namespace RapidGuestRegistration.Ui
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var builder = CreateHostBuilder(args);
+            builder.Build().Run();
+            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
