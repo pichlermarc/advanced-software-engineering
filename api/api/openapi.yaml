@@ -489,15 +489,15 @@ paths:
                   datetimeFrom:
                     format: int64
                     type: integer
-                    description: datetime from which was searched for guests at locationid, tableid
+                    description: datetime(ms since 1970) from which was searched for guests at locationid, tableid
                   datetimeTo:
                     format: int64
                     type: integer
                     description: datetime up to which was searched for guests at locationid, tableid
-                  pdf:
+                  report:
                     type: string
                     format: base64
-                    description: Base64-encoded contents of pdf
+                    description: Base64-encoded contents of pdf or xls
           description: Registration successful.
         "400":
           description: Invalid location or table ID

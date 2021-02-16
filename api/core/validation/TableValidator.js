@@ -16,8 +16,6 @@ class TableValidator extends IValidator {
         if(tableRequest.id < 0 || tableRequest.location_id < 0) {
             return new ValidationResult("Table-Id and location-Id must not be less than zero!");
         }
-        if(tableRequest.xCoordinate == "" || tableRequest.yCoordinate == "")
-            return new ValidationResult("Values for coordinates must be given");
 
         return new ValidationResult();
     }
