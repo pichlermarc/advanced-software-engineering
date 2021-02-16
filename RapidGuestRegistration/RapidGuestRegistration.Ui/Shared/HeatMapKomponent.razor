@@ -1,0 +1,47 @@
+﻿
+@using Syncfusion.Blazor.HeatMap
+@using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Client.Model
+@inject IDefaultApi Api
+
+
+
+<h3>HeatMap</h3>
+
+
+
+<SfHeatMap DataSource="@HeatMapData">
+    <HeatMapTitle Text="Sales Revenue per Employee (in 1000 US$)"></HeatMapTitle>
+    <HeatMapCellSettings ShowLabel="true" TileType="CellType.Rect"></HeatMapCellSettings>
+</SfHeatMap>
+
+@code{
+    [Parameter]
+    public Location currentLocation { get; set; }
+    List<int> activities = new List<int>();
+    List<int> GetDefaultData()
+    {
+
+        //int[,] dataSource = new int[,]
+        //{
+        //    {1, 2, 3, 4, 5},
+        //    {6, 7, 8, 9, 10},
+        //    {11, 12, 13, 14, 15},
+        //    {16, 17, 18, 19, 20},
+        //    {21, 22, 23, 24, 25}
+        //};
+        return activities;
+    }
+    public object HeatMapData { get; set; }
+    protected override void OnInitialized()
+    {
+        HeatMapData = GetDefaultData();
+        var tables = Api.GetTablesAtLocation(currentLocation.Id);
+        foreach (var t in tables)
+        {
+            var activity = (int)Api.GetTableActivity(currentLocation.Id, t.Id, DateTime.Now.Subtract(TimeSpan.FromDays(30)), DateTime.Now).Activity;
+            activities.Append(activity);
+        }
+
+    }
+}
