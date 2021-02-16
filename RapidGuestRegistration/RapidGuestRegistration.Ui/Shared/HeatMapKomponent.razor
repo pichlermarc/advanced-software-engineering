@@ -4,38 +4,52 @@
 @using RapidGuestRegistration.Client.Model
 @inject IDefaultApi Api
 
-
-
 <h3>HeatMap</h3>
 
-
-
 <SfHeatMap DataSource="@HeatMapData">
-    <HeatMapTitle Text="Sales Revenue per Employee (in 1000 US$)"></HeatMapTitle>
+    <HeatMapTitle Text="Visitors by Table"></HeatMapTitle>
     <HeatMapCellSettings ShowLabel="true" TileType="CellType.Rect"></HeatMapCellSettings>
 </SfHeatMap>
 
 @code{
     [Parameter]
-    public Location currentLocation { get; set; }
-    List<int> activities = new List<int>();
+    public Location CurrentLocation { get; set; }
+    
     int[,] GetDefaultData()
     {
-
-        int[,] datasource = { 1, 2, 3 }
-
-        return datasource;
+        // var activities = new List<int>();
+        // var tables = Api.GetTablesAtLocation(CurrentLocation.Id);
+        // foreach (var t in tables)
+        // {
+        //     var activity = (int)Api.GetTableActivity(CurrentLocation.Id, t.Id, DateTime.Now.Subtract(TimeSpan.FromDays(30)), DateTime.Now).Activity;
+        //     activities.Add(activity);
+        // }
+        //
+        // var datasource = new int[activities.Count, activities.Count];
+        //
+        // for (var i = 0; i < activities.Count; i++)
+        // {
+        //     var activity = activities[i];
+        //     datasource[0, i] = activity;
+        // }
+        //
+        // return datasource;
+        int[,] dataSource = new int[,]
+        {
+            {73, 39, 26, 39, 94, 0},
+            {93, 58, 53, 38, 26, 68},
+            {99, 28, 22, 4, 66, 90},
+            {14, 26, 97, 69, 69, 3},
+            {7, 46, 47, 47, 88, 6},
+            {41, 55, 73, 23, 3, 79}
+        };
+        return dataSource;
     }
+    
     public object HeatMapData { get; set; }
+    
     protected override void OnInitialized()
     {
         HeatMapData = GetDefaultData();
-        var tables = Api.GetTablesAtLocation(currentLocation.Id);
-        foreach (var t in tables)
-        {
-            var activity = (int)Api.GetTableActivity(currentLocation.Id, t.Id, DateTime.Now.Subtract(TimeSpan.FromDays(30)), DateTime.Now).Activity;
-            activities.Append(activity);
-        }
-
     }
 }
