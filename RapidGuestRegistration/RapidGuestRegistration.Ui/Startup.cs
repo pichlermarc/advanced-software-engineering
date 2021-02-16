@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using RapidGuestRegistration.Client.Api;
 using RapidGuestRegistration.Ui.Areas.Identity;
 using RapidGuestRegistration.Ui.Data;
+using Syncfusion.Blazor;
 
 namespace RapidGuestRegistration.Ui
 {
@@ -39,6 +40,7 @@ namespace RapidGuestRegistration.Ui
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSyncfusionBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddSingleton<IDefaultApi>(provider =>
             {
@@ -55,6 +57,9 @@ namespace RapidGuestRegistration.Ui
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mzk5ODgxQDMxMzgyZTM0MmUzMFcwSzJwbkV5Z1dGUmN0eXNKd201enZDcW5ibS83SjB4VVVTdDhHMmlwcXc9");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
