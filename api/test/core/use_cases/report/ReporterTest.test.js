@@ -1,5 +1,5 @@
 const PDFReporter = require('../../../../core/use_cases/report/PDFReporter').PDFReporter;
-// const XLSReporter = require('../../../../core/use_cases/report/XLSReporter').XLSReporter;
+const XLSReporter = require('../../../../core/use_cases/report/XLSReporter').XLSReporter;
 const {eLocation, eTable, eAssign} = require("../../../../core/entities")
 const fs = require('fs');
 const path = require('path');
@@ -37,6 +37,16 @@ test('generate a simple PDF document for 2 tables, 2 locations, 2 assigns', asyn
   let filepath = path.join(dirpath,'output_ReporterTest.pdf');
   let pdfreporter = new PDFReporter(filepath);
   let res = await pdfreporter.createDocument(entities);
+
+  expect(res).toBeDefined();
+  let doc = fs.readFileSync(filepath);
+  expect(res.toString('base64')).toBe(doc.toString('base64'));
+})
+
+test('generate a simple XLSX document for 2 tables, 2 locations, 2 assigns', async () => {
+  let filepath = path.join(dirpath,'output_ReporterTest.xlsx');
+  let xlsreporter = new XLSReporter(filepath);
+  let res = await xlsreporter.createDocument(entities);
 
   expect(res).toBeDefined();
   let doc = fs.readFileSync(filepath);
