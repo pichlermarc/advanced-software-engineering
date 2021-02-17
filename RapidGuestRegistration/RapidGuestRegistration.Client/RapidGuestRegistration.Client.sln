@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidGuestRegistration.Client", "src\RapidGuestRegistration.Client\RapidGuestRegistration.Client.csproj", "{B59C7CF5-E525-4E0C-8D73-7FE3908DC208}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidGuestRegistration.Client", "src\RapidGuestRegistration.Client\RapidGuestRegistration.Client.csproj", "{5A7918B8-3D2E-47EA-9575-7C14A0B9004F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidGuestRegistration.Client.Test", "src\RapidGuestRegistration.Client.Test\RapidGuestRegistration.Client.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B59C7CF5-E525-4E0C-8D73-7FE3908DC208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B59C7CF5-E525-4E0C-8D73-7FE3908DC208}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B59C7CF5-E525-4E0C-8D73-7FE3908DC208}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B59C7CF5-E525-4E0C-8D73-7FE3908DC208}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A7918B8-3D2E-47EA-9575-7C14A0B9004F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A7918B8-3D2E-47EA-9575-7C14A0B9004F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A7918B8-3D2E-47EA-9575-7C14A0B9004F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A7918B8-3D2E-47EA-9575-7C14A0B9004F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU

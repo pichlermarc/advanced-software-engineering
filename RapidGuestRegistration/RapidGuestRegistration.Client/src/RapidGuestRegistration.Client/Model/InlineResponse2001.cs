@@ -39,14 +39,14 @@ namespace RapidGuestRegistration.Client.Model
         /// <param name="tableId">Id of the table at which to look for guests in time range.</param>
         /// <param name="datetimeFrom">datetime from which was searched for guests at locationid, tableid.</param>
         /// <param name="datetimeTo">datetime up to which was searched for guests at locationid, tableid.</param>
-        /// <param name="pdf">Base64-encoded contents of pdf.</param>
-        public InlineResponse2001(long locationId = default(long), long tableId = default(long), long datetimeFrom = default(long), long datetimeTo = default(long), string pdf = default(string))
+        /// <param name="report">Base64-encoded contents of pdf.</param>
+        public InlineResponse2001(long locationId = default(long), long tableId = default(long), long datetimeFrom = default(long), long datetimeTo = default(long), string report = default(string))
         {
             this.LocationId = locationId;
             this.TableId = tableId;
             this.DatetimeFrom = datetimeFrom;
             this.DatetimeTo = datetimeTo;
-            this.Pdf = pdf;
+            this.Report = report;
         }
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace RapidGuestRegistration.Client.Model
         /// Base64-encoded contents of pdf
         /// </summary>
         /// <value>Base64-encoded contents of pdf</value>
-        [DataMember(Name = "pdf", EmitDefaultValue = false)]
-        public string Pdf { get; set; }
+        [DataMember(Name = "report", EmitDefaultValue = false)]
+        public string Report { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -96,7 +96,7 @@ namespace RapidGuestRegistration.Client.Model
             sb.Append("  TableId: ").Append(TableId).Append("\n");
             sb.Append("  DatetimeFrom: ").Append(DatetimeFrom).Append("\n");
             sb.Append("  DatetimeTo: ").Append(DatetimeTo).Append("\n");
-            sb.Append("  Pdf: ").Append(Pdf).Append("\n");
+            sb.Append("  Report: ").Append(Report).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -148,9 +148,9 @@ namespace RapidGuestRegistration.Client.Model
                     this.DatetimeTo.Equals(input.DatetimeTo)
                 ) && 
                 (
-                    this.Pdf == input.Pdf ||
-                    (this.Pdf != null &&
-                    this.Pdf.Equals(input.Pdf))
+                    this.Report == input.Report ||
+                    (this.Report != null &&
+                    this.Report.Equals(input.Report))
                 );
         }
 
@@ -167,8 +167,8 @@ namespace RapidGuestRegistration.Client.Model
                 hashCode = hashCode * 59 + this.TableId.GetHashCode();
                 hashCode = hashCode * 59 + this.DatetimeFrom.GetHashCode();
                 hashCode = hashCode * 59 + this.DatetimeTo.GetHashCode();
-                if (this.Pdf != null)
-                    hashCode = hashCode * 59 + this.Pdf.GetHashCode();
+                if (this.Report != null)
+                    hashCode = hashCode * 59 + this.Report.GetHashCode();
                 return hashCode;
             }
         }
