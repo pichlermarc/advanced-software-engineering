@@ -15,6 +15,7 @@ jobs:
       run: docker-compose -f docker-compose.integration-test.yml up --exit-code-from api-test
     - name: Run JMeter Tests
       uses: rbhadti94/apache-jmeter-action@v0.3.1
+      run: docker-compose -f docker-compose.integration-test.yml up
       with:
         testFilePath: api/test/testPlan.jmx
         outputReportsFolder: api/reports/
