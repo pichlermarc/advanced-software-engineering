@@ -1,0 +1,64 @@
+﻿
+@using Syncfusion.Blazor.HeatMap
+@using Syncfusion.Blazor.Inputs
+@using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Client.Model
+@inject IDefaultApi Api
+
+<h3>HeatMap</h3>
+
+<SfSlider Width="800px" Step="7" Type="SliderType.MinRange" Max="70" @bind-Value="@DaysValue">
+    <SliderTooltipData IsVisible="true" ShowOn="TooltipShowOn.Always" Placement="TooltipPlacement.After"></SliderTooltipData>
+    <SliderLimits Enabled="true" MinStart="0" MinEnd="70" ></SliderLimits>
+    <SliderTicksData Placement="Placement.After" LargeStep="7" SmallStep="7"></SliderTicksData>
+</SfSlider>
+
+<SfHeatMap DataSource="@HeatMapData">
+    <HeatMapTitle Text="Visitors by Table"></HeatMapTitle>
+    <HeatMapCellSettings ShowLabel="true" TileType="CellType.Rect"></HeatMapCellSettings>
+</SfHeatMap>
+
+@code{
+    [Parameter]
+    public Location CurrentLocation { get; set; }
+    int DaysValue { get; set; }
+
+    int[,] GetDefaultData()
+    {
+        var activities = new List<int>();
+        var tables = Api.GetTablesAtLocation(CurrentLocation.Id);
+        foreach (var t in tables)
+        {
+            var activity = (int)Api.GetTableActivity(CurrentLocation.Id, t.Id, DateTime.Now.Subtract(TimeSpan.FromDays(DaysValue)), DateTime.Now).Activity;
+            activities.Add(activity);
+        }
+
+        //var datasource = new int[1, activities.Count];
+        var datasource = new int[activities.Count, 1];
+
+        for (var i = 0; i < activities.Count; i++)
+        {
+            var activity = activities[i];
+            datasource[i, 0] = activity;
+        }
+
+        return datasource;
+        //    int[,] dataSource = new int[,]
+        //{
+        //        {73, 39, 26, 39, 94, 0},
+        //        {93, 58, 53, 38, 26, 68},
+        //        {99, 28, 22, 4, 66, 90},
+        //        {14, 26, 97, 69, 69, 3},
+        //        {7, 46, 47, 47, 88, 6},
+        //        {41, 55, 73, 23, 3, 79}
+        //};
+        //    return dataSource;
+    }
+
+    public object HeatMapData { get; set; }
+
+    protected override void OnInitialized()
+    {
+        HeatMapData = GetDefaultData();
+    }
+}

@@ -66,7 +66,8 @@ namespace RapidGuestRegistration.Ui
 
         public InlineResponse200 GetTableActivity(long locationId, long tableId, DateTime @from, DateTime to)
         {
-            throw new NotImplementedException();
+            var random = new Random(); 
+            return new InlineResponse200(random.Next(1, 10));
         }
 
         public ApiResponse<InlineResponse200> GetTableActivityWithHttpInfo(long locationId, long tableId, DateTime @from, DateTime to)
