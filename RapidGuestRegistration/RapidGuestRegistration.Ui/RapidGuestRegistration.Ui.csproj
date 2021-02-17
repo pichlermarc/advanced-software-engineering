@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="app.db" CopyToOutputDirectory="PreserveNewest"/>
+    <None Update="app.db" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.11" />
     <PackageReference Include="QRCoder" Version="1.4.1" />
     <PackageReference Include="Syncfusion.Blazor.HeatMap" Version="18.4.0.43" />
+    <PackageReference Include="Syncfusion.Blazor.Inputs" Version="18.4.0.43" />
   </ItemGroup>
 
   <ItemGroup>
