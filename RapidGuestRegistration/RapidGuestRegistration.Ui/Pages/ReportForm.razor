@@ -133,8 +133,8 @@
         Console.WriteLine(_selectedTable);
         var result = Api.GetReportForTable(_selectedLocation, _selectedTable, startUnix, endUnix, "pdf");
         _pdf = result.Report;
-        //result = Api.GetReportForTable(_selectedLocation, _selectedTable, startUnix, endUnix, "xls");
-        //_xls = result.Report;
+        result = Api.GetReportForTable(_selectedLocation, _selectedTable, startUnix, endUnix, "xls");
+        _xls = result.Report;
         _showDownload = true;
     }
 
