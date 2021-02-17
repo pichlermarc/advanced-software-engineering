@@ -33,6 +33,7 @@ namespace RapidGuestRegistration.Ui
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -52,7 +53,17 @@ namespace RapidGuestRegistration.Ui
                 throw new InvalidOperationException(
                     "Cannot determine operation mode, use either \"production\" or \"mock\"");
             });
+
+            var defaultUserSection = Configuration.GetSection("DefaultUser");
+            var defaultMail = defaultUserSection.GetSection("Email").Value;
+            var defaultPassword = defaultUserSection.GetSection("Password").Value;
+
+            services.AddHostedService<StandardUserService>(serviceProvider =>
+       new StandardUserService(
+           serviceProvider.GetService<IServiceScopeFactory>(), defaultMail, defaultPassword));
+
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -89,3 +100,4 @@ namespace RapidGuestRegistration.Ui
         }
     }
 }
+
