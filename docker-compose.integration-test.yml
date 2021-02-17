@@ -4,9 +4,12 @@ services:
     container_name: api_test_container
     build: ./api
     command: npm run integrationtest
+    hostname: postgres
     #command: sleep infinity
     depends_on: 
       - postgres
+    ports:
+      - "8080:8080"
   postgres:
     container_name: postgres_container
     image: postgres:12.2
