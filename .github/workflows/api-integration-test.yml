@@ -13,15 +13,16 @@ jobs:
       run: docker-compose -f docker-compose.integration-test.yml build
     - name: Run services and tests
       run: docker-compose -f docker-compose.integration-test.yml up --exit-code-from api-test
-    - name: Start Docker containers for JMeter tests
-      run: docker-compose -f docker-compose.integration-test.yml up
-    - name: Run JMeter Tests
-      uses: rbhadti94/apache-jmeter-action@v0.3.1
-      with:
-        testFilePath: api/test/testPlan.jmx
-        outputReportsFolder: api/reports/
     - name: Archive jmeter results
       uses: actions/upload-artifact@v2
       with:
         name: jmeter-report
         path: api/reports/*
+  jmeter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run JMeter Tests
+        uses: rbhadti94/apache-jmeter-action@v0.3.1
+        with:
+          testFilePath: api/test/testPlan.jmx
+          outputReportsFolder: api/reports/
