@@ -18,3 +18,8 @@ jobs:
       with:
         testFilePath: api/test/testPlan.jmx
         outputReportsFolder: api/reports/
+    - name: Archive jmeter results
+      uses: actions/upload-artifact@v2
+      with:
+        name: jmeter-report
+        path: api/reports/*
