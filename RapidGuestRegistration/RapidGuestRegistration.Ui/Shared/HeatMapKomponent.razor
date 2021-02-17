@@ -14,40 +14,41 @@
 @code{
     [Parameter]
     public Location CurrentLocation { get; set; }
-    
+
     int[,] GetDefaultData()
     {
-        // var activities = new List<int>();
-        // var tables = Api.GetTablesAtLocation(CurrentLocation.Id);
-        // foreach (var t in tables)
-        // {
-        //     var activity = (int)Api.GetTableActivity(CurrentLocation.Id, t.Id, DateTime.Now.Subtract(TimeSpan.FromDays(30)), DateTime.Now).Activity;
-        //     activities.Add(activity);
-        // }
-        //
-        // var datasource = new int[activities.Count, activities.Count];
-        //
-        // for (var i = 0; i < activities.Count; i++)
-        // {
-        //     var activity = activities[i];
-        //     datasource[0, i] = activity;
-        // }
-        //
-        // return datasource;
-        int[,] dataSource = new int[,]
+        var activities = new List<int>();
+        var tables = Api.GetTablesAtLocation(CurrentLocation.Id);
+        foreach (var t in tables)
         {
-            {73, 39, 26, 39, 94, 0},
-            {93, 58, 53, 38, 26, 68},
-            {99, 28, 22, 4, 66, 90},
-            {14, 26, 97, 69, 69, 3},
-            {7, 46, 47, 47, 88, 6},
-            {41, 55, 73, 23, 3, 79}
-        };
-        return dataSource;
+            var activity = (int)Api.GetTableActivity(CurrentLocation.Id, t.Id, DateTime.Now.Subtract(TimeSpan.FromDays(30)), DateTime.Now).Activity;
+            activities.Add(activity);
+        }
+
+        //var datasource = new int[1, activities.Count];
+        var datasource = new int[activities.Count, 1];
+
+        for (var i = 0; i < activities.Count; i++)
+        {
+            var activity = activities[i];
+            datasource[i, 0] = activity;
+        }
+
+        return datasource;
+    //    int[,] dataSource = new int[,]
+    //{
+    //        {73, 39, 26, 39, 94, 0},
+    //        {93, 58, 53, 38, 26, 68},
+    //        {99, 28, 22, 4, 66, 90},
+    //        {14, 26, 97, 69, 69, 3},
+    //        {7, 46, 47, 47, 88, 6},
+    //        {41, 55, 73, 23, 3, 79}
+    //};
+    //    return dataSource;
     }
-    
+
     public object HeatMapData { get; set; }
-    
+
     protected override void OnInitialized()
     {
         HeatMapData = GetDefaultData();
