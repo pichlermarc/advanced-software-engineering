@@ -17,4 +17,4 @@ jobs:
       uses: rbhadti94/apache-jmeter-action@v0.3.1
       with:
         testFilePath: api/test/testPlan.jmx
-        outputReportsFolder: reports/
+        outputReportsFolder: api/reports/
