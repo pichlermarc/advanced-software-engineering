@@ -90,6 +90,7 @@
         try
         {
             Api.RegisterAtTable(castedLocationId, castedTableId, editmodel.ToGuest());
+            NavigationManager.NavigateTo("thankyou");
         }
         catch (ApiException ae)
         {

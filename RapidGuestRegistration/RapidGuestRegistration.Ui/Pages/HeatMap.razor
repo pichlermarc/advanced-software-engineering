@@ -1,4 +1,5 @@
-﻿@page "/heatmap"
+﻿@attribute [Authorize]
+@page "/heatmap"
 @using Syncfusion.Blazor.HeatMap
 @using RapidGuestRegistration.Client.Api
 @using RapidGuestRegistration.Client.Model
@@ -6,7 +7,7 @@
 
 @foreach (var location in locations)
 {
-    <HeatMapKomponent CurrentLocation="location"></HeatMapKomponent>
+    <HeatMapComponent CurrentLocation="location"></HeatMapComponent>
 }
 
 @code
