@@ -52,6 +52,16 @@ namespace RapidGuestRegistration.Ui
                 throw new InvalidOperationException(
                     "Cannot determine operation mode, use either \"production\" or \"mock\"");
             });
+
+            var defaultUserSection = Configuration.GetSection("DefaultUser");
+            var defaultMail = defaultUserSection.GetSection("Email").Value;
+            var defaultPassword = defaultUserSection.GetSection("Password").Value;
+
+            services.AddHostedService<StandardUserService>(serviceProvider =>
+  new StandardUserService(
+      serviceProvider.GetService<IServiceScopeFactory>(), defaultMail, defaultPassword));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
