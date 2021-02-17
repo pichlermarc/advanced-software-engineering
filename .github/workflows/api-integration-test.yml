@@ -25,3 +25,5 @@ jobs:
       with:
         name: jmeter-report
         path: api/reports/*
+    - name: Shut down docker containers
+      run: docker-compose down
