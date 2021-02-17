@@ -4,7 +4,7 @@ services:
     container_name: api_test_container
     build: ./api
     command: npm run integrationtest
-    hostname: postgres
+    hostname: api
     #command: sleep infinity
     depends_on: 
       - postgres
