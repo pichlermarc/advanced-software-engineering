@@ -10,6 +10,7 @@ services:
       - postgres
     ports:
       - "8080:8080"
+    network_mode: host
   postgres:
     container_name: postgres_container
     image: postgres:12.2

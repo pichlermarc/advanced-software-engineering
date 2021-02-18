@@ -14,7 +14,7 @@ jobs:
     - name: Run services and tests
       run: docker-compose -f docker-compose.integration-test.yml up --exit-code-from api-test
     - name: Run docker containers for JMeter
-      run: docker-compose --network=host -f docker-compose.integration-test.yml up -d
+      run: docker-compose -f docker-compose.integration-test.yml up -d
     - name: Run netstat
       run: netstat -atup
     - name: Run JMeter Tests
