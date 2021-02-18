@@ -1,24 +1,26 @@
-@page "/generate"
+@attribute [Authorize]
+@page "/report"
 @using RapidGuestRegistration.Client.Model
 @using RapidGuestRegistration.Client.Api
 @inject IDefaultApi Api
 <h3>Generate Report</h3>
 
-<form>
-    <label>
-        <p>Location:</p>
-        <select class="form-control selectpicker" @onchange="UpdateTables">
-            @foreach (var location in _locations)
-            {
-                <option value=@location.Id>@location.Name</option>
-            }
-        </select>
-    </label>
-    <br/>
+<label>
+    <p>Location:</p>
+    <select class="form-control" @onchange="UpdateTables">
+        @foreach (var location in _locations)
+        {
+            <option value=@location.Id>@location.Name</option>
+        }
+    </select>
+</label>
+<br/>
 
+@if (_locationSelected)
+{
     <label>
         <p>Table:</p>
-        <select class="form-control selectpicker" @bind="_selectedTable">
+        <select class="form-control" @bind="_selectedTable">
             @foreach (var table in _tables)
             {
                 <option value="@table.Id">@table.Name</option>
@@ -26,32 +28,67 @@
         </select>
     </label>
     <br/>
+}
 
+@if (_selectedTable != 0)
+{
     <label>
         <p>Begin Date:</p>
-        <input @bind="_startDate" type="date"/>
-        <input type="number" max="23" min="0"/>:<input type="number" max="59" min="0"/>
+        <input class="form-control mb-1" @bind="_startDate" type="date"/>
+        <p>Time:</p>
+        <div class="input-group">
+            <input class="form-control" type="number" max="23" min="0" @bind="_startHour"/>
+            <span>:</span>
+            <input class="form-control" type="number" max="59" min="0" @bind="_startMinute"/>
+        </div>
     </label>
     <br/>
+
     <label>
         <p>End Date:</p>
-        <input @bind="_endDate" type="date"/>
-        <input type="number" max="23" min="0"/>:<input type="number" max="59" min="0"/>
+        <input class="form-control mb-1" @bind="_endDate" type="date"/>
+        <p>Time:</p>
+        <div class="input-group">
+            <input class="form-control" type="number" max="23" min="0" @bind="_endHour"/>
+            <span>:</span>
+            <input class="form-control" type="number" max="59" min="0" @bind="_endMinute"/>
+        </div>
     </label>
-
     <br/>
-
-    <button class="btn btn-primary" type="submit" @onclick="Generate">Generate</button>
-</form>
+    <button class="btn btn-primary" @onclick="Generate">Generate</button>
+    @if (_timeError)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Error:</strong> Start time has to be earlier then end-time.
+            <button type="button" class="close" @onclick="() => _timeError = false">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    @if (_showDownload)
+    {
+        <a download="report.pdf" href="data:application/pdf;base64,@_pdf">Download PDF</a>
+        <a download="report.xlsx" href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,@_xls">Download Excel</a>
+    }
+}
 
 @code {
     private long _selectedTable;
     private long _selectedLocation;
 
     private DateTime _startDate;
-    private DateTime _startTime;
+    private int _startHour;
+    private int _startMinute;
     private DateTime _endDate;
-    private DateTime _endTime;
+    private int _endHour;
+    private int _endMinute;
+
+    private bool _enableGeneration;
+    private bool _locationSelected;
+    private bool _showDownload;
+    private bool _timeError;
+    private string _pdf;
+    private string _xls;
 
 
     private List<Location> _locations;
@@ -62,23 +99,44 @@
         _startDate = DateTime.Today;
         _endDate = DateTime.Today;
         _locations = Api.GetLocations();
-        _tables = new List<Table>();
+
+        if (_locations.Count > 0)
+        {
+            _selectedLocation = _locations.First().Id;
+        }
+        
+        _tables = _locations.Count > 0 ? Api.GetTablesAtLocation(_locations.First().Id) : new List<Table>();
+        if (_tables.Count > 0)
+            _locationSelected = true;
     }
 
-    private async Task UpdateTables(ChangeEventArgs eventArgs)
+    private void UpdateTables(ChangeEventArgs eventArgs)
     {
         _selectedLocation = long.Parse(eventArgs.Value.ToString());
-        _tables = await Api.GetTablesAtLocationAsync(_selectedLocation);
+        Console.WriteLine($"using tables from {_selectedLocation}");
+        _tables = Api.GetTablesAtLocation(_selectedLocation);
     }
 
     private void Generate()
     {
-        var start = _startDate;
-        start = start.Add(TimeSpan.FromHours(_startTime.Hour)).Add(TimeSpan.FromHours(_startTime.Minute));
-        var end = _endDate;
-        end = end.Add(TimeSpan.FromHours(_endTime.Hour)).Add(TimeSpan.FromHours(_endTime.Minute));
-        Console.WriteLine(start);
-        Console.WriteLine(end);
+        var start = new DateTime(_startDate.Year, _startDate.Month, _startDate.Day, _startHour, _startMinute, 0);
+        var end = new DateTime(_endDate.Year, _endDate.Month, _endDate.Day, _endMinute, _endMinute, 0);
+        var startUnix = (long) start.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+        var endUnix = (long) end.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
+
+        if (startUnix > endUnix)
+        {
+            _timeError = true;
+            return;
+        }
+
+        Console.WriteLine(_selectedLocation);
+        Console.WriteLine(_selectedTable);
+        var result = Api.GetReportForTable(_selectedLocation, _selectedTable, startUnix, endUnix, "pdf");
+        _pdf = result.Report;
+        result = Api.GetReportForTable(_selectedLocation, _selectedTable, startUnix, endUnix, "xls");
+        _xls = result.Report;
+        _showDownload = true;
     }
 
 }

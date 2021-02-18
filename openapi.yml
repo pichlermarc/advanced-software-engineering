@@ -494,7 +494,7 @@ paths:
                     format: int64
                     type: integer
                     description: datetime up to which was searched for guests at locationid, tableid
-                  pdf:
+                  report:
                     type: string
                     format: base64
                     description: Base64-encoded contents of pdf

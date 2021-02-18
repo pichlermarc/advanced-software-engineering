@@ -19,8 +19,6 @@ using Xunit;
 
 using RapidGuestRegistration.Client.Client;
 using RapidGuestRegistration.Client.Api;
-using RapidGuestRegistration.Client.Model;
-
 // uncomment below to import models
 //using RapidGuestRegistration.Client.Model;
 
@@ -39,7 +37,7 @@ namespace RapidGuestRegistration.Client.Test.Api
 
         public DefaultApiTests()
         {
-            instance = new DefaultApi("http://localhost:8080/");
+            instance = new DefaultApi();
         }
 
         public void Dispose()
@@ -53,6 +51,8 @@ namespace RapidGuestRegistration.Client.Test.Api
         [Fact]
         public void InstanceTest()
         {
+            // TODO uncomment below to test 'IsType' DefaultApi
+            //Assert.IsType<DefaultApi>(instance);
         }
 
         /// <summary>
@@ -61,6 +61,10 @@ namespace RapidGuestRegistration.Client.Test.Api
         [Fact]
         public void AddLocationTest()
         {
+            // TODO uncomment below to test the method and replace null with proper value
+            //Location location = null;
+            //var response = instance.AddLocation(location);
+            //Assert.IsType<Location>(response);
         }
 
         /// <summary>
@@ -69,6 +73,11 @@ namespace RapidGuestRegistration.Client.Test.Api
         [Fact]
         public void AddTableAtLocationTest()
         {
+            // TODO uncomment below to test the method and replace null with proper value
+            //long locationId = null;
+            //Table table = null;
+            //var response = instance.AddTableAtLocation(locationId, table);
+            //Assert.IsType<Table>(response);
         }
 
         /// <summary>

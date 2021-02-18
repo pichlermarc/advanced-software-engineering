@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const GuestRegistrationInMemRepository = require('../../../core/repositories/GuestRegistrationInMemRepository');
 const PDFReporter = require('../../../core/use_cases/report/PDFReporter').PDFReporter;
-// const XLSReporter = require('../../../core/use_cases/report/XLSReporter').XLSReporter;
+const XLSReporter = require('../../../core/use_cases/report/XLSReporter').XLSReporter;
 
 let DATETIMETO = Date.now();
 let DATETIMEFROM =  DATETIMETO - 60*60*1000;

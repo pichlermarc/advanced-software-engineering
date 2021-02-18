@@ -13,7 +13,6 @@
     protected override void OnInitialized()
     {
         var baseUrl = Configuration.GetSection("registration").GetValue<string>("baseUrl");
-        // TODO: Join URLs in a way that eliminates duplicate /, similar to Path.Combine maybe?
         _link = $"{baseUrl}/locations/{LocationId}/table/{TableId}/register";
     }
     
