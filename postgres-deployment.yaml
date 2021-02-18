@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: ..\kompose.exe convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgres
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: postgres
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: ..\kompose.exe convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: postgres
+    spec:
+      containers:
+      - env:
+        - name: PGDATA
+          value: /db/postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: POSTGRES_USER
+          value: postgres
+        image: postgres:12.2
+        imagePullPolicy: ""
+        name: postgres-container
+        ports:
+        - containerPort: 5432
+        resources: {}
+        lifecycle:
+          postStart:
+            exec:
+              command: [ "/bin/bash","-c","sleep 20 && PGPASSWORD=$POSTGRES_PASSWORD psql $POSTGRES_DB -U $POSTGRES_USER -c \"CREATE ROLE ase WITH LOGIN PASSWORD \'ase\';\" && psql -U $POSTGRES_USER -c \"create database development;\"" ]
+
+      hostname: postgres
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
