@@ -20,5 +20,6 @@ services:
     volumes:
       - ./api/generateDBTables.sql:/docker-entrypoint-initdb.d/1-schema.sql
     restart: unless-stopped
+    network_mode: host
 volumes:
   postgres:
