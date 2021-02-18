@@ -8,7 +8,8 @@ services:
     #command: sleep infinity
     depends_on: 
       - postgres
-    network_mode: host
+    ports:
+      - "8080:8080"
   postgres:
     container_name: postgres_container
     image: postgres:12.2
@@ -19,7 +20,8 @@ services:
       PGDATA: /db/postgres
     volumes:
       - ./api/generateDBTables.sql:/docker-entrypoint-initdb.d/1-schema.sql
+    ports:
+      - "5051:5432"
     restart: unless-stopped
-    network_mode: host
 volumes:
   postgres:
