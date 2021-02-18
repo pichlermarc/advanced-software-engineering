@@ -1,7 +1,9 @@
 @page "/location/{LocationId}/edit"
+@attribute [Authorize]
+
 <h3>Edit Location</h3>
 <LocationEditForm LocationId="long.Parse(LocationId)"></LocationEditForm>
-
+<TableList LocationId="long.Parse(LocationId)"></TableList>
 @code {
     [Parameter]
     public string LocationId { get; set; }

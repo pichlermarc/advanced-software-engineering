@@ -1,0 +1,28 @@
+@using QRCoder
+@using System.IO
+@using System.Drawing.Imaging
+
+<img class="img-fluid rounded" src="data:image/png;base64, @_image" alt="QR code leading to @Text" />
+
+@code {
+    [Parameter] 
+    public string Text { get; set; }
+
+    [Parameter]
+    public string Size { get; set; }
+
+    private string _image;
+    
+    
+    protected override void OnInitialized()
+    {
+        var qrGenerator = new QRCodeGenerator();
+        var qrCodeData = qrGenerator.CreateQrCode(Text, QRCodeGenerator.ECCLevel.Q);
+        var qrCode = new QRCode(qrCodeData);
+        var qrCodeImage = qrCode.GetGraphic(20);
+        using var memoryStream = new MemoryStream();
+        qrCodeImage.Save(memoryStream, ImageFormat.Png);
+        _image = Convert.ToBase64String(memoryStream.ToArray());
+    }
+
+}

@@ -242,9 +242,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Table'
-                type: array
+                $ref: '#/components/schemas/Table'
           description: Table deletion successful.
         "403":
           description: Table or location does not exist.
@@ -279,9 +277,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Table'
-                type: array
+                $ref: '#/components/schemas/Table'
           description: Table retrieval successful.
         "403":
           description: Table or location does not exist.
@@ -329,6 +325,63 @@ paths:
           description: You are not allowed to edit this table.
       summary: Update an existing table
       x-eov-operation-handler: controllers/DefaultController
+  /location/{locationId}/table/{tableId}/activity:
+    get:
+      description: Get the amount of people registered on this table in the given time-range.
+      operationId: locationLocationIdTableTableIdActivityGET
+      parameters:
+      - description: ID of the location to get activity from
+        explode: false
+        in: path
+        name: locationId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: ID of the table to get activity from
+        explode: false
+        in: path
+        name: tableId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: Activity from
+        explode: false
+        in: query
+        name: from
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: Activity to
+        explode: false
+        in: query
+        name: to
+        required: true
+        schema:
+          format: date-time
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  activity:
+                    type: number
+                    example: 4.5
+                    description: number of visitors in the specified time range
+          description: Activity lookup successful.
+        "404":
+          description: Location Id or Table Id not found.
+        "400":
+          description: Invalid location or table ID
+      summary: Register on this table on this location.
+      x-eov-operation-handler: controllers/DefaultController
   /location/{locationId}/table/{tableId}/register:
     post:
       description: Register on this table on this location.
@@ -363,6 +416,88 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Guest'
+          description: Registration successful.
+        "400":
+          description: Invalid location or table ID
+      summary: Register on this table on this location.
+      x-eov-operation-handler: controllers/DefaultController
+  /location/{locationId}/table/{tableId}/report/{reportType}:
+    get:
+      description: Get report of reporttype on this table on this location.
+      operationId: locationLocationIdTableTableIdReportGET
+      parameters:
+        - description: ID of the location to register on.
+          explode: false
+          in: path
+          name: locationId
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: ID of the table to register on.
+          explode: false
+          in: path
+          name: tableId
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: Datetime from which to search for guests at tableid locationid.
+          explode: false
+          in: query
+          name: datetimeFrom
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - description: Datetime to which to search for guests at tableid locationid.
+          explode: false
+          in: query
+          name: datetimeTo
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - description: type of report to retrieve.
+          explode: false
+          in: path
+          name: reportType
+          required: true
+          schema:
+            type: string
+            example: pdf or xls
+          style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  locationId:
+                    format: int64
+                    type: integer
+                    description: Id of the location at which to look for guests in time range
+                  tableId:
+                    format: int64
+                    type: integer
+                    description: Id of the table at which to look for guests in time range
+                  datetimeFrom:
+                    format: int64
+                    type: integer
+                    description: datetime(ms since 1970) from which was searched for guests at locationid, tableid
+                  datetimeTo:
+                    format: int64
+                    type: integer
+                    description: datetime up to which was searched for guests at locationid, tableid
+                  report:
+                    type: string
+                    format: base64
+                    description: Base64-encoded contents of pdf or xls
           description: Registration successful.
         "400":
           description: Invalid location or table ID
@@ -404,6 +539,8 @@ components:
       example:
         name: 'Table #12'
         id: 420
+        xCoordinate: 1.23
+        yCoordinate: -4.56
       properties:
         id:
           example: 420
@@ -412,4 +549,10 @@ components:
         name:
           example: 'Table #12'
           type: string
+        xCoordinate:
+          example: 12.56
+          type: number
+        yCoordinate:
+          example: -3.5
+          type: number
       type: object

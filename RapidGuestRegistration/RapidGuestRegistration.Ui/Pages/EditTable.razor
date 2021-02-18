@@ -1,0 +1,17 @@
+﻿@page "/location/{LocationId}/table/{TableId}/edit"
+@attribute [Authorize]
+
+<h3>EditTable</h3>
+
+<TableEditForm TableId="long.Parse(TableId)" LocationId="long.Parse(LocationId)"></TableEditForm>
+
+
+@code {
+    [Parameter]
+    public string LocationId { get; set; }
+    [Parameter]
+    public string TableId { get; set; }
+}
+
+
+

@@ -1,18 +1,44 @@
 /* eslint-disable no-unused-vars */
 const Service = require('./Service');
-const StubRequestModel = require('../core/use_cases/stub/StubRequestModel');
-const StubValidator = require('../core/use_cases/stub/StubValidator');
-const StubInteractor = require('../core/use_cases/stub/StubInteractor');
 
 const AddLocationRequestModel = require('../core/requestModels/AddLocationRequestModel');
-const LocationsInMemRepository = require('../core/repositories/LocationsInMemRepository');
+const GuestRegistrationPostgres = require('../core/repositories/GuestRegistrationPostgres');
 const AddLocationValidator = require('../core/validation/AddLocationValidator');
-const AddLocationInteractor = require('../core/use_cases/addLocation/AddLocationInteractor');
+const AddLocationInteractor = require('../core/use_cases/AddLocationInteractor');
 
-let repository = new LocationsInMemRepository();
+let repository = new GuestRegistrationPostgres();
 
-const LocationInteractor = require('../core/use_cases/location/LocationInteractor');
-const DeleteLocationInteractor = require('../core/use_cases/location/DeleteLocationInteractor');
+const GetLocationInteractor = require('../core/use_cases/GetLocationInteractor');
+const GetLocationsInteractor = require('../core/use_cases/GetLocationsInteractor');
+const DeleteLocationInteractor = require('../core/use_cases/DeleteLocationInteractor');
+const LocationIdRequestModel = require('../core/requestModels/LocationIdRequestModel');
+const IdValidator = require('../core/validation/IdValidator');
+const LocationRequestModel = require('../core/requestModels/LocationRequestModel');
+const LocationValidator = require('../core/validation/LocationValidator');
+const UpdateLocationInteractor = require('../core/use_cases/UpdateLocationInteractor');
+const UpdateLocationByIdInteractor = require('../core/use_cases/UpdateLocationByIdInteractor');
+const GetLocationTablesInteractor = require('../core/use_cases/GetLocationTablesInteractor');
+const EntityRequestModel = require('../core/requestModels/EntityRequestModel');
+const TableValidator = require('../core/validation/TableValidator');
+const LocationIdTableIdRequestModel = require('../core/requestModels/LocationIdTableIdRequestModel');
+const GetLocationTableInteractor = require('../core/use_cases/GetLocationTableInteractor');
+const LocationIdTableIdValidator = require('../core/validation/LocationIdTableIdValidator');
+const DeleteTableAtLocation = require('../core/use_cases/DeleteTableAtLocationInteractor');
+const LocationIdTableIdTableRequestModel = require('../core/requestModels/LocationIdTableIdTableRequestModel');
+const LocationIdTableIdTableValidator = require('../core/validation/LocationIdTableIdTableValidator');
+const UpdateTableAtLocationInteractor = require('../core/use_cases/UpdateTableAtLocationInteractor');
+const LocationIdTableIdGuestRequestModel = require('../core/requestModels/LocationIdTableIdGuestRequestModel');
+const LocationIdTableIdGuestValidator = require('../core/validation/LocationIdTableIdGuestValidator');
+const RegisterGuestAtTableAtLocationInteractor = require('../core/use_cases/RegisterGuestAtTableAtLocationInteractor');
+const ReportRequestModel = require('../core/requestModels/ReportRequestModel');
+const ReportValidator = require('../core/validation/ReportValidator');
+const GetReportInteractor = require('../core/use_cases/GetReportInteractor');
+const PDFReporter = require('../core/use_cases/report/PDFReporter').PDFReporter;
+const XLSReporter = require('../core/use_cases/report/XLSReporter').XLSReporter;
+const LocationIdTableIdActivityRequestModel = require('../core/requestModels/LocationIdTableIdActivityRequestModel');
+const LocationIdTableIdActivityValidator = require('../core/validation/LocationIdTableIdActivityValidator');
+const GetLocationTableActivityInteractor = require('../core/use_cases/GetLocationTableActivityInteractor');
+const AddTableAtLocationInteractor = require('../core/use_cases/AddTableAtLocationInteractor')
 
 /**
 * Get your locations
@@ -25,9 +51,9 @@ const locationGET = () => new Promise(
     console.log("---locationGET---");
     try {
 
-      let interactor = new LocationInteractor(repository);
+      let interactor = new GetLocationsInteractor(repository);
 
-      let responsemodel = interactor.execute();
+      let responsemodel = await interactor.execute();
 
       if(responsemodel.error_msg !== null) {
         throw {
@@ -39,7 +65,7 @@ const locationGET = () => new Promise(
           }
         };
       }
-      resolve(Service.successResponse(responsemodel.entities));
+      resolve(Service.successResponse(responsemodel.location_list));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || responsemodel.error_msg,
@@ -59,24 +85,26 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
   async (resolve, reject) => {
     console.log("---locationLocationIdDELETE---");
     try {
-      let requestmodel = new StubRequestModel(locationId);
+      let requestmodel = new LocationIdRequestModel(locationId);
 
-      let validator = new StubValidator();
+      let validator = new IdValidator();
       let interactor = new DeleteLocationInteractor(repository, validator);
 
-      let responsemodel = interactor.execute(requestmodel);
+      let responsemodel = await interactor.execute(requestmodel);
 
       if(responsemodel.error_msg !== null) {
         throw {
-          name: "StubException",
+          name: "LocationNotFoundException",
           message: responsemodel.error_msg,
-          status: 405,
+          status: responsemodel.status || 404,
           toString: function() {
             return this.name + ": " + this.message;
           }
         };
       }
-      resolve(Service.successResponse({"id": responsemodel.id, "name": responsemodel.location}));
+      resolve(Service.successResponse({
+          "id": responsemodel.id,
+          "name": responsemodel.name}, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -94,19 +122,19 @@ const locationLocationIdDELETE = ({ locationId }) => new Promise(
 * */
 const locationLocationIdGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
-      console.log("---locationLocationIdGET---process-the-stub-usecase---");
+      console.log("---locationLocationIdGET---get location with given id---");
     try {
-        let requestmodel = new StubRequestModel(locationId);
-        let validator = new StubValidator();
-        let interactor = new StubInteractor(repository, validator);
+        let requestmodel = new LocationIdRequestModel(locationId);
+        let validator = new IdValidator();
+        let interactor = new GetLocationInteractor(repository, validator);
 
-        let responsemodel = interactor.execute(requestmodel);
+        let responsemodel = await interactor.execute(requestmodel);
 
         if(responsemodel.error_msg !== null) {
             throw {
-                name: "StubException",
+                name: "LocationNotFoundException",
                 message: responsemodel.error_msg,
-                status: 405,
+                status: 404,
                 toString: function() {
                     return this.name + ": " + this.message;
                 }
@@ -114,8 +142,8 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
         }
 
       resolve(Service.successResponse({
-        "id": responsemodel.id,
-          "name": responsemodel.location
+          "id": responsemodel.id,
+          "name": responsemodel.name
       }));
     } catch (e) {
       reject(Service.rejectResponse(
@@ -135,15 +163,35 @@ const locationLocationIdGET = ({ locationId }) => new Promise(
 * */
 const locationLocationIdPOST = ({ locationId, location }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationLocationIdPOST---update existing Location---");
     try {
+      let requestmodel = new LocationRequestModel(locationId, location.name);
+
+      let idvalidator = new IdValidator();
+      let locationvalidator = new LocationValidator();
+      let interactor = new UpdateLocationByIdInteractor(repository, idvalidator, locationvalidator);
+
+      let responsemodel = await interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "UpdateLocationException",
+          message: responsemodel.error_msg,
+          status: 400,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+
       resolve(Service.successResponse({
-        locationId,
-        location,
-      }));
+        "id": responsemodel.id,
+        "name": responsemodel.name
+      }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
-        e.status || 405,
+        e.status || 400,
       ));
     }
   },
@@ -157,10 +205,28 @@ const locationLocationIdPOST = ({ locationId, location }) => new Promise(
 * */
 const locationLocationIdTableGET = ({ locationId }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationLocationIdTableGET---return list of tables associated with this location---");
     try {
-      resolve(Service.successResponse({
-        locationId,
-      }));
+      let requestmodel = new LocationIdRequestModel(locationId);
+      let validator = new IdValidator();
+      let interactor = new GetLocationTablesInteractor(repository, validator);
+
+      let responsemodel = await interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "LocationNotFoundException",
+          message: responsemodel.error_msg,
+          status: 405,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+
+      resolve(Service.successResponse(
+        responsemodel.location_list
+      ));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -179,11 +245,34 @@ const locationLocationIdTableGET = ({ locationId }) => new Promise(
 * */
 const locationLocationIdTablePOST = ({ locationId, table }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationLocationIdTablePOST---add a table on the specified location---");
     try {
+      let requestmodel = new EntityRequestModel(locationId, table);
+
+      let idvalidator = new IdValidator();
+      let tablevalidator = new TableValidator();
+
+      let interactor = new AddTableAtLocationInteractor(repository, idvalidator, tablevalidator);
+
+      let responsemodel = await interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "AddLocationException",
+          message: responsemodel.error_msg,
+          status: 400,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+
       resolve(Service.successResponse({
-        locationId,
-        table,
-      }));
+          "id": responsemodel.entity.id,
+          "name": responsemodel.entity.name,
+          "xCoordinate": responsemodel.entity.xCoordinate,
+          "yCoordinate": responsemodel.entity.yCoordinate
+      }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -202,34 +291,72 @@ const locationLocationIdTablePOST = ({ locationId, table }) => new Promise(
 * */
 const locationLocationIdTableTableIdDELETE = ({ locationId, tableId }) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        locationId,
-        tableId,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+      console.log("---locationLocationIdTableTableIdDELETE---");
+      try {
+          let requestmodel = new LocationIdTableIdRequestModel(locationId, tableId);
+
+          let validator = new LocationIdTableIdValidator();
+          let interactor = new DeleteTableAtLocation(repository, validator);
+
+          let responsemodel = await interactor.execute(requestmodel);
+
+          if(responsemodel.error_msg !== null) {
+              throw {
+                  name: "LocationOrTableNotFoundException",
+                  message: responsemodel.error_msg,
+                  status: 404,
+                  toString: function() {
+                      return this.name + ": " + this.message;
+                  }
+              };
+          }
+          resolve(Service.successResponse({
+              "id": responsemodel.entity.id,
+              "name": responsemodel.entity.name,
+              "xCoordinate": responsemodel.entity.xCoordinate,
+              "yCoordinate": responsemodel.entity.yCoordinate
+          }));
+      } catch (e) {
+          reject(Service.rejectResponse(
+              e.message || 'Invalid input',
+              e.status || 405,
+          ));
+      }
   },
 );
 /**
-* Get your tables
-* Get tables associated with this location
+* Get table with given id
 *
 * locationId Long ID of the location to return.
-* tableId Long ID of the location to return.
-* returns List
+* tableId Long ID of the table to return.
+* returns single table
 * */
 const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationLocationIdTableTableIdGET---return one specific table from the specified location---");
     try {
+      let requestmodel = new LocationIdTableIdRequestModel(locationId, tableId);
+      let validator = new LocationIdTableIdValidator();
+      let interactor = new GetLocationTableInteractor(repository, validator);
+
+      let responsemodel = await interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+          throw {
+            name: "LocationOrTableNotFoundException",
+            message: responsemodel.error_msg,
+            status: 404,
+            toString: function () {
+              return this.name + ": " + this.message;
+            }
+          };
+      }
       resolve(Service.successResponse({
-        locationId,
-        tableId,
-      }));
+          "name": responsemodel.entity.name,
+          "id": responsemodel.entity.id,
+          "xCoordinate": responsemodel.entity.xCoordinate,
+          "yCoordinate": responsemodel.entity.yCoordinate
+      }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -249,18 +376,37 @@ const locationLocationIdTableTableIdGET = ({ locationId, tableId }) => new Promi
 * */
 const locationLocationIdTableTableIdPOST = ({ locationId, tableId, table }) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        locationId,
-        tableId,
-        table,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+      console.log("---locationLocationIdTableTableIdPOST---update an existing table---");
+      try {
+          let requestmodel = new LocationIdTableIdTableRequestModel(locationId, tableId, table);
+
+          let validator = new LocationIdTableIdTableValidator();
+          let interactor = new UpdateTableAtLocationInteractor(repository, validator);
+
+          let responsemodel = await interactor.execute(requestmodel);
+
+          if(responsemodel.error_msg !== null) {
+              throw {
+                  name: "LocationOrTableNotFoundException",
+                  message: responsemodel.error_msg,
+                  status: 400,
+                  toString: function() {
+                      return this.name + ": " + this.message;
+                  }
+              };
+          }
+          resolve(Service.successResponse({
+              "id": responsemodel.entity.id,
+              "name": responsemodel.entity.name,
+              "xCoordinate": responsemodel.entity.xCoordinate,
+              "yCoordinate": responsemodel.entity.yCoordinate
+          }));
+      } catch (e) {
+          reject(Service.rejectResponse(
+              e.message || 'Invalid input',
+              e.status || 405,
+          ));
+      }
   },
 );
 /**
@@ -274,18 +420,37 @@ const locationLocationIdTableTableIdPOST = ({ locationId, tableId, table }) => n
 * */
 const locationLocationIdTableTableIdRegisterPOST = ({ locationId, tableId, guest }) => new Promise(
   async (resolve, reject) => {
-    try {
-      resolve(Service.successResponse({
-        locationId,
-        tableId,
-        guest,
-      }));
-    } catch (e) {
-      reject(Service.rejectResponse(
-        e.message || 'Invalid input',
-        e.status || 405,
-      ));
-    }
+      console.log("---locationLocationIdTableTableIdRegisterPOST---register a guest on a table---");
+      try {
+          let requestmodel = new LocationIdTableIdGuestRequestModel(locationId, tableId, guest);
+
+          let validator = new LocationIdTableIdGuestValidator();
+          let interactor = new RegisterGuestAtTableAtLocationInteractor(repository, validator);
+
+          let responsemodel = await interactor.execute(requestmodel);
+
+          if(responsemodel.error_msg !== null) {
+              throw {
+                  name: "RegisterException",
+                  message: responsemodel.error_msg,
+                  status: 400,
+                  toString: function() {
+                      return this.name + ": " + this.message;
+                  }
+              };
+          }
+
+          resolve(Service.successResponse({
+              "phoneNumber": responsemodel.phoneNumber,
+              "name": responsemodel.name,
+              "email": responsemodel.email
+          }, 200));
+      } catch (e) {
+          reject(Service.rejectResponse(
+              e.message || 'Invalid input',
+              e.status || 400,
+          ));
+      }
   },
 );
 /**
@@ -304,7 +469,7 @@ const locationPOST = ({ location }) => new Promise(
           let validator = new AddLocationValidator();
           let interactor = new AddLocationInteractor(repository, validator);
 
-          let responsemodel = interactor.execute(requestmodel);
+          let responsemodel = await interactor.execute(requestmodel);
 
           if(responsemodel.error_msg !== null) {
               throw {
@@ -320,7 +485,7 @@ const locationPOST = ({ location }) => new Promise(
           resolve(Service.successResponse({
               "id": responsemodel.id,
               "name": responsemodel.name
-          }, 201));
+          }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
@@ -338,17 +503,131 @@ const locationPOST = ({ location }) => new Promise(
 * */
 const locationPUT = ({ location }) => new Promise(
   async (resolve, reject) => {
+    console.log("---locationPUT---update existing Location---");
     try {
+      let requestmodel = new LocationRequestModel(location.id, location.name);
+
+      let validator = new LocationValidator();
+      let interactor = new UpdateLocationInteractor(repository, validator);
+
+      let responsemodel = await interactor.execute(requestmodel);
+
+      if(responsemodel.error_msg !== null) {
+        throw {
+          name: "UpdateLocationException",
+          message: responsemodel.error_msg,
+          status: responsemodel.status || 404,
+          toString: function() {
+            return this.name + ": " + this.message;
+          }
+        };
+      }
+
       resolve(Service.successResponse({
-        location,
-      }));
+        "id": responsemodel.id,
+        "name": responsemodel.name
+      }, 200));
     } catch (e) {
       reject(Service.rejectResponse(
         e.message || 'Invalid input',
-        e.status || 405,
+        e.status || 400,
       ));
     }
   },
+);
+
+/**
+ * Get report of an existing table at a location at given/requested time
+ * Get report of table at location at time
+ *
+ * locationId
+ * tableId
+ * datetimeFrom
+ * datetimeTo
+ * reportType ('pdf' for PDF report, else xls report)
+ * returns report of all assigns in requested period at Location and table
+ * */
+const locationLocationIdTableTableIdReportGET = ({ locationId, tableId, datetimeFrom, datetimeTo, reportType }) => new Promise(
+    async (resolve, reject) => {
+        console.log("---locationLocationIdTableTableIdReportGET---get report---");
+        try {
+            let requestmodel = new ReportRequestModel(locationId, tableId, datetimeFrom, datetimeTo);
+
+            let validator = new ReportValidator();
+            let reporter = reportType === 'pdf' ? new PDFReporter('output.pdf') : new XLSReporter('output.xlsx');
+            let interactor = new GetReportInteractor(repository, validator, reporter);
+
+            let responsemodel = await interactor.execute(requestmodel);
+
+            if(responsemodel.error_msg !== null) {
+                throw {
+                    name: "GetReportException",
+                    message: responsemodel.error_msg,
+                    status: 400,
+                    toString: function() {
+                        return this.name + ": " + this.message;
+                    }
+                };
+            }
+
+            resolve(Service.successResponse({
+                'locationId': requestmodel.location_id,
+                'tableId': requestmodel.table_id,
+                'datetimeFrom': requestmodel.datetimeFrom,
+                'datetimeTo': requestmodel.datetimeTo,
+                'report': responsemodel.entity
+            }, 200));
+        } catch (e) {
+            reject(Service.rejectResponse(
+                e.message || 'Invalid input',
+                e.status || 400,
+            ));
+        }
+    },
+);
+
+/**
+ * Get the amount of people registered on a given table in the given time-range.
+ *
+ * locationId
+ * tableId
+ * from
+ * to
+ *
+ * returns number of guests as int
+ * */
+const locationLocationIdTableTableIdActivityGET = ({ locationId, tableId, from, to }) => new Promise(
+    async (resolve, reject) => {
+        console.log("---locationLocationIdTableTableIdActivityGET---get current activity for a table---");
+        try {
+            let requestmodel = new LocationIdTableIdActivityRequestModel(locationId, tableId, from, to);
+
+            let validator = new LocationIdTableIdActivityValidator();
+            let interactor = new GetLocationTableActivityInteractor(repository, validator);
+
+            let responsemodel = await interactor.execute(requestmodel);
+
+            if(responsemodel.error_msg !== null) {
+                throw {
+                    name: "GetActivityException",
+                    message: responsemodel.error_msg,
+                    status: 404,
+                    toString: function() {
+                        return this.name + ": " + this.message;
+                    }
+                };
+            }
+
+            resolve(Service.successResponse({
+                'activity': responsemodel.activity
+            }, 200));
+        } catch (e) {
+            reject(Service.rejectResponse(
+                e.message || 'Invalid input',
+                e.status || 400,
+            ));
+        }
+    },
 );
 
 module.exports = {
@@ -364,4 +643,6 @@ module.exports = {
   locationLocationIdTableTableIdRegisterPOST,
   locationPOST,
   locationPUT,
+  locationLocationIdTableTableIdReportGET,
+  locationLocationIdTableTableIdActivityGET
 };

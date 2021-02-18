@@ -73,16 +73,17 @@ namespace Example
             Configuration config = new Configuration();
             config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
+            var location = new Location(); // Location |  (optional) 
 
             try
             {
-                // Get your locations
-                List<Location> result = apiInstance.LocationGet();
+                // Add a new location
+                Location result = apiInstance.AddLocation(location);
                 Debug.WriteLine(result);
             }
             catch (ApiException e)
             {
-                Debug.Print("Exception when calling DefaultApi.LocationGet: " + e.Message );
+                Debug.Print("Exception when calling DefaultApi.AddLocation: " + e.Message );
                 Debug.Print("Status Code: "+ e.ErrorCode);
                 Debug.Print(e.StackTrace);
             }
@@ -99,24 +100,28 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**LocationGet**](docs/DefaultApi.md#locationget) | **GET** /location | Get your locations
-*DefaultApi* | [**LocationLocationIdDelete**](docs/DefaultApi.md#locationlocationiddelete) | **DELETE** /location/{locationId} | Delete a specific location.
-*DefaultApi* | [**LocationLocationIdGet**](docs/DefaultApi.md#locationlocationidget) | **GET** /location/{locationId} | Get a specific location.
-*DefaultApi* | [**LocationLocationIdPost**](docs/DefaultApi.md#locationlocationidpost) | **POST** /location/{locationId} | Update an existing location
-*DefaultApi* | [**LocationLocationIdTableGet**](docs/DefaultApi.md#locationlocationidtableget) | **GET** /location/{locationId}/table | Get your location's tables
-*DefaultApi* | [**LocationLocationIdTablePost**](docs/DefaultApi.md#locationlocationidtablepost) | **POST** /location/{locationId}/table | Add a new table on this location
-*DefaultApi* | [**LocationLocationIdTableTableIdDelete**](docs/DefaultApi.md#locationlocationidtabletableiddelete) | **DELETE** /location/{locationId}/table/{tableId} | Delete this table
-*DefaultApi* | [**LocationLocationIdTableTableIdGet**](docs/DefaultApi.md#locationlocationidtabletableidget) | **GET** /location/{locationId}/table/{tableId} | Get your tables
-*DefaultApi* | [**LocationLocationIdTableTableIdPost**](docs/DefaultApi.md#locationlocationidtabletableidpost) | **POST** /location/{locationId}/table/{tableId} | Update an existing table
-*DefaultApi* | [**LocationLocationIdTableTableIdRegisterPost**](docs/DefaultApi.md#locationlocationidtabletableidregisterpost) | **POST** /location/{locationId}/table/{tableId}/register | Register on this table on this location.
-*DefaultApi* | [**LocationPost**](docs/DefaultApi.md#locationpost) | **POST** /location | Add a new location
-*DefaultApi* | [**LocationPut**](docs/DefaultApi.md#locationput) | **PUT** /location | Update an existing location
+*DefaultApi* | [**AddLocation**](docs/DefaultApi.md#addlocation) | **POST** /location | Add a new location
+*DefaultApi* | [**AddTableAtLocation**](docs/DefaultApi.md#addtableatlocation) | **POST** /location/{locationId}/table | Add a new table on this location
+*DefaultApi* | [**DeleteLocation**](docs/DefaultApi.md#deletelocation) | **DELETE** /location/{locationId} | Delete a specific location.
+*DefaultApi* | [**DeleteTableAtLocation**](docs/DefaultApi.md#deletetableatlocation) | **DELETE** /location/{locationId}/table/{tableId} | Delete this table
+*DefaultApi* | [**GetLocation**](docs/DefaultApi.md#getlocation) | **GET** /location/{locationId} | Get a specific location.
+*DefaultApi* | [**GetLocations**](docs/DefaultApi.md#getlocations) | **GET** /location | Get your locations
+*DefaultApi* | [**GetReportForTable**](docs/DefaultApi.md#getreportfortable) | **GET** /location/{locationId}/table/{tableId}/report/{reportType} | Register on this table on this location.
+*DefaultApi* | [**GetTableActivity**](docs/DefaultApi.md#gettableactivity) | **GET** /location/{locationId}/table/{tableId}/activity | Register on this table on this location.
+*DefaultApi* | [**GetTableAtLocation**](docs/DefaultApi.md#gettableatlocation) | **GET** /location/{locationId}/table/{tableId} | Get your tables
+*DefaultApi* | [**GetTablesAtLocation**](docs/DefaultApi.md#gettablesatlocation) | **GET** /location/{locationId}/table | Get your location's tables
+*DefaultApi* | [**RegisterAtTable**](docs/DefaultApi.md#registerattable) | **POST** /location/{locationId}/table/{tableId}/register | Register on this table on this location.
+*DefaultApi* | [**UpdateLocation**](docs/DefaultApi.md#updatelocation) | **PUT** /location | Update an existing location
+*DefaultApi* | [**UpdateLocationWithId**](docs/DefaultApi.md#updatelocationwithid) | **POST** /location/{locationId} | Update an existing location
+*DefaultApi* | [**UpdateTableAtLocation**](docs/DefaultApi.md#updatetableatlocation) | **POST** /location/{locationId}/table/{tableId} | Update an existing table
 
 
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
  - [Model.Guest](docs/Guest.md)
+ - [Model.InlineResponse200](docs/InlineResponse200.md)
+ - [Model.InlineResponse2001](docs/InlineResponse2001.md)
  - [Model.Location](docs/Location.md)
  - [Model.Table](docs/Table.md)
 

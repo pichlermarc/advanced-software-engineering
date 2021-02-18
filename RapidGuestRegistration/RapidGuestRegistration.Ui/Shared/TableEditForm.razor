@@ -1,0 +1,76 @@
+﻿@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Client.Client
+
+@inject IDefaultApi Api
+@inject NavigationManager NavigationManager
+
+
+@if (_table != null)
+{
+    <EditForm Model="@_table" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+
+        <InputText id="name" @bind-Value="_table.Name"/>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </EditForm>}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> Could not find the table with the ID @TableId, maybe it has been deleted?
+    </div>
+}
+
+@if (_showUpdateError)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> Something went wrong when updating this table. Does it still exist?
+        <button type="button" class="close" @onclick="() => _showUpdateError = false">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public long LocationId { get; set; }
+
+    [Parameter]
+    public long TableId { get; set; }
+
+    private Table _table;
+    private bool _showUpdateError;
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            _table = Api.GetTableAtLocation(LocationId, TableId);
+        }
+        catch (ApiException e)
+        {
+            Console.WriteLine(e);
+            _table = null;
+        }
+
+        base.OnInitialized();
+    }
+
+    private void HandleValidSubmit()
+    {
+        try
+        {
+            Api.UpdateTableAtLocation(LocationId, TableId, _table);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            _showUpdateError = true;
+            return;
+        }
+        NavigationManager.NavigateTo($"/location/{LocationId}/edit");
+    }
+
+}

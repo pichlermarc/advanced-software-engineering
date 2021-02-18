@@ -1,0 +1,27 @@
+version: "3.5"
+services:
+  api-test:
+    container_name: api_test_container
+    build: ./api
+    command: npm run integrationtest
+    hostname: api
+    #command: sleep infinity
+    depends_on: 
+      - postgres
+    ports:
+      - "8080:8080"
+  postgres:
+    container_name: postgres_container
+    image: postgres:12.2
+    hostname: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /db/postgres
+    volumes:
+      - ./api/generateDBTables.sql:/docker-entrypoint-initdb.d/1-schema.sql
+    ports:
+      - "5051:5432"
+    restart: unless-stopped
+volumes:
+  postgres:

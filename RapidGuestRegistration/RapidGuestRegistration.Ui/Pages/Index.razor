@@ -1,4 +1,10 @@
 ﻿@page "/"
 
-<h1>Dashboard</h1>
-<LocationsList></LocationsList>
+<AuthorizeView>
+    <Authorized>
+        <Dashboard></Dashboard>
+    </Authorized>
+    <NotAuthorized>
+        <LoginDisplay></LoginDisplay>
+    </NotAuthorized>
+</AuthorizeView>

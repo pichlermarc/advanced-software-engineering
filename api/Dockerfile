@@ -1,5 +1,8 @@
 FROM node:12
 
+# install jest
+RUN npm install -g jest
+
 # Create app directory
 WORKDIR /usr/src/app
 
