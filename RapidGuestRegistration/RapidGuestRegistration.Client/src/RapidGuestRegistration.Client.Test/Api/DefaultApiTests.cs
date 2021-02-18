@@ -19,7 +19,6 @@ using Xunit;
 
 using RapidGuestRegistration.Client.Client;
 using RapidGuestRegistration.Client.Api;
-
 // uncomment below to import models
 //using RapidGuestRegistration.Client.Model;
 
@@ -57,154 +56,185 @@ namespace RapidGuestRegistration.Client.Test.Api
         }
 
         /// <summary>
-        /// Test LocationGet
+        /// Test AddLocation
         /// </summary>
         [Fact]
-        public void LocationGetTest()
+        public void AddLocationTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //var response = instance.LocationGet();
+            //Location location = null;
+            //var response = instance.AddLocation(location);
+            //Assert.IsType<Location>(response);
+        }
+
+        /// <summary>
+        /// Test AddTableAtLocation
+        /// </summary>
+        [Fact]
+        public void AddTableAtLocationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //long locationId = null;
+            //Table table = null;
+            //var response = instance.AddTableAtLocation(locationId, table);
+            //Assert.IsType<Table>(response);
+        }
+
+        /// <summary>
+        /// Test DeleteLocation
+        /// </summary>
+        [Fact]
+        public void DeleteLocationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //long locationId = null;
+            //var response = instance.DeleteLocation(locationId);
+            //Assert.IsType<Location>(response);
+        }
+
+        /// <summary>
+        /// Test DeleteTableAtLocation
+        /// </summary>
+        [Fact]
+        public void DeleteTableAtLocationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //long locationId = null;
+            //long tableId = null;
+            //var response = instance.DeleteTableAtLocation(locationId, tableId);
+            //Assert.IsType<Table>(response);
+        }
+
+        /// <summary>
+        /// Test GetLocation
+        /// </summary>
+        [Fact]
+        public void GetLocationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //long locationId = null;
+            //var response = instance.GetLocation(locationId);
+            //Assert.IsType<Location>(response);
+        }
+
+        /// <summary>
+        /// Test GetLocations
+        /// </summary>
+        [Fact]
+        public void GetLocationsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //var response = instance.GetLocations();
             //Assert.IsType<List<Location>>(response);
         }
 
         /// <summary>
-        /// Test LocationLocationIdDelete
+        /// Test GetReportForTable
         /// </summary>
         [Fact]
-        public void LocationLocationIdDeleteTest()
+        public void GetReportForTableTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
-            //var response = instance.LocationLocationIdDelete(locationId);
-            //Assert.IsType<Location>(response);
+            //long tableId = null;
+            //long datetimeFrom = null;
+            //long datetimeTo = null;
+            //string reportType = null;
+            //var response = instance.GetReportForTable(locationId, tableId, datetimeFrom, datetimeTo, reportType);
+            //Assert.IsType<InlineResponse2001>(response);
         }
 
         /// <summary>
-        /// Test LocationLocationIdGet
+        /// Test GetTableActivity
         /// </summary>
         [Fact]
-        public void LocationLocationIdGetTest()
+        public void GetTableActivityTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
-            //var response = instance.LocationLocationIdGet(locationId);
-            //Assert.IsType<Location>(response);
+            //long tableId = null;
+            //DateTime from = null;
+            //DateTime to = null;
+            //var response = instance.GetTableActivity(locationId, tableId, from, to);
+            //Assert.IsType<InlineResponse200>(response);
         }
 
         /// <summary>
-        /// Test LocationLocationIdPost
+        /// Test GetTableAtLocation
         /// </summary>
         [Fact]
-        public void LocationLocationIdPostTest()
+        public void GetTableAtLocationTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
-            //Location location = null;
-            //var response = instance.LocationLocationIdPost(locationId, location);
-            //Assert.IsType<Location>(response);
-        }
-
-        /// <summary>
-        /// Test LocationLocationIdTableGet
-        /// </summary>
-        [Fact]
-        public void LocationLocationIdTableGetTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //long locationId = null;
-            //var response = instance.LocationLocationIdTableGet(locationId);
-            //Assert.IsType<List<Table>>(response);
-        }
-
-        /// <summary>
-        /// Test LocationLocationIdTablePost
-        /// </summary>
-        [Fact]
-        public void LocationLocationIdTablePostTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //long locationId = null;
-            //Table table = null;
-            //var response = instance.LocationLocationIdTablePost(locationId, table);
+            //long tableId = null;
+            //var response = instance.GetTableAtLocation(locationId, tableId);
             //Assert.IsType<Table>(response);
         }
 
         /// <summary>
-        /// Test LocationLocationIdTableTableIdDelete
+        /// Test GetTablesAtLocation
         /// </summary>
         [Fact]
-        public void LocationLocationIdTableTableIdDeleteTest()
+        public void GetTablesAtLocationTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
-            //long tableId = null;
-            //var response = instance.LocationLocationIdTableTableIdDelete(locationId, tableId);
+            //var response = instance.GetTablesAtLocation(locationId);
             //Assert.IsType<List<Table>>(response);
         }
 
         /// <summary>
-        /// Test LocationLocationIdTableTableIdGet
+        /// Test RegisterAtTable
         /// </summary>
         [Fact]
-        public void LocationLocationIdTableTableIdGetTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //long locationId = null;
-            //long tableId = null;
-            //var response = instance.LocationLocationIdTableTableIdGet(locationId, tableId);
-            //Assert.IsType<List<Table>>(response);
-        }
-
-        /// <summary>
-        /// Test LocationLocationIdTableTableIdPost
-        /// </summary>
-        [Fact]
-        public void LocationLocationIdTableTableIdPostTest()
-        {
-            // TODO uncomment below to test the method and replace null with proper value
-            //long locationId = null;
-            //long tableId = null;
-            //Table table = null;
-            //var response = instance.LocationLocationIdTableTableIdPost(locationId, tableId, table);
-            //Assert.IsType<Table>(response);
-        }
-
-        /// <summary>
-        /// Test LocationLocationIdTableTableIdRegisterPost
-        /// </summary>
-        [Fact]
-        public void LocationLocationIdTableTableIdRegisterPostTest()
+        public void RegisterAtTableTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
             //long tableId = null;
             //Guest guest = null;
-            //var response = instance.LocationLocationIdTableTableIdRegisterPost(locationId, tableId, guest);
+            //var response = instance.RegisterAtTable(locationId, tableId, guest);
             //Assert.IsType<Guest>(response);
         }
 
         /// <summary>
-        /// Test LocationPost
+        /// Test UpdateLocation
         /// </summary>
         [Fact]
-        public void LocationPostTest()
+        public void UpdateLocationTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
             //Location location = null;
-            //var response = instance.LocationPost(location);
+            //var response = instance.UpdateLocation(location);
             //Assert.IsType<Location>(response);
         }
 
         /// <summary>
-        /// Test LocationPut
+        /// Test UpdateLocationWithId
         /// </summary>
         [Fact]
-        public void LocationPutTest()
+        public void UpdateLocationWithIdTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
+            //long locationId = null;
             //Location location = null;
-            //var response = instance.LocationPut(location);
+            //var response = instance.UpdateLocationWithId(locationId, location);
             //Assert.IsType<Location>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateTableAtLocation
+        /// </summary>
+        [Fact]
+        public void UpdateTableAtLocationTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //long locationId = null;
+            //long tableId = null;
+            //Table table = null;
+            //var response = instance.UpdateTableAtLocation(locationId, tableId, table);
+            //Assert.IsType<Table>(response);
         }
     }
 }

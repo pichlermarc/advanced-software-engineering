@@ -4,6 +4,8 @@ RapidGuestRegistration.Client.sln
 appveyor.yml
 docs/DefaultApi.md
 docs/Guest.md
+docs/InlineResponse200.md
+docs/InlineResponse2001.md
 docs/Location.md
 docs/Table.md
 git_push.sh
@@ -27,6 +29,8 @@ src/RapidGuestRegistration.Client/Client/RequestOptions.cs
 src/RapidGuestRegistration.Client/Client/RetryConfiguration.cs
 src/RapidGuestRegistration.Client/Model/AbstractOpenAPISchema.cs
 src/RapidGuestRegistration.Client/Model/Guest.cs
+src/RapidGuestRegistration.Client/Model/InlineResponse200.cs
+src/RapidGuestRegistration.Client/Model/InlineResponse2001.cs
 src/RapidGuestRegistration.Client/Model/Location.cs
 src/RapidGuestRegistration.Client/Model/Table.cs
 src/RapidGuestRegistration.Client/RapidGuestRegistration.Client.csproj

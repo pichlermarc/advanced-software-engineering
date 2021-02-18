@@ -73,6 +73,22 @@ namespace RapidGuestRegistration.Client.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+        /// <summary>
+        /// Test the property 'XCoordinate'
+        /// </summary>
+        [Fact]
+        public void XCoordinateTest()
+        {
+            // TODO unit test for the property 'XCoordinate'
+        }
+        /// <summary>
+        /// Test the property 'YCoordinate'
+        /// </summary>
+        [Fact]
+        public void YCoordinateTest()
+        {
+            // TODO unit test for the property 'YCoordinate'
+        }
 
     }
 

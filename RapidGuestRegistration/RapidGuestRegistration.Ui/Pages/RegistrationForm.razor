@@ -6,72 +6,72 @@
 @inject IDefaultApi Api
 @inject NavigationManager NavigationManager
 
-@if (ParseErrorOccured) {<div class="alert alert-danger" role="alert">Parsing Failed</div>}
-
-
-
-        <h3>RegistrationForm</h3>
-
-@if (!ParseErrorOccured){
-<EditForm Model="@editmodel" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <label>
-        Registration:
-    </label>
-    <p>
-        <label>
-    <p>Name:</p>
-    <InputText @bind-Value="editmodel.Name" />
-    </label>
-    </p>
-    <p>
-        <label>
-    <p>Phone Number:</p>
-    <InputText @bind-Value="editmodel.Phonenumber" />
-    </label>
-    </p>
-    <p>
-        <label>
-    <p>Email:</p>
-    <InputText @bind-Value="editmodel.Email" />
-    </label>
-    </p>
-
-
-    <button class="btn btn-primary" type="submit">Save</button>
-    @if (ApiErrorOccured)
-    {<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-         <strong>Api Call Failed!</strong> hmm seem something went wrong on our side
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close" @onclick="()=> ApiErrorOccured=false">
-                <span aria-hidden="true">&times;</span>
-            </button>
-     </div>
-    }
-</EditForm>
+@if (ParseErrorOccured)
+{
+    <div class="alert alert-danger" role="alert">Parsing Failed</div>
 }
-    
 
-    @code {
 
-        [Parameter]
-        public string LocationId { get; set; }
-        [Parameter]
-        public string TableId { get; set; }
+<h3>RegistrationForm</h3>
 
-        long castedLocationId;
-        long castedTableId;
+@if (!ParseErrorOccured)
+{
+    <EditForm Model="@editmodel" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
 
-        bool ParseErrorOccured;
-        bool ApiErrorOccured;
+        <label>
+            <p>Name:</p>
+            <InputText @bind-Value="editmodel.Name"/>
+        </label>
+        <br/>
 
-private GuestEditModel editmodel;
+        <label>
+            <p>Phone Number:</p>
+            <InputText @bind-Value="editmodel.Phonenumber"/>
+        </label>
+        <br/>
+
+        <label>
+            <p>Email:</p>
+            <InputText @bind-Value="editmodel.Email"/>
+        </label>
+        <br/>
+
+
+        <button class="btn btn-primary" type="submit">Save</button>
+        @if (ApiErrorOccured)
+        {
+            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                <strong>Api Call Failed!</strong> hmm seem something went wrong on our side
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" @onclick="() => ApiErrorOccured = false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    </EditForm>
+}
+
+
+@code {
+
+    [Parameter]
+    public string LocationId { get; set; }
+
+    [Parameter]
+    public string TableId { get; set; }
+
+    long castedLocationId;
+    long castedTableId;
+
+    bool ParseErrorOccured;
+    bool ApiErrorOccured;
+
+    private GuestEditModel editmodel;
 
 
     protected override void OnInitialized()
     {
-
         editmodel = new GuestEditModel();
 
         try
@@ -89,11 +89,14 @@ private GuestEditModel editmodel;
     {
         try
         {
-            Api.LocationLocationIdTableTableIdRegisterPost(castedLocationId, castedTableId, editmodel.ToGuest());
+            Api.RegisterAtTable(castedLocationId, castedTableId, editmodel.ToGuest());
+            NavigationManager.NavigateTo("thankyou");
         }
         catch (ApiException ae)
         {
+            Console.WriteLine(ae.ToString());
             ApiErrorOccured = true;
         }
     }
-    }
+
+}

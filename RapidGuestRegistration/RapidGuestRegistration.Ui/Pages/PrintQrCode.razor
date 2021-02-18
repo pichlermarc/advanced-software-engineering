@@ -1,0 +1,30 @@
+@page "/location/{LocationId}/table/{TableId}/print"
+@using RapidGuestRegistration.Client.Api
+@inject IDefaultApi Api
+
+<h3>@_locationName/@_tableName</h3>
+<TableQrCode LocationId="_locationId" TableId="_tableId"></TableQrCode>
+
+@code {
+    [Parameter]
+    public string LocationId { get; set; }
+    [Parameter]
+    public string TableId { get; set; }
+
+    private string _tableName = "";
+    private string _locationName = "";
+    private long _locationId;
+    private long _tableId;
+
+    protected override void OnInitialized()
+    {
+        // TODO: Add error messages in case parsing goes wrong.
+        _locationId = long.Parse(LocationId);
+        _tableId = long.Parse(TableId);
+        
+        // TODO: Add error messages in case API calls fail.
+        _locationName = Api.GetLocation(_locationId).Name;
+        _tableName = Api.GetTableAtLocation(_locationId, _tableId).Name;
+    }
+
+}

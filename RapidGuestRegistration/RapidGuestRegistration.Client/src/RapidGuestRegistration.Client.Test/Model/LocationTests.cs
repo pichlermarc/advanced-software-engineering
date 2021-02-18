@@ -34,16 +34,11 @@ namespace RapidGuestRegistration.Client.Test.Model
     {
         // TODO uncomment below to declare an instance variable for Location
         //private Location instance;
-        private Location testlocation;
 
         public LocationTests()
         {
             // TODO uncomment below to create an instance of Location
             //instance = new Location();
-            testlocation = new Location();
-            //testlocation.Id = 1;
-
-
         }
 
         public void Dispose()
@@ -59,7 +54,6 @@ namespace RapidGuestRegistration.Client.Test.Model
         {
             // TODO uncomment below to test "IsType" Location
             //Assert.IsType<Location>(instance);
-            Assert.IsType<Location>(testlocation);
         }
 
 
@@ -70,7 +64,6 @@ namespace RapidGuestRegistration.Client.Test.Model
         public void IdTest()
         {
             // TODO unit test for the property 'Id'
-            testlocation.Id = 1;
         }
         /// <summary>
         /// Test the property 'Name'
@@ -79,7 +72,6 @@ namespace RapidGuestRegistration.Client.Test.Model
         public void NameTest()
         {
             // TODO unit test for the property 'Name'
-            testlocation.Name = "testname";
         }
 
     }

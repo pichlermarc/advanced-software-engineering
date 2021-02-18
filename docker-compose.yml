@@ -2,12 +2,15 @@ version: "3.5"
 services:
   api:
     build: ./api/
+    environment:
+      - NODE_ENV=staging
     ports:
       - 8080:8080
+    command: /bin/bash -c "npm run sync && node index.js"
   ui:
     build: ./RapidGuestRegistration/
     ports:
-      - 5000:5000
+      - 5000:80
   postgres:
     container_name: postgres_container
     image: postgres:12.2

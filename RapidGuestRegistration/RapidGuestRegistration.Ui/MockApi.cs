@@ -37,9 +37,42 @@ namespace RapidGuestRegistration.Ui
         private List<Location> _locations;
         private Dictionary<long, List<Table>> _tables;
 
-        public List<Location> LocationGet()
+        public ApiResponse<Location> GetLocationWithHttpInfo(long locationId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Location> GetLocations()
         {
             return _locations;
+        }
+
+        public ApiResponse<List<Location>> GetLocationsWithHttpInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public InlineResponse2001 GetReportForTable(long locationId, long tableId, long datetimeFrom, long datetimeTo,
+            string reportType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApiResponse<InlineResponse2001> GetReportForTableWithHttpInfo(long locationId, long tableId, long datetimeFrom, long datetimeTo,
+            string reportType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public InlineResponse200 GetTableActivity(long locationId, long tableId, DateTime @from, DateTime to)
+        {
+            var random = new Random(); 
+            return new InlineResponse200(random.Next(1, 10));
+        }
+
+        public ApiResponse<InlineResponse200> GetTableActivityWithHttpInfo(long locationId, long tableId, DateTime @from, DateTime to)
+        {
+            throw new NotImplementedException();
         }
 
         public ApiResponse<List<Location>> LocationGetWithHttpInfo()
@@ -47,22 +80,14 @@ namespace RapidGuestRegistration.Ui
             throw new System.NotImplementedException();
         }
 
-        public Location LocationLocationIdDelete(long locationId)
-        {
-            var itemToDelete = _locations.Find(location => location.Id == locationId);
-            _locations.Remove(itemToDelete);
-            return itemToDelete;
-        }
+       
 
         public ApiResponse<Location> LocationLocationIdDeleteWithHttpInfo(long locationId)
         {
             throw new System.NotImplementedException();
         }
 
-        public Location LocationLocationIdGet(long locationId)
-        {
-            return _locations.Find(location => location.Id == locationId);
-        }
+     
 
         public ApiResponse<Location> LocationLocationIdGetWithHttpInfo(long locationId)
         {
@@ -80,7 +105,12 @@ namespace RapidGuestRegistration.Ui
             throw new System.NotImplementedException();
         }
 
-        public List<Table> LocationLocationIdTableGet(long locationId)
+        public ApiResponse<Table> GetTableAtLocationWithHttpInfo(long locationId, long tableId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Table> GetTablesAtLocation(long locationId)
         {
             try
             {
@@ -89,7 +119,11 @@ namespace RapidGuestRegistration.Ui
             {
                 return new List<Table>();
             }
-            
+        }
+
+        public ApiResponse<List<Table>> GetTablesAtLocationWithHttpInfo(long locationId)
+        {
+            throw new NotImplementedException();
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableGetWithHttpInfo(long locationId)
@@ -97,7 +131,12 @@ namespace RapidGuestRegistration.Ui
             throw new System.NotImplementedException();
         }
 
-        public Table LocationLocationIdTablePost(long locationId, Table table = default(Table))
+        public ApiResponse<Location> AddLocationWithHttpInfo(Location location = default(Location))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Table AddTableAtLocation(long locationId, Table table = default(Table))
         {
             if (table == null)
                 throw new ArgumentNullException(nameof(table));
@@ -110,15 +149,42 @@ namespace RapidGuestRegistration.Ui
             return table;
         }
 
+        public ApiResponse<Table> AddTableAtLocationWithHttpInfo(long locationId, Table table = default(Table))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Location DeleteLocation(long locationId)
+        {
+            var itemToDelete = _locations.Find(location => location.Id == locationId);
+            _locations.Remove(itemToDelete);
+            return itemToDelete;
+        }
+
+        public ApiResponse<Location> DeleteLocationWithHttpInfo(long locationId)
+        {
+            throw new NotImplementedException();
+        }
+
         public ApiResponse<Table> LocationLocationIdTablePostWithHttpInfo(long locationId, Table table = default(Table))
         {
             throw new System.NotImplementedException();
         }
-
-        public List<Table> LocationLocationIdTableTableIdDelete(long locationId, long tableId)
+        
+        public Table DeleteTableAtLocation(long locationId, long tableId)
         {
             _tables[locationId].RemoveAll(table => table.Id == tableId);
-            return new List<Table>();
+            return null;
+        }
+
+        public ApiResponse<Table> DeleteTableAtLocationWithHttpInfo(long locationId, long tableId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Location GetLocation(long locationId)
+        {
+            return _locations.Find(location => location.Id == locationId);
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableTableIdDeleteWithHttpInfo(long locationId, long tableId)
@@ -126,16 +192,15 @@ namespace RapidGuestRegistration.Ui
             throw new System.NotImplementedException();
         }
 
-        public List<Table> LocationLocationIdTableTableIdGet(long locationId, long tableId)
+        public Table GetTableAtLocation(long locationId, long tableId)
         {
             try
             {
-                return new List<Table>() { _tables[locationId].First(table => table.Id == tableId) };
+                return _tables[locationId].First(table => table.Id == tableId);
             }catch(Exception e)
             {
                 throw new ApiException();
             }
-            
         }
 
         public ApiResponse<List<Table>> LocationLocationIdTableTableIdGetWithHttpInfo(long locationId, long tableId)
@@ -143,9 +208,13 @@ namespace RapidGuestRegistration.Ui
             throw new System.NotImplementedException();
         }
 
-        public Table LocationLocationIdTableTableIdPost(long locationId, long tableId, Table table = default(Table))
+        public ApiResponse<Location> UpdateLocationWithIdWithHttpInfo(long locationId, Location location = default(Location))
         {
+            throw new NotImplementedException();
+        }
 
+        public Table UpdateTableAtLocation(long locationId, long tableId, Table table = default(Table))
+        {
             try
             {
                 var updatedTable = _tables[locationId].First(table => table.Id == tableId);
@@ -155,7 +224,11 @@ namespace RapidGuestRegistration.Ui
             {
                 throw new ApiException();
             }
-            
+        }
+
+        public ApiResponse<Table> UpdateTableAtLocationWithHttpInfo(long locationId, long tableId, Table table = default(Table))
+        {
+            throw new NotImplementedException();
         }
 
         public ApiResponse<Table> LocationLocationIdTableTableIdPostWithHttpInfo(long locationId, long tableId,
@@ -164,10 +237,14 @@ namespace RapidGuestRegistration.Ui
             throw new System.NotImplementedException();
         }
 
-        public Guest LocationLocationIdTableTableIdRegisterPost(long locationId, long tableId,
-            Guest guest = default(Guest))
+        public Guest RegisterAtTable(long locationId, long tableId, Guest guest = default(Guest))
         {
             throw new ApiException();
+        }
+
+        public ApiResponse<Guest> RegisterAtTableWithHttpInfo(long locationId, long tableId, Guest guest = default(Guest))
+        {
+            throw new NotImplementedException();
         }
 
         public ApiResponse<Guest> LocationLocationIdTableTableIdRegisterPostWithHttpInfo(long locationId, long tableId,
@@ -176,7 +253,7 @@ namespace RapidGuestRegistration.Ui
             throw new System.NotImplementedException();
         }
 
-        public Location LocationPost(Location location = default(Location))
+        public Location AddLocation(Location location = default(Location))
         {
             if (location == null)
                 throw new ArgumentNullException(nameof(location));
@@ -194,7 +271,7 @@ namespace RapidGuestRegistration.Ui
             throw new System.NotImplementedException();
         }
 
-        public Location LocationPut(Location location = default(Location))
+        public Location UpdateLocation(Location location = default(Location))
         {
             if (location == null)
                 throw new ArgumentNullException(nameof(location));
@@ -206,6 +283,16 @@ namespace RapidGuestRegistration.Ui
             locationToUpdate.Name = location.Name;
 
             return locationToUpdate;
+        }
+
+        public ApiResponse<Location> UpdateLocationWithHttpInfo(Location location = default(Location))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Location UpdateLocationWithId(long locationId, Location location = default(Location))
+        {
+            throw new NotImplementedException();
         }
 
         public ApiResponse<Location> LocationPutWithHttpInfo(Location location = default(Location))
@@ -362,6 +449,167 @@ namespace RapidGuestRegistration.Ui
             CancellationToken cancellationToken = default(CancellationToken))
         {
             throw new System.NotImplementedException();
+        }
+
+        public Task<Location> AddLocationAsync(Location location = default(Location),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Location>> AddLocationWithHttpInfoAsync(Location location = default(Location),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Table> AddTableAtLocationAsync(long locationId, Table table = default(Table),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Table>> AddTableAtLocationWithHttpInfoAsync(long locationId, Table table = default(Table),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Location> DeleteLocationAsync(long locationId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Location>> DeleteLocationWithHttpInfoAsync(long locationId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Table> DeleteTableAtLocationAsync(long locationId, long tableId,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Table>> DeleteTableAtLocationWithHttpInfoAsync(long locationId, long tableId,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Location> GetLocationAsync(long locationId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Location>> GetLocationWithHttpInfoAsync(long locationId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Location>> GetLocationsAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<List<Location>>> GetLocationsWithHttpInfoAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<InlineResponse2001> GetReportForTableAsync(long locationId, long tableId, long datetimeFrom, long datetimeTo, string reportType,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<InlineResponse2001>> GetReportForTableWithHttpInfoAsync(long locationId, long tableId, long datetimeFrom, long datetimeTo,
+            string reportType, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<InlineResponse200> GetTableActivityAsync(long locationId, long tableId, DateTime @from, DateTime to,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<InlineResponse200>> GetTableActivityWithHttpInfoAsync(long locationId, long tableId, DateTime @from, DateTime to,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Table> GetTableAtLocationAsync(long locationId, long tableId,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Table>> GetTableAtLocationWithHttpInfoAsync(long locationId, long tableId,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Table>> GetTablesAtLocationAsync(long locationId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<List<Table>>> GetTablesAtLocationWithHttpInfoAsync(long locationId,
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Guest> RegisterAtTableAsync(long locationId, long tableId, Guest guest = default(Guest),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Guest>> RegisterAtTableWithHttpInfoAsync(long locationId, long tableId, Guest guest = default(Guest),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Location> UpdateLocationAsync(Location location = default(Location),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Location>> UpdateLocationWithHttpInfoAsync(Location location = default(Location),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Location> UpdateLocationWithIdAsync(long locationId, Location location = default(Location),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Location>> UpdateLocationWithIdWithHttpInfoAsync(long locationId, Location location = default(Location),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Table> UpdateTableAtLocationAsync(long locationId, long tableId, Table table = default(Table),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Table>> UpdateTableAtLocationWithHttpInfoAsync(long locationId, long tableId, Table table = default(Table),
+            CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
         }
     }
 }

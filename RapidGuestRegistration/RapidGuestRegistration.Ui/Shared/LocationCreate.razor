@@ -27,7 +27,7 @@
 
     private async void AddLocation()
     {
-        Api.LocationPost(_location);
+        Api.AddLocation(_location);
         await OnLocationsChanged.InvokeAsync(_location);
     }
 

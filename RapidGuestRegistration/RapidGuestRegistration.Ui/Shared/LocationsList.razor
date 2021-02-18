@@ -21,11 +21,11 @@
 
     protected override void OnInitialized()
     {
-        _locations = Api.LocationGet() ?? new List<Location>();
+        _locations = Api.GetLocations() ?? new List<Location>();
     }
 
     private void UpdateLocations()
     {
-        _locations = Api.LocationGet() ?? new List<Location>();
+        _locations = Api.GetLocations() ?? new List<Location>();
     }
 }

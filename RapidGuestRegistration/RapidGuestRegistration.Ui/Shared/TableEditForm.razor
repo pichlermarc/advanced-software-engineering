@@ -9,14 +9,12 @@
 @if (_table != null)
 {
     <EditForm Model="@_table" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
 
-        <InputText id="name" @bind-Value="_table.Name" />
-
-         
-    </EditForm>
-}
+        <InputText id="name" @bind-Value="_table.Name"/>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </EditForm>}
 else
 {
     <div class="alert alert-danger">
@@ -35,8 +33,10 @@ else
 }
 
 @code {
+
     [Parameter]
     public long LocationId { get; set; }
+
     [Parameter]
     public long TableId { get; set; }
 
@@ -47,7 +47,7 @@ else
     {
         try
         {
-            _table = Api.LocationLocationIdTableTableIdGet(LocationId, TableId).FirstOrDefault();
+            _table = Api.GetTableAtLocation(LocationId, TableId);
         }
         catch (ApiException e)
         {
@@ -62,7 +62,7 @@ else
     {
         try
         {
-            Api.LocationLocationIdTableTableIdPost(LocationId, TableId, _table);
+            Api.UpdateTableAtLocation(LocationId, TableId, _table);
         }
         catch (Exception e)
         {
@@ -72,7 +72,5 @@ else
         }
         NavigationManager.NavigateTo($"/location/{LocationId}/edit");
     }
+
 }
-
-
-

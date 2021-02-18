@@ -25,7 +25,7 @@
     
     private async Task DeleteLocation()
     {
-        var location = Api.LocationLocationIdDelete(Location.Id);
+        var location = Api.DeleteLocation(Location.Id);
         await OnLocationsChanged.InvokeAsync(location);
     }
 

@@ -1,0 +1,20 @@
+﻿@attribute [Authorize]
+@page "/heatmap"
+@using Syncfusion.Blazor.HeatMap
+@using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Client.Model
+@inject IDefaultApi Api
+
+@foreach (var location in locations)
+{
+    <HeatMapComponent CurrentLocation="location"></HeatMapComponent>
+}
+
+@code
+{
+    List<Location> locations;
+    protected override void OnInitialized()
+    {
+        locations = Api.GetLocations();
+    }
+}

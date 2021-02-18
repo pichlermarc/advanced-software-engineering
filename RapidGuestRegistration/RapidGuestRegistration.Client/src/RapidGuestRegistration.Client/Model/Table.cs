@@ -37,10 +37,14 @@ namespace RapidGuestRegistration.Client.Model
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public Table(long id = default(long), string name = default(string))
+        /// <param name="xCoordinate">xCoordinate.</param>
+        /// <param name="yCoordinate">yCoordinate.</param>
+        public Table(long id = default(long), string name = default(string), decimal xCoordinate = default(decimal), decimal yCoordinate = default(decimal))
         {
             this.Id = id;
             this.Name = name;
+            this.XCoordinate = xCoordinate;
+            this.YCoordinate = yCoordinate;
         }
 
         /// <summary>
@@ -56,6 +60,18 @@ namespace RapidGuestRegistration.Client.Model
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or Sets XCoordinate
+        /// </summary>
+        [DataMember(Name = "xCoordinate", EmitDefaultValue = false)]
+        public decimal XCoordinate { get; set; }
+
+        /// <summary>
+        /// Gets or Sets YCoordinate
+        /// </summary>
+        [DataMember(Name = "yCoordinate", EmitDefaultValue = false)]
+        public decimal YCoordinate { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -65,6 +81,8 @@ namespace RapidGuestRegistration.Client.Model
             sb.Append("class Table {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  XCoordinate: ").Append(XCoordinate).Append("\n");
+            sb.Append("  YCoordinate: ").Append(YCoordinate).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -107,6 +125,14 @@ namespace RapidGuestRegistration.Client.Model
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
+                ) && 
+                (
+                    this.XCoordinate == input.XCoordinate ||
+                    this.XCoordinate.Equals(input.XCoordinate)
+                ) && 
+                (
+                    this.YCoordinate == input.YCoordinate ||
+                    this.YCoordinate.Equals(input.YCoordinate)
                 );
         }
 
@@ -122,6 +148,8 @@ namespace RapidGuestRegistration.Client.Model
                 hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                hashCode = hashCode * 59 + this.XCoordinate.GetHashCode();
+                hashCode = hashCode * 59 + this.YCoordinate.GetHashCode();
                 return hashCode;
             }
         }
