@@ -503,6 +503,62 @@ paths:
           description: Invalid location or table ID
       summary: Register on this table on this location.
       x-eov-operation-handler: controllers/DefaultController
+  /booking:
+    get:
+      description: Get bookings associated with your location
+      operationId: GetBookings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Booking'
+                type: array
+          description: Bookings retrieved succesfully.
+      summary: Get bookings
+    post:
+      description: Add a booking
+      operationId: AddBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: Insert successful.
+        "400":
+          description: Invalid booking ID
+      summary: Add a new booking
+      x-eov-operation-handler: controllers/DefaultController
+    put:
+      description: Update booking
+      operationId: UpdateBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+          description: Update successful.
+        "400":
+          description: Invalid booking ID
+        "404":
+          description: Booking not found
+        "403":
+          description: You are not allowed to change this booking.
+      summary: Update an existing location
+      x-eov-operation-handler: controllers/DefaultController
 components:
   schemas:
     Guest:
@@ -556,3 +612,34 @@ components:
           example: -3.5
           type: number
       type: object
+    Booking:
+      example:
+        id: 69
+        location: 'Location #69'
+        table:  'Table#69'
+        name: 'Max Bookingmann'
+        people: 4
+        email: max.bookingmann@booking.com
+      properties:
+        id:
+          example: 69
+          format: int64
+          type: integer
+        location:
+          example: 'Location #69'
+          type: string
+        table:
+          example: 'Table #69'
+          type: string
+        name:
+          example: Sepp Forcher
+          type: string
+        people:
+          example: 69
+          format: int64
+          type: integer
+        email:
+          example: sepp.forcher@orf.at
+          format: email
+          type: string
+      type: object      
