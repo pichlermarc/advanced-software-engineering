@@ -1,10 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidGuestRegistration.Client", "src\RapidGuestRegistration.Client\RapidGuestRegistration.Client.csproj", "{791E4BB3-59F4-443E-A6B1-5B49445FF33D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapidGuestRegistration.Client", "src\RapidGuestRegistration.Client\RapidGuestRegistration.Client.csproj", "{791E4BB3-59F4-443E-A6B1-5B49445FF33D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidGuestRegistration.Client.Test", "src\RapidGuestRegistration.Client.Test\RapidGuestRegistration.Client.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RapidGuestRegistration.Client.Test", "src\RapidGuestRegistration.Client.Test\RapidGuestRegistration.Client.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7BE8B6F7-0576-4518-824A-6B8E08434430}
 	EndGlobalSection
 EndGlobal
