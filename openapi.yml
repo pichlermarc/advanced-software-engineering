@@ -524,7 +524,13 @@ components:
       type: object
     Location:
       example:
-        name: Coolstreet 123
+        name: Restaurant 1
+        street: Coolstreet 123
+        postcode: 6666
+        city: Cooltown
+        land: countrycool
+        phoneNumber: +43 666 4566798
+        email: restaurant1@cool.com
         id: 69
       properties:
         id:
@@ -532,7 +538,26 @@ components:
           format: int64
           type: integer
         name:
+          example: Restaurant 1
+          type: string
+        street:
           example: Coolstreet 123
+          type: string
+        postcode:
+          example: 6666
+          type: string
+        city:
+          example: Cooltown
+          type: string
+        land:
+          example: countrycool
+          type: string
+        phoneNumber:
+          example: +43 666 4566798
+          type: string
+        email:
+          example: restaurant1@cool.com
+          format: email
           type: string
       type: object
     Table:
