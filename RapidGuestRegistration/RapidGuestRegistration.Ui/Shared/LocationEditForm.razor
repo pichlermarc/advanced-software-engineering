@@ -7,14 +7,41 @@
 
 @if (_location != null)
 {
-    <EditForm Model="@_location" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator/>
-        <ValidationSummary/>
-
-        <InputText id="name" @bind-Value="_location.Name"/>
-
-        <button class="btn btn-primary" type="submit">Save</button>
-    </EditForm>    
+<EditForm Model="@_location" OnValidSubmit="@HandleValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+	<fieldset>
+		<label for="name">Name:</label>
+		<br />
+		<InputText id="name" @bind-Value="_location.Name" style="margin-bottom:10px"/>
+		<br />
+		<label for="street">Street:</label>
+		<br />
+		<InputText id="street" @bind-Value="_location.Street" style="margin-bottom:10px" />
+		<br />
+		<label for="postcode">Postcode:</label>
+		<br />
+		<InputText id="postcode" @bind-Value="_location.Postcode" style="margin-bottom:10px"/>
+		<br />
+		<label for="city">City:</label>
+		<br />
+		<InputText id="city" @bind-Value="_location.City" style="margin-bottom:10px"/>
+		<br />
+		<label for="land">Land:</label>
+		<br />
+		<InputText id="land" @bind-Value="_location.Land" style="margin-bottom:10px"/>
+		<br />
+		<label for="phoneNumber">PhoneNumber:</label>
+		<br />
+		<InputText id="phoneNumber" @bind-Value="_location.PhoneNumber" style="margin-bottom:10px"/>
+		<br />
+		<label for="email">Email:</label>
+		<br />
+		<InputText id="email" @bind-Value="_location.Email" style="margin-bottom:10px"/>
+		<br />
+	</fieldset>
+		<button class="btn btn-primary" type="submit">Save</button>
+</EditForm>    
 }
 else
 {
