@@ -6,18 +6,24 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddLocation**](DefaultApi.md#addlocation) | **POST** /location | Add a new location
 [**AddTableAtLocation**](DefaultApi.md#addtableatlocation) | **POST** /location/{locationId}/table | Add a new table on this location
+[**AddUser**](DefaultApi.md#adduser) | **POST** /user | Add a new User
 [**DeleteLocation**](DefaultApi.md#deletelocation) | **DELETE** /location/{locationId} | Delete a specific location.
 [**DeleteTableAtLocation**](DefaultApi.md#deletetableatlocation) | **DELETE** /location/{locationId}/table/{tableId} | Delete this table
+[**DeleteUser**](DefaultApi.md#deleteuser) | **DELETE** /user/{userId} | Delete a specific user.
 [**GetLocation**](DefaultApi.md#getlocation) | **GET** /location/{locationId} | Get a specific location.
 [**GetLocations**](DefaultApi.md#getlocations) | **GET** /location | Get your locations
 [**GetReportForTable**](DefaultApi.md#getreportfortable) | **GET** /location/{locationId}/table/{tableId}/report/{reportType} | Register on this table on this location.
 [**GetTableActivity**](DefaultApi.md#gettableactivity) | **GET** /location/{locationId}/table/{tableId}/activity | Register on this table on this location.
 [**GetTableAtLocation**](DefaultApi.md#gettableatlocation) | **GET** /location/{locationId}/table/{tableId} | Get your tables
 [**GetTablesAtLocation**](DefaultApi.md#gettablesatlocation) | **GET** /location/{locationId}/table | Get your location&#39;s tables
+[**GetUser**](DefaultApi.md#getuser) | **GET** /user/{userId} | Get a specific user.
+[**GetUsers**](DefaultApi.md#getusers) | **GET** /user | Get Users
 [**RegisterAtTable**](DefaultApi.md#registerattable) | **POST** /location/{locationId}/table/{tableId}/register | Register on this table on this location.
 [**UpdateLocation**](DefaultApi.md#updatelocation) | **PUT** /location | Update an existing location
 [**UpdateLocationWithId**](DefaultApi.md#updatelocationwithid) | **POST** /location/{locationId} | Update an existing location
 [**UpdateTableAtLocation**](DefaultApi.md#updatetableatlocation) | **POST** /location/{locationId}/table/{tableId} | Update an existing table
+[**UpdateUser**](DefaultApi.md#updateuser) | **PUT** /user | Update an existing User
+[**UpdateUserWithId**](DefaultApi.md#updateuserwithid) | **POST** /user/{userId} | Update an existing user
 
 
 <a name="addlocation"></a>
@@ -94,7 +100,7 @@ No authorization required
 
 <a name="addtableatlocation"></a>
 # **AddTableAtLocation**
-> Table AddTableAtLocation (long locationId, Table table = null)
+> Object AddTableAtLocation (long locationId, Object body = null)
 
 Add a new table on this location
 
@@ -118,12 +124,12 @@ namespace Example
             config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
-            var table = new Table(); // Table |  (optional) 
+            var body = ;  // Object |  (optional) 
 
             try
             {
                 // Add a new table on this location
-                Table result = apiInstance.AddTableAtLocation(locationId, table);
+                Object result = apiInstance.AddTableAtLocation(locationId, body);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -142,11 +148,11 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **locationId** | **long**| ID of the location to return. | 
- **table** | [**Table**](Table.md)|  | [optional] 
+ **body** | **Object**|  | [optional] 
 
 ### Return type
 
-[**Table**](Table.md)
+**Object**
 
 ### Authorization
 
@@ -164,6 +170,78 @@ No authorization required
 | **200** | Insert successful. |  -  |
 | **400** | Invalid location ID. |  -  |
 | **403** | You are not allowed to modify this location |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="adduser"></a>
+# **AddUser**
+> User AddUser (User user = null)
+
+Add a new User
+
+Add a User
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using RapidGuestRegistration.Client.Api;
+using RapidGuestRegistration.Client.Client;
+using RapidGuestRegistration.Client.Model;
+
+namespace Example
+{
+    public class AddUserExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new DefaultApi(config);
+            var user = new User(); // User |  (optional) 
+
+            try
+            {
+                // Add a new User
+                User result = apiInstance.AddUser(user);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DefaultApi.AddUser: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user** | [**User**](User.md)|  | [optional] 
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Insert successful. |  -  |
+| **400** | Invalid User ID |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -243,7 +321,7 @@ No authorization required
 
 <a name="deletetableatlocation"></a>
 # **DeleteTableAtLocation**
-> Table DeleteTableAtLocation (long locationId, long tableId)
+> Object DeleteTableAtLocation (long locationId, long tableId)
 
 Delete this table
 
@@ -272,7 +350,7 @@ namespace Example
             try
             {
                 // Delete this table
-                Table result = apiInstance.DeleteTableAtLocation(locationId, tableId);
+                Object result = apiInstance.DeleteTableAtLocation(locationId, tableId);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -295,7 +373,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Table**](Table.md)
+**Object**
 
 ### Authorization
 
@@ -313,6 +391,80 @@ No authorization required
 | **200** | Table deletion successful. |  -  |
 | **403** | Table or location does not exist. |  -  |
 | **404** | Table or location does not exist. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="deleteuser"></a>
+# **DeleteUser**
+> User DeleteUser (long userId)
+
+Delete a specific user.
+
+Deletes the user with the user ID.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using RapidGuestRegistration.Client.Api;
+using RapidGuestRegistration.Client.Client;
+using RapidGuestRegistration.Client.Model;
+
+namespace Example
+{
+    public class DeleteUserExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new DefaultApi(config);
+            var userId = 789;  // long | ID of the user to return.
+
+            try
+            {
+                // Delete a specific user.
+                User result = apiInstance.DeleteUser(userId);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DefaultApi.DeleteUser: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **long**| ID of the user to return. | 
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Delete successful. |  -  |
+| **400** | Invalid user ID |  -  |
+| **404** | User not found |  -  |
+| **403** | You are not allowed to delete this user. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -618,7 +770,7 @@ No authorization required
 
 <a name="gettableatlocation"></a>
 # **GetTableAtLocation**
-> Table GetTableAtLocation (long locationId, long tableId)
+> Object GetTableAtLocation (long locationId, long tableId)
 
 Get your tables
 
@@ -647,7 +799,7 @@ namespace Example
             try
             {
                 // Get your tables
-                Table result = apiInstance.GetTableAtLocation(locationId, tableId);
+                Object result = apiInstance.GetTableAtLocation(locationId, tableId);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -670,7 +822,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Table**](Table.md)
+**Object**
 
 ### Authorization
 
@@ -693,7 +845,7 @@ No authorization required
 
 <a name="gettablesatlocation"></a>
 # **GetTablesAtLocation**
-> List&lt;Table&gt; GetTablesAtLocation (long locationId)
+> List&lt;Object&gt; GetTablesAtLocation (long locationId)
 
 Get your location's tables
 
@@ -721,7 +873,7 @@ namespace Example
             try
             {
                 // Get your location's tables
-                List<Table> result = apiInstance.GetTablesAtLocation(locationId);
+                List<Object> result = apiInstance.GetTablesAtLocation(locationId);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -743,7 +895,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List&lt;Table&gt;**](Table.md)
+**List<Object>**
 
 ### Authorization
 
@@ -759,6 +911,147 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Update successful. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="getuser"></a>
+# **GetUser**
+> User GetUser (long userId)
+
+Get a specific user.
+
+Gets the user with the user ID.
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using RapidGuestRegistration.Client.Api;
+using RapidGuestRegistration.Client.Client;
+using RapidGuestRegistration.Client.Model;
+
+namespace Example
+{
+    public class GetUserExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new DefaultApi(config);
+            var userId = 789;  // long | ID of the user to return.
+
+            try
+            {
+                // Get a specific user.
+                User result = apiInstance.GetUser(userId);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DefaultApi.GetUser: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **long**| ID of the user to return. | 
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Update successful. |  -  |
+| **400** | Invalid user ID |  -  |
+| **404** | User not found |  -  |
+| **403** | You are not allowed to access this user. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="getusers"></a>
+# **GetUsers**
+> List&lt;User&gt; GetUsers ()
+
+Get Users
+
+Get Users
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using RapidGuestRegistration.Client.Api;
+using RapidGuestRegistration.Client.Client;
+using RapidGuestRegistration.Client.Model;
+
+namespace Example
+{
+    public class GetUsersExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new DefaultApi(config);
+
+            try
+            {
+                // Get Users
+                List<User> result = apiInstance.GetUsers();
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DefaultApi.GetUsers: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;User&gt;**](User.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Locations retrieved successfully. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -988,7 +1281,7 @@ No authorization required
 
 <a name="updatetableatlocation"></a>
 # **UpdateTableAtLocation**
-> Table UpdateTableAtLocation (long locationId, long tableId, Table table = null)
+> Object UpdateTableAtLocation (long locationId, long tableId, Object body = null)
 
 Update an existing table
 
@@ -1013,12 +1306,12 @@ namespace Example
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
             var tableId = 789;  // long | ID of the location to return.
-            var table = new Table(); // Table |  (optional) 
+            var body = ;  // Object |  (optional) 
 
             try
             {
                 // Update an existing table
-                Table result = apiInstance.UpdateTableAtLocation(locationId, tableId, table);
+                Object result = apiInstance.UpdateTableAtLocation(locationId, tableId, body);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -1038,11 +1331,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **locationId** | **long**| ID of the location to return. | 
  **tableId** | **long**| ID of the location to return. | 
- **table** | [**Table**](Table.md)|  | [optional] 
+ **body** | **Object**|  | [optional] 
 
 ### Return type
 
-[**Table**](Table.md)
+**Object**
 
 ### Authorization
 
@@ -1060,6 +1353,154 @@ No authorization required
 | **200** | Update successful. |  -  |
 | **400** | Invalid location or table ID |  -  |
 | **403** | You are not allowed to edit this table. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="updateuser"></a>
+# **UpdateUser**
+> User UpdateUser (User user = null)
+
+Update an existing User
+
+Update a User
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using RapidGuestRegistration.Client.Api;
+using RapidGuestRegistration.Client.Client;
+using RapidGuestRegistration.Client.Model;
+
+namespace Example
+{
+    public class UpdateUserExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new DefaultApi(config);
+            var user = new User(); // User |  (optional) 
+
+            try
+            {
+                // Update an existing User
+                User result = apiInstance.UpdateUser(user);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DefaultApi.UpdateUser: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user** | [**User**](User.md)|  | [optional] 
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Update successful. |  -  |
+| **400** | Invalid User ID |  -  |
+| **404** | User not found |  -  |
+| **403** | You are not allowed to change this User. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="updateuserwithid"></a>
+# **UpdateUserWithId**
+> User UpdateUserWithId (long userId, User user = null)
+
+Update an existing user
+
+Update a user
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using RapidGuestRegistration.Client.Api;
+using RapidGuestRegistration.Client.Client;
+using RapidGuestRegistration.Client.Model;
+
+namespace Example
+{
+    public class UpdateUserWithIdExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new DefaultApi(config);
+            var userId = 789;  // long | ID of the user to return.
+            var user = new User(); // User |  (optional) 
+
+            try
+            {
+                // Update an existing user
+                User result = apiInstance.UpdateUserWithId(userId, user);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DefaultApi.UpdateUserWithId: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **userId** | **long**| ID of the user to return. | 
+ **user** | [**User**](User.md)|  | [optional] 
+
+### Return type
+
+[**User**](User.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Update successful. |  -  |
+| **400** | Invalid user ID |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
