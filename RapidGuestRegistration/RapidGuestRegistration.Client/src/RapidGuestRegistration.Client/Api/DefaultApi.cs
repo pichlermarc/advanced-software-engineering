@@ -786,7 +786,6 @@ namespace RapidGuestRegistration.Client.Api
             this.Configuration = configuration;
             this.ExceptionFactory = RapidGuestRegistration.Client.Client.Configuration.DefaultExceptionFactory;
         }
-
         /// <summary>
         /// The client for accessing this underlying API asynchronously.
         /// </summary>

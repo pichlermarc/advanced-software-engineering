@@ -1,5 +1,32 @@
-﻿<h3>UserList</h3>
+﻿@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Ui.Data
+@inject IDefaultApi Api
+<h3>Users</h3>
+
+
+@foreach (var user in _users)
+{
+	<div class="row">
+		<UserDisplay User="@user" OnUserChanged="@UpdateUsers"></UserDisplay>
+	</div>
+}
+
+<h3>Add Location</h3>
+<div class="row">
+	<UserCreate OnUsersChanged="@UpdateUsers"></UserCreate>
+</div>
 
 @code {
+	private List<GuestEditModel> _users;
 
+	protected override void OnInitialized()
+	{
+		_users = new List<GuestEditModel>();
+	}
+
+	private void UpdateUsers()
+	{
+		_users = new List<GuestEditModel>();
+	}
 }
