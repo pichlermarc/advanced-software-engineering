@@ -110,10 +110,11 @@ namespace RapidGuestRegistration.Client.Api
         /// Deletes the location with the location ID.
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+
         /// <param name="locationId">ID of the location to return.</param>
         /// <returns>ApiResponse of LocationBooking</returns>
         /// 
-        Location DeleteBooking(long bookingId);
+        Booking DeleteBooking(long bookingId);
 
         /// <summary>
         /// Delete a specific location.
@@ -351,12 +352,12 @@ namespace RapidGuestRegistration.Client.Api
         /// Update booking
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="booking"> (optional)</param>
+        /// <param name="guest"> (optional)</param>
         /// <returns>Booking</returns>
         Booking UpdateBooking(Booking booking = default(Booking));
 
         /// <summary>
-        /// Update an existing location
+        /// Update an existing booking
         /// </summary>
         /// <remarks>
         /// Update booking
@@ -2917,6 +2918,11 @@ namespace RapidGuestRegistration.Client.Api
         }
 
         public Location DeleteBooking(long bookingId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Booking IDefaultApiSync.DeleteBooking(long bookingId)
         {
             throw new NotImplementedException();
         }

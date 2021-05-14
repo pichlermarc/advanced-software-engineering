@@ -5,19 +5,24 @@
 
 @inject IDefaultApi Api
 @inject NavigationManager NavigationManager
-
+<!--{Id = 1, Email="1abc", LocationBooking="1", TableBooking="t1", Name="Musterman1" , People = 1 },
+    -->
 @if (_booking != null)
 {
-    <EditForm Model="@_booking" OnValidSubmit="@HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
+<EditForm Model="@_booking" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-        <InputText id="name" @bind-Value="_booking.Name" />
-      
+    <InputText name="name" @bind-Value="_booking.Name" />
+    <br />
+    <InputText email="email" @bind-Value="_booking.Email" />
+    
 
 
-        <button class="btn btn-primary" type="submit">Save</button>
-    </EditForm>
+
+
+    <button class="btn btn-primary" type="submit">Save</button>
+</EditForm>
 }
 else
 {
@@ -42,8 +47,8 @@ else
     public long BookingId { get; set; }
 
 
-
     private Booking _booking;
+
     private bool _showUpdateError;
 
     protected override void OnInitialized()

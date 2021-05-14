@@ -15,9 +15,9 @@ namespace RapidGuestRegistration.Ui
         {
             _locations = new List<Location>
             {
-                new Location {Id = 1, Name = "LocationBooking #1"}, 
-                new Location {Id = 2, Name = "LocationBooking #2"},
-                new Location {Id = 3, Name = "LocationBooking #3"}
+                new Location {Id = 1, Name = "Location #1"},
+                new Location {Id = 2, Name = "Location #2"},
+                new Location {Id = 3, Name = "Location #3"}
             };
 
             _tables = new Dictionary<long, List<Table>>()
@@ -27,10 +27,10 @@ namespace RapidGuestRegistration.Ui
 
             _bookings = new List<Booking>
             {
-                new Booking {Id = 1, Email="1abc", LocationBooking="1", TableBooking="t1", Name="Musterman1" , People = 1 },
-                new Booking {Id = 2, Email="2abc", LocationBooking="2", TableBooking="t2", Name="Musterman2" , People = 2 },
-                new Booking {Id = 3, Email="3abc", LocationBooking="3", TableBooking="t3", Name="Musterman3" , People = 3 },
-                new Booking {Id = 4, Email="4abc", LocationBooking="4", TableBooking="t4", Name="Musterman4" , People = 4 }
+                new Booking {Id = 1, Email="1abc@booking.at", LocationBooking="1", TableBooking="t1", Name="Musterman1" , People = 1 },
+                new Booking {Id = 2, Email="2abc@booking.at", LocationBooking="2", TableBooking="t2", Name="Musterman2" , People = 2 },
+                new Booking {Id = 3, Email="3abc@booking.at", LocationBooking="3", TableBooking="t3", Name="Musterman3" , People = 3 },
+                new Booking {Id = 4, Email="4abc@booking.at", LocationBooking="4", TableBooking="t4", Name="Musterman4" , People = 4 }
             };
         }
 
@@ -75,7 +75,7 @@ namespace RapidGuestRegistration.Ui
 
         public InlineResponse200 GetTableActivity(long locationId, long tableId, DateTime @from, DateTime to)
         {
-            var random = new Random(); 
+            var random = new Random();
             return new InlineResponse200(random.Next(1, 10));
         }
 
@@ -89,14 +89,14 @@ namespace RapidGuestRegistration.Ui
             throw new System.NotImplementedException();
         }
 
-       
+
 
         public ApiResponse<Location> LocationLocationIdDeleteWithHttpInfo(long locationId)
         {
             throw new System.NotImplementedException();
         }
 
-     
+
 
         public ApiResponse<Location> LocationLocationIdGetWithHttpInfo(long locationId)
         {
@@ -124,7 +124,8 @@ namespace RapidGuestRegistration.Ui
             try
             {
                 return _tables[locationId].Select(table => new Table(table.Id, table.Name)).ToList();
-            } catch(Exception emptyList)
+            }
+            catch (Exception emptyList)
             {
                 return new List<Table>();
             }
@@ -149,7 +150,7 @@ namespace RapidGuestRegistration.Ui
         {
             if (table == null)
                 throw new ArgumentNullException(nameof(table));
-            if (!_tables.ContainsKey(locationId)) 
+            if (!_tables.ContainsKey(locationId))
             {
                 _tables[locationId] = new List<Table>();
             }
@@ -179,7 +180,7 @@ namespace RapidGuestRegistration.Ui
         {
             throw new System.NotImplementedException();
         }
-        
+
         public Table DeleteTableAtLocation(long locationId, long tableId)
         {
             _tables[locationId].RemoveAll(table => table.Id == tableId);
@@ -206,7 +207,8 @@ namespace RapidGuestRegistration.Ui
             try
             {
                 return _tables[locationId].First(table => table.Id == tableId);
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new ApiException();
             }
@@ -229,7 +231,8 @@ namespace RapidGuestRegistration.Ui
                 var updatedTable = _tables[locationId].First(table => table.Id == tableId);
                 updatedTable.Name = table.Name;
                 return updatedTable;
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new ApiException();
             }
@@ -267,11 +270,11 @@ namespace RapidGuestRegistration.Ui
             if (location == null)
                 throw new ArgumentNullException(nameof(location));
 
-            location.Id  = _locations.Select(existingLocation => existingLocation.Id).DefaultIfEmpty(0).Max() + 1;
-            
-            
+            location.Id = _locations.Select(existingLocation => existingLocation.Id).DefaultIfEmpty(0).Max() + 1;
+
+
             // Copy location object since we want to simulate inserts without references.
-            _locations.Add(new Location {Id = location.Id, Name = location.Name});
+            _locations.Add(new Location { Id = location.Id, Name = location.Name });
             return location;
         }
 
@@ -284,7 +287,7 @@ namespace RapidGuestRegistration.Ui
         {
             if (location == null)
                 throw new ArgumentNullException(nameof(location));
-            
+
             var locationToUpdate = _locations.Find(listLocation => listLocation.Id == location.Id);
             if (locationToUpdate == null)
                 throw new InvalidOperationException($"Could not find location with ID {location.Id} to update");
@@ -641,10 +644,21 @@ namespace RapidGuestRegistration.Ui
             throw new NotImplementedException();
         }
 
-        public Booking UpdateBooking(Booking booking = null)
+        public Booking UpdateBooking(Booking booking = default(Booking))
         {
-            throw new NotImplementedException();
+            if (booking == null)
+                throw new ArgumentNullException(nameof(booking));
+
+            var bookingToUpdate = _bookings.Find(listBooking => listBooking.Id == booking.Id);
+            if (bookingToUpdate == null)
+                throw new InvalidOperationException($"Could not find booking with ID {booking.Id} to update");
+            bookingToUpdate.Id = booking.Id;
+            bookingToUpdate.Name = booking.Name;
+
+            return bookingToUpdate;
         }
+
+
 
         public ApiResponse<Booking> UpdateBookingWithHttpInfo(Booking booking = null)
         {
@@ -693,7 +707,7 @@ namespace RapidGuestRegistration.Ui
             // Copy location object since we want to simulate inserts without references.
             _bookings.Add(new Booking { Id = booking.Id, Name = booking.Name });
             return booking;
-            
+
         }
 
         public ApiResponse<Booking> AddBookingWithHttpInfo(Booking booking = null)
@@ -711,11 +725,6 @@ namespace RapidGuestRegistration.Ui
             var itemToDelete = _bookings.Find(booking => booking.Id == bookingId);
             _bookings.Remove(itemToDelete);
             return itemToDelete;
-        }
-
-        Location IDefaultApiSync.DeleteBooking(long bookingId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

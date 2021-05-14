@@ -29,7 +29,7 @@ namespace RapidGuestRegistration.Client.Model
     /// <summary>
     /// LocationBooking
     /// </summary>
-    [DataContract(Name = "LocationBooking")]
+    [DataContract(Name = "Location")]
     public partial class Location : IEquatable<Location>, IValidatableObject
     {
         /// <summary>
@@ -62,7 +62,7 @@ namespace RapidGuestRegistration.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class LocationBooking {\n");
+            sb.Append("class Location {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");

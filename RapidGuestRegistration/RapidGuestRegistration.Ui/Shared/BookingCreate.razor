@@ -28,7 +28,7 @@
     private async void AddBooking()
     {
         Api.AddBooking(_booking);
-        //await .InvokeAsync(_location);
+        await OnBookingsChanged.InvokeAsync(_booking);
     }
 
 }
