@@ -56,15 +56,27 @@ namespace RapidGuestRegistration.Client.Test.Api
         }
 
         /// <summary>
+        /// Test AddBooking
+        /// </summary>
+        [Fact]
+        public void AddBookingTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //LocationBooking location = null;
+            //var response = instance.AddBooking(location);
+            //Assert.IsType<Booking>(response);
+        }
+
+        /// <summary>
         /// Test AddLocation
         /// </summary>
         [Fact]
         public void AddLocationTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //Location location = null;
+            //LocationBooking location = null;
             //var response = instance.AddLocation(location);
-            //Assert.IsType<Location>(response);
+            //Assert.IsType<LocationBooking>(response);
         }
 
         /// <summary>
@@ -75,9 +87,9 @@ namespace RapidGuestRegistration.Client.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
-            //Table table = null;
+            //TableBooking table = null;
             //var response = instance.AddTableAtLocation(locationId, table);
-            //Assert.IsType<Table>(response);
+            //Assert.IsType<TableBooking>(response);
         }
 
         /// <summary>
@@ -89,7 +101,7 @@ namespace RapidGuestRegistration.Client.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
             //var response = instance.DeleteLocation(locationId);
-            //Assert.IsType<Location>(response);
+            //Assert.IsType<LocationBooking>(response);
         }
 
         /// <summary>
@@ -102,7 +114,18 @@ namespace RapidGuestRegistration.Client.Test.Api
             //long locationId = null;
             //long tableId = null;
             //var response = instance.DeleteTableAtLocation(locationId, tableId);
-            //Assert.IsType<Table>(response);
+            //Assert.IsType<TableBooking>(response);
+        }
+
+        /// <summary>
+        /// Test GetBookings
+        /// </summary>
+        [Fact]
+        public void GetBookingsTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //var response = instance.GetBookings();
+            //Assert.IsType<List<Booking>>(response);
         }
 
         /// <summary>
@@ -114,7 +137,7 @@ namespace RapidGuestRegistration.Client.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
             //var response = instance.GetLocation(locationId);
-            //Assert.IsType<Location>(response);
+            //Assert.IsType<LocationBooking>(response);
         }
 
         /// <summary>
@@ -125,7 +148,7 @@ namespace RapidGuestRegistration.Client.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //var response = instance.GetLocations();
-            //Assert.IsType<List<Location>>(response);
+            //Assert.IsType<List<LocationBooking>>(response);
         }
 
         /// <summary>
@@ -169,7 +192,7 @@ namespace RapidGuestRegistration.Client.Test.Api
             //long locationId = null;
             //long tableId = null;
             //var response = instance.GetTableAtLocation(locationId, tableId);
-            //Assert.IsType<Table>(response);
+            //Assert.IsType<TableBooking>(response);
         }
 
         /// <summary>
@@ -181,7 +204,7 @@ namespace RapidGuestRegistration.Client.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
             //var response = instance.GetTablesAtLocation(locationId);
-            //Assert.IsType<List<Table>>(response);
+            //Assert.IsType<List<TableBooking>>(response);
         }
 
         /// <summary>
@@ -199,15 +222,27 @@ namespace RapidGuestRegistration.Client.Test.Api
         }
 
         /// <summary>
+        /// Test UpdateBooking
+        /// </summary>
+        [Fact]
+        public void UpdateBookingTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //Booking booking = null;
+            //var response = instance.UpdateBooking(booking);
+            //Assert.IsType<Booking>(response);
+        }
+
+        /// <summary>
         /// Test UpdateLocation
         /// </summary>
         [Fact]
         public void UpdateLocationTest()
         {
             // TODO uncomment below to test the method and replace null with proper value
-            //Location location = null;
+            //LocationBooking location = null;
             //var response = instance.UpdateLocation(location);
-            //Assert.IsType<Location>(response);
+            //Assert.IsType<LocationBooking>(response);
         }
 
         /// <summary>
@@ -218,9 +253,9 @@ namespace RapidGuestRegistration.Client.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
-            //Location location = null;
+            //LocationBooking location = null;
             //var response = instance.UpdateLocationWithId(locationId, location);
-            //Assert.IsType<Location>(response);
+            //Assert.IsType<LocationBooking>(response);
         }
 
         /// <summary>
@@ -232,9 +267,9 @@ namespace RapidGuestRegistration.Client.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
             //long tableId = null;
-            //Table table = null;
+            //TableBooking table = null;
             //var response = instance.UpdateTableAtLocation(locationId, tableId, table);
-            //Assert.IsType<Table>(response);
+            //Assert.IsType<TableBooking>(response);
         }
     }
 }

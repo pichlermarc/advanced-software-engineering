@@ -15,14 +15,22 @@ namespace RapidGuestRegistration.Ui
         {
             _locations = new List<Location>
             {
-                new Location {Id = 1, Name = "Location #1"}, 
-                new Location {Id = 2, Name = "Location #2"},
-                new Location {Id = 3, Name = "Location #3"}
+                new Location {Id = 1, Name = "LocationBooking #1"}, 
+                new Location {Id = 2, Name = "LocationBooking #2"},
+                new Location {Id = 3, Name = "LocationBooking #3"}
             };
 
             _tables = new Dictionary<long, List<Table>>()
             {
                 {1L, new List<Table>() {new Table(1L, "table1")}}
+            };
+
+            _bookings = new List<Booking>
+            {
+                new Booking {Id = 1, Email="1abc", LocationBooking="1", TableBooking="t1", Name="Musterman1" , People = 1 },
+                new Booking {Id = 2, Email="2abc", LocationBooking="2", TableBooking="t2", Name="Musterman2" , People = 2 },
+                new Booking {Id = 3, Email="3abc", LocationBooking="3", TableBooking="t3", Name="Musterman3" , People = 3 },
+                new Booking {Id = 4, Email="4abc", LocationBooking="4", TableBooking="t4", Name="Musterman4" , People = 4 }
             };
         }
 
@@ -35,6 +43,7 @@ namespace RapidGuestRegistration.Ui
 
         public ExceptionFactory ExceptionFactory { get; set; }
         private List<Location> _locations;
+        private List<Booking> _bookings;
         private Dictionary<long, List<Table>> _tables;
 
         public ApiResponse<Location> GetLocationWithHttpInfo(long locationId)
@@ -608,6 +617,96 @@ namespace RapidGuestRegistration.Ui
 
         public Task<ApiResponse<Table>> UpdateTableAtLocationWithHttpInfoAsync(long locationId, long tableId, Table table = default(Table),
             CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
+        }
+
+        public Booking AddBooking(Location location = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApiResponse<Booking> AddBookingWithHttpInfo(Location location = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Booking> GetBookings()
+        {
+            return _bookings;
+        }
+
+        public ApiResponse<List<Booking>> GetBookingsWithHttpInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Booking UpdateBooking(Booking booking = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApiResponse<Booking> UpdateBookingWithHttpInfo(Booking booking = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Booking> AddBookingAsync(Location location = null, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Booking>> AddBookingWithHttpInfoAsync(Location location = null, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Booking>> GetBookingsAsync(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<List<Booking>>> GetBookingsWithHttpInfoAsync(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Booking> UpdateBookingAsync(Booking booking = null, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse<Booking>> UpdateBookingWithHttpInfoAsync(Booking booking = null, CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Booking AddBooking(Booking booking = default(Booking))
+        {
+
+            if (booking == null)
+                throw new ArgumentNullException(nameof(booking));
+
+            booking.Id = _bookings.Select(existingBooking => existingBooking.Id).DefaultIfEmpty(0).Max() + 1;
+
+
+            // Copy location object since we want to simulate inserts without references.
+            _bookings.Add(new Booking { Id = booking.Id, Name = booking.Name });
+            return booking;
+            
+        }
+
+        public ApiResponse<Booking> AddBookingWithHttpInfo(Booking booking = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Booking GetBooking(long bookingId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Location DeleteBooking(long bookingId)
         {
             throw new NotImplementedException();
         }

@@ -28,6 +28,27 @@ namespace RapidGuestRegistration.Client.Api
     {
         #region Synchronous Operations
         /// <summary>
+        /// Add a new booking
+        /// </summary>
+        /// <remarks>
+        /// Add a booking
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="location"> (optional)</param>
+        /// <returns>Booking</returns>
+        Booking AddBooking(Booking booking = default(Booking));
+
+        /// <summary>
+        /// Add a new booking
+        /// </summary>
+        /// <remarks>
+        /// Add a booking
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="booking"> (optional)</param>
+        /// <returns>ApiResponse of Booking</returns>
+        ApiResponse<Booking> AddBookingWithHttpInfo(Booking booking = default(Booking));
+        /// <summary>
         /// Add a new location
         /// </summary>
         /// <remarks>
@@ -35,7 +56,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
         Location AddLocation(Location location = default(Location));
 
         /// <summary>
@@ -46,7 +67,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
         ApiResponse<Location> AddLocationWithHttpInfo(Location location = default(Location));
         /// <summary>
         /// Add a new table on this location
@@ -57,7 +78,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
-        /// <returns>Table</returns>
+        /// <returns>TableBooking</returns>
         Table AddTableAtLocation(long locationId, Table table = default(Table));
 
         /// <summary>
@@ -69,7 +90,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
-        /// <returns>ApiResponse of Table</returns>
+        /// <returns>ApiResponse of TableBooking</returns>
         ApiResponse<Table> AddTableAtLocationWithHttpInfo(long locationId, Table table = default(Table));
         /// <summary>
         /// Delete a specific location.
@@ -79,7 +100,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
         Location DeleteLocation(long locationId);
 
         /// <summary>
@@ -90,7 +111,19 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
+        /// 
+        Location DeleteBooking(long bookingId);
+
+        /// <summary>
+        /// Delete a specific location.
+        /// </summary>
+        /// <remarks>
+        /// Deletes the location with the location ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bookingId">ID of the location to return.</param>
+        /// <returns>ApiResponse of LocationBooking</returns>
         ApiResponse<Location> DeleteLocationWithHttpInfo(long locationId);
         /// <summary>
         /// Delete this table
@@ -101,7 +134,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
-        /// <returns>Table</returns>
+        /// <returns>TableBooking</returns>
         Table DeleteTableAtLocation(long locationId, long tableId);
 
         /// <summary>
@@ -113,8 +146,27 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
-        /// <returns>ApiResponse of Table</returns>
+        /// <returns>ApiResponse of TableBooking</returns>
         ApiResponse<Table> DeleteTableAtLocationWithHttpInfo(long locationId, long tableId);
+        /// <summary>
+        /// Get bookings
+        /// </summary>
+        /// <remarks>
+        /// Get bookings associated with your location
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;Booking&gt;</returns>
+        List<Booking> GetBookings();
+
+        /// <summary>
+        /// Get bookings
+        /// </summary>
+        /// <remarks>
+        /// Get bookings associated with your location
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;Booking&gt;</returns>
+        ApiResponse<List<Booking>> GetBookingsWithHttpInfo();
         /// <summary>
         /// Get a specific location.
         /// </summary>
@@ -123,7 +175,19 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
+        /// 
+        Booking GetBooking(long bookingId);
+
+        /// <summary>
+        /// Get a specific booking.
+        /// </summary>
+        /// <remarks>
+        /// Gets the booking with the booking ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="bookingId">ID of the location to return.</param>
+        /// <returns>ApiResponse of LocationBooking</returns>
         Location GetLocation(long locationId);
 
         /// <summary>
@@ -134,7 +198,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
         ApiResponse<Location> GetLocationWithHttpInfo(long locationId);
         /// <summary>
         /// Get your locations
@@ -143,7 +207,7 @@ namespace RapidGuestRegistration.Client.Api
         /// Get locations associated with your user
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;Location&gt;</returns>
+        /// <returns>List&lt;LocationBooking&gt;</returns>
         List<Location> GetLocations();
 
         /// <summary>
@@ -153,7 +217,7 @@ namespace RapidGuestRegistration.Client.Api
         /// Get locations associated with your user
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;Location&gt;</returns>
+        /// <returns>ApiResponse of List&lt;LocationBooking&gt;</returns>
         ApiResponse<List<Location>> GetLocationsWithHttpInfo();
         /// <summary>
         /// Register on this table on this location.
@@ -220,7 +284,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
-        /// <returns>Table</returns>
+        /// <returns>TableBooking</returns>
         Table GetTableAtLocation(long locationId, long tableId);
 
         /// <summary>
@@ -232,7 +296,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
-        /// <returns>ApiResponse of Table</returns>
+        /// <returns>ApiResponse of TableBooking</returns>
         ApiResponse<Table> GetTableAtLocationWithHttpInfo(long locationId, long tableId);
         /// <summary>
         /// Get your location&#39;s tables
@@ -242,7 +306,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>List&lt;Table&gt;</returns>
+        /// <returns>List&lt;TableBooking&gt;</returns>
         List<Table> GetTablesAtLocation(long locationId);
 
         /// <summary>
@@ -253,7 +317,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>ApiResponse of List&lt;Table&gt;</returns>
+        /// <returns>ApiResponse of List&lt;TableBooking&gt;</returns>
         ApiResponse<List<Table>> GetTablesAtLocationWithHttpInfo(long locationId);
         /// <summary>
         /// Register on this table on this location.
@@ -284,11 +348,32 @@ namespace RapidGuestRegistration.Client.Api
         /// Update an existing location
         /// </summary>
         /// <remarks>
+        /// Update booking
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="booking"> (optional)</param>
+        /// <returns>Booking</returns>
+        Booking UpdateBooking(Booking booking = default(Booking));
+
+        /// <summary>
+        /// Update an existing location
+        /// </summary>
+        /// <remarks>
+        /// Update booking
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="booking"> (optional)</param>
+        /// <returns>ApiResponse of Booking</returns>
+        ApiResponse<Booking> UpdateBookingWithHttpInfo(Booking booking = default(Booking));
+        /// <summary>
+        /// Update an existing location
+        /// </summary>
+        /// <remarks>
         /// Update a location
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
         Location UpdateLocation(Location location = default(Location));
 
         /// <summary>
@@ -299,7 +384,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
         ApiResponse<Location> UpdateLocationWithHttpInfo(Location location = default(Location));
         /// <summary>
         /// Update an existing location
@@ -310,7 +395,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="location"> (optional)</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
         Location UpdateLocationWithId(long locationId, Location location = default(Location));
 
         /// <summary>
@@ -322,7 +407,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="location"> (optional)</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
         ApiResponse<Location> UpdateLocationWithIdWithHttpInfo(long locationId, Location location = default(Location));
         /// <summary>
         /// Update an existing table
@@ -334,7 +419,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
-        /// <returns>Table</returns>
+        /// <returns>TableBooking</returns>
         Table UpdateTableAtLocation(long locationId, long tableId, Table table = default(Table));
 
         /// <summary>
@@ -347,7 +432,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
-        /// <returns>ApiResponse of Table</returns>
+        /// <returns>ApiResponse of TableBooking</returns>
         ApiResponse<Table> UpdateTableAtLocationWithHttpInfo(long locationId, long tableId, Table table = default(Table));
         #endregion Synchronous Operations
     }
@@ -359,6 +444,29 @@ namespace RapidGuestRegistration.Client.Api
     {
         #region Asynchronous Operations
         /// <summary>
+        /// Add a new booking
+        /// </summary>
+        /// <remarks>
+        /// Add a booking
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="location"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Booking</returns>
+        System.Threading.Tasks.Task<Booking> AddBookingAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Add a new booking
+        /// </summary>
+        /// <remarks>
+        /// Add a booking
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="location"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Booking)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Booking>> AddBookingWithHttpInfoAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
         /// Add a new location
         /// </summary>
         /// <remarks>
@@ -367,7 +475,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         System.Threading.Tasks.Task<Location> AddLocationAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -379,7 +487,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Location>> AddLocationWithHttpInfoAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Add a new table on this location
@@ -391,7 +499,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Table</returns>
+        /// <returns>Task of TableBooking</returns>
         System.Threading.Tasks.Task<Table> AddTableAtLocationAsync(long locationId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -404,7 +512,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Table)</returns>
+        /// <returns>Task of ApiResponse (TableBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Table>> AddTableAtLocationWithHttpInfoAsync(long locationId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Delete a specific location.
@@ -415,7 +523,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         System.Threading.Tasks.Task<Location> DeleteLocationAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -427,7 +535,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Location>> DeleteLocationWithHttpInfoAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Delete this table
@@ -439,7 +547,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Table</returns>
+        /// <returns>Task of TableBooking</returns>
         System.Threading.Tasks.Task<Table> DeleteTableAtLocationAsync(long locationId, long tableId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -452,8 +560,29 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Table)</returns>
+        /// <returns>Task of ApiResponse (TableBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Table>> DeleteTableAtLocationWithHttpInfoAsync(long locationId, long tableId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Get bookings
+        /// </summary>
+        /// <remarks>
+        /// Get bookings associated with your location
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;Booking&gt;</returns>
+        System.Threading.Tasks.Task<List<Booking>> GetBookingsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get bookings
+        /// </summary>
+        /// <remarks>
+        /// Get bookings associated with your location
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;Booking&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<Booking>>> GetBookingsWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get a specific location.
         /// </summary>
@@ -463,7 +592,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         System.Threading.Tasks.Task<Location> GetLocationAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -475,7 +604,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Location>> GetLocationWithHttpInfoAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get your locations
@@ -485,7 +614,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;Location&gt;</returns>
+        /// <returns>Task of List&lt;LocationBooking&gt;</returns>
         System.Threading.Tasks.Task<List<Location>> GetLocationsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -496,7 +625,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;Location&gt;)</returns>
+        /// <returns>Task of ApiResponse (List&lt;LocationBooking&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Location>>> GetLocationsWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Register on this table on this location.
@@ -568,7 +697,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Table</returns>
+        /// <returns>Task of TableBooking</returns>
         System.Threading.Tasks.Task<Table> GetTableAtLocationAsync(long locationId, long tableId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -581,7 +710,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Table)</returns>
+        /// <returns>Task of ApiResponse (TableBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Table>> GetTableAtLocationWithHttpInfoAsync(long locationId, long tableId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get your location&#39;s tables
@@ -592,7 +721,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;Table&gt;</returns>
+        /// <returns>Task of List&lt;TableBooking&gt;</returns>
         System.Threading.Tasks.Task<List<Table>> GetTablesAtLocationAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -604,7 +733,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;Table&gt;)</returns>
+        /// <returns>Task of ApiResponse (List&lt;TableBooking&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Table>>> GetTablesAtLocationWithHttpInfoAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Register on this table on this location.
@@ -637,12 +766,35 @@ namespace RapidGuestRegistration.Client.Api
         /// Update an existing location
         /// </summary>
         /// <remarks>
+        /// Update booking
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="booking"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Booking</returns>
+        System.Threading.Tasks.Task<Booking> UpdateBookingAsync(Booking booking = default(Booking), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Update an existing location
+        /// </summary>
+        /// <remarks>
+        /// Update booking
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="booking"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Booking)</returns>
+        System.Threading.Tasks.Task<ApiResponse<Booking>> UpdateBookingWithHttpInfoAsync(Booking booking = default(Booking), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Update an existing location
+        /// </summary>
+        /// <remarks>
         /// Update a location
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         System.Threading.Tasks.Task<Location> UpdateLocationAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -654,7 +806,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Location>> UpdateLocationWithHttpInfoAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Update an existing location
@@ -666,7 +818,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         System.Threading.Tasks.Task<Location> UpdateLocationWithIdAsync(long locationId, Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -679,7 +831,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Location>> UpdateLocationWithIdWithHttpInfoAsync(long locationId, Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Update an existing table
@@ -692,7 +844,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Table</returns>
+        /// <returns>Task of TableBooking</returns>
         System.Threading.Tasks.Task<Table> UpdateTableAtLocationAsync(long locationId, long tableId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
@@ -706,7 +858,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Table)</returns>
+        /// <returns>Task of ApiResponse (TableBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Table>> UpdateTableAtLocationWithHttpInfoAsync(long locationId, long tableId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
@@ -829,11 +981,120 @@ namespace RapidGuestRegistration.Client.Api
         }
 
         /// <summary>
+        /// Add a new booking Add a booking
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="location"> (optional)</param>
+        /// <returns>Booking</returns>
+        public Booking AddBooking(Location location = default(Location))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<Booking> localVarResponse = AddBookingWithHttpInfo(location);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Add a new booking Add a booking
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="location"> (optional)</param>
+        /// <returns>ApiResponse of Booking</returns>
+        public RapidGuestRegistration.Client.Client.ApiResponse<Booking> AddBookingWithHttpInfo(Location location = default(Location))
+        {
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = location;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<Booking>("/booking", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("AddBooking", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Add a new booking Add a booking
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="location"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Booking</returns>
+        public async System.Threading.Tasks.Task<Booking> AddBookingAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<Booking> localVarResponse = await AddBookingWithHttpInfoAsync(location, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Add a new booking Add a booking
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="location"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Booking)</returns>
+        public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Booking>> AddBookingWithHttpInfoAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = location;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<Booking>("/booking", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("AddBooking", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Add a new location Add a location
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
         public Location AddLocation(Location location = default(Location))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = AddLocationWithHttpInfo(location);
@@ -845,7 +1106,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<Location> AddLocationWithHttpInfo(Location location = default(Location))
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -886,7 +1147,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         public async System.Threading.Tasks.Task<Location> AddLocationAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = await AddLocationWithHttpInfoAsync(location, cancellationToken).ConfigureAwait(false);
@@ -899,7 +1160,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Location>> AddLocationWithHttpInfoAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -943,7 +1204,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
-        /// <returns>Table</returns>
+        /// <returns>TableBooking</returns>
         public Table AddTableAtLocation(long locationId, Table table = default(Table))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Table> localVarResponse = AddTableAtLocationWithHttpInfo(locationId, table);
@@ -956,7 +1217,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
-        /// <returns>ApiResponse of Table</returns>
+        /// <returns>ApiResponse of TableBooking</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<Table> AddTableAtLocationWithHttpInfo(long locationId, Table table = default(Table))
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -999,7 +1260,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Table</returns>
+        /// <returns>Task of TableBooking</returns>
         public async System.Threading.Tasks.Task<Table> AddTableAtLocationAsync(long locationId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Table> localVarResponse = await AddTableAtLocationWithHttpInfoAsync(locationId, table, cancellationToken).ConfigureAwait(false);
@@ -1013,7 +1274,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Table)</returns>
+        /// <returns>Task of ApiResponse (TableBooking)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Table>> AddTableAtLocationWithHttpInfoAsync(long locationId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -1057,7 +1318,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
         public Location DeleteLocation(long locationId)
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = DeleteLocationWithHttpInfo(locationId);
@@ -1069,7 +1330,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<Location> DeleteLocationWithHttpInfo(long locationId)
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -1109,7 +1370,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         public async System.Threading.Tasks.Task<Location> DeleteLocationAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = await DeleteLocationWithHttpInfoAsync(locationId, cancellationToken).ConfigureAwait(false);
@@ -1122,7 +1383,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Location>> DeleteLocationWithHttpInfoAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -1165,7 +1426,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
-        /// <returns>Table</returns>
+        /// <returns>TableBooking</returns>
         public Table DeleteTableAtLocation(long locationId, long tableId)
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Table> localVarResponse = DeleteTableAtLocationWithHttpInfo(locationId, tableId);
@@ -1178,7 +1439,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
-        /// <returns>ApiResponse of Table</returns>
+        /// <returns>ApiResponse of TableBooking</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<Table> DeleteTableAtLocationWithHttpInfo(long locationId, long tableId)
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -1220,7 +1481,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Table</returns>
+        /// <returns>Task of TableBooking</returns>
         public async System.Threading.Tasks.Task<Table> DeleteTableAtLocationAsync(long locationId, long tableId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Table> localVarResponse = await DeleteTableAtLocationWithHttpInfoAsync(locationId, tableId, cancellationToken).ConfigureAwait(false);
@@ -1234,7 +1495,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Table)</returns>
+        /// <returns>Task of ApiResponse (TableBooking)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Table>> DeleteTableAtLocationWithHttpInfoAsync(long locationId, long tableId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -1273,11 +1534,112 @@ namespace RapidGuestRegistration.Client.Api
         }
 
         /// <summary>
+        /// Get bookings Get bookings associated with your location
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;Booking&gt;</returns>
+        public List<Booking> GetBookings()
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<List<Booking>> localVarResponse = GetBookingsWithHttpInfo();
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get bookings Get bookings associated with your location
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;Booking&gt;</returns>
+        public RapidGuestRegistration.Client.Client.ApiResponse<List<Booking>> GetBookingsWithHttpInfo()
+        {
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<List<Booking>>("/booking", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetBookings", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get bookings Get bookings associated with your location
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;Booking&gt;</returns>
+        public async System.Threading.Tasks.Task<List<Booking>> GetBookingsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<List<Booking>> localVarResponse = await GetBookingsWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get bookings Get bookings associated with your location
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;Booking&gt;)</returns>
+        public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<List<Booking>>> GetBookingsWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<Booking>>("/booking", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetBookings", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Get a specific location. Gets the location with the location ID.
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
         public Location GetLocation(long locationId)
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = GetLocationWithHttpInfo(locationId);
@@ -1289,7 +1651,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<Location> GetLocationWithHttpInfo(long locationId)
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -1329,7 +1691,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         public async System.Threading.Tasks.Task<Location> GetLocationAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = await GetLocationWithHttpInfoAsync(locationId, cancellationToken).ConfigureAwait(false);
@@ -1342,7 +1704,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Location>> GetLocationWithHttpInfoAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -1383,7 +1745,7 @@ namespace RapidGuestRegistration.Client.Api
         /// Get your locations Get locations associated with your user
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;Location&gt;</returns>
+        /// <returns>List&lt;LocationBooking&gt;</returns>
         public List<Location> GetLocations()
         {
             RapidGuestRegistration.Client.Client.ApiResponse<List<Location>> localVarResponse = GetLocationsWithHttpInfo();
@@ -1394,7 +1756,7 @@ namespace RapidGuestRegistration.Client.Api
         /// Get your locations Get locations associated with your user
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;Location&gt;</returns>
+        /// <returns>ApiResponse of List&lt;LocationBooking&gt;</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<List<Location>> GetLocationsWithHttpInfo()
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -1432,7 +1794,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;Location&gt;</returns>
+        /// <returns>Task of List&lt;LocationBooking&gt;</returns>
         public async System.Threading.Tasks.Task<List<Location>> GetLocationsAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<List<Location>> localVarResponse = await GetLocationsWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
@@ -1444,7 +1806,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;Location&gt;)</returns>
+        /// <returns>Task of ApiResponse (List&lt;LocationBooking&gt;)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<List<Location>>> GetLocationsWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -1750,7 +2112,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
-        /// <returns>Table</returns>
+        /// <returns>TableBooking</returns>
         public Table GetTableAtLocation(long locationId, long tableId)
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Table> localVarResponse = GetTableAtLocationWithHttpInfo(locationId, tableId);
@@ -1763,7 +2125,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
-        /// <returns>ApiResponse of Table</returns>
+        /// <returns>ApiResponse of TableBooking</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<Table> GetTableAtLocationWithHttpInfo(long locationId, long tableId)
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -1805,7 +2167,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Table</returns>
+        /// <returns>Task of TableBooking</returns>
         public async System.Threading.Tasks.Task<Table> GetTableAtLocationAsync(long locationId, long tableId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Table> localVarResponse = await GetTableAtLocationWithHttpInfoAsync(locationId, tableId, cancellationToken).ConfigureAwait(false);
@@ -1819,7 +2181,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Table)</returns>
+        /// <returns>Task of ApiResponse (TableBooking)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Table>> GetTableAtLocationWithHttpInfoAsync(long locationId, long tableId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -1862,7 +2224,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>List&lt;Table&gt;</returns>
+        /// <returns>List&lt;TableBooking&gt;</returns>
         public List<Table> GetTablesAtLocation(long locationId)
         {
             RapidGuestRegistration.Client.Client.ApiResponse<List<Table>> localVarResponse = GetTablesAtLocationWithHttpInfo(locationId);
@@ -1874,7 +2236,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
-        /// <returns>ApiResponse of List&lt;Table&gt;</returns>
+        /// <returns>ApiResponse of List&lt;TableBooking&gt;</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<List<Table>> GetTablesAtLocationWithHttpInfo(long locationId)
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -1914,7 +2276,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;Table&gt;</returns>
+        /// <returns>Task of List&lt;TableBooking&gt;</returns>
         public async System.Threading.Tasks.Task<List<Table>> GetTablesAtLocationAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<List<Table>> localVarResponse = await GetTablesAtLocationWithHttpInfoAsync(locationId, cancellationToken).ConfigureAwait(false);
@@ -1927,7 +2289,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;Table&gt;)</returns>
+        /// <returns>Task of ApiResponse (List&lt;TableBooking&gt;)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<List<Table>>> GetTablesAtLocationWithHttpInfoAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -2086,11 +2448,120 @@ namespace RapidGuestRegistration.Client.Api
         }
 
         /// <summary>
+        /// Update an existing location Update booking
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="booking"> (optional)</param>
+        /// <returns>Booking</returns>
+        public Booking UpdateBooking(Booking booking = default(Booking))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<Booking> localVarResponse = UpdateBookingWithHttpInfo(booking);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update an existing location Update booking
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="booking"> (optional)</param>
+        /// <returns>ApiResponse of Booking</returns>
+        public RapidGuestRegistration.Client.Client.ApiResponse<Booking> UpdateBookingWithHttpInfo(Booking booking = default(Booking))
+        {
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = booking;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Put<Booking>("/booking", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateBooking", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update an existing location Update booking
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="booking"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of Booking</returns>
+        public async System.Threading.Tasks.Task<Booking> UpdateBookingAsync(Booking booking = default(Booking), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<Booking> localVarResponse = await UpdateBookingWithHttpInfoAsync(booking, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update an existing location Update booking
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="booking"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (Booking)</returns>
+        public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Booking>> UpdateBookingWithHttpInfoAsync(Booking booking = default(Booking), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = booking;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PutAsync<Booking>("/booking", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateBooking", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Update an existing location Update a location
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
         public Location UpdateLocation(Location location = default(Location))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = UpdateLocationWithHttpInfo(location);
@@ -2102,7 +2573,7 @@ namespace RapidGuestRegistration.Client.Api
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<Location> UpdateLocationWithHttpInfo(Location location = default(Location))
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -2143,7 +2614,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         public async System.Threading.Tasks.Task<Location> UpdateLocationAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = await UpdateLocationWithHttpInfoAsync(location, cancellationToken).ConfigureAwait(false);
@@ -2156,7 +2627,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Location>> UpdateLocationWithHttpInfoAsync(Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -2200,7 +2671,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="location"> (optional)</param>
-        /// <returns>Location</returns>
+        /// <returns>LocationBooking</returns>
         public Location UpdateLocationWithId(long locationId, Location location = default(Location))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = UpdateLocationWithIdWithHttpInfo(locationId, location);
@@ -2213,7 +2684,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="location"> (optional)</param>
-        /// <returns>ApiResponse of Location</returns>
+        /// <returns>ApiResponse of LocationBooking</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<Location> UpdateLocationWithIdWithHttpInfo(long locationId, Location location = default(Location))
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -2256,7 +2727,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Location</returns>
+        /// <returns>Task of LocationBooking</returns>
         public async System.Threading.Tasks.Task<Location> UpdateLocationWithIdAsync(long locationId, Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Location> localVarResponse = await UpdateLocationWithIdWithHttpInfoAsync(locationId, location, cancellationToken).ConfigureAwait(false);
@@ -2270,7 +2741,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="location"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Location)</returns>
+        /// <returns>Task of ApiResponse (LocationBooking)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Location>> UpdateLocationWithIdWithHttpInfoAsync(long locationId, Location location = default(Location), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -2316,7 +2787,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
-        /// <returns>Table</returns>
+        /// <returns>TableBooking</returns>
         public Table UpdateTableAtLocation(long locationId, long tableId, Table table = default(Table))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Table> localVarResponse = UpdateTableAtLocationWithHttpInfo(locationId, tableId, table);
@@ -2330,7 +2801,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="locationId">ID of the location to return.</param>
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
-        /// <returns>ApiResponse of Table</returns>
+        /// <returns>ApiResponse of TableBooking</returns>
         public RapidGuestRegistration.Client.Client.ApiResponse<Table> UpdateTableAtLocationWithHttpInfo(long locationId, long tableId, Table table = default(Table))
         {
             RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
@@ -2375,7 +2846,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of Table</returns>
+        /// <returns>Task of TableBooking</returns>
         public async System.Threading.Tasks.Task<Table> UpdateTableAtLocationAsync(long locationId, long tableId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             RapidGuestRegistration.Client.Client.ApiResponse<Table> localVarResponse = await UpdateTableAtLocationWithHttpInfoAsync(locationId, tableId, table, cancellationToken).ConfigureAwait(false);
@@ -2390,7 +2861,7 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="tableId">ID of the location to return.</param>
         /// <param name="table"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (Table)</returns>
+        /// <returns>Task of ApiResponse (TableBooking)</returns>
         public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<Table>> UpdateTableAtLocationWithHttpInfoAsync(long locationId, long tableId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
 
@@ -2430,5 +2901,24 @@ namespace RapidGuestRegistration.Client.Api
             return localVarResponse;
         }
 
+        public Booking AddBooking(Booking booking = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ApiResponse<Booking> AddBookingWithHttpInfo(Booking booking = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Booking GetBooking(long bookingId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Location DeleteBooking(long bookingId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

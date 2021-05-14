@@ -1,4 +1,5 @@
 # RapidGuestRegistration.Client.Model.Location
+
 ## Properties
 
 Name | Type | Description | Notes

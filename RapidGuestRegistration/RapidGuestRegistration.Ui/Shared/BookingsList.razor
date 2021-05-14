@@ -4,8 +4,31 @@
 <h3>BookingsList</h3>
 
 
+@foreach (var booking in _bookings)
+{
+    <div class="row">
+        <BookingDisplay Booking="@booking" OnBookingsChanged="@UpdateBookings"></BookingDisplay>
+    </div>
+}
+
+<h3>Add Booking</h3>
+<div class="row">
+    <BookingCreate OnBookingsChanged="@UpdateBookings"></BookingCreate>
+</div>
 
 @code {
+    private List<Booking> _bookings;
 
+    protected override void OnInitialized()
+    {
+        _bookings = Api.GetBookings() ?? new List<Booking>();
+    }
+
+    private void UpdateBookings()
+    {
+        _bookings = Api.GetBookings() ?? new List<Booking>();
+    }
 }
+
+
 

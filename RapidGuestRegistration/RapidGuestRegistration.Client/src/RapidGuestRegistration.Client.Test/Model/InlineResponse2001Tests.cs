@@ -90,12 +90,12 @@ namespace RapidGuestRegistration.Client.Test.Model
             // TODO unit test for the property 'DatetimeTo'
         }
         /// <summary>
-        /// Test the property 'Pdf'
+        /// Test the property 'Report'
         /// </summary>
         [Fact]
-        public void PdfTest()
+        public void ReportTest()
         {
-            // TODO unit test for the property 'Pdf'
+            // TODO unit test for the property 'Report'
         }
 
     }

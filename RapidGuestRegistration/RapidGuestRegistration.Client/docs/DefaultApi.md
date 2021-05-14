@@ -4,10 +4,12 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddBooking**](DefaultApi.md#addbooking) | **POST** /booking | Add a new booking
 [**AddLocation**](DefaultApi.md#addlocation) | **POST** /location | Add a new location
 [**AddTableAtLocation**](DefaultApi.md#addtableatlocation) | **POST** /location/{locationId}/table | Add a new table on this location
 [**DeleteLocation**](DefaultApi.md#deletelocation) | **DELETE** /location/{locationId} | Delete a specific location.
 [**DeleteTableAtLocation**](DefaultApi.md#deletetableatlocation) | **DELETE** /location/{locationId}/table/{tableId} | Delete this table
+[**GetBookings**](DefaultApi.md#getbookings) | **GET** /booking | Get bookings
 [**GetLocation**](DefaultApi.md#getlocation) | **GET** /location/{locationId} | Get a specific location.
 [**GetLocations**](DefaultApi.md#getlocations) | **GET** /location | Get your locations
 [**GetReportForTable**](DefaultApi.md#getreportfortable) | **GET** /location/{locationId}/table/{tableId}/report/{reportType} | Register on this table on this location.
@@ -15,10 +17,83 @@ Method | HTTP request | Description
 [**GetTableAtLocation**](DefaultApi.md#gettableatlocation) | **GET** /location/{locationId}/table/{tableId} | Get your tables
 [**GetTablesAtLocation**](DefaultApi.md#gettablesatlocation) | **GET** /location/{locationId}/table | Get your location&#39;s tables
 [**RegisterAtTable**](DefaultApi.md#registerattable) | **POST** /location/{locationId}/table/{tableId}/register | Register on this table on this location.
+[**UpdateBooking**](DefaultApi.md#updatebooking) | **PUT** /booking | Update an existing location
 [**UpdateLocation**](DefaultApi.md#updatelocation) | **PUT** /location | Update an existing location
 [**UpdateLocationWithId**](DefaultApi.md#updatelocationwithid) | **POST** /location/{locationId} | Update an existing location
 [**UpdateTableAtLocation**](DefaultApi.md#updatetableatlocation) | **POST** /location/{locationId}/table/{tableId} | Update an existing table
 
+
+<a name="addbooking"></a>
+# **AddBooking**
+> Booking AddBooking (Location location = null)
+
+Add a new booking
+
+Add a booking
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using RapidGuestRegistration.Client.Api;
+using RapidGuestRegistration.Client.Client;
+using RapidGuestRegistration.Client.Model;
+
+namespace Example
+{
+    public class AddBookingExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new DefaultApi(config);
+            var location = new Location(); // Location |  (optional) 
+
+            try
+            {
+                // Add a new booking
+                Booking result = apiInstance.AddBooking(location);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DefaultApi.AddBooking: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **location** | [**Location**](Location.md)|  | [optional] 
+
+### Return type
+
+[**Booking**](Booking.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Insert successful. |  -  |
+| **400** | Invalid booking ID |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 <a name="addlocation"></a>
 # **AddLocation**
@@ -82,6 +157,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -156,6 +232,7 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -227,6 +304,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -303,12 +381,80 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Table deletion successful. |  -  |
 | **403** | Table or location does not exist. |  -  |
 | **404** | Table or location does not exist. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="getbookings"></a>
+# **GetBookings**
+> List&lt;Booking&gt; GetBookings ()
+
+Get bookings
+
+Get bookings associated with your location
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using RapidGuestRegistration.Client.Api;
+using RapidGuestRegistration.Client.Client;
+using RapidGuestRegistration.Client.Model;
+
+namespace Example
+{
+    public class GetBookingsExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new DefaultApi(config);
+
+            try
+            {
+                // Get bookings
+                List<Booking> result = apiInstance.GetBookings();
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DefaultApi.GetBookings: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List&lt;Booking&gt;**](Booking.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Bookings retrieved succesfully. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -374,6 +520,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -443,6 +590,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -522,6 +670,7 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -599,6 +748,7 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -673,6 +823,7 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -744,6 +895,7 @@ No authorization required
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -819,11 +971,86 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Registration successful. |  -  |
 | **400** | Invalid location or table ID |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+<a name="updatebooking"></a>
+# **UpdateBooking**
+> Booking UpdateBooking (Booking booking = null)
+
+Update an existing location
+
+Update booking
+
+### Example
+```csharp
+using System.Collections.Generic;
+using System.Diagnostics;
+using RapidGuestRegistration.Client.Api;
+using RapidGuestRegistration.Client.Client;
+using RapidGuestRegistration.Client.Model;
+
+namespace Example
+{
+    public class UpdateBookingExample
+    {
+        public static void Main()
+        {
+            Configuration config = new Configuration();
+            config.BasePath = "http://localhost";
+            var apiInstance = new DefaultApi(config);
+            var booking = new Booking(); // Booking |  (optional) 
+
+            try
+            {
+                // Update an existing location
+                Booking result = apiInstance.UpdateBooking(booking);
+                Debug.WriteLine(result);
+            }
+            catch (ApiException  e)
+            {
+                Debug.Print("Exception when calling DefaultApi.UpdateBooking: " + e.Message );
+                Debug.Print("Status Code: "+ e.ErrorCode);
+                Debug.Print(e.StackTrace);
+            }
+        }
+    }
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **booking** | [**Booking**](Booking.md)|  | [optional] 
+
+### Return type
+
+[**Booking**](Booking.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Update successful. |  -  |
+| **400** | Invalid booking ID |  -  |
+| **404** | Booking not found |  -  |
+| **403** | You are not allowed to change this booking. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -889,6 +1116,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -965,6 +1193,7 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
@@ -1039,6 +1268,7 @@ No authorization required
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |

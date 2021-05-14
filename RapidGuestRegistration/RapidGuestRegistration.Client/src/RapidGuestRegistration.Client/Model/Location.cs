@@ -27,9 +27,9 @@ using OpenAPIDateConverter = RapidGuestRegistration.Client.Client.OpenAPIDateCon
 namespace RapidGuestRegistration.Client.Model
 {
     /// <summary>
-    /// Location
+    /// LocationBooking
     /// </summary>
-    [DataContract(Name = "Location")]
+    [DataContract(Name = "LocationBooking")]
     public partial class Location : IEquatable<Location>, IValidatableObject
     {
         /// <summary>
@@ -62,7 +62,7 @@ namespace RapidGuestRegistration.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Location {\n");
+            sb.Append("class LocationBooking {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
@@ -89,9 +89,9 @@ namespace RapidGuestRegistration.Client.Model
         }
 
         /// <summary>
-        /// Returns true if Location instances are equal
+        /// Returns true if LocationBooking instances are equal
         /// </summary>
-        /// <param name="input">Instance of Location to be compared</param>
+        /// <param name="input">Instance of LocationBooking to be compared</param>
         /// <returns>Boolean</returns>
         public bool Equals(Location input)
         {

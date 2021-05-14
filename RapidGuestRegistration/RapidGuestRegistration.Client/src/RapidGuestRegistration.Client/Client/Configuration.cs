@@ -111,7 +111,7 @@ namespace RapidGuestRegistration.Client.Client
             {
                 {
                     new Dictionary<string, object> {
-                        {"url", "/"},
+                        {"url", ""},
                         {"description", "No description provided"},
                     }
                 }

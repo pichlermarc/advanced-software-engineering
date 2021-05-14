@@ -27,24 +27,28 @@ using OpenAPIDateConverter = RapidGuestRegistration.Client.Client.OpenAPIDateCon
 namespace RapidGuestRegistration.Client.Model
 {
     /// <summary>
-    /// Table
+    /// Booking
     /// </summary>
-    [DataContract(Name = "Table")]
-    public partial class Table : IEquatable<Table>, IValidatableObject
+    [DataContract(Name = "Booking")]
+    public partial class Booking : IEquatable<Booking>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Table" /> class.
+        /// Initializes a new instance of the <see cref="Booking" /> class.
         /// </summary>
         /// <param name="id">id.</param>
+        /// <param name="location">location.</param>
+        /// <param name="table">table.</param>
         /// <param name="name">name.</param>
-        /// <param name="xCoordinate">xCoordinate.</param>
-        /// <param name="yCoordinate">yCoordinate.</param>
-        public Table(long id = default(long), string name = default(string), decimal xCoordinate = default(decimal), decimal yCoordinate = default(decimal))
+        /// <param name="people">people.</param>
+        /// <param name="email">email.</param>
+        public Booking(long id = default(long), string location = default(string), string table = default(string), string name = default(string), long people = default(long), string email = default(string))
         {
             this.Id = id;
+            this.LocationBooking = location;
+            this.TableBooking = table;
             this.Name = name;
-            this.XCoordinate = xCoordinate;
-            this.YCoordinate = yCoordinate;
+            this.People = people;
+            this.Email = email;
         }
 
         /// <summary>
@@ -54,22 +58,34 @@ namespace RapidGuestRegistration.Client.Model
         public long Id { get; set; }
 
         /// <summary>
+        /// Gets or Sets LocationBooking
+        /// </summary>
+        [DataMember(Name = "location", EmitDefaultValue = false)]
+        public string LocationBooking { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TableBooking
+        /// </summary>
+        [DataMember(Name = "table", EmitDefaultValue = false)]
+        public string TableBooking { get; set; }
+
+        /// <summary>
         /// Gets or Sets Name
         /// </summary>
         [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets XCoordinate
+        /// Gets or Sets People
         /// </summary>
-        [DataMember(Name = "xCoordinate", EmitDefaultValue = false)]
-        public decimal XCoordinate { get; set; }
+        [DataMember(Name = "people", EmitDefaultValue = false)]
+        public long People { get; set; }
 
         /// <summary>
-        /// Gets or Sets YCoordinate
+        /// Gets or Sets Email
         /// </summary>
-        [DataMember(Name = "yCoordinate", EmitDefaultValue = false)]
-        public decimal YCoordinate { get; set; }
+        [DataMember(Name = "email", EmitDefaultValue = false)]
+        public string Email { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -78,11 +94,13 @@ namespace RapidGuestRegistration.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class Table {\n");
+            sb.Append("class Booking {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  LocationBooking: ").Append(LocationBooking).Append("\n");
+            sb.Append("  TableBooking: ").Append(TableBooking).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  XCoordinate: ").Append(XCoordinate).Append("\n");
-            sb.Append("  YCoordinate: ").Append(YCoordinate).Append("\n");
+            sb.Append("  People: ").Append(People).Append("\n");
+            sb.Append("  Email: ").Append(Email).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,15 +121,15 @@ namespace RapidGuestRegistration.Client.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as Table);
+            return this.Equals(input as Booking);
         }
 
         /// <summary>
-        /// Returns true if Table instances are equal
+        /// Returns true if Booking instances are equal
         /// </summary>
-        /// <param name="input">Instance of Table to be compared</param>
+        /// <param name="input">Instance of Booking to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(Table input)
+        public bool Equals(Booking input)
         {
             if (input == null)
                 return false;
@@ -122,17 +140,28 @@ namespace RapidGuestRegistration.Client.Model
                     this.Id.Equals(input.Id)
                 ) && 
                 (
+                    this.LocationBooking == input.LocationBooking ||
+                    (this.LocationBooking != null &&
+                    this.LocationBooking.Equals(input.LocationBooking))
+                ) && 
+                (
+                    this.TableBooking == input.TableBooking ||
+                    (this.TableBooking != null &&
+                    this.TableBooking.Equals(input.TableBooking))
+                ) && 
+                (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
                 ) && 
                 (
-                    this.XCoordinate == input.XCoordinate ||
-                    this.XCoordinate.Equals(input.XCoordinate)
+                    this.People == input.People ||
+                    this.People.Equals(input.People)
                 ) && 
                 (
-                    this.YCoordinate == input.YCoordinate ||
-                    this.YCoordinate.Equals(input.YCoordinate)
+                    this.Email == input.Email ||
+                    (this.Email != null &&
+                    this.Email.Equals(input.Email))
                 );
         }
 
@@ -146,10 +175,15 @@ namespace RapidGuestRegistration.Client.Model
             {
                 int hashCode = 41;
                 hashCode = hashCode * 59 + this.Id.GetHashCode();
+                if (this.LocationBooking != null)
+                    hashCode = hashCode * 59 + this.LocationBooking.GetHashCode();
+                if (this.TableBooking != null)
+                    hashCode = hashCode * 59 + this.TableBooking.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
-                hashCode = hashCode * 59 + this.XCoordinate.GetHashCode();
-                hashCode = hashCode * 59 + this.YCoordinate.GetHashCode();
+                hashCode = hashCode * 59 + this.People.GetHashCode();
+                if (this.Email != null)
+                    hashCode = hashCode * 59 + this.Email.GetHashCode();
                 return hashCode;
             }
         }

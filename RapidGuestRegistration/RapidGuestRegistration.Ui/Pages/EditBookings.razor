@@ -1,0 +1,12 @@
+﻿<h3>EditBookings</h3>
+
+@page "/bookings/{BookingId}/edit"
+@attribute [Authorize]
+
+<h3>Edit Booking</h3>
+<BookingEditForm BookingId="long.Parse(BookingId)"></BookingEditForm>
+
+@code {
+    [Parameter]
+    public string BookingId { get; set; }
+}
