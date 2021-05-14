@@ -1,6 +1,36 @@
+
+@inject NavigationManager NavigationManager
+
+
 <h1>Dashboard</h1>
-<LocationsList></LocationsList>
+<button class="btn btn-primary mr-1 float-right" @onclick="GotoLocations">Goto Locations</button>
+<button class="btn btn-primary mr-1 float-right" @onclick="GotoBookings">Goto Bookings</button>
+<button class="btn btn-primary mr-1 float-right" @onclick="CheckoutHeatmap">Checkout Heatmap</button>
+<button class="btn btn-primary mr-1 float-right" @onclick="GenerateReport">Generate Report</button>
 
 @code {
+    private void GotoLocations()
+    {
+
+        NavigationManager.NavigateTo("/locations");
+    }
+
+    private void GotoBookings()
+    {
+
+        NavigationManager.NavigateTo("/bookings");
+    }
+
+    private void CheckoutHeatmap()
+    {
+
+        NavigationManager.NavigateTo("/heatmap");
+    }
+
+    private void GenerateReport()
+    {
+
+        NavigationManager.NavigateTo("/report");
+    }
 
 }
