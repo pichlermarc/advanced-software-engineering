@@ -42,7 +42,8 @@ namespace RapidGuestRegistration.Client.Model
         /// <param name="city">city.</param>
         /// <param name="land">land.</param>
         /// <param name="phoneNumber">phoneNumber.</param>
-        public Location(long id = default(long), string name = default(string), string street = default(string), string postcode = default(string), string city = default(string), string land = default(string), string phoneNumber = default(string))
+        /// <param name="email">email.</param>
+        public Location(long id = default(long), string name = default(string), string street = default(string), string postcode = default(string), string city = default(string), string land = default(string), string phoneNumber = default(string), string email = default(string))
         {
             this.Id = id;
             this.Name = name;
@@ -51,6 +52,7 @@ namespace RapidGuestRegistration.Client.Model
             this.City = city;
             this.Land = land;
             this.PhoneNumber = phoneNumber;
+            this.Email = email;
         }
 
         /// <summary>
@@ -96,6 +98,12 @@ namespace RapidGuestRegistration.Client.Model
         public string PhoneNumber { get; set; }
 
         /// <summary>
+        /// Gets or Sets Email
+        /// </summary>
+        [DataMember(Name = "email", EmitDefaultValue = false)]
+        public string Email { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -110,6 +118,7 @@ namespace RapidGuestRegistration.Client.Model
             sb.Append("  City: ").Append(City).Append("\n");
             sb.Append("  Land: ").Append(Land).Append("\n");
             sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
+            sb.Append("  Email: ").Append(Email).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -177,6 +186,11 @@ namespace RapidGuestRegistration.Client.Model
                     this.PhoneNumber == input.PhoneNumber ||
                     (this.PhoneNumber != null &&
                     this.PhoneNumber.Equals(input.PhoneNumber))
+                ) && 
+                (
+                    this.Email == input.Email ||
+                    (this.Email != null &&
+                    this.Email.Equals(input.Email))
                 );
         }
 
@@ -202,6 +216,8 @@ namespace RapidGuestRegistration.Client.Model
                     hashCode = hashCode * 59 + this.Land.GetHashCode();
                 if (this.PhoneNumber != null)
                     hashCode = hashCode * 59 + this.PhoneNumber.GetHashCode();
+                if (this.Email != null)
+                    hashCode = hashCode * 59 + this.Email.GetHashCode();
                 return hashCode;
             }
         }

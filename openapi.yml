@@ -719,6 +719,10 @@ components:
         phoneNumber:
           example: +43 666 4566798
           type: string
+        email:
+          example: restaurant1@cool.com
+          format: email
+          type: string
       type: object
     Table:
       example:
