@@ -20,6 +20,13 @@ namespace RapidGuestRegistration.Ui
                 new Location {Id = 3, Name = "Location #3"}
             };
 
+            _users = new List<User>
+            {
+                new User {Id = 1, Name = "User #1"},
+
+            };
+
+
             _tables = new Dictionary<long, List<Table>>()
             {
                 {1L, new List<Table>() {new Table(1L, "table1")}}
@@ -35,6 +42,7 @@ namespace RapidGuestRegistration.Ui
 
         public ExceptionFactory ExceptionFactory { get; set; }
         private List<Location> _locations;
+        private List<User> _users;
         private Dictionary<long, List<Table>> _tables;
 
         public ApiResponse<Location> GetLocationWithHttpInfo(long locationId)
@@ -614,8 +622,16 @@ namespace RapidGuestRegistration.Ui
 
 		public User AddUser(User user = null)
 		{
-			throw new NotImplementedException();
-		}
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            user.Id = _users.Select(existingUser=> existingUser.Id).DefaultIfEmpty(0).Max() + 1;
+
+
+            // Copy location object since we want to simulate inserts without references.
+            _users.Add(new User { Id = user.Id, Name = user.Name });
+            return user;
+        }
 
 		public ApiResponse<User> AddUserWithHttpInfo(User user = null)
 		{
@@ -624,8 +640,10 @@ namespace RapidGuestRegistration.Ui
 
 		public User DeleteUser(long userId)
 		{
-			throw new NotImplementedException();
-		}
+            var itemToDelete = _users.Find(user => user.Id == userId);
+            _users.Remove(itemToDelete);
+            return itemToDelete;
+        }
 
 		public ApiResponse<User> DeleteUserWithHttpInfo(long userId)
 		{
@@ -634,8 +652,8 @@ namespace RapidGuestRegistration.Ui
 
 		public User GetUser(long userId)
 		{
-			throw new NotImplementedException();
-		}
+            return _users.Find(user => user.Id == userId);
+        }
 
 		public ApiResponse<User> GetUserWithHttpInfo(long userId)
 		{
@@ -644,8 +662,9 @@ namespace RapidGuestRegistration.Ui
 
 		public List<User> GetUsers()
 		{
-			throw new NotImplementedException();
-		}
+            return _users;
+
+        }
 
 		public ApiResponse<List<User>> GetUsersWithHttpInfo()
 		{
@@ -654,8 +673,17 @@ namespace RapidGuestRegistration.Ui
 
 		public User UpdateUser(User user = null)
 		{
-			throw new NotImplementedException();
-		}
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            var userToUpdate = _users.Find(listLocation => listLocation.Id == user.Id);
+            if (userToUpdate == null)
+                throw new InvalidOperationException($"Could not find user with ID {user.Id} to update");
+            userToUpdate.Id = user.Id;
+            userToUpdate.Name = user.Name;
+
+            return userToUpdate;
+        }
 
 		public ApiResponse<User> UpdateUserWithHttpInfo(User user = null)
 		{

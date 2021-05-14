@@ -1,6 +1,5 @@
 ﻿@using RapidGuestRegistration.Client.Model
 @using RapidGuestRegistration.Client.Api
-@using RapidGuestRegistration.Ui.Data
 @inject IDefaultApi Api
 <h3>Users</h3>
 
@@ -12,21 +11,21 @@
 	</div>
 }
 
-<h3>Add Location</h3>
+<h3>Add User</h3>
 <div class="row">
 	<UserCreate OnUsersChanged="@UpdateUsers"></UserCreate>
 </div>
 
 @code {
-	private List<GuestEditModel> _users;
+	private List<User> _users;
 
 	protected override void OnInitialized()
 	{
-		_users = new List<GuestEditModel>();
+		_users = Api.GetUsers() ?? new List<User>();
 	}
 
 	private void UpdateUsers()
 	{
-		_users = new List<GuestEditModel>();
+		_users = Api.GetUsers() ?? new List<User>();
 	}
 }

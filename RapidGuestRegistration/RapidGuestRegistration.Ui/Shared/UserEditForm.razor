@@ -1,0 +1,85 @@
+﻿@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Client.Client
+
+@inject IDefaultApi Api
+@inject NavigationManager NavigationManager
+
+@if (_user != null)
+{
+	<EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit">
+		<DataAnnotationsValidator />
+		<ValidationSummary />
+		<fieldset>
+			<label for="name">Name:</label>
+			<br />
+			<InputText id="name" @bind-Value="_user.Name" style="margin-bottom:10px" />
+			<br />
+			<label for="email">Email:</label>
+			<br />
+			<InputText id="email" @bind-Value="_user.Email" style="margin-bottom:10px" />
+			<br />
+			<label for="password">Password:</label>
+			<br />
+			<InputText id="password" @bind-Value="_user.Password" style="margin-bottom:10px" />
+			<br />			
+		</fieldset>
+		<button class="btn btn-primary" type="submit">Save</button>
+	</EditForm>
+}
+else
+{
+	<div class="alert alert-danger">
+		<strong>Error:</strong> Could not find the location with the ID @UserId, maybe it has been deleted?
+	</div>
+}
+
+@if (_showUpdateError)
+{
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		<strong>Error:</strong> Something went wrong when updating this user. Does it still exist?
+		<button type="button" class="close" @onclick="() => _showUpdateError = false">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+}
+
+@code {
+
+	[Parameter]
+	public long UserId { get; set; }
+
+	private User _user;
+	private bool _showUpdateError;
+
+	protected override void OnInitialized()
+	{
+		try
+		{
+			_user = Api.GetUser(UserId);
+		}
+		catch (ApiException e)
+		{
+			Console.WriteLine(e);
+			_user = null;
+		}
+
+		base.OnInitialized();
+	}
+
+	private void HandleValidSubmit()
+	{
+		try
+		{
+			Api.UpdateUser(_user);
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			_showUpdateError = true;
+			return;
+		}
+		NavigationManager.NavigateTo("/users");
+	}
+
+}
