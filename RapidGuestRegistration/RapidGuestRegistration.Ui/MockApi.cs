@@ -611,5 +611,125 @@ namespace RapidGuestRegistration.Ui
         {
             throw new NotImplementedException();
         }
-    }
+
+		public User AddUser(User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ApiResponse<User> AddUserWithHttpInfo(User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public User DeleteUser(long userId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ApiResponse<User> DeleteUserWithHttpInfo(long userId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public User GetUser(long userId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ApiResponse<User> GetUserWithHttpInfo(long userId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public List<User> GetUsers()
+		{
+			throw new NotImplementedException();
+		}
+
+		public ApiResponse<List<User>> GetUsersWithHttpInfo()
+		{
+			throw new NotImplementedException();
+		}
+
+		public User UpdateUser(User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ApiResponse<User> UpdateUserWithHttpInfo(User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public User UpdateUserWithId(long userId, User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ApiResponse<User> UpdateUserWithIdWithHttpInfo(long userId, User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> AddUserAsync(User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> AddUserWithHttpInfoAsync(User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> DeleteUserAsync(long userId, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> DeleteUserWithHttpInfoAsync(long userId, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> GetUserAsync(long userId, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> GetUserWithHttpInfoAsync(long userId, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<List<User>> GetUsersAsync(CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<List<User>>> GetUsersWithHttpInfoAsync(CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> UpdateUserAsync(User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> UpdateUserWithHttpInfoAsync(User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> UpdateUserWithIdAsync(long userId, User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> UpdateUserWithIdWithHttpInfoAsync(long userId, User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
