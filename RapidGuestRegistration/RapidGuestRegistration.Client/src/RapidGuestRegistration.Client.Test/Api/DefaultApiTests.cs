@@ -75,9 +75,9 @@ namespace RapidGuestRegistration.Client.Test.Api
         {
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
-            //Object body = null;
-            //var response = instance.AddTableAtLocation(locationId, body);
-            //Assert.IsType<Object>(response);
+            //Table table = null;
+            //var response = instance.AddTableAtLocation(locationId, table);
+            //Assert.IsType<Table>(response);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace RapidGuestRegistration.Client.Test.Api
             //long locationId = null;
             //long tableId = null;
             //var response = instance.DeleteTableAtLocation(locationId, tableId);
-            //Assert.IsType<Object>(response);
+            //Assert.IsType<Table>(response);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace RapidGuestRegistration.Client.Test.Api
             //long locationId = null;
             //long tableId = null;
             //var response = instance.GetTableAtLocation(locationId, tableId);
-            //Assert.IsType<Object>(response);
+            //Assert.IsType<Table>(response);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace RapidGuestRegistration.Client.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
             //var response = instance.GetTablesAtLocation(locationId);
-            //Assert.IsType<List<Object>>(response);
+            //Assert.IsType<List<Table>>(response);
         }
 
         /// <summary>
@@ -279,9 +279,9 @@ namespace RapidGuestRegistration.Client.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //long locationId = null;
             //long tableId = null;
-            //Object body = null;
-            //var response = instance.UpdateTableAtLocation(locationId, tableId, body);
-            //Assert.IsType<Object>(response);
+            //Table table = null;
+            //var response = instance.UpdateTableAtLocation(locationId, tableId, table);
+            //Assert.IsType<Table>(response);
         }
 
         /// <summary>

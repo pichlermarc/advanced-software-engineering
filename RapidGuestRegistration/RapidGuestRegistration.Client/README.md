@@ -130,6 +130,7 @@ Class | Method | HTTP request | Description
  - [Model.InlineResponse200](docs/InlineResponse200.md)
  - [Model.InlineResponse2001](docs/InlineResponse2001.md)
  - [Model.Location](docs/Location.md)
+ - [Model.Table](docs/Table.md)
  - [Model.User](docs/User.md)
 
 

@@ -100,7 +100,7 @@ No authorization required
 
 <a name="addtableatlocation"></a>
 # **AddTableAtLocation**
-> Object AddTableAtLocation (long locationId, Object body = null)
+> Table AddTableAtLocation (long locationId, Table table = null)
 
 Add a new table on this location
 
@@ -124,12 +124,12 @@ namespace Example
             config.BasePath = "http://localhost";
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
-            var body = ;  // Object |  (optional) 
+            var table = new Table(); // Table |  (optional) 
 
             try
             {
                 // Add a new table on this location
-                Object result = apiInstance.AddTableAtLocation(locationId, body);
+                Table result = apiInstance.AddTableAtLocation(locationId, table);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -148,11 +148,11 @@ namespace Example
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **locationId** | **long**| ID of the location to return. | 
- **body** | **Object**|  | [optional] 
+ **table** | [**Table**](Table.md)|  | [optional] 
 
 ### Return type
 
-**Object**
+[**Table**](Table.md)
 
 ### Authorization
 
@@ -321,7 +321,7 @@ No authorization required
 
 <a name="deletetableatlocation"></a>
 # **DeleteTableAtLocation**
-> Object DeleteTableAtLocation (long locationId, long tableId)
+> Table DeleteTableAtLocation (long locationId, long tableId)
 
 Delete this table
 
@@ -350,7 +350,7 @@ namespace Example
             try
             {
                 // Delete this table
-                Object result = apiInstance.DeleteTableAtLocation(locationId, tableId);
+                Table result = apiInstance.DeleteTableAtLocation(locationId, tableId);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -373,7 +373,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Object**
+[**Table**](Table.md)
 
 ### Authorization
 
@@ -770,7 +770,7 @@ No authorization required
 
 <a name="gettableatlocation"></a>
 # **GetTableAtLocation**
-> Object GetTableAtLocation (long locationId, long tableId)
+> Table GetTableAtLocation (long locationId, long tableId)
 
 Get your tables
 
@@ -799,7 +799,7 @@ namespace Example
             try
             {
                 // Get your tables
-                Object result = apiInstance.GetTableAtLocation(locationId, tableId);
+                Table result = apiInstance.GetTableAtLocation(locationId, tableId);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -822,7 +822,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**Object**
+[**Table**](Table.md)
 
 ### Authorization
 
@@ -845,7 +845,7 @@ No authorization required
 
 <a name="gettablesatlocation"></a>
 # **GetTablesAtLocation**
-> List&lt;Object&gt; GetTablesAtLocation (long locationId)
+> List&lt;Table&gt; GetTablesAtLocation (long locationId)
 
 Get your location's tables
 
@@ -873,7 +873,7 @@ namespace Example
             try
             {
                 // Get your location's tables
-                List<Object> result = apiInstance.GetTablesAtLocation(locationId);
+                List<Table> result = apiInstance.GetTablesAtLocation(locationId);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -895,7 +895,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**List<Object>**
+[**List&lt;Table&gt;**](Table.md)
 
 ### Authorization
 
@@ -1281,7 +1281,7 @@ No authorization required
 
 <a name="updatetableatlocation"></a>
 # **UpdateTableAtLocation**
-> Object UpdateTableAtLocation (long locationId, long tableId, Object body = null)
+> Table UpdateTableAtLocation (long locationId, long tableId, Table table = null)
 
 Update an existing table
 
@@ -1306,12 +1306,12 @@ namespace Example
             var apiInstance = new DefaultApi(config);
             var locationId = 789;  // long | ID of the location to return.
             var tableId = 789;  // long | ID of the location to return.
-            var body = ;  // Object |  (optional) 
+            var table = new Table(); // Table |  (optional) 
 
             try
             {
                 // Update an existing table
-                Object result = apiInstance.UpdateTableAtLocation(locationId, tableId, body);
+                Table result = apiInstance.UpdateTableAtLocation(locationId, tableId, table);
                 Debug.WriteLine(result);
             }
             catch (ApiException  e)
@@ -1331,11 +1331,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **locationId** | **long**| ID of the location to return. | 
  **tableId** | **long**| ID of the location to return. | 
- **body** | **Object**|  | [optional] 
+ **table** | [**Table**](Table.md)|  | [optional] 
 
 ### Return type
 
-**Object**
+[**Table**](Table.md)
 
 ### Authorization
 

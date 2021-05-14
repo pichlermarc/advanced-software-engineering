@@ -719,6 +719,7 @@ components:
         phoneNumber:
           example: +43 666 4566798
           type: string
+      type: object
     Table:
       example:
         name: 'Table #12'
@@ -739,4 +740,4 @@ components:
         yCoordinate:
           example: -3.5
           type: number
-      type: objectss
+      type: object
