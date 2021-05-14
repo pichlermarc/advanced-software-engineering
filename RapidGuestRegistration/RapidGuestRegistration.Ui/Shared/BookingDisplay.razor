@@ -6,7 +6,7 @@
     <div class="card mb-1">
         <div class="card-header">
             <div class="input-group h-100">
-                <!-- <input id="name" class="mr-1" value="@Booking.Name"/> -->
+                <!--<input id="name" class="mr-1" value="@Booking.Name"/>-->
                 <h4 class="align-middle mr-1">@Booking.Name</h4>
                 <button class="btn btn-primary mr-1 float-right" @onclick="NavigateToEdit">Edit</button>
                 <button class="btn btn-outline-danger mr-1 float-right" @onclick="DeleteBooking">Delete</button>
@@ -31,6 +31,6 @@
 
     private async Task NavigateToEdit()
     {
-        NavigationManager.NavigateTo($"/booking/{Booking.Id}/edit");
+        NavigationManager.NavigateTo($"/bookings/{Booking.Id}/edit");
     }
 }

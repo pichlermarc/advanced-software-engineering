@@ -13,6 +13,8 @@
         <ValidationSummary />
 
         <InputText id="name" @bind-Value="_booking.Name" />
+      
+
 
         <button class="btn btn-primary" type="submit">Save</button>
     </EditForm>
@@ -27,7 +29,7 @@ else
 @if (_showUpdateError)
 {
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Error:</strong> Something went wrong when updating this location. Does it still exist?
+        <strong>Error:</strong> Something went wrong when updating this booking. Does it still exist?
         <button type="button" class="close" @onclick="() => _showUpdateError = false">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -71,7 +73,7 @@ else
             _showUpdateError = true;
             return;
         }
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/bookings");
     }
 
 }

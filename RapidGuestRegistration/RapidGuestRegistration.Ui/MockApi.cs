@@ -703,10 +703,17 @@ namespace RapidGuestRegistration.Ui
 
         public Booking GetBooking(long bookingId)
         {
-            throw new NotImplementedException();
+            return _bookings.Find(booking => booking.Id == bookingId);
         }
 
-        public Location DeleteBooking(long bookingId)
+        public Booking DeleteBooking(long bookingId)
+        {
+            var itemToDelete = _bookings.Find(booking => booking.Id == bookingId);
+            _bookings.Remove(itemToDelete);
+            return itemToDelete;
+        }
+
+        Location IDefaultApiSync.DeleteBooking(long bookingId)
         {
             throw new NotImplementedException();
         }

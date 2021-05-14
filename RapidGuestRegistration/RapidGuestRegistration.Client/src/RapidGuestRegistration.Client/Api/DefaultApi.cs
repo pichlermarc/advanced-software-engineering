@@ -55,7 +55,7 @@ namespace RapidGuestRegistration.Client.Api
         /// Add a location
         /// </remarks>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="location"> (optional)</param>
+        /// <param name="booking"> (optional)</param>
         /// <returns>LocationBooking</returns>
         Location AddLocation(Location location = default(Location));
 
