@@ -2,43 +2,45 @@
 @using RapidGuestRegistration.Client.Api
 @using RapidGuestRegistration.Client.Client
 @using Microsoft.AspNetCore.Identity;
+@using RapidGuestRegistration.Ui.Data
 
 @inject IDefaultApi Api
 @inject NavigationManager NavigationManager
+@inject UserService service
 
 @if (_user != null)
 {
-<EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit">
-	<DataAnnotationsValidator />
-	<ValidationSummary />
-	<fieldset>
-		<label for="name">Name:</label>
-		<br />
-		<InputText id="name" @bind-Value="_user.Name" style="margin-bottom:10px" />
-		<br />
-		<label for="email">Email:</label>
-		<br />
-		<InputText id="email" @bind-Value="_user.Email" style="margin-bottom:10px" />
-		<br />
-		<label for="password">Password:</label>
-		<br />
-		<InputText id="password" @bind-Value="_user.Password" style="margin-bottom:10px" />
-		<br />
-	</fieldset>
+	<EditForm Model="@_user" OnValidSubmit="@HandleValidSubmit">
+		<DataAnnotationsValidator />
+		<ValidationSummary />
+		<fieldset>
+			<label for="name">Name:</label>
+			<br />
+			<InputText id="name" @bind-Value="_user.Name" style="margin-bottom:10px" />
+			<br />
+			<label for="email">Email:</label>
+			<br />
+			<InputText id="email" @bind-Value="_user.Email" style="margin-bottom:10px" />
+			<br />
+			<label for="password">Password:</label>
+			<br />
+			<InputText id="password" @bind-Value="_user.Password" style="margin-bottom:10px" />
+			<br />
+		</fieldset>
 
-	<b style="margin-bottom:10px; margin-top:20px">Allowed Locations</b>
+		<b style="margin-bottom:10px; margin-top:20px">Allowed Locations</b>
 
-	@foreach (var location in _locations)
-	{
-		<div >
-			<InputCheckbox @bind-Value="@_checkedLocations[location.Id].Value"  @onchange="@((ChangeEventArgs __e) => changeOption(__e,location.Id))"></InputCheckbox>
-			<label>@location.Name</label>
-		</div>
-	}
+		@foreach (var location in _locations)
+		{
+			<div>
+				<InputCheckbox @bind-Value="@_checkedLocations[location.Id].Value" @onchange="@((ChangeEventArgs __e) => changeOption(__e,location.Id))"></InputCheckbox>
+				<label>@location.Name</label>
+			</div>
+		}
 
 
-	<button class="btn btn-primary" type="submit">Save</button>
-</EditForm>
+		<button class="btn btn-primary" type="submit">Save</button>
+	</EditForm>
 }
 else
 {
@@ -77,7 +79,7 @@ else
 	[Parameter]
 	public long UserId { get; set; }
 
-	private User _user;
+	private ClientUser _user;
 	private List<Location> _locations;
 	private Dictionary<long, FormResponse> _checkedLocations;
 
@@ -92,12 +94,12 @@ else
 	{
 		try
 		{
-			_user = Api.GetUser(UserId);
+			_user = service.GetUser(UserId);
 			_locations = Api.GetLocations() ?? new List<Location>();
 			_checkedLocations = new Dictionary<long, FormResponse>();
 
 
-			foreach(var location in _locations)
+			foreach (var location in _locations)
 			{
 				_checkedLocations.Add(location.Id, new FormResponse(false));
 			}
@@ -123,12 +125,12 @@ else
 	{
 		try
 		{
-			Api.UpdateUser(_user);
+			service.UpdateUser(_user);
 
 
 
 
-			var userManager = (UserManager<IdentityUser>) ServiceProvider.GetService(typeof(UserManager<IdentityUser>));
+			var userManager = (UserManager<IdentityUser>)ServiceProvider.GetService(typeof(UserManager<IdentityUser>));
 
 			var user = new IdentityUser();
 			user.Email = _user.Email;

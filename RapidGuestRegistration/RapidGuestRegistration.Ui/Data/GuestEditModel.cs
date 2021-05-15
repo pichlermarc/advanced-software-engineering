@@ -18,6 +18,7 @@ namespace RapidGuestRegistration.Ui.Data
 
         [Required]
         [EmailAddress]
+        [Key]
         public string Email { get; set; }
 
         [Required]

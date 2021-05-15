@@ -1,6 +1,8 @@
 ﻿@using RapidGuestRegistration.Client.Model
 @using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Ui.Data
 @inject IDefaultApi Api
+@inject UserService service
 
 <div class="col-12">
 	<div class="card mb-1">
@@ -14,7 +16,7 @@
 </div>
 
 @code {
-	private User _user;
+	private ClientUser _user;
 
 	[Parameter]
 	public EventCallback OnUsersChanged { get; set; }
@@ -22,12 +24,12 @@
 	protected override void OnInitialized()
 	{
 		base.OnInitialized();
-		_user = new User();
+		_user = new ClientUser();
 	}
 
 	private async void AddUser()
 	{
-		Api.AddUser(_user);
+		service.AddUser(_user);
 
 		await OnUsersChanged.InvokeAsync(_user);
 	}

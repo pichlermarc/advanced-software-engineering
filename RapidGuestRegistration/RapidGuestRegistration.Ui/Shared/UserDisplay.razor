@@ -1,7 +1,9 @@
 ﻿@using RapidGuestRegistration.Client.Model
 @using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Ui.Data
 @inject IDefaultApi Api
 @inject NavigationManager NavigationManager
+@inject UserService service
 <div class="col-12">
 	<div class="card mb-1">
 		<div class="card-header">
@@ -17,14 +19,14 @@
 
 @code {
 	[Parameter]
-	public User User { get; set; }
+	public ClientUser User { get; set; }
 
 	[Parameter]
 	public EventCallback OnUserChanged { get; set; }
 
 	private async Task DeleteUser()
 	{
-		var user = Api.DeleteUser(User.Id);
+		var user = service.DeleteUser(User);
 		await OnUserChanged.InvokeAsync(user);
 	}
 

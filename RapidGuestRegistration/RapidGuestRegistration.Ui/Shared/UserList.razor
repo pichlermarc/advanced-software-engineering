@@ -1,6 +1,8 @@
 ﻿@using RapidGuestRegistration.Client.Model
 @using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Ui.Data
 @inject IDefaultApi Api
+@inject UserService service
 <h3>Users</h3>
 
 
@@ -17,15 +19,15 @@
 </div>
 
 @code {
-	private List<User> _users;
+	private List<ClientUser> _users;
 
 	protected override void OnInitialized()
 	{
-		_users = Api.GetUsers() ?? new List<User>();
+		_users = service.GetUser() ?? new List<ClientUser>();
 	}
 
 	private void UpdateUsers()
 	{
-		_users = Api.GetUsers() ?? new List<User>();
+		_users = service.GetUser() ?? new List<ClientUser>();
 	}
 }

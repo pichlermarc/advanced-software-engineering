@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using RapidGuestRegistration.Client.Api;
 using RapidGuestRegistration.Client.Client;
 using RapidGuestRegistration.Client.Model;
+using RapidGuestRegistration.Ui.Data;
 
 namespace RapidGuestRegistration.Ui
 {
     public class MockApi : IDefaultApi
     {
+
         public MockApi()
         {
             _locations = new List<Location>
