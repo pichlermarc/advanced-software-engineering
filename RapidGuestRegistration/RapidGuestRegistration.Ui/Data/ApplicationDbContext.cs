@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using RapidGuestRegistration.Client.Model;
 
 namespace RapidGuestRegistration.Ui.Data
 {
@@ -12,5 +13,8 @@ namespace RapidGuestRegistration.Ui.Data
             : base(options)
         {
         }
+
+       
+
     }
 }

@@ -73,6 +73,54 @@ namespace RapidGuestRegistration.Client.Test.Model
         {
             // TODO unit test for the property 'Name'
         }
+        /// <summary>
+        /// Test the property 'Street'
+        /// </summary>
+        [Fact]
+        public void StreetTest()
+        {
+            // TODO unit test for the property 'Street'
+        }
+        /// <summary>
+        /// Test the property 'Postcode'
+        /// </summary>
+        [Fact]
+        public void PostcodeTest()
+        {
+            // TODO unit test for the property 'Postcode'
+        }
+        /// <summary>
+        /// Test the property 'City'
+        /// </summary>
+        [Fact]
+        public void CityTest()
+        {
+            // TODO unit test for the property 'City'
+        }
+        /// <summary>
+        /// Test the property 'Land'
+        /// </summary>
+        [Fact]
+        public void LandTest()
+        {
+            // TODO unit test for the property 'Land'
+        }
+        /// <summary>
+        /// Test the property 'PhoneNumber'
+        /// </summary>
+        [Fact]
+        public void PhoneNumberTest()
+        {
+            // TODO unit test for the property 'PhoneNumber'
+        }
+        /// <summary>
+        /// Test the property 'Email'
+        /// </summary>
+        [Fact]
+        public void EmailTest()
+        {
+            // TODO unit test for the property 'Email'
+        }
 
     }
 

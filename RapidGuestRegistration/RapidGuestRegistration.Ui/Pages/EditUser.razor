@@ -1,0 +1,10 @@
+﻿@page "/user/{UserId}/edit"
+@attribute [Authorize]
+
+<h3>Edit User</h3>
+<UserEditForm UserId="long.Parse(UserId)"></UserEditForm>
+
+@code {
+	[Parameter]
+	public string UserId { get; set; }
+}

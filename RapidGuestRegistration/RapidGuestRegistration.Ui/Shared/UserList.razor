@@ -1,0 +1,33 @@
+﻿@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Ui.Data
+@inject IDefaultApi Api
+@inject UserService service
+<h3>Users</h3>
+
+
+@foreach (var user in _users)
+{
+	<div class="row">
+		<UserDisplay User="@user" OnUserChanged="@UpdateUsers"></UserDisplay>
+	</div>
+}
+
+<h3>Add User</h3>
+<div class="row">
+	<UserCreate OnUsersChanged="@UpdateUsers"></UserCreate>
+</div>
+
+@code {
+	private List<ClientUser> _users;
+
+	protected override void OnInitialized()
+	{
+		_users = service.GetUser() ?? new List<ClientUser>();
+	}
+
+	private void UpdateUsers()
+	{
+		_users = service.GetUser() ?? new List<ClientUser>();
+	}
+}

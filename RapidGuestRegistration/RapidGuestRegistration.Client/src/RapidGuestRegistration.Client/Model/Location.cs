@@ -37,10 +37,22 @@ namespace RapidGuestRegistration.Client.Model
         /// </summary>
         /// <param name="id">id.</param>
         /// <param name="name">name.</param>
-        public Location(long id = default(long), string name = default(string))
+        /// <param name="street">street.</param>
+        /// <param name="postcode">postcode.</param>
+        /// <param name="city">city.</param>
+        /// <param name="land">land.</param>
+        /// <param name="phoneNumber">phoneNumber.</param>
+        /// <param name="email">email.</param>
+        public Location(long id = default(long), string name = default(string), string street = default(string), string postcode = default(string), string city = default(string), string land = default(string), string phoneNumber = default(string), string email = default(string))
         {
             this.Id = id;
             this.Name = name;
+            this.Street = street;
+            this.Postcode = postcode;
+            this.City = city;
+            this.Land = land;
+            this.PhoneNumber = phoneNumber;
+            this.Email = email;
         }
 
         /// <summary>
@@ -56,6 +68,42 @@ namespace RapidGuestRegistration.Client.Model
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or Sets Street
+        /// </summary>
+        [DataMember(Name = "street", EmitDefaultValue = false)]
+        public string Street { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Postcode
+        /// </summary>
+        [DataMember(Name = "postcode", EmitDefaultValue = false)]
+        public string Postcode { get; set; }
+
+        /// <summary>
+        /// Gets or Sets City
+        /// </summary>
+        [DataMember(Name = "city", EmitDefaultValue = false)]
+        public string City { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Land
+        /// </summary>
+        [DataMember(Name = "land", EmitDefaultValue = false)]
+        public string Land { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PhoneNumber
+        /// </summary>
+        [DataMember(Name = "phoneNumber", EmitDefaultValue = false)]
+        public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Email
+        /// </summary>
+        [DataMember(Name = "email", EmitDefaultValue = false)]
+        public string Email { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -65,6 +113,12 @@ namespace RapidGuestRegistration.Client.Model
             sb.Append("class Location {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Street: ").Append(Street).Append("\n");
+            sb.Append("  Postcode: ").Append(Postcode).Append("\n");
+            sb.Append("  City: ").Append(City).Append("\n");
+            sb.Append("  Land: ").Append(Land).Append("\n");
+            sb.Append("  PhoneNumber: ").Append(PhoneNumber).Append("\n");
+            sb.Append("  Email: ").Append(Email).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -107,6 +161,36 @@ namespace RapidGuestRegistration.Client.Model
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
+                ) && 
+                (
+                    this.Street == input.Street ||
+                    (this.Street != null &&
+                    this.Street.Equals(input.Street))
+                ) && 
+                (
+                    this.Postcode == input.Postcode ||
+                    (this.Postcode != null &&
+                    this.Postcode.Equals(input.Postcode))
+                ) && 
+                (
+                    this.City == input.City ||
+                    (this.City != null &&
+                    this.City.Equals(input.City))
+                ) && 
+                (
+                    this.Land == input.Land ||
+                    (this.Land != null &&
+                    this.Land.Equals(input.Land))
+                ) && 
+                (
+                    this.PhoneNumber == input.PhoneNumber ||
+                    (this.PhoneNumber != null &&
+                    this.PhoneNumber.Equals(input.PhoneNumber))
+                ) && 
+                (
+                    this.Email == input.Email ||
+                    (this.Email != null &&
+                    this.Email.Equals(input.Email))
                 );
         }
 
@@ -122,6 +206,18 @@ namespace RapidGuestRegistration.Client.Model
                 hashCode = hashCode * 59 + this.Id.GetHashCode();
                 if (this.Name != null)
                     hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Street != null)
+                    hashCode = hashCode * 59 + this.Street.GetHashCode();
+                if (this.Postcode != null)
+                    hashCode = hashCode * 59 + this.Postcode.GetHashCode();
+                if (this.City != null)
+                    hashCode = hashCode * 59 + this.City.GetHashCode();
+                if (this.Land != null)
+                    hashCode = hashCode * 59 + this.Land.GetHashCode();
+                if (this.PhoneNumber != null)
+                    hashCode = hashCode * 59 + this.PhoneNumber.GetHashCode();
+                if (this.Email != null)
+                    hashCode = hashCode * 59 + this.Email.GetHashCode();
                 return hashCode;
             }
         }

@@ -1,0 +1,37 @@
+﻿@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Ui.Data
+@inject IDefaultApi Api
+@inject UserService service
+
+<div class="col-12">
+	<div class="card mb-1">
+		<div class="card-header">
+			<div class="input-group h-100">
+				<input id="name" class="mr-1" placeholder="User Name" @bind="@_user.Name" />
+				<button class="btn btn-primary mr-1 float-right" @onclick="AddUser">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	private ClientUser _user;
+
+	[Parameter]
+	public EventCallback OnUsersChanged { get; set; }
+
+	protected override void OnInitialized()
+	{
+		base.OnInitialized();
+		_user = new ClientUser();
+	}
+
+	private async void AddUser()
+	{
+		service.AddUser(_user);
+
+		await OnUsersChanged.InvokeAsync(_user);
+	}
+
+}

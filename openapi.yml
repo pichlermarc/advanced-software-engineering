@@ -503,6 +503,149 @@ paths:
           description: Invalid location or table ID
       summary: Register on this table on this location.
       x-eov-operation-handler: controllers/DefaultController
+  /user:
+    get:
+      description: Get Users
+      operationId: GetUsers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: Locations retrieved successfully.
+      summary: Get Users
+      x-eov-operation-handler: controllers/DefaultController
+    post:
+      description: Add a User
+      operationId: AddUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Insert successful.
+        "400":
+          description: Invalid User ID
+      summary: Add a new User
+      x-eov-operation-handler: controllers/DefaultController
+    put:
+      description: Update a User
+      operationId: UpdateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Update successful.
+        "400":
+          description: Invalid User ID
+        "404":
+          description: User not found
+        "403":
+          description: You are not allowed to change this User.
+      summary: Update an existing User
+      x-eov-operation-handler: controllers/DefaultController
+  /user/{userId}:
+    delete:
+      description: Deletes the user with the user ID.
+      operationId: DeleteUser
+      parameters:
+      - description: ID of the user to return.
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Delete successful.
+        "400":
+          description: Invalid user ID
+        "404":
+          description: User not found
+        "403":
+          description: You are not allowed to delete this user.
+      summary: Delete a specific user.
+      x-eov-operation-handler: controllers/DefaultController
+    get:
+      description: Gets the user with the user ID.
+      operationId: GetUser
+      parameters:
+      - description: ID of the user to return.
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Update successful.
+        "400":
+          description: Invalid user ID
+        "404":
+          description: User not found
+        "403":
+          description: You are not allowed to access this user.
+      summary: Get a specific user.
+      x-eov-operation-handler: controllers/DefaultController
+    post:
+      description: Update a user
+      operationId: UpdateUserWithId
+      parameters:
+      - description: ID of the user to return.
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Update successful.
+        "400":
+          description: Invalid user ID
+      summary: Update an existing user
+      x-eov-operation-handler: controllers/DefaultController
   /booking:
     get:
       description: Get bookings associated with your location
@@ -578,9 +721,36 @@ components:
           example: +43 420 69696969
           type: string
       type: object
+    User:
+      example:
+        Id: 1
+        name: Sepp Forcher
+        email: sepp.forcher@orf.at
+        password: test
+      properties:
+        name:
+          example: Sepp Forcher
+          type: string
+        email:
+          example: sepp.forcher@orf.at
+          format: email
+          type: string
+        id:
+          example: 1
+          type: integer
+        password:
+          example: test
+          type: string
+      type: object      
     Location:
       example:
-        name: Coolstreet 123
+        name: Restaurant 1
+        street: Coolstreet 123
+        postcode: 6666
+        city: Cooltown
+        land: countrycool
+        phoneNumber: +43 666 4566798
+        email: restaurant1@cool.com
         id: 69
       properties:
         id:
@@ -588,7 +758,26 @@ components:
           format: int64
           type: integer
         name:
+          example: Restaurant 1
+          type: string
+        street:
           example: Coolstreet 123
+          type: string
+        postcode:
+          example: 6666
+          type: string
+        city:
+          example: Cooltown
+          type: string
+        land:
+          example: countrycool
+          type: string
+        phoneNumber:
+          example: +43 666 4566798
+          type: string
+        email:
+          example: restaurant1@cool.com
+          format: email
           type: string
       type: object
     Table:

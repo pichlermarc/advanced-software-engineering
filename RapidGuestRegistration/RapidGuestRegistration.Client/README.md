@@ -104,20 +104,26 @@ Class | Method | HTTP request | Description
 *DefaultApi* | [**AddBooking**](docs/DefaultApi.md#addbooking) | **POST** /booking | Add a new booking
 *DefaultApi* | [**AddLocation**](docs/DefaultApi.md#addlocation) | **POST** /location | Add a new location
 *DefaultApi* | [**AddTableAtLocation**](docs/DefaultApi.md#addtableatlocation) | **POST** /location/{locationId}/table | Add a new table on this location
+*DefaultApi* | [**AddUser**](docs/DefaultApi.md#adduser) | **POST** /user | Add a new User
 *DefaultApi* | [**DeleteLocation**](docs/DefaultApi.md#deletelocation) | **DELETE** /location/{locationId} | Delete a specific location.
 *DefaultApi* | [**DeleteTableAtLocation**](docs/DefaultApi.md#deletetableatlocation) | **DELETE** /location/{locationId}/table/{tableId} | Delete this table
 *DefaultApi* | [**GetBookings**](docs/DefaultApi.md#getbookings) | **GET** /booking | Get bookings
+*DefaultApi* | [**DeleteUser**](docs/DefaultApi.md#deleteuser) | **DELETE** /user/{userId} | Delete a specific user.
 *DefaultApi* | [**GetLocation**](docs/DefaultApi.md#getlocation) | **GET** /location/{locationId} | Get a specific location.
 *DefaultApi* | [**GetLocations**](docs/DefaultApi.md#getlocations) | **GET** /location | Get your locations
 *DefaultApi* | [**GetReportForTable**](docs/DefaultApi.md#getreportfortable) | **GET** /location/{locationId}/table/{tableId}/report/{reportType} | Register on this table on this location.
 *DefaultApi* | [**GetTableActivity**](docs/DefaultApi.md#gettableactivity) | **GET** /location/{locationId}/table/{tableId}/activity | Register on this table on this location.
 *DefaultApi* | [**GetTableAtLocation**](docs/DefaultApi.md#gettableatlocation) | **GET** /location/{locationId}/table/{tableId} | Get your tables
 *DefaultApi* | [**GetTablesAtLocation**](docs/DefaultApi.md#gettablesatlocation) | **GET** /location/{locationId}/table | Get your location's tables
+*DefaultApi* | [**GetUser**](docs/DefaultApi.md#getuser) | **GET** /user/{userId} | Get a specific user.
+*DefaultApi* | [**GetUsers**](docs/DefaultApi.md#getusers) | **GET** /user | Get Users
 *DefaultApi* | [**RegisterAtTable**](docs/DefaultApi.md#registerattable) | **POST** /location/{locationId}/table/{tableId}/register | Register on this table on this location.
 *DefaultApi* | [**UpdateBooking**](docs/DefaultApi.md#updatebooking) | **PUT** /booking | Update an existing location
 *DefaultApi* | [**UpdateLocation**](docs/DefaultApi.md#updatelocation) | **PUT** /location | Update an existing location
 *DefaultApi* | [**UpdateLocationWithId**](docs/DefaultApi.md#updatelocationwithid) | **POST** /location/{locationId} | Update an existing location
 *DefaultApi* | [**UpdateTableAtLocation**](docs/DefaultApi.md#updatetableatlocation) | **POST** /location/{locationId}/table/{tableId} | Update an existing table
+*DefaultApi* | [**UpdateUser**](docs/DefaultApi.md#updateuser) | **PUT** /user | Update an existing User
+*DefaultApi* | [**UpdateUserWithId**](docs/DefaultApi.md#updateuserwithid) | **POST** /user/{userId} | Update an existing user
 
 
 <a name="documentation-for-models"></a>
@@ -129,6 +135,7 @@ Class | Method | HTTP request | Description
  - [Model.InlineResponse2001](docs/InlineResponse2001.md)
  - [Model.Location](docs/Location.md)
  - [Model.Table](docs/Table.md)
+ - [Model.User](docs/User.md)
 
 
 <a name="documentation-for-authorization"></a>

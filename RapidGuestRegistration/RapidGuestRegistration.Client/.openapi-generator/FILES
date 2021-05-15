@@ -10,6 +10,7 @@ docs/InlineResponse200.md
 docs/InlineResponse2001.md
 docs/Location.md
 docs/Table.md
+docs/User.md
 git_push.sh
 src/RapidGuestRegistration.Client.Test/Api/DefaultApiTests.cs
 src/RapidGuestRegistration.Client.Test/Model/BookingTests.cs
@@ -43,4 +44,5 @@ src/RapidGuestRegistration.Client/Model/InlineResponse200.cs
 src/RapidGuestRegistration.Client/Model/InlineResponse2001.cs
 src/RapidGuestRegistration.Client/Model/Location.cs
 src/RapidGuestRegistration.Client/Model/Table.cs
+src/RapidGuestRegistration.Client/Model/User.cs
 src/RapidGuestRegistration.Client/RapidGuestRegistration.Client.csproj

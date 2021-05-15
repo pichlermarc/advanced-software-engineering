@@ -1,0 +1,37 @@
+﻿@using RapidGuestRegistration.Client.Model
+@using RapidGuestRegistration.Client.Api
+@using RapidGuestRegistration.Ui.Data
+@inject IDefaultApi Api
+@inject NavigationManager NavigationManager
+@inject UserService service
+<div class="col-12">
+	<div class="card mb-1">
+		<div class="card-header">
+			<div class="input-group h-100">
+				<!-- <input id="name" class="mr-1" value="@User.Name"/> -->
+				<h4 class="align-middle mr-1">@User.Name</h4>
+				<button class="btn btn-primary mr-1 float-right" @onclick="NavigateToEdit">Edit</button>
+				<button class="btn btn-outline-danger mr-1 float-right" @onclick="DeleteUser">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public ClientUser User { get; set; }
+
+	[Parameter]
+	public EventCallback OnUserChanged { get; set; }
+
+	private async Task DeleteUser()
+	{
+		var user = service.DeleteUser(User);
+		await OnUserChanged.InvokeAsync(user);
+	}
+
+	private async Task NavigateToEdit()
+	{
+		NavigationManager.NavigateTo($"/user/{User.Id}/edit");
+	}
+}

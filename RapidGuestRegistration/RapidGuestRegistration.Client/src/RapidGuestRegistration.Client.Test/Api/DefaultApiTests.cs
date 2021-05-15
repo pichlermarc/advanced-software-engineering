@@ -93,6 +93,18 @@ namespace RapidGuestRegistration.Client.Test.Api
         }
 
         /// <summary>
+        /// Test AddUser
+        /// </summary>
+        [Fact]
+        public void AddUserTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //User user = null;
+            //var response = instance.AddUser(user);
+            //Assert.IsType<User>(response);
+        }
+
+        /// <summary>
         /// Test DeleteLocation
         /// </summary>
         [Fact]
@@ -126,6 +138,18 @@ namespace RapidGuestRegistration.Client.Test.Api
             // TODO uncomment below to test the method and replace null with proper value
             //var response = instance.GetBookings();
             //Assert.IsType<List<Booking>>(response);
+        }
+
+        /// <summary>
+        /// Test DeleteUser
+        /// </summary>
+        [Fact]
+        public void DeleteUserTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //long userId = null;
+            //var response = instance.DeleteUser(userId);
+            //Assert.IsType<User>(response);
         }
 
         /// <summary>
@@ -208,6 +232,29 @@ namespace RapidGuestRegistration.Client.Test.Api
         }
 
         /// <summary>
+        /// Test GetUser
+        /// </summary>
+        [Fact]
+        public void GetUserTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //long userId = null;
+            //var response = instance.GetUser(userId);
+            //Assert.IsType<User>(response);
+        }
+
+        /// <summary>
+        /// Test GetUsers
+        /// </summary>
+        [Fact]
+        public void GetUsersTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //var response = instance.GetUsers();
+            //Assert.IsType<List<User>>(response);
+        }
+
+        /// <summary>
         /// Test RegisterAtTable
         /// </summary>
         [Fact]
@@ -270,6 +317,31 @@ namespace RapidGuestRegistration.Client.Test.Api
             //TableBooking table = null;
             //var response = instance.UpdateTableAtLocation(locationId, tableId, table);
             //Assert.IsType<TableBooking>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateUser
+        /// </summary>
+        [Fact]
+        public void UpdateUserTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //User user = null;
+            //var response = instance.UpdateUser(user);
+            //Assert.IsType<User>(response);
+        }
+
+        /// <summary>
+        /// Test UpdateUserWithId
+        /// </summary>
+        [Fact]
+        public void UpdateUserWithIdTest()
+        {
+            // TODO uncomment below to test the method and replace null with proper value
+            //long userId = null;
+            //User user = null;
+            //var response = instance.UpdateUserWithId(userId, user);
+            //Assert.IsType<User>(response);
         }
     }
 }

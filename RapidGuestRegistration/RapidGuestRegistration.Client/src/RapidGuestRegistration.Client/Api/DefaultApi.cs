@@ -93,6 +93,27 @@ namespace RapidGuestRegistration.Client.Api
         /// <returns>ApiResponse of TableBooking</returns>
         ApiResponse<Table> AddTableAtLocationWithHttpInfo(long locationId, Table table = default(Table));
         /// <summary>
+        /// Add a new User
+        /// </summary>
+        /// <remarks>
+        /// Add a User
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <returns>User</returns>
+        User AddUser(User user = default(User));
+
+        /// <summary>
+        /// Add a new User
+        /// </summary>
+        /// <remarks>
+        /// Add a User
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> AddUserWithHttpInfo(User user = default(User));
+        /// <summary>
         /// Delete a specific location.
         /// </summary>
         /// <remarks>
@@ -149,6 +170,27 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="tableId">ID of the location to return.</param>
         /// <returns>ApiResponse of TableBooking</returns>
         ApiResponse<Table> DeleteTableAtLocationWithHttpInfo(long locationId, long tableId);
+        /// <summary>
+        /// Delete a specific user.
+        /// </summary>
+        /// <remarks>
+        /// Deletes the user with the user ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <returns>User</returns>
+        User DeleteUser(long userId);
+
+        /// <summary>
+        /// Delete a specific user.
+        /// </summary>
+        /// <remarks>
+        /// Deletes the user with the user ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> DeleteUserWithHttpInfo(long userId);
         /// <summary>
         /// Get bookings
         /// </summary>
@@ -321,6 +363,46 @@ namespace RapidGuestRegistration.Client.Api
         /// <returns>ApiResponse of List&lt;TableBooking&gt;</returns>
         ApiResponse<List<Table>> GetTablesAtLocationWithHttpInfo(long locationId);
         /// <summary>
+        /// Get a specific user.
+        /// </summary>
+        /// <remarks>
+        /// Gets the user with the user ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <returns>User</returns>
+        User GetUser(long userId);
+
+        /// <summary>
+        /// Get a specific user.
+        /// </summary>
+        /// <remarks>
+        /// Gets the user with the user ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> GetUserWithHttpInfo(long userId);
+        /// <summary>
+        /// Get Users
+        /// </summary>
+        /// <remarks>
+        /// Get Users
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;User&gt;</returns>
+        List<User> GetUsers();
+
+        /// <summary>
+        /// Get Users
+        /// </summary>
+        /// <remarks>
+        /// Get Users
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;User&gt;</returns>
+        ApiResponse<List<User>> GetUsersWithHttpInfo();
+        /// <summary>
         /// Register on this table on this location.
         /// </summary>
         /// <remarks>
@@ -435,6 +517,50 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="table"> (optional)</param>
         /// <returns>ApiResponse of TableBooking</returns>
         ApiResponse<Table> UpdateTableAtLocationWithHttpInfo(long locationId, long tableId, Table table = default(Table));
+        /// <summary>
+        /// Update an existing User
+        /// </summary>
+        /// <remarks>
+        /// Update a User
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <returns>User</returns>
+        User UpdateUser(User user = default(User));
+
+        /// <summary>
+        /// Update an existing User
+        /// </summary>
+        /// <remarks>
+        /// Update a User
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> UpdateUserWithHttpInfo(User user = default(User));
+        /// <summary>
+        /// Update an existing user
+        /// </summary>
+        /// <remarks>
+        /// Update a user
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="user"> (optional)</param>
+        /// <returns>User</returns>
+        User UpdateUserWithId(long userId, User user = default(User));
+
+        /// <summary>
+        /// Update an existing user
+        /// </summary>
+        /// <remarks>
+        /// Update a user
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="user"> (optional)</param>
+        /// <returns>ApiResponse of User</returns>
+        ApiResponse<User> UpdateUserWithIdWithHttpInfo(long userId, User user = default(User));
         #endregion Synchronous Operations
     }
 
@@ -516,6 +642,29 @@ namespace RapidGuestRegistration.Client.Api
         /// <returns>Task of ApiResponse (TableBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Table>> AddTableAtLocationWithHttpInfoAsync(long locationId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
+        /// Add a new User
+        /// </summary>
+        /// <remarks>
+        /// Add a User
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> AddUserAsync(User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Add a new User
+        /// </summary>
+        /// <remarks>
+        /// Add a User
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> AddUserWithHttpInfoAsync(User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
         /// Delete a specific location.
         /// </summary>
         /// <remarks>
@@ -563,6 +712,29 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (TableBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Table>> DeleteTableAtLocationWithHttpInfoAsync(long locationId, long tableId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Delete a specific user.
+        /// </summary>
+        /// <remarks>
+        /// Deletes the user with the user ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> DeleteUserAsync(long userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Delete a specific user.
+        /// </summary>
+        /// <remarks>
+        /// Deletes the user with the user ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> DeleteUserWithHttpInfoAsync(long userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get bookings
         /// </summary>
@@ -737,6 +909,50 @@ namespace RapidGuestRegistration.Client.Api
         /// <returns>Task of ApiResponse (List&lt;TableBooking&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Table>>> GetTablesAtLocationWithHttpInfoAsync(long locationId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
+        /// Get a specific user.
+        /// </summary>
+        /// <remarks>
+        /// Gets the user with the user ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> GetUserAsync(long userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get a specific user.
+        /// </summary>
+        /// <remarks>
+        /// Gets the user with the user ID.
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> GetUserWithHttpInfoAsync(long userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Get Users
+        /// </summary>
+        /// <remarks>
+        /// Get Users
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;User&gt;</returns>
+        System.Threading.Tasks.Task<List<User>> GetUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get Users
+        /// </summary>
+        /// <remarks>
+        /// Get Users
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;User&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<User>>> GetUsersWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
         /// Register on this table on this location.
         /// </summary>
         /// <remarks>
@@ -861,6 +1077,54 @@ namespace RapidGuestRegistration.Client.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (TableBooking)</returns>
         System.Threading.Tasks.Task<ApiResponse<Table>> UpdateTableAtLocationWithHttpInfoAsync(long locationId, long tableId, Table table = default(Table), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Update an existing User
+        /// </summary>
+        /// <remarks>
+        /// Update a User
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> UpdateUserAsync(User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Update an existing User
+        /// </summary>
+        /// <remarks>
+        /// Update a User
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> UpdateUserWithHttpInfoAsync(User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Update an existing user
+        /// </summary>
+        /// <remarks>
+        /// Update a user
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        System.Threading.Tasks.Task<User> UpdateUserWithIdAsync(long userId, User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Update an existing user
+        /// </summary>
+        /// <remarks>
+        /// Update a user
+        /// </remarks>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        System.Threading.Tasks.Task<ApiResponse<User>> UpdateUserWithIdWithHttpInfoAsync(long userId, User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -1315,6 +1579,115 @@ namespace RapidGuestRegistration.Client.Api
         }
 
         /// <summary>
+        /// Add a new User Add a User
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <returns>User</returns>
+        public User AddUser(User user = default(User))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = AddUserWithHttpInfo(user);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Add a new User Add a User
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <returns>ApiResponse of User</returns>
+        public RapidGuestRegistration.Client.Client.ApiResponse<User> AddUserWithHttpInfo(User user = default(User))
+        {
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = user;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<User>("/user", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("AddUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Add a new User Add a User
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> AddUserAsync(User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = await AddUserWithHttpInfoAsync(user, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Add a new User Add a User
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<User>> AddUserWithHttpInfoAsync(User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = user;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<User>("/user", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("AddUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Delete a specific location. Deletes the location with the location ID.
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1528,6 +1901,113 @@ namespace RapidGuestRegistration.Client.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("DeleteTableAtLocation", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Delete a specific user. Deletes the user with the user ID.
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <returns>User</returns>
+        public User DeleteUser(long userId)
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = DeleteUserWithHttpInfo(userId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Delete a specific user. Deletes the user with the user ID.
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <returns>ApiResponse of User</returns>
+        public RapidGuestRegistration.Client.Client.ApiResponse<User> DeleteUserWithHttpInfo(long userId)
+        {
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("userId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(userId)); // path parameter
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Delete<User>("/user/{userId}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Delete a specific user. Deletes the user with the user ID.
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> DeleteUserAsync(long userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = await DeleteUserWithHttpInfoAsync(userId, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Delete a specific user. Deletes the user with the user ID.
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<User>> DeleteUserWithHttpInfoAsync(long userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("userId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(userId)); // path parameter
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.DeleteAsync<User>("/user/{userId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("DeleteUser", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -2328,6 +2808,214 @@ namespace RapidGuestRegistration.Client.Api
         }
 
         /// <summary>
+        /// Get a specific user. Gets the user with the user ID.
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <returns>User</returns>
+        public User GetUser(long userId)
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = GetUserWithHttpInfo(userId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get a specific user. Gets the user with the user ID.
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <returns>ApiResponse of User</returns>
+        public RapidGuestRegistration.Client.Client.ApiResponse<User> GetUserWithHttpInfo(long userId)
+        {
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("userId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(userId)); // path parameter
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<User>("/user/{userId}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get a specific user. Gets the user with the user ID.
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> GetUserAsync(long userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = await GetUserWithHttpInfoAsync(userId, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get a specific user. Gets the user with the user ID.
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<User>> GetUserWithHttpInfoAsync(long userId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("userId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(userId)); // path parameter
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<User>("/user/{userId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get Users Get Users
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;User&gt;</returns>
+        public List<User> GetUsers()
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<List<User>> localVarResponse = GetUsersWithHttpInfo();
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get Users Get Users
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;User&gt;</returns>
+        public RapidGuestRegistration.Client.Client.ApiResponse<List<User>> GetUsersWithHttpInfo()
+        {
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<List<User>>("/user", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUsers", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get Users Get Users
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of List&lt;User&gt;</returns>
+        public async System.Threading.Tasks.Task<List<User>> GetUsersAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<List<User>> localVarResponse = await GetUsersWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get Users Get Users
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (List&lt;User&gt;)</returns>
+        public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<List<User>>> GetUsersWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<User>>("/user", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUsers", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
         /// Register on this table on this location. Register on this table on this location.
         /// </summary>
         /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
@@ -2896,6 +3584,230 @@ namespace RapidGuestRegistration.Client.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("UpdateTableAtLocation", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update an existing User Update a User
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <returns>User</returns>
+        public User UpdateUser(User user = default(User))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = UpdateUserWithHttpInfo(user);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update an existing User Update a User
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <returns>ApiResponse of User</returns>
+        public RapidGuestRegistration.Client.Client.ApiResponse<User> UpdateUserWithHttpInfo(User user = default(User))
+        {
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = user;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Put<User>("/user", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update an existing User Update a User
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> UpdateUserAsync(User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = await UpdateUserWithHttpInfoAsync(user, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update an existing User Update a User
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<User>> UpdateUserWithHttpInfoAsync(User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.Data = user;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PutAsync<User>("/user", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateUser", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update an existing user Update a user
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="user"> (optional)</param>
+        /// <returns>User</returns>
+        public User UpdateUserWithId(long userId, User user = default(User))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = UpdateUserWithIdWithHttpInfo(userId, user);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update an existing user Update a user
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="user"> (optional)</param>
+        /// <returns>ApiResponse of User</returns>
+        public RapidGuestRegistration.Client.Client.ApiResponse<User> UpdateUserWithIdWithHttpInfo(long userId, User user = default(User))
+        {
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("userId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(userId)); // path parameter
+            localVarRequestOptions.Data = user;
+
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<User>("/user/{userId}", localVarRequestOptions, this.Configuration);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateUserWithId", localVarResponse);
+                if (_exception != null) throw _exception;
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Update an existing user Update a user
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of User</returns>
+        public async System.Threading.Tasks.Task<User> UpdateUserWithIdAsync(long userId, User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            RapidGuestRegistration.Client.Client.ApiResponse<User> localVarResponse = await UpdateUserWithIdWithHttpInfoAsync(userId, user, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Update an existing user Update a user
+        /// </summary>
+        /// <exception cref="RapidGuestRegistration.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId">ID of the user to return.</param>
+        /// <param name="user"> (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (User)</returns>
+        public async System.Threading.Tasks.Task<RapidGuestRegistration.Client.Client.ApiResponse<User>> UpdateUserWithIdWithHttpInfoAsync(long userId, User user = default(User), System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+
+            RapidGuestRegistration.Client.Client.RequestOptions localVarRequestOptions = new RapidGuestRegistration.Client.Client.RequestOptions();
+
+            String[] _contentTypes = new String[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            String[] _accepts = new String[] {
+                "application/json"
+            };
+
+
+            var localVarContentType = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+
+            var localVarAccept = RapidGuestRegistration.Client.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+
+            localVarRequestOptions.PathParameters.Add("userId", RapidGuestRegistration.Client.Client.ClientUtils.ParameterToString(userId)); // path parameter
+            localVarRequestOptions.Data = user;
+
+
+            // make the HTTP request
+
+            var localVarResponse = await this.AsynchronousClient.PostAsync<User>("/user/{userId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("UpdateUserWithId", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

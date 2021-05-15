@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using RapidGuestRegistration.Client.Api;
 using RapidGuestRegistration.Client.Client;
 using RapidGuestRegistration.Client.Model;
+using RapidGuestRegistration.Ui.Data;
 
 namespace RapidGuestRegistration.Ui
 {
     public class MockApi : IDefaultApi
     {
+
         public MockApi()
         {
             _locations = new List<Location>
@@ -19,6 +21,13 @@ namespace RapidGuestRegistration.Ui
                 new Location {Id = 2, Name = "Location #2"},
                 new Location {Id = 3, Name = "Location #3"}
             };
+
+            _users = new List<User>
+            {
+                new User {Id = 1, Name = "User #1"},
+
+            };
+
 
             _tables = new Dictionary<long, List<Table>>()
             {
@@ -43,6 +52,7 @@ namespace RapidGuestRegistration.Ui
 
         public ExceptionFactory ExceptionFactory { get; set; }
         private List<Location> _locations;
+        private List<User> _users;
         private List<Booking> _bookings;
         private Dictionary<long, List<Table>> _tables;
 
@@ -665,6 +675,146 @@ namespace RapidGuestRegistration.Ui
             throw new NotImplementedException();
         }
 
+		public User AddUser(User user = null)
+		{
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            user.Id = _users.Select(existingUser=> existingUser.Id).DefaultIfEmpty(0).Max() + 1;
+
+
+            // Copy location object since we want to simulate inserts without references.
+            _users.Add(new User { Id = user.Id, Name = user.Name });
+            return user;
+        }
+
+		public ApiResponse<User> AddUserWithHttpInfo(User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public User DeleteUser(long userId)
+		{
+            var itemToDelete = _users.Find(user => user.Id == userId);
+            _users.Remove(itemToDelete);
+            return itemToDelete;
+        }
+
+		public ApiResponse<User> DeleteUserWithHttpInfo(long userId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public User GetUser(long userId)
+		{
+            return _users.Find(user => user.Id == userId);
+        }
+
+		public ApiResponse<User> GetUserWithHttpInfo(long userId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public List<User> GetUsers()
+		{
+            return _users;
+
+        }
+
+		public ApiResponse<List<User>> GetUsersWithHttpInfo()
+		{
+			throw new NotImplementedException();
+		}
+
+		public User UpdateUser(User user = null)
+		{
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            var userToUpdate = _users.Find(listLocation => listLocation.Id == user.Id);
+            if (userToUpdate == null)
+                throw new InvalidOperationException($"Could not find user with ID {user.Id} to update");
+            userToUpdate.Id = user.Id;
+            userToUpdate.Name = user.Name;
+
+            return userToUpdate;
+        }
+
+		public ApiResponse<User> UpdateUserWithHttpInfo(User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public User UpdateUserWithId(long userId, User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ApiResponse<User> UpdateUserWithIdWithHttpInfo(long userId, User user = null)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> AddUserAsync(User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> AddUserWithHttpInfoAsync(User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> DeleteUserAsync(long userId, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> DeleteUserWithHttpInfoAsync(long userId, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> GetUserAsync(long userId, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> GetUserWithHttpInfoAsync(long userId, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<List<User>> GetUsersAsync(CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<List<User>>> GetUsersWithHttpInfoAsync(CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> UpdateUserAsync(User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> UpdateUserWithHttpInfoAsync(User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<User> UpdateUserWithIdAsync(long userId, User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ApiResponse<User>> UpdateUserWithIdWithHttpInfoAsync(long userId, User user = null, CancellationToken cancellationToken = default)
+		{
+			throw new NotImplementedException();
+		}
+	
         public Task<Booking> AddBookingAsync(Location location = null, CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
