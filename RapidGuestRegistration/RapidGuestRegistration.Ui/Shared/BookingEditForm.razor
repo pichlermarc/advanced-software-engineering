@@ -13,11 +13,34 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <InputText name="name" @bind-Value="_booking.Name" />
-    <br />
-    <InputText email="email" @bind-Value="_booking.Email" />
-    
+    <fieldset>
+        <label for="name">Name:</label>
+        <br />
+        <InputText name="name" @bind-Value="_booking.Name" style="margin-bottom:10px" />
+        <br />
+        <label for="email">Email:</label>
+        <br />
+        <InputText email="email" @bind-Value="_booking.Email" style="margin-bottom:10px" />
+        <br />
+    </fieldset>
 
+
+    @foreach (var location in _locations)
+    {
+        <div class="col-12">
+            <div class="card mb-1">
+                <div class="card-header">
+                    <div class="input-group h-100">
+                        <label>@location.Name</label>
+                        <button class="btn btn-primary mr-1 float-right" @onclick="NavigateToTablesSelection">Select</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+
+    }
 
     <button class="btn btn-primary" type="submit">Save</button>
 </EditForm>
@@ -44,8 +67,20 @@ else
     [Parameter]
     public long BookingId { get; set; }
 
+    [Parameter]
+    public string LocationId { get; set; }
+
+    [Parameter]
+    public string TableId { get; set; }
+
 
     private Booking _booking;
+
+    private List<Location> _locations;
+
+    private Table _tables;
+
+    private Dictionary<long, FormResponse> _checkedLocations;
 
     private bool _showUpdateError;
 
@@ -54,11 +89,19 @@ else
         try
         {
             _booking = Api.GetBooking(BookingId);
+            _locations = Api.GetLocations() ?? new List<Location>();
+            _checkedLocations = new Dictionary<long, FormResponse>();
+            foreach (var location in _locations)
+            {
+                _checkedLocations.Add(location.Id, new FormResponse(false));
+            }
         }
         catch (ApiException e)
         {
             Console.WriteLine(e);
+
             _booking = null;
+            _locations = null;
         }
 
         base.OnInitialized();
@@ -77,6 +120,29 @@ else
             return;
         }
         NavigationManager.NavigateTo("/bookings");
+    }
+
+    public class FormResponse
+    {
+        public bool Value
+        {
+            get; set;
+        }
+
+        public FormResponse(bool value)
+        {
+            Value = value;
+        }
+    }
+
+    public void changeOption(ChangeEventArgs __e, long id)
+    {
+        _checkedLocations[id].Value = (bool)__e.Value;
+    }
+
+    private async Task NavigateToTablesSelection()
+    {
+        NavigationManager.NavigateTo($"/locations/{LocationId}/table/");
     }
 
 }

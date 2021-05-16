@@ -10,6 +10,9 @@
 <button class="btn btn-primary mr-1 float-right" @onclick="CheckoutHeatmap">Checkout Heatmap</button>
 <br />
 <button class="btn btn-primary mr-1 float-right" @onclick="GenerateReport">Generate Report</button>
+<br />
+<button class="btn btn-primary mr-1 float-right" @onclick="GotoUsers">Goto Users</button>
+
 
 @code {
     private void GotoLocations()
@@ -34,6 +37,12 @@
     {
 
         NavigationManager.NavigateTo("/report");
+    }
+
+    private void GotoUsers()
+    {
+
+         NavigationManager.NavigateTo("/users");
     }
 
 }
